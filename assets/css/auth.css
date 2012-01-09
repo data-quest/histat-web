@@ -1,0 +1,189 @@
+#auth.background{
+    width:100%;
+    height:100%;
+    position: absolute;
+    top:0px;
+    left:0px;
+    overflow: hidden;
+    background:url(../img/auth/background.jpg) repeat-x top center #00539B;
+}
+
+#auth .window{
+    width:500px;
+    position: absolute;
+    left:50%;
+    margin-left:-250px;
+    top:200px;
+    -moz-box-shadow: 0px 0px 10px 0px #000; /* Firefox */
+    -webkit-box-shadow: 0px 0px 10px 0px #000; /* Safari, Chrome */
+    box-shadow: 0px 0px 10px 0px #000; /* CSS3 */
+}
+#auth .window .logo{
+    background: url(../img/auth/header_logo.png) no-repeat;
+    width:204px;
+    height: 44px;
+    position: absolute;
+    top:-50px;
+    margin-left:-102px;
+    left:50%;
+}
+#auth .main{
+    position: relative;
+    height:300px;
+    border-left:1px solid black;
+    border-right:1px solid black;
+
+}
+#auth .main .ui-widget-overlay{
+    width:100%;
+    height:100%;
+}
+#auth .main .content{
+    position: absolute;
+    padding:5px;
+    border:1px solid black;
+    font-size: 16px;
+    -moz-box-shadow: 0px 0px 3px 0px #000; /* Firefox */
+    -webkit-box-shadow: 0px 0px 3px 0px #000; /* Safari, Chrome */
+    box-shadow: 0px 0px 3px 0px #000; /* CSS3 */
+}
+#auth .content input.right{
+    width:180px;
+    float: right;
+}
+#auth .header{
+    position: relative;
+    border:1px solid black;
+    padding:5px;
+}
+.header .icon{
+    width:16px;
+    height:16px;
+    float: left;
+    margin-right: 5px;
+
+}
+.header .time {
+    float:right;
+}
+#auth .footer{
+    position: relative;
+    border:1px solid black;
+    padding:5px;
+    height:70px;
+}
+
+#auth .footer .os-icon-48{
+    float:right;
+    margin-left: 15px;
+}
+#auth .footer ul{
+    float:left;
+}
+#auth ul li{
+    list-style: none;
+    font-weight: normal;
+}
+#auth li span{
+    font-weight: bold;
+    font-size: 14px;
+    width:150px;
+    display:block;
+    border-bottom: 1px solid black;
+}
+#auth li a{
+    text-decoration: none;
+}
+.os-icon-48 span{
+    text-align: center;
+    display: block;
+    margin-top: 55px;
+}
+
+.transparent{
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+    /* IE 5-7 */
+    filter: alpha(opacity=50);
+
+    /* Netscape */
+    -moz-opacity: 0.5;
+
+    /* Safari 1.x */
+    -khtml-opacity: 0.5;
+
+    /* Good browsers */
+    opacity: 0.5;
+}
+
+.clear-transparent{
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
+    /* IE 5-7 */
+    filter: alpha(opacity=100);
+
+    /* Netscape */
+    -moz-opacity:1;
+
+    /* Safari 1.x */
+    -khtml-opacity:1;
+
+    /* Good browsers */
+    opacity: 1;
+}
+#auth .login{
+    margin-left:22%;
+    margin-top:20%;
+    line-height: 22px;
+}
+#auth .login .ui-button,#auth .create .ui-button{
+    width:100%;
+}
+#auth .login input{
+    float:right;
+}
+#auth .create{
+    margin: 10px;
+    line-height: 22px;
+    width:465px;
+}
+
+#auth .create input{
+    float:right;
+    width:250px;
+}
+#auth .menu{
+    position: absolute;
+    bottom:0;
+    width:100%;
+    height:20px;
+    line-height: 20px;
+}
+
+#auth .menu  .ui-widget-overlay{
+    width:100%;
+    height:20px;
+    color:#FFFFFF;
+    line-height: 20px;
+    bottom:0px;
+    left:0px;
+}
+#auth .menu .links{
+    border-top:1px solid #000000;
+    position: absolute;
+    bottom:0px;
+    right:0px;
+    width:100%;
+}
+#auth .menu .links span{
+    float:right;
+}
+
+#auth .menu span a,#auth .menu span a:hover,#auth .menu span a:focus,#auth .menu span a:visited{
+    color:#000000;
+    margin-right:5px;
+    margin-left:5px;
+    text-decoration: none;
+}

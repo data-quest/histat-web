@@ -1,0 +1,16 @@
+*{
+    margin: 0px;
+    padding:0px;
+    font-size: 9pt;
+    font-family: sans-serif,Helvatica
+}
+body{
+    overflow: hidden;
+
+}
+.js{
+    display:none;
+}
+.clear{
+    clear:both;
+}
