@@ -4,13 +4,36 @@
     font-size: 9pt;
     font-family: sans-serif,Helvatica
 }
-body{
-    overflow: hidden;
-
-}
-.js{
-    display:none;
-}
 .clear{
     clear:both;
+}
+body {
+
+}
+#layout{
+    width:900px;
+    margin:auto;
+}
+
+#header{
+    border:1px solid black;
+    height:80px;
+}
+#main_navi{
+    height: 30px;
+    line-height: 30px;
+    border:1px solid black;
+}
+#sub_navi{
+   border:1px solid black; 
+   min-height: 10px;
+}
+#content{
+  border:1px solid black;  
+  height:300px;
+}
+#footer{
+    height:30px;
+    line-height: 30px;
+    padding-left: 15px;
 }

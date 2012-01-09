@@ -26,11 +26,11 @@
                     echo HTML::anchor ($item['uri'],$item['title'],$item['active']==1?array('class'=>'active'):null);
                 ?>
             </div>
-            <div id="content">
+            <div id="content" class="ui-corner-bottom">
                 <?= $content ?>
             </div>
             <div id="footer">
-
+                © GESIS <?= HTML::anchor('pages/impressum',__('Impressum')) ?> | <?= HTML::anchor('pages/sitemap',__('Sitemap'))  ?>
             </div>
         </div>
 

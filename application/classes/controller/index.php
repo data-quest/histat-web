@@ -53,6 +53,7 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
         $this->main_navi->add('friends', __('Friends'));
+        $this->sub_navi->add('test',__('test'));
     }
 
     public function action_index() {
