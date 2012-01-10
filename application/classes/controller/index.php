@@ -53,12 +53,18 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('friends', __('Friends'));
         
         $this->template->date = date("d.m.Y",time());
-        
-    }
+        //Bind Assets Directories global to all Views
+        View::bind_global('assets', $this->assets);
+    }   
 
     public function action_index() {
         //Activate Home Item
         $this->main_navi->activate(__('Home'));
+        
+        $view = View::factory('home');
+        $view->welcome =View::factory(I18n::$lang . '/welcome')->render();
+        $view->stats =View::factory(I18n::$lang . '/stats')->render();
+        $this->content = $view->render();
     }
 
     public function after() {
@@ -69,7 +75,6 @@ class Controller_Index extends Controller_Template {
         $this->template->content = $this->content;
         $this->template->styles = $this->styles;
         $this->template->scripts = $this->scripts;
-        $this->template->assets = $this->assets;
         parent::after();
     }
 

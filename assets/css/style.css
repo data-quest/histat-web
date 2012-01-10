@@ -1,3 +1,4 @@
+/*General Styles*/
 *{
     margin: 0px;
     padding:0px;
@@ -8,8 +9,20 @@
     clear:both;
 }
 body {
-    background: url(../img/bg.png) repeat-x top center #000000;
+    background: url(../img/layout/bg.png) repeat-x top center #000000;
 }
+h1{
+    font-size: 1.4em;
+    font-weight: normal;
+    color: #2b405e;
+}
+h3{
+    font-size: 1.2em;
+    font-weight: normal;
+    color: #505050;
+}
+/*General Styles end*/
+/*Main Layout*/
 #layout{
     width:900px;
     margin:auto;
@@ -21,7 +34,7 @@ body {
 }
 #main_navi{
     color:#ffffff;
-    background: url(../img/navi_main_default.png) repeat-x center center;
+    background: url(../img/layout/navi_main_default.png) repeat-x center center;
     height: 50px;
     line-height: 50px;
     border-top:2px groove #cbd0d8;
@@ -40,14 +53,14 @@ body {
     display:block;
 }
 #main_navi a.active{
-    background: url(../img/navi_main_active.png) repeat-x center center;
+    background: url(../img/layout/navi_main_active.png) repeat-x center center;
 }
 #main_navi a.active span{
     display:block;
     width:36px;
     height:24px;
     margin: auto;
-    background: url(../img/navi_main_triangle.png) no-repeat center center;
+    background: url(../img/layout/navi_main_triangle.png) no-repeat center center;
 }
 #main_navi a:first-child{
     border-left:2px groove #cbd0d8;
@@ -57,7 +70,7 @@ body {
     min-height: 25px;
     line-height: 50px;
     padding-left:190px;
-    background: url(../img/navi_sub_default.png) repeat-x center center;
+    background: url(../img/layout/navi_sub_default.png) repeat-x center center;
 }
 
 #sub_navi ul li{
@@ -77,10 +90,9 @@ body {
     border-left:0px solid;
 }
 #sub_navi li.active{
-    background: url(../img/navi_sub_triangle.png) no-repeat bottom center;
+    background: url(../img/layout/navi_sub_triangle.png) no-repeat bottom center;
 }
 #content{
-    height:300px;
     background: #f9f7ee;
 }
 #footer{
@@ -96,3 +108,31 @@ body {
     text-decoration: none;
     color: #ffffff
 }
+/*Main Layout End*/
+/*Home layout*/
+#home{
+    font-size:10pt;
+}
+#home .left{
+    border-right:2px ridge #2b405e;
+    float:left;
+    width:67%;
+    height:100%;
+}
+#home a{
+    color:#000000;
+}
+#home .left p{
+    padding-top:10px;padding-bottom:10px;
+}
+#home .right{
+    float: left;
+}
+#home #welcome{
+    padding: 30px;
+    border-bottom:2px ridge #2b405e;
+}
+#home #stats{
+    padding: 30px;
+}
+/*Home layout End*/
