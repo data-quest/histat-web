@@ -1,4 +1,4 @@
-<div id="themes" style="width:100%; height:500px; background-color:#F9F7EE;margin:auto">
+<div id="themes" class="ui-corner-bottom" style="width:100%; height:500px; background-color:#F9F7EE;">
     <ul>
         <?php 
         foreach($themes as $name => $theme)

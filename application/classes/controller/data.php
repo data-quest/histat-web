@@ -14,7 +14,10 @@ class Controller_Data extends Controller_Index {
 
     public function action_index() {
         $this->sub_navi->activate(__('New'));
-        $this->content = 'asd';
+        $project = ORM::factory('project');
+        $view = View::factory(I18n::$lang.'/data/index');
+        $view->projects = $project->new_projects();
+        $this->content = $view->render();
     }
 
 
