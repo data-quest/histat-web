@@ -29,6 +29,34 @@ class Controller_Data extends Controller_Index {
 
     public function action_themes() {
         $this->sub_navi->activate(__('Themes'));
+        $this->scripts[]='jquery.tagsphere.min.js';
+        $this->scripts[]='themes.js';
+        $themes = array(
+            'Geld'=>array('top'=>true),
+            'Arbeit'=>array('top'=>true),
+            'Bildung'=>array(),
+            'Bevölkerung'=>array(),
+            'Energie'=>array(),
+            'Gesundheit'=>array(),
+            'Bauen'=>array(),
+            'Handel'=>array('top'=>true),
+            'Hanse'=>array(),
+            'Innovation'=>array(),
+            'Kommunikation'=>array(),
+            'Kriminalität'=>array(),
+            'Umwelt'=>array(),
+            'Städte'=>array(),
+            'Landwirtschaft'=>array(),
+            'Unternehmen'=>array(),
+            'Verbrauch'=>array('top'=>true),
+            'Wachstum'=>array(),
+            'VGR'=>array(),
+            'Wahlen'=>array()
+            
+        );
+        $view = View::factory(I18n::$lang.'/themes');
+        $view->themes = $themes;
+        $this->content = $view->render();
     }
 
     public function action_authors() {

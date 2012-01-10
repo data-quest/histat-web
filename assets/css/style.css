@@ -147,4 +147,20 @@ h3{
     background: url(../img/layout/list_triangle.png) top left no-repeat;
 }
 
+#themes{
+    width: 100%;
+    height:600px;
+}
+
+#themes ul li{
+    list-style: none;
+   
+}
+#themes ul li a{
+     color:#72777a;
+     text-decoration: none;
+}
+#themes ul li.top a{
+    color:#ff6100;
+}
 /* Home layout End*/
