@@ -1,6 +1,4 @@
-<?php
-
-defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Index extends Controller_Template {
 
@@ -39,7 +37,7 @@ class Controller_Index extends Controller_Template {
         //Setup empty content
         $this->content = '';
         //Setup empty title
-        $this->title = 'Historische Statistik';
+        $this->title = __('Historical Statistics');
 
         //Setup Instances of Navigations
         $this->main_navi = new Navigation();
@@ -53,7 +51,9 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
         $this->main_navi->add('friends', __('Friends'));
-        $this->sub_navi->add('test',__('test'));
+        
+        $this->template->date = date("d.m.Y",time());
+        
     }
 
     public function action_index() {

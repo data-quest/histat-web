@@ -17,20 +17,23 @@
             <div id="main_navi">
                 <?php
                 foreach ($main_navi as $item)
-                    echo HTML::anchor ($item['uri'],$item['title'],$item['active']==1?array('class'=>'active'):null);
+                    echo HTML::anchor($item['uri'], $item['active'] == 1 ? $item['title'] . '<span></span>' : $item['title'], $item['active'] == 1 ? array('class' => 'active') : null);
                 ?>
             </div>
             <div id="sub_navi">
-                <?php
-                foreach ($sub_navi as $item)
-                    echo HTML::anchor ($item['uri'],$item['title'],$item['active']==1?array('class'=>'active'):null);
-                ?>
+                <ul>
+                    <?php
+                    foreach ($sub_navi as $item)
+                        echo '<li '.($item['active'] == 1 ? 'class="active"' : '').'>'.HTML::anchor($item['uri'], $item['title']).'</li>';
+                    ?>
+                </ul>
+                <div class="clear"></div>
             </div>
             <div id="content" class="ui-corner-bottom">
                 <?= $content ?>
             </div>
             <div id="footer">
-                © GESIS <?= HTML::anchor('pages/impressum',__('Impressum')) ?> | <?= HTML::anchor('pages/sitemap',__('Sitemap'))  ?>
+                © GESIS <?= HTML::anchor('pages/impressum', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date',array(':date'=>$date)) ?>
             </div>
         </div>
 

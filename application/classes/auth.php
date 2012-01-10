@@ -1,10 +1,7 @@
-<?php
-
-defined('SYSPATH') or die('No direct access allowed.');
+<?php defined('SYSPATH') or die('No direct access allowed.');
 
 abstract class Auth extends Kohana_Auth {
     public function get_user($default = NULL) {
-        
         $user = parent::get_user($default);
         if(!$user){
             return $default;

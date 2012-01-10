@@ -8,7 +8,7 @@
     clear:both;
 }
 body {
-
+    background: url(../img/bg.png) repeat-x top center #000000;
 }
 #layout{
     width:900px;
@@ -17,23 +17,82 @@ body {
 
 #header{
     border:1px solid black;
-    height:80px;
+    height:120px;
 }
 #main_navi{
-    height: 30px;
-    line-height: 30px;
-    border:1px solid black;
+    color:#ffffff;
+    background: url(../img/navi_main_default.png) repeat-x center center;
+    height: 50px;
+    line-height: 50px;
+    border-top:2px groove #cbd0d8;
+    border-bottom:5px solid #ffffff;
+    padding-left:50px;
+}
+#main_navi a{
+    color:#ffffff;
+    text-decoration: none;
+    padding-left:15px;
+    padding-right:15px;
+    font-size: 13pt;
+    border-right:2px groove #cbd0d8;
+    height:100%;
+    float:left;
+    display:block;
+}
+#main_navi a.active{
+    background: url(../img/navi_main_active.png) repeat-x center center;
+}
+#main_navi a.active span{
+    display:block;
+    width:36px;
+    height:24px;
+    margin: auto;
+    background: url(../img/navi_main_triangle.png) no-repeat center center;
+}
+#main_navi a:first-child{
+    border-left:2px groove #cbd0d8;
+    padding-left:15px;
 }
 #sub_navi{
-   border:1px solid black; 
-   min-height: 10px;
+    min-height: 25px;
+    line-height: 50px;
+    padding-left:190px;
+    background: url(../img/navi_sub_default.png) repeat-x center center;
+}
+
+#sub_navi ul li{
+    list-style: none;
+    float:left;
+    display:block;
+}
+#sub_navi a{
+    text-decoration: none;
+    color:#ffffff;
+    font-size: 11pt;
+    padding-left:10px;
+    padding-right:10px;
+    border-left:2px solid #cbd0d8;
+}
+#sub_navi li:first-child a{
+    border-left:0px solid;
+}
+#sub_navi li.active{
+    background: url(../img/navi_sub_triangle.png) no-repeat bottom center;
 }
 #content{
-  border:1px solid black;  
-  height:300px;
+    height:300px;
+    background: #f9f7ee;
 }
 #footer{
     height:30px;
     line-height: 30px;
     padding-left: 15px;
+    color: #ffffff;
+}
+#footer a:first-child{
+    margin-left:30px;
+}
+#footer a{
+    text-decoration: none;
+    color: #ffffff
 }
