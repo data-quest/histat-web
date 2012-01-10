@@ -64,6 +64,8 @@ class Controller_Index extends Controller_Template {
         $view = View::factory('home');
         $view->welcome =View::factory(I18n::$lang . '/welcome')->render();
         $view->stats =View::factory(I18n::$lang . '/stats')->render();
+        $view->priorities = View::factory(I18n::$lang . '/priorities')->render();
+        $view->partners = View::factory(I18n::$lang . '/partners')->render();
         $this->content = $view->render();
     }
 

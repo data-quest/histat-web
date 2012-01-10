@@ -126,13 +126,25 @@ h3{
     padding-top:10px;padding-bottom:10px;
 }
 #home .right{
-    float: left;
+    float:left;
+    width:32.7%;
 }
-#home #welcome{
-    padding: 30px;
+#home #priorities{
     border-bottom:2px ridge #2b405e;
 }
-#home #stats{
+#home #welcome{
+    border-bottom:2px ridge #2b405e;
+}
+#home #stats,#home #priorities,#home #welcome,#home #partners{
     padding: 30px;
 }
-/*Home layout End*/
+
+#home ul li{
+    font-size: 0.8em;
+    line-height:26px;
+    list-style: none;
+    padding-left:15px;
+    background: url(../img/layout/list_triangle.png) top left no-repeat;
+}
+
+/* Home layout End*/
