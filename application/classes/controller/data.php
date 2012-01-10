@@ -1,10 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
+/**
+ * Controller <b>Data</b> 
+ */
 class Controller_Data extends Controller_Index {
 
     public function before() {
         parent::before();
+        //Activate Data navigation point
         $this->main_navi->activate(__('Data'));
+        //Add sub navigation items
         $this->sub_navi->add('data/index', __('New'));
         $this->sub_navi->add('data/top', __('Top'));
         $this->sub_navi->add('data/times', __('Times'));
@@ -13,14 +17,17 @@ class Controller_Data extends Controller_Index {
     }
 
     public function action_index() {
+        //Activate sub navigation point "New"
         $this->sub_navi->activate(__('New'));
+        //Load model/project.php
         $project = ORM::factory('project');
+        //Load view/<lang>/data/index.php
         $view = View::factory(I18n::$lang.'/data/index');
+        //Assign new projects
         $view->projects = $project->new_projects();
+        //set content
         $this->content = $view->render();
     }
-
-
 
     public function action_top() {
         $this->sub_navi->activate(__('Top'));

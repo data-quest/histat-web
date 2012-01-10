@@ -1,20 +1,69 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
+/**
+ * Controller <b>Index</b> is the Main Controller
+ */
 class Controller_Index extends Controller_Template {
-
+    /**
+     * Directory Paths to Assets
+     * @var array $assets [js|css|img]
+     */
     protected $assets = array(
         'js' => 'assets/js/',
         'css' => 'assets/css/',
         'img' => 'assets/img/'
     );
+    /**
+     * Instance of Auth Class
+     * @var Object $user 
+     */
     protected $user = NULL;
+    /**
+     * Object of Config class, use method <b>get</b> to get Values from config/config.php
+     * @var Object $config 
+     * @example
+     * $this->config->get('foo'); //get foo from config/config.php
+     * @link http://kohanaframework.org/3.2/guide/kohana/config
+     */
     protected $config;
+    /**
+     * Instance of Session object
+     * @var Object $session 
+     * @link http://kohanaframework.org/3.2/guide/kohana/sessions
+     */
     protected $session;
+    /**
+     * Page Title
+     * @var string $title 
+     */
     protected $title = '';
+    /**
+     * Page Content , accepts HTML and View
+     * @var string $content 
+     */
     protected $content = '';
+    /**
+     * css Styles
+     * @var array $styles 
+     * @example
+     * $this->styles[] = 'myfile.css'; //Add new CSS style
+     */
     protected $styles = array();
+    /**
+     * js Scripts
+     * @var array $scripts 
+     * @example
+     * $this->scripts[]='myscript.js'; //Add new JS Script
+     */
     protected $scripts = array();
+    /**
+     * Navigation object of main navigation (see classes/navigation.php)
+     * @var Navigation $main_navi 
+     */
     protected $main_navi;
+    /**
+     * Navigation object of main navigation (see classes/navigation.php)
+     * @var Navigation $sub_navi 
+     */
     protected $sub_navi;
 
     public function before() {
@@ -33,7 +82,8 @@ class Controller_Index extends Controller_Template {
 
         //Setup Cookie
         Cookie::$salt = $this->config->get('cookie_salt');
-        
+        //Setup Session
+        $this->session  = Session::instance();
         //Setup empty content
         $this->content = '';
         //Setup empty title
@@ -58,14 +108,19 @@ class Controller_Index extends Controller_Template {
     }   
 
     public function action_index() {
+      
         //Activate Home Item
         $this->main_navi->activate(__('Home'));
         
+        //Get the view home.php
         $view = View::factory('home');
-        $view->welcome =View::factory(I18n::$lang . '/welcome')->render();
-        $view->stats =View::factory(I18n::$lang . '/stats')->render();
-        $view->priorities = View::factory(I18n::$lang . '/priorities')->render();
-        $view->partners = View::factory(I18n::$lang . '/partners')->render();
+        //Assign Vars to home.php
+        $view->welcome =View::factory(I18n::$lang . '/welcome')->render(); //render view/<lang>/welcome.php
+        $view->stats =View::factory(I18n::$lang . '/stats')->render(); //render view/<lang>/stats.php
+        $view->priorities = View::factory(I18n::$lang . '/priorities')->render(); //render view/<lang>/priorities.php
+        $view->partners = View::factory(I18n::$lang . '/partners')->render(); //render view/<lang>/partners.php
+        
+        //Render View and setup Content
         $this->content = $view->render();
     }
 
@@ -77,6 +132,7 @@ class Controller_Index extends Controller_Template {
         $this->template->content = $this->content;
         $this->template->styles = $this->styles;
         $this->template->scripts = $this->scripts;
+        //Main Layout will be rendered in after method
         parent::after();
     }
 
