@@ -126,7 +126,7 @@ Route::set('activate', '(<lang>/)activate(/<username>/<key>)', array('lang' => '
  * defaults for the URI.
  */
 Route::set('default', '(<lang>/)(<controller>(/<action>(/<id>)))', 
-        array('lang' => '(' . $langs . ')', 'id' => '.+'))
+        array('lang' => '(' . $langs . ')'))
         ->defaults(array(
             'controller' => 'index',
             'action' => 'index'));

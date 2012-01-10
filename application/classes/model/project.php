@@ -27,7 +27,7 @@ class Model_Project extends ORM {
         'datei_name'=>array(),
         'chdate'=>array()
     );
-    
+    protected $_primary_key = 'ID_Projekt';
     public function new_projects(){
         return $this->select(
                 array('ZA_Studiennummer','Studiennummer'),
