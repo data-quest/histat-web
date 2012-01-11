@@ -10,9 +10,9 @@
         <title><?= $title ?></title>
     </head>
     <body>
+        <div id="top"></div>
         <div id="layout">
             <div id="header">
-
             </div>
             <div id="main_navi">
                 <?php
@@ -31,6 +31,8 @@
             </div>
             <div id="content" class="ui-corner-bottom">
                 <?= $content ?>
+                <div id="gotop"><a href="#top" alt="<?= __('Go Top')?>"><?= __('Go Top')?></a></div>
+                <div class="clear"></div>
             </div>
             <div id="footer">
                 © GESIS <?= HTML::anchor('pages/impressum', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date',array(':date'=>$date)) ?>

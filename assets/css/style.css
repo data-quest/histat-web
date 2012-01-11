@@ -32,7 +32,7 @@ table a{
     text-decoration: none;
 }
 table tr:hover a{
-     color: #ffffff;
+    color: #ffffff;
 }
 table .odd{
     background: #E2E2E2;
@@ -43,7 +43,10 @@ table .even{
 
 table tr:hover{
     background: #58748F;
-   
+
+}
+.padding{
+    padding:30px;
 }
 /*General Styles end*/
 /*Main Layout*/
@@ -119,6 +122,23 @@ table tr:hover{
 #content{
     background: #f9f7ee;
 }
+#content #gotop{
+    width:100%;
+
+}
+#content #gotop a{
+    margin-right:20px;
+    display:block;
+    height: 30px;
+    width:auto;
+    padding-left:15px;
+    padding-right: 15px;
+    color:#ffffff;
+    text-decoration: none;
+    float:right;
+    line-height: 30px;
+    background: url(../img/layout/navi_main_active.png) repeat-x center center;
+}
 #footer{
     height:30px;
     line-height: 30px;
@@ -172,6 +192,9 @@ table tr:hover{
 }
 /*Style index end */
 /* Style data/themes */
+#themes{
+    overflow:hidden;
+}
 #themes ul li{
     list-style: none;
     margin:auto;
@@ -192,3 +215,14 @@ table tr:hover{
 }
 
 /* Style data/index end*/
+/*Style project/details/id */
+#project_details{
+    padding:20px;
+}
+#project_details p{
+    padding-top:10px;padding-bottom:10px;
+}
+#project_details hr{
+    margin-top:10px;margin-bottom:10px;
+}
+/*Style project/details/id end*/

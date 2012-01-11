@@ -5,7 +5,7 @@
  */
 class Controller_Project extends Controller_Data {
 
-    private $id = null;
+    private $id;
 
     public function before() {
         parent::before();
@@ -16,9 +16,12 @@ class Controller_Project extends Controller_Data {
 
         if ($this->id == NULL)
             throw new HTTP_Exception_404(); //If ID not given throw Exception
+        $this->sub_navi->activate(__('New'));
         $project = ORM::factory('project', $this->id);
         if ($project->loaded()) {
-            $this->content = '<pre>' . print_r($project->object(), true) . '<pre>';
+            $view = View::factory(I18n::$lang . '/project/details');
+            $view->project = $project;
+            $this->content = $view->render();
         } else {
             $this->content = __('Project not found');
         }
