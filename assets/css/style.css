@@ -2,8 +2,8 @@
 *{
     margin: 0px;
     padding:0px;
-    font-size: 9pt;
-    font-family: sans-serif,Helvatica
+    font-size: 12px;
+    font-family: Arial,Verdana,Helvetica,sans-serif;
 }
 .clear{
     clear:both;
@@ -26,28 +26,55 @@ table th{
     color:#ffffff;
     padding:5px;
     text-align: left;
+
+}
+table{
+    border:1px solid #72777a;
+    padding:0px;
+    margin:0px;
+    width:100%;
+    border-spacing: 0 0.4em;
+    background: #ffffff;
 }
 table a{
     color:#000000;
     text-decoration: none;
 }
-table tr:hover a{
-    color: #ffffff;
+table td{
+    border:1px solid #72777a;
+    padding:10px;
 }
-table .odd{
-    background: #E2E2E2;
+table tbody tr:hover{
+    cursor: pointer;
 }
-table .even{
-    background: #F2F2F2;
+td.details{
+    padding:0px;
+  background: url(../img/layout/details.png) center center;
+  min-width: 80px;
+  text-align: center;
+}
+.details a{
+
+    color:#ffffff;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
-table tr:hover{
-    background: #58748F;
+.details span{
 
+    display:inline-block;
+    width: 13px;
+    height: 20px;
+    width:117%;
+    background: url(../img/layout/details_triangle.png) no-repeat right center;
 }
-.padding{
-    padding:30px;
+
+table tr td.even {
+    background: #e6e6e6;
 }
+
+
+
 /*General Styles end*/
 /*Main Layout*/
 #layout{
@@ -62,10 +89,10 @@ table tr:hover{
 #main_navi{
     color:#ffffff;
     background: url(../img/layout/navi_main_default.png) repeat-x center center;
-    height: 50px;
-    line-height: 50px;
+    height: 30px;
+    line-height: 30px;
     border-top:2px groove #cbd0d8;
-    border-bottom:5px solid #ffffff;
+    border-bottom:2px solid #ffffff;
     padding-left:50px;
 }
 #main_navi a{
@@ -73,7 +100,7 @@ table tr:hover{
     text-decoration: none;
     padding-left:15px;
     padding-right:15px;
-    font-size: 13pt;
+    font-size: 1.2em;
     border-right:2px groove #cbd0d8;
     height:100%;
     float:left;
@@ -84,8 +111,8 @@ table tr:hover{
 }
 #main_navi a.active span{
     display:block;
-    width:36px;
-    height:24px;
+    width:23px;
+    height:15px;
     margin: auto;
     background: url(../img/layout/navi_main_triangle.png) no-repeat center center;
 }
@@ -94,9 +121,9 @@ table tr:hover{
     padding-left:15px;
 }
 #sub_navi{
-    min-height: 25px;
-    line-height: 50px;
-    padding-left:190px;
+    min-height: 15px;
+    line-height: 30px;
+    padding-left:170px;
     background: url(../img/layout/navi_sub_default.png) repeat-x center center;
 }
 
@@ -108,7 +135,7 @@ table tr:hover{
 #sub_navi a{
     text-decoration: none;
     color:#ffffff;
-    font-size: 11pt;
+    font-size: 1.2em;
     padding-left:10px;
     padding-right:10px;
     border-left:2px solid #cbd0d8;
@@ -180,12 +207,11 @@ table tr:hover{
     border-bottom:2px ridge #2b405e;
 }
 #home #stats,#home #priorities,#home #welcome,#home #partners{
-    padding: 30px;
+    padding: 20px;
 }
 
 #home ul li{
-    font-size: 0.8em;
-    line-height:26px;
+    font-size: 1em;
     list-style: none;
     padding-left:15px;
     background: url(../img/layout/list_triangle.png) top left no-repeat;

@@ -1,20 +1,20 @@
 <div id="data_new">
-    <h1><?= __('List of new studies')?></h1><br/>
-    <table border="0"  style="width:100%" cellpadding="2" cellspacing="2">
-        <tr>
-            <th><?= __('Studiennummer') ?></th>
-            <th><?= __('Studientitel') ?></th>
-            <th><?= __('Autor') ?></th>
-        </tr>
-        <?php $i = 0; ?>
+    <h1>Liste der neuen Studien</h1><br/>
+    <table border="0" cellpadding="0" cellspacing="0">
         <?php foreach ($projects->find_all() as $project): ?>
-
-            <tr class="<?= ($i % 2 == 0) ? 'odd' : 'even' ?>">
-                <td><?= HTML::anchor('project/details/'.$project->ID_Projekt,$project->Studiennummer) ?></td>
-                <td><?= HTML::anchor('project/details/'.$project->ID_Projekt,$project->Studientitel) ?></td>
-                <td><?= HTML::anchor('project/details/'.$project->ID_Projekt,$project->Autor) ?></td>
+            <tr >
+                <td width="10%">ZA <?=  $project->Studiennummer ?></td>
+                <td class="even" width="60%"><?= $project->Studientitel ?></td>
+                <td width="25%">
+                    <?= $project->Anzahl_Zeitreihen; ?> Zeitreihen (<?= $project->Zeitraum?>)
+                    <?php $tabellen = $project->getUsedTables();?>
+                    <?= count($tabellen) > 0 ?'<br/>'.count($tabellen).' Tabellen':'' ?> 
+                </td>
+                <td width="8%" class="details"><span><?= HTML::anchor('project/details/'.$project->ID_Projekt,'Details...') ?></span></td>
+                <td width="2%" ></td>
             </tr>
-            <?php $i++; ?>
+            
         <?php endforeach ?>
     </table>
+
 </div>

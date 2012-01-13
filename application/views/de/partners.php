@@ -1,6 +1,6 @@
 <h3>Kooperationspartner</h3>
 <br/>
-<ul style="font-size: 1.2em">
+<ul>
     <li>
         <strong>Statistisches Bundesamt</strong>
         <br/>
