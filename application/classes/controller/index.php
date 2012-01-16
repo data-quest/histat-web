@@ -1,8 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
+
 /**
  * Controller <b>Index</b> is the Main Controller
  */
 class Controller_Index extends Controller_Template {
+
     /**
      * Directory Paths to Assets
      * @var array $assets [js|css|img]
@@ -12,11 +14,13 @@ class Controller_Index extends Controller_Template {
         'css' => 'assets/css/',
         'img' => 'assets/img/'
     );
+
     /**
      * Instance of Auth Class
      * @var Object $user 
      */
     protected $user = NULL;
+
     /**
      * Object of Config class, use method <b>get</b> to get Values from config/config.php
      * @var Object $config 
@@ -25,22 +29,26 @@ class Controller_Index extends Controller_Template {
      * @link http://kohanaframework.org/3.2/guide/kohana/config
      */
     protected $config;
+
     /**
      * Instance of Session object
      * @var Object $session 
      * @link http://kohanaframework.org/3.2/guide/kohana/sessions
      */
     protected $session;
+
     /**
      * Page Title
      * @var string $title 
      */
     protected $title = '';
+
     /**
      * Page Content , accepts HTML and View
      * @var string $content 
      */
     protected $content = '';
+
     /**
      * css Styles
      * @var array $styles 
@@ -48,6 +56,7 @@ class Controller_Index extends Controller_Template {
      * $this->styles[] = 'myfile.css'; //Add new CSS style
      */
     protected $styles = array();
+
     /**
      * js Scripts
      * @var array $scripts 
@@ -55,16 +64,19 @@ class Controller_Index extends Controller_Template {
      * $this->scripts[]='myscript.js'; //Add new JS Script
      */
     protected $scripts = array();
+
     /**
      * Navigation object of main navigation (see classes/navigation.php)
      * @var Navigation $main_navi 
      */
     protected $main_navi;
+
     /**
      * Navigation object of main navigation (see classes/navigation.php)
      * @var Navigation $sub_navi 
      */
     protected $sub_navi;
+    protected $xsrf;
 
     public function before() {
         //Setup layout
@@ -73,7 +85,6 @@ class Controller_Index extends Controller_Template {
         //Load Config
         $this->config = Kohana::$config->load('config');
         //Setup Stylesheets
-        $this->styles [] = 'jquery-ui.css';
         $this->styles [] = 'style.css';
         //Setup Scripts
         $this->scripts [] = 'jquery.min.js';
@@ -83,7 +94,7 @@ class Controller_Index extends Controller_Template {
         //Setup Cookie
         Cookie::$salt = $this->config->get('cookie_salt');
         //Setup Session
-        $this->session  = Session::instance();
+        $this->session = Session::instance();
         //Setup empty content
         $this->content = '';
         //Setup empty title
@@ -94,45 +105,52 @@ class Controller_Index extends Controller_Template {
         $this->sub_navi = new Navigation(1);
         //Get user Instance
         $this->user = Auth::instance()->get_user();
-        
+
         //Add main Navigation Items
         $this->main_navi->add('index', __('Home'));
         $this->main_navi->add('data', __('Data'));
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
         $this->main_navi->add('friends', __('Friends'));
-        
-        $this->template->date = date("d.m.Y",time());
+
+
         //Bind Assets Directories global to all Views
         View::bind_global('assets', $this->assets);
-    }   
+
+        //Read or Create new xsrf Token
+        $this->xsrf = $this->session->get('xsrf', md5(Text::random('alnum')));
+        //Save xsrf Token
+        $this->session->set('xsrf', $this->xsrf);
+    }
 
     public function action_index() {
-      
         //Activate Home Item
         $this->main_navi->activate(__('Home'));
-        
         //Get the view home.php
         $view = View::factory('home');
         //Assign Vars to home.php
-        $view->welcome =View::factory(I18n::$lang . '/welcome')->render(); //render view/<lang>/welcome.php
-        $view->stats =View::factory(I18n::$lang . '/stats')->render(); //render view/<lang>/stats.php
+        $view->welcome = View::factory(I18n::$lang . '/welcome')->render(); //render view/<lang>/welcome.php
+        $view->stats = View::factory(I18n::$lang . '/stats')->render(); //render view/<lang>/stats.php
         $view->priorities = View::factory(I18n::$lang . '/priorities')->render(); //render view/<lang>/priorities.php
         $view->partners = View::factory(I18n::$lang . '/partners')->render(); //render view/<lang>/partners.php
-        
         //Render View and setup Content
         $this->content = $view->render();
     }
 
     public function after() {
-        //Assign vars to layout
-        $this->template->main_navi = $this->main_navi->get_items();
-        $this->template->sub_navi = $this->sub_navi->get_items();
-        $this->template->title = $this->title;
-        $this->template->content = $this->content;
-        $this->template->styles = $this->styles;
-        $this->template->scripts = $this->scripts;
-        //Main Layout will be rendered in after method
+        //Disable assign vars if template is not a view(ajax Request)
+        if($this->template instanceof View){
+            //Assign vars to layout
+            $this->template->main_navi = $this->main_navi->get_items();
+            $this->template->sub_navi = $this->sub_navi->get_items();
+            $this->template->title = $this->title;
+            $this->template->content = $this->content;
+            $this->template->styles = $this->styles;
+            $this->template->scripts = $this->scripts;
+            $this->template->xsrf = $this->xsrf;
+            $this->template->date = date("d.m.Y", time());
+            //Main Layout will be rendered in after method
+        }
         parent::after();
     }
 

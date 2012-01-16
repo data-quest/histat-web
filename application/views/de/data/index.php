@@ -10,11 +10,13 @@
                     <?php $tabellen = $project->getUsedTables();?>
                     <?= count($tabellen) > 0 ?'<br/>'.count($tabellen).' Tabellen':'' ?> 
                 </td>
-                <td width="8%" class="details"><span><?= HTML::anchor('project/details/'.$project->ID_Projekt,'Details...') ?></span></td>
+                <td width="8%" class="details"><span>Details...<?= Form::hidden('project_id',$project->ID_Projekt)?></span></td>
                 <td width="2%" ></td>
             </tr>
             
         <?php endforeach ?>
     </table>
-
+    <script type="text/javascript">
+    var closeText = "Schließen";
+    </script>
 </div>

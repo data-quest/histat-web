@@ -17,6 +17,7 @@ class Controller_Data extends Controller_Index {
     }
 
     public function action_index() {
+        $this->scripts[]='data_new.js';
         //Activate sub navigation point "New"
         $this->sub_navi->activate(__('New'));
         //Load model/project.php
