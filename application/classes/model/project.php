@@ -5,7 +5,11 @@
     protected $_table_name = 'Aka_Projekte';
     protected $_primary_key = 'ID_Projekt';
     protected $_has_many = array(
-        'keymasks' => array('model' => 'keymask', 'foreign_key' => 'ID_Projekt', 'far_key' => 'ID_Projekt')
+        'keymasks' => array('model' => 'keymask', 'foreign_key' => 'ID_Projekt', 'far_key' => 'ID_Projekt'),
+        
+    );
+    protected $_has_one = array(
+        'theme'=>array('model'=>'theme','foreign_key'=>'ID_Thema','far_key'=>'ID_Thema')
     );
     protected $_table_columns = array(
         'ID_Projekt' => array(),

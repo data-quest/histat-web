@@ -1,6 +1,6 @@
 <div id="project_details" >
-    <h1>Details zur Studie</h1>
-    <hr/>
+    <h1>Details zur Studie:</h1>
+    <br/>
     <h3>Name der Studie</h3>
     <span><?= $project->Projektname ?></span>
     <hr/>
@@ -46,6 +46,7 @@
         <span><?= nl2br($project->Quellen) ?></span>
     <?php endif ?>
     <hr/>
+
     <h3>Sachliche Untergliederung der Datentabellen:</h3>
     <?php if (strlen($project->Untergliederung) > 200): ?>
         <span class="short">
@@ -59,6 +60,7 @@
         <span><?= nl2br($project->Untergliederung) ?></span>
     <?php endif ?>
     <hr/>
+
     <h3>Tabellenverzeichnis:</h3>
     <?php
     $tabellenverzeichnis = '';

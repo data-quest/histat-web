@@ -1,9 +1,9 @@
 $(function(){
-    $('.details span').on('click',function(e){
+    $('.details').on('click',function(e){
         e.preventDefault();
         var target = $(this);
         var project_id = target.find('input[name="project_id"]').val();
-        var title = target.parents('tr').find('td:eq(1)').text();
+        var title = target.parents('tr').find('td:eq(2)').text();
         $.ajax({
             url: base_url+"project/details",
             data:{

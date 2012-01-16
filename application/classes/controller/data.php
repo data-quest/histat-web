@@ -42,29 +42,18 @@ class Controller_Data extends Controller_Index {
         $this->sub_navi->activate(__('Themes'));
         $this->scripts[]='jquery.tagsphere.min.js';
         $this->scripts[]='themes.js';
-        $themes = array(
-            'Geld'=>array('top'=>true),
-            'Arbeit'=>array('top'=>true),
-            'Bildung'=>array(),
-            'Bevölkerung'=>array(),
-            'Energie'=>array(),
-            'Gesundheit'=>array(),
-            'Bauen'=>array(),
-            'Handel'=>array('top'=>true),
-            'Hanse'=>array(),
-            'Innovation'=>array(),
-            'Kommunikation'=>array(),
-            'Kriminalität'=>array(),
-            'Umwelt'=>array(),
-            'Städte'=>array(),
-            'Landwirtschaft'=>array(),
-            'Unternehmen'=>array(),
-            'Verbrauch'=>array('top'=>true),
-            'Wachstum'=>array(),
-            'VGR'=>array(),
-            'Wahlen'=>array()
-            
-        );
+        $themes_orm = ORM::factory('theme');
+        $total = 0;
+        $themes_tmp = $themes_orm->getThemes()->order_by('summe','DESC')->as_object()->execute();
+        foreach($themes_tmp as $theme){
+            $total += $theme->summe;
+        }
+        $themes = array();
+        $i = 0;
+        foreach($themes_tmp as $theme){
+             $themes[$theme->Thema] = array('top'=>($i < 5)?true:false,'count'=>15+ceil(($theme->summe/$total)*100));
+             $i++;
+        }
         $view = View::factory(I18n::$lang.'/themes');
         $view->themes = $themes;
         $this->content = $view->render();
