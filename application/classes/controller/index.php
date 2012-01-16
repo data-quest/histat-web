@@ -89,6 +89,7 @@ class Controller_Index extends Controller_Template {
         //Setup Scripts
         $this->scripts [] = 'jquery.min.js';
         $this->scripts [] = 'jquery-ui.min.js';
+        $this->scripts [] = 'jquery.toggletext.js';
         $this->scripts [] = 'main.js';
 
         //Setup Cookie

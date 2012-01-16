@@ -315,13 +315,24 @@ table tr td.even {
 /* Style data/index end*/
 /*Style project/details/id */
 #project_details{
-    padding:10px;
+    padding:10px 0px;
 }
+#project_details h1,#project_details h3,#project_details p,#project_details span{
+    padding:0px 10px;
+}
+#project_details span{
+    padding-top:10px;
+    display:block;
+}
+#project_details span.more{
+    cursor: pointer;
+}
+
 #project_details p{
-    padding-top:10px;padding-bottom:10px;
+    display:none;
 }
 #project_details hr{
-    margin-top:10px;margin-bottom:10px;
+ margin:10px 0px;
 }
 .ui-dialog-content p{
  

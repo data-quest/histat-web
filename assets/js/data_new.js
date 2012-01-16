@@ -15,18 +15,29 @@ $(function(){
                 $('#dialog').html(data).dialog({
                     minWidth:860,
                     maxWidth:860,
-                    minHeight:500,
                     draggable:false,
                     modal:true,
                     title:title,
                     resizable:false,
                     show: "blind",
                     hide: "blind",
-                    closeText:closeText
-            
+                    closeText:closeText,
+                    close:function(){
+                        $(this).html("");
+                    }
                 });
+                
             }
         });
        
+    });
+    $('.more').live('click',function(){
+        var target = $(this);
+         target.prev('span.full').slideToggle('slow',function(){
+             $(this).prev('span.short').toggle();
+         }); 
+        
+       
+        target.toggleText(more,less);
     });
 });

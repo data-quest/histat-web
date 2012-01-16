@@ -1,25 +1,86 @@
 <div id="project_details" >
-    <h1>Details zur Studie: <br/><?= $project->Projektname ?></h1>
+    <h1>Details zur Studie</h1>
+    <hr/>
+    <h3>Name der Studie</h3>
+    <span><?= $project->Projektname ?></span>
+    <hr/>
+    <h3>Leiter der Studie:</h3>
+    <span><?= $project->Projektautor ?></span>
     <hr/>
     <h3>Beschreibung:</h3>
-    <p>
-        <?= nl2br($project->Projektbeschreibung) ?>
 
-    </p>
-    <span class="more">Mehr...</span>
+    <?php if (strlen($project->Projektbeschreibung) > 200): ?>
+        <span class="short">
+            <?= substr(nl2br($project->Projektbeschreibung), 0, 200) . '...' ?>
+        </span>
+        <span class="full" style="display:none">
+            <?= nl2br($project->Projektbeschreibung) ?>
+        </span>
+        <span class="more">Mehr...</span>
+    <?php else: ?>
+        <span><?= nl2br($project->Projektbeschreibung) ?></span>
+    <?php endif ?>
+    <hr/>
+    <h3>Zeitraum:</h3>
+    <span><?= $project->Zeitraum ?></span>
+    <hr/>
+    <h3>Anzahl der Zeitreihen:</h3>
+    <span><?= $project->Anzahl_Zeitreihen ?></span>
+    <hr/>
+    <h3>Untersuchungsgebiet:</h3>
+    <span><?= $project->Untersuchsungsgebiet ?></span>
+    <hr/>
+    <h3>Veröffentlichung:</h3>
+    <span><?= $project->Veroeffentlichung ?></span>
     <hr/>
     <h3>Quellentypen:</h3>
-    <p>
-        <?= nl2br($project->Quellen) ?>
-    </p>
-    <span class="more">Mehr...</span>
+    <?php if (strlen($project->Quellen) > 200): ?>
+        <span class="short">
+            <?= substr(nl2br($project->Quellen), 0, 200) . '...' ?>
+        </span>
+        <span class="full" style="display:none">
+            <?= nl2br($project->Quellen) ?>
+        </span>
+        <span class="more">Mehr...</span>
+    <?php else: ?>
+        <span><?= nl2br($project->Quellen) ?></span>
+    <?php endif ?>
+    <hr/>
+    <h3>Sachliche Untergliederung der Datentabellen:</h3>
+    <?php if (strlen($project->Untergliederung) > 200): ?>
+        <span class="short">
+            <?= substr(nl2br($project->Untergliederung), 0, 200) . '...' ?>
+        </span>
+        <span class="full" style="display:none">
+            <?= nl2br($project->Untergliederung) ?>
+        </span>
+        <span class="more">Mehr...</span>
+    <?php else: ?>
+        <span><?= nl2br($project->Untergliederung) ?></span>
+    <?php endif ?>
     <hr/>
     <h3>Tabellenverzeichnis:</h3>
-    <p>
-       <?php foreach($project->getUsedTables() as $table): ?>
-        <?= $table->Tabelle?>
-        <?php endforeach; ?>
-    </p>
-    <span class="more">Mehr...</span>
+    <?php
+    $tabellenverzeichnis = '';
+    foreach ($project->getUsedTables() as $table):
+        $tabellenverzeichnis .= $table->Tabelle . ' ';
+    endforeach;
+    ?>
+
+    <?php if (strlen($tabellenverzeichnis) > 200): ?>
+        <span class="short">
+            <?= substr(nl2br($tabellenverzeichnis), 0, 200) . '...' ?>
+        </span>
+        <span class="full" style="display:none">
+            <?= nl2br($tabellenverzeichnis) ?>
+        </span>
+        <span class="more">Mehr...</span>
+    <?php else: ?>
+        <span><?= nl2br($tabellenverzeichnis) ?></span>
+    <?php endif ?>
 
 </div>
+<script type="text/javascript">
+    var more = "Mehr...";
+    var less = "Weniger...";
+</script>
