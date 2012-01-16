@@ -33,11 +33,11 @@ $(function(){
     });
     $('.more').live('click',function(){
         var target = $(this);
-         target.prev('span.full').slideToggle('slow',function(){
-             $(this).prev('span.short').toggle();
-         }); 
-        
-       
+        var full =target.prev('span.full');
+        var short_text = full.prev('span.short');
+   
+        short_text.toggle(); 
+        full.slideToggle('slow'); 
         target.toggleText(more,less);
     });
 });

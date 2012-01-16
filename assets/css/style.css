@@ -9,7 +9,7 @@
     clear:both;
 }
 body {
-    background: url(../img/layout/bg.png) repeat-x top center #000000;
+    background: url(../img/layout/hg-verlauf.jpg) repeat-x top center #000000;
 }
 h1{
     font-size: 1.4em;
@@ -51,29 +51,21 @@ table tbody tr:hover{
 }
 td.details{
     padding:0px;
-    background: url(../img/layout/details.png) center center;
-    min-width: 80px;
+    background: url(../img/layout/button-details.png) no-repeat left center;
+    min-width: 90px;
     text-align: center;
-
-}
-
-.details span{
-    color:#ffffff;
-    font-weight: bold;
+    color: #ffffff;
     font-size: 1.1em;
-    display:inline-block;
-    width: 13px;
-    height: 20px;
-    width:117%;
-    background: url(../img/layout/details_triangle.png) no-repeat right center;
+    font-weight: bold;
 }
+
 
 table tr td.even {
     background: #e6e6e6;
 }
 
 .ui-dialog .ui-dialog-titlebar{
-    background: url(../img/layout/navi_main_active.png) repeat-x center center; 
+    background: url(../img/layout/verlauf-orange_150x5.jpg) repeat-x center center; 
     text-align: center;
     height: 30px;
     line-height: 30px;
@@ -150,20 +142,19 @@ table tr td.even {
 /*General Styles end*/
 /*Main Layout*/
 #layout{
-    width:900px;
+    width:960px;
     margin:auto;
 }
 
 #header{
-    border:1px solid black;
-    height:120px;
+    background:url(../img/layout/hg-header-logo.jpg)no-repeat center center;
+    height:80px;
 }
 #main_navi{
     color:#ffffff;
-    background: url(../img/layout/navi_main_default.png) repeat-x center center;
+    background: url(../img/layout/hg-navi-blau.jpg) repeat-x center center;
     height: 30px;
     line-height: 30px;
-    border-top:2px groove #cbd0d8;
     border-bottom:2px solid #ffffff;
     padding-left:50px;
 }
@@ -179,7 +170,7 @@ table tr td.even {
     display:block;
 }
 #main_navi a.active{
-    background: url(../img/layout/navi_main_active.png) repeat-x center center;
+    background: url(../img/layout/hg-navi-orange.jpg) repeat-x center center;
 }
 #main_navi a.active span{
     display:block;
@@ -196,7 +187,7 @@ table tr td.even {
     min-height: 15px;
     line-height: 30px;
     padding-left:170px;
-    background: url(../img/layout/navi_sub_default.png) repeat-x center center;
+    background: url(../img/layout/hg-navi-grau.jpg) repeat-x center center;
 }
 
 #sub_navi ul li{
@@ -222,21 +213,20 @@ table tr td.even {
     background: #f9f7ee;
 }
 #content #gotop{
-    width:100%;
-
+      width:90px;
+      float:right;
 }
 #content #gotop a{
     margin-right:20px;
     display:block;
-    height: 30px;
-    width:auto;
+    height: 32px;
     padding-left:15px;
     padding-right: 15px;
     color:#ffffff;
     text-decoration: none;
     float:right;
-    line-height: 30px;
-    background: url(../img/layout/navi_main_active.png) repeat-x center center;
+    line-height: 40px;
+    background: url(../img/layout/button-top.png) repeat-x center center;
 }
 #footer{
     height:30px;

@@ -26,7 +26,7 @@ return array
          * string   identifier  set the escaping identifier
          */
         'table_prefix' => '',
-        'identifier' => '`',
+       // 'identifier' => '`',
         'charset' => 'utf8',
         'caching' => FALSE,
         'profiling' => (Kohana::$environment !== Kohana::PRODUCTION),
