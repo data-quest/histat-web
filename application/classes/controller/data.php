@@ -72,6 +72,8 @@ class Controller_Data extends Controller_Index {
 
     public function action_authors() {
         $this->sub_navi->activate(__('Authors'));
+        $this->scripts[]='authors.js';
+        $this->scripts[]='data_new.js';
         $orm = ORM::factory('project');
         $view = View::factory(I18n::$lang . '/data/authors/overview');
         $authors = $orm->getAuthors();

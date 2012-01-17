@@ -372,7 +372,9 @@ table tr td.even {
 /*Style project/details/id end*/
 /*Style lang/data/authors */
 #authors div.keys{
-       padding:15px;
+       padding:10px;
+       margin: auto;
+       width: auto;
 }
 
 #authors div.keys ul li{
@@ -393,17 +395,33 @@ table tr td.even {
 #authors .list{
     padding:15px;
 }
-#authors .list ul li.key{    
+#authors .list .key > span{    
+     float:left;
     color: #ff8a00;
     font-weight: bold;
      border-right: 0px solid;
+     cursor: default;
+     margin:5px 0px;
+    padding:0px 6px;
 }
-#authors .list ul li{
+#authors .list .key div.author{
     margin:5px 0px;
     padding:0px 6px;
     float:left;
     list-style: none;
     border-right: 1px solid #757576;
+    cursor: pointer;
 }
-
+#authors .list .key div.project{
+    float:left;
+    width:100%;
+}
+#authors .list .key div:last-child.author{
+    border-right: 0px solid;
+}
+#authors .list ul li span{
+    display: none;
+    width:960px;
+    height:100px;
+}
 /*Style lang/data/authors end */

@@ -1,5 +1,5 @@
 $(function(){
-    $('.details').on('click',function(e){
+    $('.details').live('click',function(e){
         e.preventDefault();
         var target = $(this);
         var project_id = target.find('input[name="project_id"]').val();

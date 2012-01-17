@@ -12,11 +12,11 @@
     <div class="list">
         <h1>Autorenliste</h1><br/>
         <?php foreach ($author_list as $key => $authors): ?>
-        <ul><li class="key" id="<?= $key ?>"><?= $key ?></li>
+        <div class="key" id="<?= $key ?>"><span><?= $key ?></span>
             <?php foreach ($authors as $author): ?>
-            <li><?= $author ?></li>
+            <div class="author"><?= $author ?><?= Form::hidden('author', $author) ?></div><div class="project" style="display:none"></div>
             <?php endforeach; ?>
-            </ul>
+        </div>
         <?php endforeach; ?>
         <div class="clear"></div>
     </div>

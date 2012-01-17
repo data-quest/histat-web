@@ -5,7 +5,7 @@
             <tr >
                 <td width="10%">ZA <?=  $project->Studiennummer ?></td>
                  <td class="even" width="13%"><?= $project->theme->Thema ?></td>
-                <td  width="50%"><?= $project->Studientitel ?></td>
+                <td  width="50%"><?= $project->Projektautor ?>, <?= $project->Studientitel ?></td>
                 <td class="even" width="22%">
                     <?= $project->Anzahl_Zeitreihen; ?> Zeitreihen (<?= $project->Zeitraum?>)
                     <?php $tabellen = $project->getUsedTables();?>

@@ -19,8 +19,6 @@ class Controller_Project extends Controller_Data {
         if ($this->id == NULL || $this->token !== $this->xsrf || !$this->request->is_ajax())
             throw new HTTP_Exception_404(); //If ID not given throw Exception
 
-
-        $this->sub_navi->activate(__('New'));
         $project = ORM::factory('project', $this->id);
         if ($project->loaded()) {
             $view = View::factory(I18n::$lang . '/project/details');
@@ -31,7 +29,16 @@ class Controller_Project extends Controller_Data {
         }
         $this->response->body($content);
     }
-
+    public function action_list(){
+         if ($this->id == NULL || $this->token !== $this->xsrf || !$this->request->is_ajax())
+            throw new HTTP_Exception_404(); //If ID not given throw Exception
+         
+         $projects = ORM::factory('project')->where('Projektautor','LIKE','%'.$this->id.'%');
+         $view = View::factory(I18n::$lang.'/project/list');
+         $view->projects = $projects;
+         $this->response->body($view->render());
+         
+    }
     public function action_download() {
         $this->id = $this->request->param('id');
         if (!$this->id)
