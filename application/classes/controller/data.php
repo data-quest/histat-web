@@ -1,6 +1,4 @@
-<?php
-
-defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') or die('No direct script access.');
 
 /**
  * Controller <b>Data</b> 
@@ -44,11 +42,11 @@ class Controller_Data extends Controller_Index {
     public function action_themes() {
         $this->sub_navi->activate(__('Themes'));
         $id = $this->request->param('id');
-         
+
         if (!$id) {
             $this->scripts[] = 'jquery.tagsphere.min.js';
             $this->scripts[] = 'themes.js';
-           $orm = ORM::factory('theme');
+            $orm = ORM::factory('theme');
             $total = 0;
             $themes_tmp = $orm->getThemes()->order_by('summe', 'DESC')->as_object()->execute();
             foreach ($themes_tmp as $theme) {
@@ -62,21 +60,46 @@ class Controller_Data extends Controller_Index {
             }
             $view = View::factory(I18n::$lang . '/data/themes/cloud');
             $view->themes = $themes;
-          
-        }else{
-             $this->scripts[] = 'data_new.js';
-            $orm = ORM::factory('theme',$id);
-          //  $orm->load_with('project');
+        } else {
+            $this->scripts[] = 'data_new.js';
+            $orm = ORM::factory('theme', $id);
             $view = View::factory(I18n::$lang . '/data/themes/overview');
             $view->theme_list = $orm->getThemes()->as_object()->execute();
             $view->projects = $orm->projects->find_all();
-        
         }
-          $this->content = $view->render();
+        $this->content = $view->render();
     }
 
     public function action_authors() {
         $this->sub_navi->activate(__('Authors'));
+        $orm = ORM::factory('project');
+        $view = View::factory(I18n::$lang . '/data/authors/overview');
+        $authors = $orm->getAuthors();
+        $author_list = array();
+        $key_list = array();
+        foreach ($authors as $author) {
+            $names = explode(';', $author->Projektautor);
+            if (count($names) > 0) {
+                foreach ($names as $name) {
+                    $name = trim(str_replace(array('(', ')'), array(''), $name));
+                    $author_id = md5($name);
+                    $key = strtoupper($name[0]);
+                    $key_list[$key] = $key;
+                    $author_list[$key][$author_id] =  $name;
+                }
+            } else {
+                $name = $names;
+                $author_id = md5($name);
+                $key = strtoupper($name[0]);
+                $key_list[$key] = $key;
+                $author_list[$key][$author_id] =  $name;
+            }
+        }
+        ksort($author_list);
+        ksort($key_list);
+        $view->author_list = $author_list;
+        $view->key_list = $key_list;
+        $this->content = $view->render();
     }
 
 }

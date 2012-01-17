@@ -58,5 +58,14 @@
                         ->where('p.ID_Projekt', '=', $this->ID_Projekt)
                         ->order_by('Tabelle')->as_object()->execute();
     }
-
+    public function getAuthors(){
+   
+        return DB::select('ID_Projekt','Projektautor')
+                ->from(array('Aka_Projekte','p'))
+                ->where('p.ID_Projekt','!=','14')
+                ->where('p.Projektautor','IS NOT',NULL)
+                ->as_object()
+                ->execute();
+                
+    }
 }

@@ -368,7 +368,41 @@ table tr td.even {
 #project_details hr{
  margin:10px 0px;
 }
-.ui-dialog-content p{
- 
-}
 /*Style project/details/id end*/
+/*Style lang/data/authors */
+#authors div.keys{
+       padding:15px;
+}
+
+#authors div.keys ul li{
+    list-style: none;
+    float:left;
+    display:block;
+}
+#authors div.keys ul{float:left;}
+#authors div.keys ul li a{
+    text-decoration: none;
+    color:#ffffff;
+    background: #ff8a00;
+    font-size: 1.1em;
+    padding:0px 3px;
+    margin:5px;
+    display:block;
+}
+#authors .list{
+    padding:15px;
+}
+#authors .list ul li.key{    
+    color: #ff8a00;
+    font-weight: bold;
+     border-right: 0px solid;
+}
+#authors .list ul li{
+    margin:5px 0px;
+    padding:0px 6px;
+    float:left;
+    list-style: none;
+    border-right: 1px solid #757576;
+}
+
+/*Style lang/data/authors end */
