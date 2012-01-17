@@ -12,5 +12,6 @@ return array(
     'Themes'=>'Themen',
     'Authors'=>'Autoren',
     'Last Updates from :date'=>'Letzte aktualisierung der Seite am :date',
-    'Historical Statistics'=>'Historische Statistik'
+    'Historical Statistics'=>'Historische Statistik',
+    'go top' =>'nach oben'
 );

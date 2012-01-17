@@ -214,13 +214,14 @@ table tr td.even {
 #content #gotop{
       width:90px;
       float:right;
+      text-align: center;
 }
 #content #gotop a{
     margin-right:20px;
     display:block;
     height: 32px;
-    padding-left:15px;
-    padding-right: 15px;
+    width:100%;
+    display:block;
     color:#ffffff;
     text-decoration: none;
     float:right;

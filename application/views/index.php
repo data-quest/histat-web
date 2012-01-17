@@ -32,7 +32,7 @@
             </div>
             <div id="content" class="ui-corner-bottom">
                 <?= $content ?>
-                <div id="gotop" ><a class="ui-corner-top" href="#top" alt="<?= __('Go Top')?>"><?= __('Go Top')?></a></div>
+                <div id="gotop" ><a href="#top" alt="<?= __('go top')?>"><?= __('go top')?></a></div>
                 <div class="clear"></div>
             </div>
             <div id="footer">
