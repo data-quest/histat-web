@@ -45,7 +45,7 @@
         return $this->select(
                                 array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt'
                         )
-                        ->where('ID_Thema', '<>', '14')
+                        ->where('ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
                         ->order_by('chdate', 'DESC')
                         ->limit('30');
     }
@@ -62,7 +62,7 @@
    
         return DB::select('ID_Projekt','Projektautor')
                 ->from(array('Aka_Projekte','p'))
-                ->where('p.ID_Projekt','!=','14')
+                ->where('p.ID_Thema','!=',Kohana::$config->load('config.example_theme_id'))
                 ->where('p.Projektautor','IS NOT',NULL)
                 ->as_object()
                 ->execute();

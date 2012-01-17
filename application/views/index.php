@@ -14,6 +14,18 @@
         <div id="top"></div>
         <div id="layout">
             <div id="header">
+                <div class="text">
+                    <span class="highlight"><?= __('histat:') ?></span>
+                    <span><?= __('Historical Statistics') ?></span>
+                </div>
+                 <div class="timelines">
+                    <span class="highlight"><?= $times ?></span>
+                    <span><?= __('Timelines') ?></span>
+                </div>
+                 <div class="values">
+                    <span class="highlight"><?= $values ?></span>
+                    <span><?= __('Values') ?></span>
+                </div>
             </div>
             <div id="main_navi">
                 <?php

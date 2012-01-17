@@ -33,7 +33,7 @@ class Controller_Project extends Controller_Data {
          if ($this->id == NULL || $this->token !== $this->xsrf || !$this->request->is_ajax())
             throw new HTTP_Exception_404(); //If ID not given throw Exception
          
-         $projects = ORM::factory('project')->where('Projektautor','LIKE','%'.$this->id.'%');
+         $projects = ORM::factory('project')->where('ID_Thema','!=',$this->config->get('example_theme_id'))->where('Projektautor','LIKE','%'.$this->id.'%');
          $view = View::factory(I18n::$lang.'/project/list');
          $view->projects = $projects;
          $this->response->body($view->render());

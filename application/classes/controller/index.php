@@ -149,6 +149,8 @@ class Controller_Index extends Controller_Template {
             $this->template->styles = $this->styles;
             $this->template->scripts = $this->scripts;
             $this->template->xsrf = $this->xsrf;
+            $this->template->times = 10000;
+            $this->template->values = 1000000;
             $this->template->date = date("d.m.Y", time());
             //Main Layout will be rendered in after method
         }
