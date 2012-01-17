@@ -1,6 +1,15 @@
 <div id="project_details" >
-    <h1>Details zur Studie:</h1>
+    <h1>Details zur Studie</h1>
     <br/>
+    <?php if (!empty($project->datei_name)): ?>
+        <h3>Download:</h3>
+        <span>Download weiterer Texte zu dieser Studie im PDF Format (Forschungsberichte, Publikationen, Materialien zur Studie) 
+            <?= HTML::anchor('project/download/' . $project->ID_Projekt, 'Download: .pdf', array('class' => 'button')) ?>
+            <div class="clear"></div>
+        </span>
+         <hr/>
+    <?php endif ?>
+   
     <h3>Name der Studie</h3>
     <span><?= $project->Projektname ?></span>
     <hr/>
@@ -11,7 +20,7 @@
 
     <?php if (strlen($project->Projektbeschreibung) > 200): ?>
         <span class="short">
-            <?= substr(nl2br($project->Projektbeschreibung), 0, 200) . '...' ?>
+            <?= mb_substr(nl2br($project->Projektbeschreibung), 0, 200) . '...' ?>
         </span>
         <span class="full" style="display:none">
             <?= nl2br($project->Projektbeschreibung) ?>
@@ -36,7 +45,7 @@
     <h3>Quellentypen:</h3>
     <?php if (strlen($project->Quellen) > 200): ?>
         <span class="short">
-            <?= substr(nl2br($project->Quellen), 0, 200) . '...' ?>
+            <?= mb_substr(nl2br($project->Quellen), 0, 200) . '...' ?>
         </span>
         <span class="full" style="display:none">
             <?= nl2br($project->Quellen) ?>
@@ -50,7 +59,7 @@
     <h3>Sachliche Untergliederung der Datentabellen:</h3>
     <?php if (strlen($project->Untergliederung) > 200): ?>
         <span class="short">
-            <?= substr(nl2br($project->Untergliederung), 0, 200) . '...' ?>
+            <?= mb_substr(nl2br($project->Untergliederung), 0, 200) . '...' ?>
         </span>
         <span class="full" style="display:none">
             <?= nl2br($project->Untergliederung) ?>
@@ -71,7 +80,7 @@
 
     <?php if (strlen($tabellenverzeichnis) > 200): ?>
         <span class="short">
-            <?= substr(nl2br($tabellenverzeichnis), 0, 200) . '...' ?>
+            <?= mb_substr(nl2br($tabellenverzeichnis), 0, 200) . '...' ?>
         </span>
         <span class="full" style="display:none">
             <?= nl2br($tabellenverzeichnis) ?>

@@ -13,8 +13,8 @@ $(function(){
             type:'POST',
             success: function(data){
                 $('#dialog').html(data).dialog({
-                    minWidth:860,
-                    maxWidth:860,
+                    minWidth:914,
+                    maxWidth:914,
                     draggable:false,
                     modal:true,
                     title:title,
@@ -37,7 +37,18 @@ $(function(){
         var short_text = full.prev('span.short');
    
         short_text.toggle(); 
-        full.slideToggle('slow'); 
-        target.toggleText(more,less);
+        full.slideToggle('slow',function(){
+            target.text(less).attr('class','less');
+        });  
+    });
+      $('.less').live('click',function(){
+        var target = $(this);
+        var full =target.prev('span.full');
+        var short_text = full.prev('span.short');
+        full.slideToggle('slow',function(){
+             short_text.toggle(); 
+               target.text(more).attr('class','more');
+        }); 
+      
     });
 });

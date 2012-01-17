@@ -11,10 +11,10 @@
         'Position' => array(),
         'chdate' => array()
     );
-    protected $_belongs_to = array(
-        'project'=>array('model'=>'project','far_key'=>'ID_Thema')
+   
+    protected $_has_many = array(
+        'projects' => array('model'=>'project','far_key'=>'ID_Thema','foreign_key'=>'ID_Thema')
     );
-  
     
     public function getThemes(){
         return DB::select('Aka_Themen.*',array('COUNT(Aka_Projekte.ID_Projekt)','count'),array('SUM(Aka_Projekte.Anzahl_Zeitreihen)','summe'))
@@ -22,9 +22,6 @@
                 ->join('Aka_Projekte','LEFT')
                 ->on('Aka_Themen.ID_Thema','=','Aka_Projekte.ID_Thema')
                 ->where('Aka_Projekte.ID_Projekt', 'IS NOT ', NULL)
-                ->group_by('Thema');
-      
-         
-                
+                ->group_by('Thema');        
     }
 }

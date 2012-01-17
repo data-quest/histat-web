@@ -11,6 +11,9 @@
     protected $_has_one = array(
         'theme'=>array('model'=>'theme','foreign_key'=>'ID_Thema','far_key'=>'ID_Thema')
     );
+    protected $_belongs_to = array(
+          'theme'=>array('model'=>'theme','foreign_key'=>'ID_Thema','far_key'=>'ID_Thema')
+    );
     protected $_table_columns = array(
         'ID_Projekt' => array(),
         'ID_Thema' => array(),

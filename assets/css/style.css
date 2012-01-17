@@ -46,24 +46,29 @@ table td{
     border:1px solid #72777a;
     padding:10px;
 }
-table tbody tr:hover{
-    cursor: pointer;
-}
+
 td.details{
     padding:0px;
     background: url(../img/layout/button-details.png) no-repeat left center;
     min-width: 90px;
     text-align: center;
+ 
+}
+td.details span{
+    display:block;
+    width:70px;
     color: #ffffff;
     font-size: 1.1em;
     font-weight: bold;
+    cursor: pointer;
 }
-
 
 table tr td.even {
     background: #e6e6e6;
 }
-
+.ui-dialog {
+    border:1px solid #72777a;
+}
 .ui-dialog .ui-dialog-titlebar{
     background: url(../img/layout/verlauf-orange_150x5.jpg) repeat-x center center; 
     text-align: center;
@@ -78,28 +83,14 @@ table tr td.even {
 .ui-dialog-title{
      overflow:hidden;
      float:left;
-     width:89.3%;
+     width:88.3%;
      height:30px;
 }
 .ui-widget-overlay{
-    /* Theoretically for IE 8 & 9 (more valid) */
-    /* ...but not required as filter works too */
-    /* should come BEFORE filter */
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-
-    /* This works in IE 8 & 9 too */
-    /* ... but also 5, 6, 7 */
     filter: alpha(opacity=50);
-
-    /* Older than Firefox 0.9 */
     -moz-opacity:0.5;
-
-    /* Safari 1.x (pre WebKit!) */
     -khtml-opacity: 0.5;
-
-    /* Modern!
-    /* Firefox 0.9+, Safari 2?, Chrome any?
-    /* Opera 9+, IE 9+ */
     opacity: 0.5;
     
     background: #000000;
@@ -131,13 +122,21 @@ table tr td.even {
     color:#757576;
     display: block;
     float:right;
-    width:92px;
-    background: url(../img/layout/close_button.png) no-repeat right center;
+    width:100px;
+    background: url(../img/layout/button-close.png) no-repeat left center;
 }
 .ui-dialog-titlebar-close span{
     display:block;
     float: right;
     width: 80px;
+}
+
+.button{
+    text-decoration: none;
+    color:#ffffff;
+    padding:10px;
+    font-size: 1.1em;
+    background: url(../img/layout/hg-navi-orange.jpg) repeat-x left center;
 }
 /*General Styles end*/
 /*Main Layout*/
@@ -164,7 +163,7 @@ table tr td.even {
     padding-left:15px;
     padding-right:15px;
     font-size: 1.2em;
-    border-right:2px groove #cbd0d8;
+    border-right:2px groove #ffffff;
     height:100%;
     float:left;
     display:block;
@@ -174,13 +173,13 @@ table tr td.even {
 }
 #main_navi a.active span{
     display:block;
-    width:23px;
-    height:15px;
+    width:19px;
+    height:11px;
     margin: auto;
     background: url(../img/layout/navi_main_triangle.png) no-repeat center center;
 }
 #main_navi a:first-child{
-    border-left:2px groove #cbd0d8;
+    border-left:2px groove #ffffff;
     padding-left:15px;
 }
 #sub_navi{
@@ -198,10 +197,10 @@ table tr td.even {
 #sub_navi a{
     text-decoration: none;
     color:#ffffff;
-    font-size: 1.2em;
+    font-size: 1.1em;
     padding-left:10px;
     padding-right:10px;
-    border-left:2px solid #cbd0d8;
+    border-left:1px solid #ffffff;
 }
 #sub_navi li:first-child a{
     border-left:0px solid;
@@ -280,23 +279,47 @@ table tr td.even {
 }
 /*Style index end */
 /* Style data/themes */
-#themes{
+#themes_cloud{
     overflow:hidden;
 }
-#themes ul li{
+#themes_cloud ul li{
     list-style: none;
     margin:auto;
     display: block;
     text-align: center;
 }
-#themes ul li a{
+#themes_cloud ul li a{
     color:#72777a;
     text-decoration: none;
 }
-#themes ul li.top a{
+#themes_cloud ul li.top a{
     color:#ff6100;
 }
 /* Style data/themes end*/
+/*Style data/themes/id*/
+#themes_overview{
+    
+}
+#themes_overview ul{
+    padding:20px 10px;
+}
+#themes_overview ul li{
+    list-style: none;
+    float:left;
+    margin-bottom: 10px;
+    border-right:2px solid #fd893f;
+}
+#themes_overview ul li a{
+    color:#000000;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding:0px 15px;
+}
+#themes_overview ul li:last-child{ border-right:0px;}
+#themes_overview .project_list{
+    padding: 15px;
+}
+/*Style data/themes/id end*/
 /* Style data/index */
 #data_new{
     padding:20px;
@@ -314,10 +337,31 @@ table tr td.even {
     padding-top:10px;
     display:block;
 }
-#project_details span.more{
-    cursor: pointer;
+#project_details span .button{
+    float:right;
 }
-
+#project_details span.more{
+    color:#72777a;
+    cursor: pointer;
+    padding-top:0px;
+    height: 16px;
+    line-height: 16px;
+    padding-left: 20px;
+    margin-top:5px;
+    margin-left: 5px;
+    background: url(../img/layout/content-pfeil-right.png) no-repeat left center;
+}
+#project_details span.less{
+    color:#72777a;
+    cursor: pointer;
+    padding-top:0px;
+    height: 16px;
+    line-height: 16px;
+    padding-left: 20px;
+    margin-top:5px;
+    margin-left: 5px;
+    background: url(../img/layout/content-pfeil-bottom.png) no-repeat left center;
+}
 #project_details p{
     display:none;
 }
