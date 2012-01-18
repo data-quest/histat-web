@@ -52,7 +52,7 @@ td.details{
     background: url(../img/layout/button-details.png) no-repeat left center;
     min-width: 90px;
     text-align: center;
- 
+
 }
 td.details span{
     display:block;
@@ -62,7 +62,31 @@ td.details span{
     font-weight: bold;
     cursor: pointer;
 }
+td .tooltip span{
 
+}
+td .tooltip{
+    -webkit-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border-radius: 6px;
+    background: #ffffff;
+    border:1px solid #72777a;
+    position: absolute;
+    padding:10px;
+    margin-top:10px;
+    margin-left:5px;
+    text-align: left;
+}
+td .tooltip span{
+    position: absolute;
+    margin-top:-21px; /*height + padding*/
+    width:16px;
+    height:11px;
+    background:url(../img/layout/tooltip-pfeil-top.png) no-repeat left bottom;
+}
 table tr td.even {
     background: #e6e6e6;
 }
@@ -78,13 +102,13 @@ table tr td.even {
     color:#ffffff;
     font-size: 1.2em;
     padding:0px;
-   
+
 }
 .ui-dialog-title{
-     overflow:hidden;
-     float:left;
-     width:88.3%;
-     height:30px;
+    overflow:hidden;
+    float:left;
+    width:88.3%;
+    height:30px;
 }
 .ui-widget-overlay{
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
@@ -92,7 +116,7 @@ table tr td.even {
     -moz-opacity:0.5;
     -khtml-opacity: 0.5;
     opacity: 0.5;
-    
+
     background: #000000;
     position: fixed;
     height:100%;
@@ -213,9 +237,9 @@ table tr td.even {
     background: #f9f7ee;
 }
 #content #gotop{
-      width:90px;
-      float:right;
-      text-align: center;
+    width:90px;
+    float:right;
+    text-align: center;
 }
 #content #gotop a{
     margin-right:20px;
@@ -300,7 +324,7 @@ table tr td.even {
 /* Style data/themes end*/
 /*Style data/themes/id*/
 #themes_overview{
-    
+
 }
 #themes_overview ul{
     padding:20px 10px;
@@ -368,14 +392,14 @@ table tr td.even {
     display:none;
 }
 #project_details hr{
- margin:10px 0px;
+    margin:10px 0px;
 }
 /*Style project/details/id end*/
 /*Style lang/data/authors */
 #authors div.keys{
-       padding:10px;
-       margin: auto;
-       width: auto;
+    padding:10px;
+    margin: auto;
+    width: auto;
 }
 
 #authors div.keys ul li{
@@ -397,12 +421,12 @@ table tr td.even {
     padding:15px;
 }
 #authors .list .key > span{    
-     float:left;
+    float:left;
     color: #ff8a00;
     font-weight: bold;
-     border-right: 0px solid;
-     cursor: default;
-     margin:5px 0px;
+    border-right: 0px solid;
+    cursor: default;
+    margin:5px 0px;
     padding:0px 6px;
 }
 #authors .list .key div.author{

@@ -25,8 +25,12 @@ class Controller_Data extends Controller_Index {
         $project = ORM::factory('project');
         //Load view/<lang>/data/index.php
         $view = View::factory(I18n::$lang . '/data/index');
-        //Assign new projects
-        $view->projects = $project->new_projects();
+        //Load view/<lang>/project/list.php prepare the subview
+        $list = View::factory(I18n::$lang . '/project/list');
+        //assign new projects to subview
+        $list->projects = $project->new_projects();
+        //Assign list in view
+        $view->list = $list->render();
         //set content
         $this->content = $view->render();
     }
@@ -65,7 +69,13 @@ class Controller_Data extends Controller_Index {
             $orm = ORM::factory('theme', $id);
             $view = View::factory(I18n::$lang . '/data/themes/overview');
             $view->theme_list = $orm->getThemes()->as_object()->execute();
-            $view->projects = $orm->projects->find_all();
+            
+              //Load view/<lang>/project/list.php prepare the subview
+        $list = View::factory(I18n::$lang . '/project/list');
+        //assign new projects to subview
+        $list->projects =$orm->projects;
+        //Assign list in view
+            $view->list = $list->render();
         }
         $this->content = $view->render();
     }

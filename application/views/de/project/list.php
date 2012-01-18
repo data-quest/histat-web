@@ -9,7 +9,7 @@
                 <?php $tabellen = $project->getUsedTables(); ?>
                 <?= count($tabellen) > 0 ? '<br/>' . count($tabellen) . ' Tabellen' : '' ?> 
             </td>
-            <td width="90" class="details"><span>Details...<?= Form::hidden('project_id', $project->ID_Projekt) ?></span></td>
+            <td width="90" class="details"><span>Details...<?= Form::hidden('project_id', $project->ID_Projekt) ?></span><div class="tooltip" style="display:none"><span></span><a href="#" class="timeline">Zeitreiehenauswahl</a><br/><a href="#" class="project_details">Studiendetails</a></div></td>
 
         </tr>
 
