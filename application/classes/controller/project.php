@@ -29,6 +29,20 @@ class Controller_Project extends Controller_Data {
         }
         $this->response->body($content);
     }
+      public function action_timeline() {
+        if ($this->id == NULL || $this->token !== $this->xsrf || !$this->request->is_ajax())
+            throw new HTTP_Exception_404(); //If ID not given throw Exception
+
+        $project = ORM::factory('project', $this->id);
+        if ($project->loaded()) {
+            $view = View::factory(I18n::$lang . '/project/timeline');
+            $view->names = $project->keymasks->find_all();
+            $content = $view->render();
+        } else {
+            $content = __('Project not found');
+        }
+        $this->response->body($content);
+    }
     public function action_list(){
          if ($this->id == NULL || $this->token !== $this->xsrf || !$this->request->is_ajax())
             throw new HTTP_Exception_404(); //If ID not given throw Exception

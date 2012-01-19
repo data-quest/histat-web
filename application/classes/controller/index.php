@@ -89,7 +89,6 @@ class Controller_Index extends Controller_Template {
         //Setup Scripts
         $this->scripts [] = 'jquery.min.js';
         $this->scripts [] = 'jquery-ui.min.js';
-        $this->scripts [] = 'jquery.toggletext.js';
         $this->scripts [] = 'main.js';
 
         //Setup Cookie
@@ -112,9 +111,11 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('data', __('Data'));
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
-        $this->main_navi->add('friends', __('Friends'));
-
-
+        if($this->user){
+             $this->main_navi->add('auth/logout', __('Logout'));
+        }else{
+            $this->main_navi->add('auth', __('Login'));  
+        }
         //Bind Assets Directories global to all Views
         View::bind_global('assets', $this->assets);
 

@@ -14,5 +14,5 @@ class Model_Keymask extends ORM {
     protected $_has_many = array(
         'literatures' => array('model' => 'literature', 'foreign_key' => 'ID_HS', 'far_key' => 'ID_HS'),
     );
-
+   
 }

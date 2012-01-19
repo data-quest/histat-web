@@ -18,7 +18,6 @@ class Controller_Data extends Controller_Index {
     }
 
     public function action_index() {
-        $this->scripts[] = 'data_new.js';
         //Activate sub navigation point "New"
         $this->sub_navi->activate(__('New'));
         //Load model/project.php
@@ -65,7 +64,6 @@ class Controller_Data extends Controller_Index {
             $view = View::factory(I18n::$lang . '/data/themes/cloud');
             $view->themes = $themes;
         } else {
-            $this->scripts[] = 'data_new.js';
             $orm = ORM::factory('theme', $id);
             $view = View::factory(I18n::$lang . '/data/themes/overview');
             $view->theme_list = $orm->getThemes()->as_object()->execute();
@@ -83,7 +81,7 @@ class Controller_Data extends Controller_Index {
     public function action_authors() {
         $this->sub_navi->activate(__('Authors'));
         $this->scripts[]='authors.js';
-        $this->scripts[]='data_new.js';
+
         $orm = ORM::factory('project');
         $view = View::factory(I18n::$lang . '/data/authors/overview');
         $authors = $orm->getAuthors();

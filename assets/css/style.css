@@ -67,10 +67,7 @@ td .tooltip span{
 }
 td .tooltip{
     -webkit-border-radius: 6px;
-    -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
     border-radius: 6px;
     background: #ffffff;
     border:1px solid #72777a;
@@ -86,6 +83,9 @@ td .tooltip span{
     width:16px;
     height:11px;
     background:url(../img/layout/tooltip-pfeil-top.png) no-repeat left bottom;
+}
+td .tooltip a{
+    cursor: pointer;
 }
 table tr td.even {
     background: #e6e6e6;
@@ -154,7 +154,35 @@ table tr td.even {
     float: right;
     width: 80px;
 }
+.ui-dialog-buttonpane{
+    background: #505050;
+    border-bottom: 1px solid #ffffff;
+    float:right;
+    width: 100%;
+}
+.ui-dialog-buttonset{
+    border:1px solid #72777a;
+}
 
+.ui-dialog-buttonset .ui-button{
+    padding:10px;
+    border:1px solid #72777a;
+    float:right;
+}
+.ui-state-hover .ui-button-text{
+    color:#ffffff;
+}
+.ui-button-text{
+    font-size: 1.1em;
+    color:#505050;
+}
+.ui-button.ui-state-hover{
+    background: url(../img/layout/verlauf-orange_150x5.jpg) repeat-x left center;
+}
+.ui-button{
+    background: #ffffff; 
+    cursor: pointer;
+}
 .button{
     text-decoration: none;
     color:#ffffff;
@@ -172,8 +200,11 @@ table tr td.even {
 #header{
     background:url(../img/layout/hg-header-logo.jpg)no-repeat center center;
     height:80px;
+    width: 100%;
 }
-
+#header *{
+    display:none;
+}
 #main_navi{
     color:#ffffff;
     background: url(../img/layout/hg-navi-blau.jpg) repeat-x center center;
@@ -192,9 +223,11 @@ table tr td.even {
     height:100%;
     float:left;
     display:block;
+    width: auto;
 }
 #main_navi a.active{
     background: url(../img/layout/hg-navi-orange.jpg) repeat-x center center;
+    width: auto;
 }
 #main_navi a.active span{
     display:block;
@@ -450,3 +483,81 @@ table tr td.even {
     height:100px;
 }
 /*Style lang/data/authors end */
+/*Style project/timeline */
+#timeline{
+    padding:15px;
+}
+/*Style project/timeline end*/
+/*Style auth */
+#auth{
+    padding:15px;
+}
+#auth label{
+    color: #505050;
+    font-size: 1.1em;
+}
+#auth p{
+    padding:5px 0px;
+}
+#auth .star{
+    font-weight: bold;
+    line-height: 0px;
+    color: #FF8F00;
+    font-size: 1.3em;
+}
+/*Style auth end */
+/*Style auth/login */
+#login{
+    width: 300px;
+    margin: auto;
+}
+#auth input{
+    border:1px solid #72777a;
+    padding:3px 0px 3px 3px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+#auth input:focus{
+    border:1px solid #FF8F00;
+}
+#auth input[type="text"],#login input[type="password"]{
+    width:200px;
+}
+#auth input[type="submit"]{
+    width:206px;
+    cursor: pointer;
+    color:#505050;
+    background: #ffffff;
+}
+#auth input:hover[type="submit"]{
+    color:#ffffff;
+    background: url(../img/layout/verlauf-orange_150x5.jpg) repeat-x left center;
+}
+
+#auth span.error{
+    color:#FF8F00;
+    margin:10px 0px;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: block;
+}
+/*Style auth/login end*/
+/*Style auth/create */
+#auth #create{
+    width:360px;
+    margin: auto;
+}
+#auth #create form{
+    line-height: 25px;
+}
+#auth #create input{
+    float:right;
+}
+#auth #create input[type="submit"]{
+    width:100%;
+}
+#auth h1{
+    text-align: center;
+}
+/*Style auth/create end*/

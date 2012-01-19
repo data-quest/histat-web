@@ -13,33 +13,73 @@ class Model_User extends Model_Auth_User {
         'id' => array(),
         'email' => array(),
         'username' => array(),
+        'title' => array(),
+        'name' => array(),
+        'surname' => array(),
+        'institution' => array(),
+        'department' => array(),
+        'street' => array(),
+        'zip' => array(),
+        'location' => array(),
+        'country' => array(),
+        'phone' => array(),
         'password' => array(),
-        'ip' => array(),
-        'register_date' => array(),
-        'activation_key' => array(),
-        'auth_key'=>array(),
         'logins' => array(),
-        'last_login' => array()
+        'last_login' => array(),
+        'ip' => array(),
+        'last_action' => array(),
+        'chdate' => array(),
+        'mkdate' => array()
     );
 
     public function rules() {
-
-        return Arr::merge(array(
+       
+        return Arr::merge(
+                        array(
                     'username' => array(
+                        array('not_empty'),
                         array('alpha_dash'),
                         array('min_length', array(':value', 4)),
                         array('max_length', array(':value', 20)),
                         array(array($this, 'unique'), array('username', ':value')),
                     ),
-                        ), parent::rules());
+                    'name' => array(
+                        array('not_empty'),
+                        array('alpha', array(':value', TRUE))
+                    ),
+                    'surname' => array(
+                        array('not_empty'),
+                        array('alpha', array(':value', TRUE))
+                    ),
+                    'street' => array(
+                        array('not_empty')
+                    ),
+                    'zip' => array(
+                        array('not_empty'),
+                        array('numeric')
+                    ),
+                    'location' => array(
+                        array('not_empty'),
+                        array('alpha', array(':value', TRUE))
+                    ),
+                    'country' => array(
+                        array('not_empty'),
+                        array('alpha', array(':value', TRUE))
+                    ), 'phone' => array(
+                        array('phone')
+                    ), 'title' => array(
+                        array('alpha', array(':value', TRUE))
+                    ),
+                    'institution' => array(
+                        array('alpha', array(':value', TRUE))
+                    ), 'department' => array(
+                        array('alpha', array(':value', TRUE))
+                        )), parent::rules()
+        );
     }
 
     public function extra_rules() {
-        return array(
-            'terms' => array(
-                array('equals', array(':value', 'on')),
-            ),
-        );
+        return array();
     }
 
     public static function get_password_validation($values) {
@@ -49,15 +89,7 @@ class Model_User extends Model_Auth_User {
     }
 
     public function create_user($values, $expected) {
-        // Validation for passwords
-        $extra_validation = Model_User::get_password_validation($values)
-                ->rule('password', 'not_empty');
-        //Extend with extra validation
-        foreach ($this->extra_rules() as $field => $rules) {
-            $extra_validation->rules($field, $rules);
-        }
-
-        return $this->values($values, $expected)->create($extra_validation);
+        return $this->values($values, $expected)->create();
     }
 
     public function update_user($values, $expected = NULL) {
