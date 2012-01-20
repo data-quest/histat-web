@@ -74,12 +74,12 @@ class Controller_Profile extends Controller_Index {
                 );
 
                 $post = Arr::merge($this->request->post(), $additional);
-                // Create the user using form values
-               
-                $this->user->update_user($post, array(
-                    'password',
-                    'password_confirm',
-                    'password_current'
+                
+      
+               // Create the user using form values
+                $this->user->update_password($post, array(
+                    'chdate',
+                    'password'
                 ));
                // Reset values so form is not sticky
                 $_POST = array();

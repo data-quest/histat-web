@@ -2,18 +2,18 @@
 
 <div id="edit_password">
     <?php foreach ($errors as $key => $error): ?>
-        <span class="error"> <?= $error ?></span>
+        <span class="error"> <?= Debug::vars($error); ?></span>
     <?php endforeach; ?>
     <?php if (isset($success)): ?>
         <span class="info">Benutzerdaten wurden geändert</span>
     <?php endif; ?>
     <?= Form::open('profile/edit_password') ?>
     <span class="star">*</span><?= Form::label('password_current', 'Passwort :') ?>
-    <?= Form::input('password_current', HTML::chars(Arr::get($_POST, 'password_current'))) ?><br/>
+    <?= Form::password('password_current', HTML::chars(Arr::get($_POST, 'password_current'))) ?><br/>
     <span class="star">*</span><?= Form::label('password', 'Neues Passwort :') ?>
-    <?= Form::input('password', HTML::chars(Arr::get($_POST, 'password'))) ?><br/>
+    <?= Form::password('password', HTML::chars(Arr::get($_POST, 'password'))) ?><br/>
     <span class="star">*</span><?= Form::label('password_confirm', 'Neues Passwort wiederholen:') ?>
-    <?= Form::input('password_confirm', HTML::chars(Arr::get($_POST, 'password_confirm'))) ?><br/>
+    <?= Form::password('password_confirm', HTML::chars(Arr::get($_POST, 'password_confirm'))) ?><br/>
     <?= Form::submit('edit', 'Speichern') ?>
     <?= Form::close() ?>
     <div class="clear"></div>

@@ -33,7 +33,7 @@ class Model_User extends Model_Auth_User {
     );
 
     public function rules() {
-       
+
         return Arr::merge(
                         array(
                     'username' => array(
@@ -79,7 +79,12 @@ class Model_User extends Model_Auth_User {
     }
 
     public function extra_rules() {
-        return array();
+        return array(
+            'password_current' => array(
+                array('not_empty'),
+                array(array(Auth::instance(), 'check_password'), array(':value'))
+            )
+        );
     }
 
     public static function get_password_validation($values) {
@@ -91,12 +96,20 @@ class Model_User extends Model_Auth_User {
     public function create_user($values, $expected) {
         return $this->values($values, $expected)->create();
     }
-
+    public function update_password($values, $expected = NULL){
+        // Validation for passwords
+        $extra_validation = Model_User::get_password_validation($values);
+        //Extend with extra validation
+        foreach ($this->extra_rules() as $field => $rules) {
+            $extra_validation->rules($field, $rules);
+        }
+        return $this->values($values, $expected)->update($extra_validation);
+    }
     public function update_user($values, $expected = NULL) {
         if (empty($values['password'])) {
             unset($values['password'], $values['password_confirm']);
         }
-
+        
         // Validation for passwords
         $extra_validation = Model_User::get_password_validation($values);
         //Extend with extra validation
