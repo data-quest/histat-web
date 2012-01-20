@@ -113,13 +113,6 @@ Kohana::modules(array(
 	));
 
 $langs = implode('|', Kohana::$config->load('config')->get('avaliable_languages',array()));
-/**
- * Set Activation Route
- */
-Route::set('activate', '(<lang>/)activate(/<username>/<key>)', array('lang' => '(' . $langs . ')', 'username' => '.+', 'key' => '.+'))
-        ->defaults(array(
-            'controller' => 'auth',
-            'action' => 'activate'));
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of

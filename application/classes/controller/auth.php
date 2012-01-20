@@ -16,7 +16,7 @@ class Controller_Auth extends Controller_Index {
 
     public function action_index() {
         //if user is logged in display Error page
-        if ($this->user) {
+        if ($this->user->has_roles(array('admin','login'))) {
             throw new HTTP_Exception_404();
         }
 
@@ -25,7 +25,7 @@ class Controller_Auth extends Controller_Index {
 
     public function action_login() {
         //if user is logged in display Error page
-        if ($this->user) {
+        if ($this->user->has_roles(array('admin','login'))) {
             throw new HTTP_Exception_404();
         }
         $this->sub_navi->activate(__('Login'));
@@ -47,16 +47,17 @@ class Controller_Auth extends Controller_Index {
 
     public function action_logout() {
         //if user is logged in display Error page
-        if ($this->user == NULL) {
+        if ($this->user->has_roles(array('guest'))) {
             throw new HTTP_Exception_404();
         }
         Auth::instance()->logout();
+        Auth::instance()->force_login('guest');
         $this->request->redirect(I18n::$lang . '/index');
     }
 
     public function action_create() {
         //if user is logged in display Error page
-        if ($this->user) {
+        if ($this->user->has_roles(array('admin','user'))) {
             throw new HTTP_Exception_404();
         }
 
@@ -97,7 +98,7 @@ class Controller_Auth extends Controller_Index {
                 ));
 
                 // Grant user login role
-                $user->add('roles', ORM::factory('role', array('name' => 'login')));
+                $user->add('roles', ORM::factory('role',array('name'=>'login')));
 
                 // Reset values so form is not sticky
                 $_POST = array();
@@ -106,7 +107,7 @@ class Controller_Auth extends Controller_Index {
                 $view = View::factory(I18n::$lang . '/auth/create_success');
                 $view->email = $post['email'];
 
-                $mailBody = View::factory(I18n::$lang . '/mails/activate');
+                $mailBody = View::factory(I18n::$lang . '/mails/registration');
                 $mailBody->username = $post['username'];
                 $mailBody->password = $password;
                 $mailBody->name = $post['name'];
@@ -124,46 +125,6 @@ class Controller_Auth extends Controller_Index {
 
 
         $this->layout->content = $view->render();
-    }
-
-    public function action_send_again() {
-        //if user is logged in display Error page
-        if ($this->user != NULL) {
-            throw new HTTP_Exception_404();
-        }
-        $this->layout->icon = 'mail-open';
-        $this->title = 'Web.OS - ' . _('Resend activation key');
-        $view = View::factory('auth/activate');
-        $view->error = NULL;
-        if (HTTP_Request::POST == $this->request->method()) {
-            $email = $this->request->post('email');
-
-            if ($email != NULL) {
-                $user = ORM::factory('user', array('email' => $email));
-                if (!$user->loaded()) {
-                    $view->error = __('User not found.');
-                } else {
-                    if ($user->activation_key != NULL) {
-                        $activation_key = Text::random('alnum');
-                        $user->activation_key = $activation_key;
-                        $user->save();
-                        $body = View::factory(I18n::$lang . '/mails/activation');
-                        $body->username = $user->username;
-                        $body->activation_key = $activation_key;
-                        $view = View::factory(I18n::$lang . '/user/resend_success');
-                        $view->email = $email;
-                        $email = Email::factory(__(':username Activate your account', array(':username' => $user->username)))
-                                ->to($email)
-                                ->from('noreply@cruel-online.de', 'Cruel Online')
-                                ->message($body->render(), 'text/html')
-                                ->send();
-                    } else {
-                        $view->error = __('Account is already active.');
-                    }
-                }
-            }
-        }
-        $this->content = $view->render();
     }
 
     public function after() {

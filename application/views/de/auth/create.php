@@ -12,31 +12,31 @@ Bitten nehmen Sie zur Kenntnis, dass Sie als Nutzer die Nutzungsbedingungen der 
 
 
     <?= Form::open('auth/create') ?>
-    <span class="star">*</span><?= Form::label('username', __('Username') . ' :') ?>
+    <span class="star">*</span><?= Form::label('username', 'Benutzername:') ?>
     <?= Form::input('username', HTML::chars(Arr::get($_POST, 'username'))) ?><br/>
-    <?= Form::label('title', __('Title') . ' :') ?>
+    <?= Form::label('title', ' Titel:') ?>
     <?= Form::input('title', HTML::chars(Arr::get($_POST, 'title'))) ?><br/>
-    <span class="star">*</span><?= Form::label('name', __('Name') . ' :') ?>
+    <span class="star">*</span><?= Form::label('name', 'Vorname:') ?>
     <?= Form::input('name', HTML::chars(Arr::get($_POST, 'name'))) ?><br/>
-    <span class="star">*</span><?= Form::label('surname', __('Surname') . ' :') ?>
+    <span class="star">*</span><?= Form::label('surname', 'Nachname:') ?>
     <?= Form::input('surname', HTML::chars(Arr::get($_POST, 'surname'))) ?><br/>
-    <?= Form::label('institution', __('Institution') . ' :') ?>
+    <?= Form::label('institution', 'Institution:') ?>
     <?= Form::input('institution', HTML::chars(Arr::get($_POST, 'institution'))) ?><br/>
-    <?= Form::label('department', __('Department') . ' :') ?>
+    <?= Form::label('department', 'Abteilung:') ?>
     <?= Form::input('department', HTML::chars(Arr::get($_POST, 'department'))) ?><br/>
-    <span class="star">*</span><?= Form::label('street', __('Street. Nr / PO Box') . ' :') ?>
+    <span class="star">*</span><?= Form::label('street', 'Straße, Nr. / Postfach:') ?>
     <?= Form::input('street', HTML::chars(Arr::get($_POST, 'street'))) ?><br/>
-    <span class="star">*</span><?= Form::label('zip', __('Zip Code') . ' :') ?>
+    <span class="star">*</span><?= Form::label('zip', 'Postleitzahl:') ?>
     <?= Form::input('zip', HTML::chars(Arr::get($_POST, 'zip'))) ?><br/>
-    <span class="star">*</span><?= Form::label('location', __('Location') . ' :') ?>
+    <span class="star">*</span><?= Form::label('location', 'Ort:') ?>
     <?= Form::input('location', HTML::chars(Arr::get($_POST, 'location'))) ?><br/>
-    <span class="star">*</span><?= Form::label('country', __('Country') . ' :') ?>
+    <span class="star">*</span><?= Form::label('country', 'Land:') ?>
     <?= Form::input('country', HTML::chars(Arr::get($_POST, 'country'))) ?><br/>
-    <span class="star">*</span><?= Form::label('email', __('E-Mail') . ' :') ?>
+    <span class="star">*</span><?= Form::label('email', 'E-Mail:') ?>
     <?= Form::input('email', HTML::chars(Arr::get($_POST, 'email'))) ?><br/>
-    <?= Form::label('phone', __('Phone') . ' :') ?>
+    <?= Form::label('phone', 'Telefon:') ?>
     <?= Form::input('phone', HTML::chars(Arr::get($_POST, 'phone'))) ?><br/>
-    <?= Form::submit('register', __('Register')) ?>
+    <?= Form::submit('register', 'Registrieren') ?>
     <?= Form::close() ?>
     <div class="clear"></div>
 </div>

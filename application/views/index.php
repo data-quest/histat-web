@@ -10,7 +10,7 @@
         <title><?= $title ?></title>
     </head>
     <body>
-        
+
         <div id="top"></div>
         <div id="layout">
             <div id="header">
@@ -18,11 +18,11 @@
                     <span class="highlight"><?= __('histat:') ?></span>
                     <span><?= __('Historical Statistics') ?></span>
                 </div>
-                 <div class="timelines">
+                <div class="timelines">
                     <span class="highlight"><?= $times ?></span>
                     <span><?= __('Timelines') ?></span>
                 </div>
-                 <div class="values">
+                <div class="values">
                     <span class="highlight"><?= $values ?></span>
                     <span><?= __('Values') ?></span>
                 </div>
@@ -34,26 +34,41 @@
                 ?>
             </div>
             <div id="sub_navi">
-                <ul>
-                    <?php
-                    foreach ($sub_navi as $item)
-                        echo '<li '.($item['active'] == 1 ? 'class="active"' : '').'>'.HTML::anchor($item['uri'], $item['title']).'</li>';
-                    ?>
-                </ul>
+                <?php if (count($sub_navi) > 0): ?>
+                    <ul>
+                        <?php
+                        foreach ($sub_navi as $item)
+                            echo '<li ' . ($item['active'] == 1 ? 'class="active"' : '') . '>' . HTML::anchor($item['uri'], $item['title']) . '</li>';
+                        ?>
+                    </ul>
+                <?php endif; ?>
+                <?php if (Arr::get($user->has_roles(),'login')): ?>
+                    <div class="userinfo">
+                        <?= __('Logged in: :name :surname', array(':name' => $user->name, ':surname' => $user->surname)) ?>
+                        <ul>
+                            <li><?= HTML::anchor('cart', __('Cart [:value/:total]', array(':value' => 12, ':total' => 145))) ?></li>
+                            <li><?= HTML::anchor('profile', __('Profile')) ?></li>
+                            <?php if (Arr::get($user->has_roles(),'admin')): ?>
+                            <li><?= HTML::anchor('admin', __('Admin')) ?></li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+
+                <?php endif; ?>
                 <div class="clear"></div>
             </div>
             <div id="content" class="ui-corner-bottom">
                 <?= $content ?>
-                <div id="gotop" ><a href="#top" alt="<?= __('go top')?>"><?= __('go top')?></a></div>
+                <div id="gotop" ><a href="#top" alt="<?= __('go top') ?>"><?= __('go top') ?></a></div>
                 <div class="clear"></div>
             </div>
             <div id="footer">
-                © GESIS <?= HTML::anchor('pages/impressum', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date',array(':date'=>$date)) ?>
+                © GESIS <?= HTML::anchor('pages/impressum', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date', array(':date' => $date)) ?>
             </div>
             <div id="dialog"></div>
             <script type="text/javascript">
-            var xsrf = "<?= $xsrf ?>";
-            var base_url = "<?= URL::base()?>";
+                var xsrf = "<?= $xsrf ?>";
+                var base_url = "<?= URL::base() ?>";
             </script>
         </div>
 

@@ -111,7 +111,14 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('data', __('Data'));
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
-        if($this->user){
+        
+        //If user is not loged in
+        if(!$this->user && Auth::instance()->force_login('guest')){
+            $this->user = Auth::instance()->get_user();
+        }
+        
+        //If user has roles login OR admin, display logout button
+        if($this->user->has_roles(array('login','admin'))){
              $this->main_navi->add('auth/logout', __('Logout'));
         }else{
             $this->main_navi->add('auth', __('Login'));  
@@ -153,6 +160,7 @@ class Controller_Index extends Controller_Template {
             $this->template->times = 10000;
             $this->template->values = 1000000;
             $this->template->date = date("d.m.Y", time());
+            $this->template->user = $this->user;
             //Main Layout will be rendered in after method
         }
         parent::after();

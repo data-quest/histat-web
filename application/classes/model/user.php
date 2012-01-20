@@ -109,10 +109,10 @@ class Model_User extends Model_Auth_User {
     public function has_roles($roles = array()) {
         $my_roles = array();
         foreach ($this->roles->find_all() as $role) {
-            $my_roles[] = $role->name;
+            $my_roles[$role->name] = true;
         }
         if (count($roles) > 0) {
-            return count(array_intersect($my_roles, $roles)) > 0 ? TRUE : FALSE;
+            return count(array_intersect_key($my_roles, array_flip($roles))) > 0 ? TRUE : FALSE;
         } else {
             return $my_roles;
         }
