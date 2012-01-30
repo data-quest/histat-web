@@ -119,7 +119,7 @@ $langs = implode('|', Kohana::$config->load('config')->get('avaliable_languages'
  * defaults for the URI.
  */
 Route::set('default', '(<lang>/)(<controller>(/<action>(/<id>)))', 
-        array('lang' => '(' . $langs . ')'))
+        array('lang' => '(' . $langs . ')','id'=>'.+'))
         ->defaults(array(
             'controller' => 'index',
             'action' => 'index'));

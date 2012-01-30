@@ -4,7 +4,7 @@
  * Controller <b>Data</b> 
  */
 class Controller_Data extends Controller_Index {
-
+    protected $dialog = "";
     public function before() {
         parent::before();
         //Activate Data navigation point
@@ -28,10 +28,16 @@ class Controller_Data extends Controller_Index {
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects = $project->new_projects();
+        //assign the referrer uri
+        $list->uri = URL::site(I18n::$lang.'/data/index');
         //Assign list in view
         $view->list = $list->render();
+        //Setup Dialog
+        $view->dialog = $this->dialog;
         //set content
         $this->content = $view->render();
+        //Setup last action
+        $this->session->set('action',array('name'=>'index'));
     }
 
     public function action_top() {
@@ -42,10 +48,11 @@ class Controller_Data extends Controller_Index {
         $this->sub_navi->activate(__('Times'));
     }
 
-    public function action_themes() {
+    public function action_themes($id = NULL) {
         $this->sub_navi->activate(__('Themes'));
-        $id = $this->request->param('id');
-
+        if(!$id)
+            $id = $this->request->param('id');
+       
         if (!$id) {
             $this->scripts[] = 'jquery.tagsphere.min.js';
             $this->scripts[] = 'themes.js';
@@ -72,15 +79,22 @@ class Controller_Data extends Controller_Index {
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects =$orm->projects;
+        //assign the referrer uri
+        $list->uri = URL::site(I18n::$lang.'/data/themes/'.$id);
         //Assign list in view
-            $view->list = $list->render();
+        $view->list = $list->render();
         }
+         //Setup Dialog
+        $view->dialog = $this->dialog;
         $this->content = $view->render();
+        $this->session->set('action',array('name'=>'themes','param'=>$id));
     }
 
-    public function action_authors() {
+    public function action_authors($id = NULL) {
         $this->sub_navi->activate(__('Authors'));
-        $this->scripts[]='authors.js';
+ 
+        if(!$id)
+            $id = urldecode($this->request->param('id'));
 
         $orm = ORM::factory('project');
         $view = View::factory(I18n::$lang . '/data/authors/overview');
@@ -105,11 +119,27 @@ class Controller_Data extends Controller_Index {
                 $author_list[$key][$author_id] =  $name;
             }
         }
+        
+        
         ksort($author_list);
         ksort($key_list);
         $view->author_list = $author_list;
         $view->key_list = $key_list;
+        $view->projects = '';
+          if ($id) {
+            $projects = ORM::factory('project')->where('ID_Thema', '!=', $this->config->get('example_theme_id'))->where('Projektautor', 'LIKE', '%' . $id . '%');
+            $list = View::factory(I18n::$lang . '/project/list');
+            $list->projects = $projects;
+            //assign the referrer uri
+            $list->uri = URL::site(I18n::$lang.'/data/authors/'.urlencode($id));
+            $view->projects = $list->render();
+        }
+        $view->name = $id;
+         //Setup Dialog
+        $view->dialog = $this->dialog;
         $this->content = $view->render();
+        $this->session->set('action',array('name'=>'authors','param'=>$id));
+       
     }
 
 }

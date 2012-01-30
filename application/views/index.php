@@ -65,7 +65,6 @@
             <div id="footer">
                 © GESIS <?= HTML::anchor('pages/impressum', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date', array(':date' => $date)) ?>
             </div>
-            <div id="dialog"></div>
             <script type="text/javascript">
                 var xsrf = "<?= $xsrf ?>";
                 var base_url = "<?= URL::base() ?>";

@@ -9,14 +9,12 @@
                 <?php $tabellen = $project->getUsedTables(); ?>
                 <?= count($tabellen) > 0 ? '<br/>' . count($tabellen) . ' Tabellen' : '' ?> 
             </td>
-            <td width="90" class="details"><span>Details...<?= Form::hidden('project_id', $project->ID_Projekt) ?></span><div class="tooltip" style="display:none"><span></span><a class="project_details">Studiendetails</a><br/><a class="timeline">Zeitreiehen auswählen</a></div></td>
+            <td width="90" class="details"><span>Details...</span><div class="tooltip" style="display:none"><span></span><?= HTML::anchor('project/details/'.$project->ID_Projekt, 'Studiendetails')?><br/><?= HTML::anchor('project/timeline/'.$project->ID_Projekt, 'Zeitreiehen auswählen')?></div></td>
 
         </tr>
 
     <?php endforeach ?>
 </table>
 <script type="text/javascript">
-    var closeText = "Schließen";
-    var showText = "Ergebnis Anzeigen";
-    var resetText = "Auswahl zurücksetzen";
+    var uri = "<?= $uri ?>";
 </script>

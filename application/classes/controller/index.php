@@ -113,10 +113,11 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('galery', __('Galery'));
         
         //If user is not loged in
-        if(!$this->user && Auth::instance()->force_login('guest')){
+        if(!$this->user){
+            Auth::instance()->force_login('guest');
             $this->user = Auth::instance()->get_user();
         }
-        
+
         //If user has roles login OR admin, display logout button
         if($this->user->has_roles(array('login','admin'))){
              $this->main_navi->add('auth/logout', __('Logout'));
@@ -130,6 +131,8 @@ class Controller_Index extends Controller_Template {
         $this->xsrf = $this->session->get('xsrf', md5(Text::random('alnum')));
         //Save xsrf Token
         $this->session->set('xsrf', $this->xsrf);
+        
+        History::record();
     }
 
     public function action_index() {

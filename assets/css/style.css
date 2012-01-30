@@ -342,7 +342,7 @@ table tr td.even {
     font-size: 1em;
     list-style: none;
     padding-left:15px;
-    background: url(../img/layout/list_triangle.png) top left no-repeat;
+    background: url(../img/layout/pfeil-orange.png) top left no-repeat;
 }
 /*Style index end */
 /* Style data/themes */
@@ -471,12 +471,18 @@ table tr td.even {
     padding:0px 6px;
 }
 #authors .list .key div.author{
+   
+    text-decoration: none;
     margin:5px 0px;
     padding:0px 6px;
     float:left;
     list-style: none;
     border-right: 1px solid #757576;
     cursor: pointer;
+}
+#authors .list .key div.author a{
+    text-decoration: none;
+    color:#000000;
 }
 #authors .list .key div.project{
     float:left;

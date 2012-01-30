@@ -1,11 +1,10 @@
-<?php
-
-defined('SYSPATH') or die('No direct access allowed.');
+<?php defined('SYSPATH') or die('No direct access allowed.');
 
 class Model_User extends Model_Auth_User {
 
     protected $_has_many = array(
         'user_tokens' => array('model' => 'user_token'),
+        'user_logins' => array('model' => 'user_login'),
         'roles' => array('model' => 'role', 'through' => 'roles_users'),
     );
     protected $_table_name = 'users';
@@ -96,7 +95,8 @@ class Model_User extends Model_Auth_User {
     public function create_user($values, $expected) {
         return $this->values($values, $expected)->create();
     }
-    public function update_password($values, $expected = NULL){
+
+    public function update_password($values, $expected = NULL) {
         // Validation for passwords
         $extra_validation = Model_User::get_password_validation($values);
         //Extend with extra validation
@@ -105,11 +105,12 @@ class Model_User extends Model_Auth_User {
         }
         return $this->values($values, $expected)->update($extra_validation);
     }
+
     public function update_user($values, $expected = NULL) {
         if (empty($values['password'])) {
             unset($values['password'], $values['password_confirm']);
         }
-        
+
         // Validation for passwords
         $extra_validation = Model_User::get_password_validation($values);
         //Extend with extra validation
@@ -128,6 +129,25 @@ class Model_User extends Model_Auth_User {
             return count(array_intersect_key($my_roles, array_flip($roles))) > 0 ? TRUE : FALSE;
         } else {
             return $my_roles;
+        }
+    }
+
+    public function complete_login() {
+        if ($this->_loaded) {
+
+            // Update the number of logins
+            $this->logins = new Database_Expression('logins + 1');
+
+            // Set the last login date
+            $this->last_login = time();
+
+            // Save the user
+            $this->update();
+
+            $login = ORM::factory('user_login');
+            $login->user_id = $this->id;
+            $login->mkdate = time();
+            $login->create();
         }
     }
 

@@ -12,5 +12,7 @@ abstract class Auth extends Kohana_Auth {
             return $user;
         }
     }
-
+    public function hash($str){
+        return hash($this->_config['hash_method'], $str);
+    }
 }

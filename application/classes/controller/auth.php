@@ -30,14 +30,15 @@ class Controller_Auth extends Controller_Index {
         }
         $this->sub_navi->activate(__('Login'));
         $view = View::factory(I18n::$lang . '/auth/login');
-
+        
+       
         if (HTTP_Request::POST == $this->request->method()) {
             // Attempt to login user
             $remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
             $user = Auth::instance()->login($this->request->post('username'), $this->request->post('password'), $remember);
             // If successful...
             if ($user) {
-                $this->request->redirect(I18n::$lang . '/index');
+                $this->request->redirect($this->session->get('referrer',I18n::$lang.'/index'));
             } else {
                 $view->incorrect = TRUE;
             }
@@ -52,7 +53,7 @@ class Controller_Auth extends Controller_Index {
         }
         Auth::instance()->logout();
         Auth::instance()->force_login('guest');
-        $this->request->redirect(I18n::$lang . '/index');
+        $this->request->redirect($this->request->referrer());
     }
 
     public function action_create() {

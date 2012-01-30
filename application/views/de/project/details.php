@@ -1,4 +1,4 @@
-<div id="project_details" >
+<div id="project_details" style="display:none" >
     <h1>Details zur Studie</h1>
     <br/>
     <?php if (!empty($project->datei_name)): ?>
@@ -20,7 +20,7 @@
 
     <?php if (strlen($project->Projektbeschreibung) > 200): ?>
         <span class="short">
-            <?= mb_substr(nl2br($project->Projektbeschreibung), 0, 200) . '...' ?>
+            <?= nl2br(mb_substr($project->Projektbeschreibung, 0, 200) . '...') ?>
         </span>
         <span class="full" style="display:none">
             <?= nl2br($project->Projektbeschreibung) ?>
@@ -45,7 +45,7 @@
     <h3>Quellentypen:</h3>
     <?php if (strlen($project->Quellen) > 200): ?>
         <span class="short">
-            <?= mb_substr(nl2br($project->Quellen), 0, 200) . '...' ?>
+            <?= nl2br(mb_substr($project->Quellen, 0, 200) . '...') ?>
         </span>
         <span class="full" style="display:none">
             <?= nl2br($project->Quellen) ?>
@@ -59,7 +59,7 @@
     <h3>Sachliche Untergliederung der Datentabellen:</h3>
     <?php if (strlen($project->Untergliederung) > 200): ?>
         <span class="short">
-            <?= mb_substr(nl2br($project->Untergliederung), 0, 200) . '...' ?>
+            <?= nl2br(mb_substr($project->Untergliederung, 0, 200) . '...') ?>
         </span>
         <span class="full" style="display:none">
             <?= nl2br($project->Untergliederung) ?>
@@ -80,7 +80,7 @@
 
     <?php if (strlen($tabellenverzeichnis) > 200): ?>
         <span class="short">
-            <?= mb_substr(nl2br($tabellenverzeichnis), 0, 200) . '...' ?>
+            <?= nl2br(mb_substr($tabellenverzeichnis, 0, 200) . '...') ?>
         </span>
         <span class="full" style="display:none">
             <?= nl2br($tabellenverzeichnis) ?>
@@ -94,4 +94,7 @@
 <script type="text/javascript">
     var more = "Mehr...";
     var less = "Weniger...";
+    var title = "<?=$project->Projektname?>"
+    var closeText = "Schließen";
+
 </script>
