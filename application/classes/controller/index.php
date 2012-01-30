@@ -131,8 +131,6 @@ class Controller_Index extends Controller_Template {
         $this->xsrf = $this->session->get('xsrf', md5(Text::random('alnum')));
         //Save xsrf Token
         $this->session->set('xsrf', $this->xsrf);
-        
-        History::record();
     }
 
     public function action_index() {

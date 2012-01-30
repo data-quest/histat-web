@@ -1,4 +1,6 @@
-<?php defined('SYSPATH') or die('No direct access allowed.');
+<?php
+
+defined('SYSPATH') or die('No direct access allowed.');
 
 class Model_User extends Model_Auth_User {
 
@@ -71,9 +73,11 @@ class Model_User extends Model_Auth_User {
                     ),
                     'institution' => array(
                         array('alpha', array(':value', TRUE))
-                    ), 'department' => array(
+                    ),
+                    'department' => array(
                         array('alpha', array(':value', TRUE))
-                        )), parent::rules()
+                    )
+                        ), parent::rules()
         );
     }
 
@@ -82,13 +86,15 @@ class Model_User extends Model_Auth_User {
             'password_current' => array(
                 array('not_empty'),
                 array(array(Auth::instance(), 'check_password'), array(':value'))
-            )
+            ),
         );
     }
 
     public static function get_password_validation($values) {
         return Validation::factory($values)
+                        ->rule('password', 'not_empty')
                         ->rule('password', 'min_length', array(':value', 6))
+                        ->rule('password_confirm', 'not_empty')
                         ->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
     }
 
@@ -97,6 +103,7 @@ class Model_User extends Model_Auth_User {
     }
 
     public function update_password($values, $expected = NULL) {
+
         // Validation for passwords
         $extra_validation = Model_User::get_password_validation($values);
         //Extend with extra validation

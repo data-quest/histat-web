@@ -13,6 +13,7 @@ class Controller_Project extends Controller_Data {
         parent::before();
         $this->id = $this->request->param('id', $this->request->post('id'));
         $this->token = $this->request->post('xsrf');
+         $this->session->set('referrer',NULL);
     }
 
     public function action_details() {
@@ -51,16 +52,6 @@ class Controller_Project extends Controller_Data {
             $content = __('Project not found');
         }
         $this->dialog = $content;
-    }
-
-    public function action_list() {
-        if ($this->id == NULL || $this->token !== $this->xsrf || !$this->request->is_ajax())
-            throw new HTTP_Exception_404(); //If ID not given throw Exception
-
-        $projects = ORM::factory('project')->where('ID_Thema', '!=', $this->config->get('example_theme_id'))->where('Projektautor', 'LIKE', '%' . $this->id . '%');
-        $view = View::factory(I18n::$lang . '/project/list');
-        $view->projects = $projects;
-        $this->response->body($view->render());
     }
 
     public function action_download() {

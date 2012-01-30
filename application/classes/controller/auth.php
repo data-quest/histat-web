@@ -53,7 +53,7 @@ class Controller_Auth extends Controller_Index {
         }
         Auth::instance()->logout();
         Auth::instance()->force_login('guest');
-        $this->request->redirect($this->request->referrer());
+        $this->request->redirect(I18n::$lang.'/index');
     }
 
     public function action_create() {
