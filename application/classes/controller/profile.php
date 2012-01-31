@@ -1,6 +1,4 @@
-<?php
-
-defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Profile extends Controller_Index {
 
@@ -33,7 +31,7 @@ class Controller_Profile extends Controller_Index {
                 );
 
                 $post = Arr::merge($this->request->post(), $additional);
-                // Create the user using form values
+                // Edit the user using form values
                
                 $this->user->update_user($post, array(
                     'email',
@@ -65,21 +63,19 @@ class Controller_Profile extends Controller_Index {
           $view = View::factory(I18n::$lang . '/auth/edit_password');
         $view->errors = array();
        
-        $view->user = $this->user;
+   
         if (HTTP_Request::POST == $this->request->method()) {
             try {
                 //Add additional values which dont comes from Form
                 $additional = array(
                     'chdate' => time(),
                 );
-
-                $post = Arr::merge($this->request->post(), $additional);
+                $post = Arr::merge($additional,$this->request->post());    
                 
-      
-               // Create the user using form values
+               // Edit the user using form values
                 $this->user->update_password($post, array(
-                    'chdate',
-                    'password'
+                    'password',
+                    'chdate'
                 ));
                // Reset values so form is not sticky
                 $_POST = array();

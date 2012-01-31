@@ -1,6 +1,4 @@
-<?php
-
-defined('SYSPATH') or die('No direct access allowed.');
+<?php defined('SYSPATH') or die('No direct access allowed.');
 
 class Model_User extends Model_Auth_User {
 
@@ -35,66 +33,67 @@ class Model_User extends Model_Auth_User {
 
     public function rules() {
 
-        return Arr::merge(
-                        array(
-                    'username' => array(
-                        array('not_empty'),
-                        array('alpha_dash'),
-                        array('min_length', array(':value', 4)),
-                        array('max_length', array(':value', 20)),
-                        array(array($this, 'unique'), array('username', ':value')),
-                    ),
-                    'name' => array(
-                        array('not_empty'),
-                        array('alpha', array(':value', TRUE))
-                    ),
-                    'surname' => array(
-                        array('not_empty'),
-                        array('alpha', array(':value', TRUE))
-                    ),
-                    'street' => array(
-                        array('not_empty')
-                    ),
-                    'zip' => array(
-                        array('not_empty'),
-                        array('numeric')
-                    ),
-                    'location' => array(
-                        array('not_empty'),
-                        array('alpha', array(':value', TRUE))
-                    ),
-                    'country' => array(
-                        array('not_empty'),
-                        array('alpha', array(':value', TRUE))
-                    ), 'phone' => array(
-                        array('phone')
-                    ), 'title' => array(
-                        array('alpha', array(':value', TRUE))
-                    ),
-                    'institution' => array(
-                        array('alpha', array(':value', TRUE))
-                    ),
-                    'department' => array(
-                        array('alpha', array(':value', TRUE))
-                    )
-                        ), parent::rules()
-        );
+        return array(
+            'username' => array(
+                array('not_empty'),
+                array('alpha_dash'),
+                array('min_length', array(':value', 4)),
+                array('max_length', array(':value', 20)),
+                array(array($this, 'unique'), array('username', ':value')),
+            ),
+            'password' => array(
+                array('not_empty'),
+            ),
+            'email' => array(
+                array('not_empty'),
+                array('email'),
+                array(array($this, 'unique'), array('email', ':value')),
+            ),
+            'name' => array(
+                array('not_empty'),
+                array('alpha', array(':value', TRUE))
+            ),
+            'surname' => array(
+                array('not_empty'),
+                array('alpha', array(':value', TRUE))
+            ),
+            'street' => array(
+                array('not_empty')
+            ),
+            'zip' => array(
+                array('not_empty'),
+                array('numeric')
+            ),
+            'location' => array(
+                array('not_empty'),
+                array('alpha', array(':value', TRUE))
+            ),
+            'country' => array(
+                array('not_empty'),
+                array('alpha', array(':value', TRUE))
+            ),
+            'phone' => array(
+                array('phone')
+            ),
+            'title' => array(
+                array('alpha', array(':value', TRUE))
+            ),
+            'institution' => array(
+                array('alpha', array(':value', TRUE))
+            ),
+            'department' => array(
+                array('alpha', array(':value', TRUE))
+                ));
     }
 
     public function extra_rules() {
         return array(
-            'password_current' => array(
-                array('not_empty'),
-                array(array(Auth::instance(), 'check_password'), array(':value'))
-            ),
         );
     }
 
     public static function get_password_validation($values) {
         return Validation::factory($values)
-                        ->rule('password', 'not_empty')
                         ->rule('password', 'min_length', array(':value', 6))
-                        ->rule('password_confirm', 'not_empty')
                         ->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
     }
 
@@ -103,14 +102,12 @@ class Model_User extends Model_Auth_User {
     }
 
     public function update_password($values, $expected = NULL) {
-
-        // Validation for passwords
-        $extra_validation = Model_User::get_password_validation($values);
-        //Extend with extra validation
-        foreach ($this->extra_rules() as $field => $rules) {
-            $extra_validation->rules($field, $rules);
-        }
-        return $this->values($values, $expected)->update($extra_validation);
+       
+        $validation = Validation::factory($values)
+                ->rule('password','not_empty')
+                ->rule('password', 'min_length', array(':value', 6))
+                ->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
+        return $this->values($values, $expected)->update($validation);
     }
 
     public function update_user($values, $expected = NULL) {
