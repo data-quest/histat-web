@@ -62,8 +62,10 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
 -- Daten für Tabelle `roles_users`
 --
 
-INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
-(1, 3);
+INSERT INTO `roles_users` (`user_id`, `role_id`) 
+SELECT `ID` AS `user_id` ,1 AS `role_id` FROM `auth_user` WHERE `status`  = 'user';
+INSERT INTO `roles_users` (`user_id`, `role_id`) 
+SELECT `ID` AS `user_id` ,2 AS `role_id` FROM `auth_user` WHERE `status`  = 'admin';
 
 -- --------------------------------------------------------
 
@@ -72,39 +74,38 @@ INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
 --
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(254) NOT NULL,
-  `username` varchar(32) NOT NULL DEFAULT '',
-  `title` varchar(32) DEFAULT NULL,
-  `name` varchar(64) NOT NULL,
-  `surname` varchar(64) NOT NULL,
-  `institution` varchar(64) DEFAULT NULL,
-  `department` varchar(64) DEFAULT NULL,
-  `street` varchar(64) NOT NULL,
-  `zip` int(10) NOT NULL,
-  `location` varchar(64) NOT NULL,
-  `country` varchar(64) NOT NULL,
-  `phone` varchar(32) DEFAULT NULL,
-  `password` varchar(64) NOT NULL,
-  `logins` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_login` int(10) unsigned DEFAULT NULL,
-  `ip` varchar(15) NOT NULL,
-  `last_action` int(10) unsigned NOT NULL,
-  `chdate` int(10) unsigned NOT NULL,
-  `mkdate` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_username` (`username`),
-  UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
+RENAME TABLE `auth_user` TO `users` ;
+ALTER TABLE `users` 
+  CHANGE `ID` `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  CHANGE `email` `email` varchar(254) NOT NULL,
+  CHANGE `username` `username` varchar(32) NOT NULL DEFAULT '',
+  CHANGE `titel` `title` varchar(32) DEFAULT NULL,
+  CHANGE `vorname` `name` varchar(64) NOT NULL,
+  CHANGE `nachname` `surname` varchar(64) NOT NULL,
+  CHANGE `institution` `institution` varchar(64) DEFAULT NULL,
+  CHANGE `abteilung` `department` varchar(64) DEFAULT NULL,
+  CHANGE `strasse` `street` varchar(64) NOT NULL,
+  CHANGE `plz` `zip` int(10) NOT NULL,
+  CHANGE `ort` `location` varchar(64) NOT NULL,
+  CHANGE `land` `country` varchar(64) NOT NULL,
+  CHANGE `telefon` `phone` varchar(32) DEFAULT NULL,
+  CHANGE `password` `password` varchar(64) NOT NULL,
+  CHANGE `chdate` `chdate` int(10) unsigned NOT NULL,
+  CHANGE `mkdate` `mkdate` int(10) unsigned NOT NULL,
+  ADD `logins` INT( 10 ) UNSIGNED NOT NULL DEFAULT '0' ,
+  ADD `last_action` INT( 10 ) UNSIGNED NOT NULL ,
+  ADD `ip` VARCHAR( 15 ) NOT NULL ,
+  ADD `last_login` INT( 10 ) UNSIGNED NOT NULL ,
+  DROP `status`;
+ALTER TABLE `users` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 --
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `title`, `name`, `surname`, `institution`, `department`, `street`, `zip`, `location`, `country`, `phone`, `password`, `logins`, `last_login`, `ip`, `last_action`, `chdate`, `mkdate`) VALUES
-(1, 'guest@guest.com', 'guest', '', 'guest', 'guest', '', '', 'gueststreet', 0, 'guesttown', 'guestcountry', '', '123456', 7, 1327061926, '127.0.0.1', 1327061946, 1327052005, 1327052005);
-
+INSERT INTO `users` ( `email`, `username`, `title`, `name`, `surname`, `institution`, `department`, `street`, `zip`, `location`, `country`, `phone`, `password`, `logins`, `last_login`, `ip`, `last_action`, `chdate`, `mkdate`) VALUES
+('guest@guest.com', 'guest', '', 'guest', 'guest', '', '', 'gueststreet', 0, 'guesttown', 'guestcountry', '', '123456', 7, 1327061926, '127.0.0.1', 1327061946, 1327052005, 1327052005);
+INSERT INTO `roles_users` (`user_id`, `role_id`) 
+SELECT `ID` AS `user_id` ,3 AS `role_id` FROM `users` WHERE `username`  = 'guest';
 -- --------------------------------------------------------
 
 --
@@ -125,6 +126,14 @@ CREATE TABLE IF NOT EXISTS `user_tokens` (
   KEY `fk_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+DROP TABLE IF EXISTS `user_logins`;
+CREATE TABLE IF NOT EXISTS `user_logins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `mkdate` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
 --
 -- Constraints der exportierten Tabellen
 --
@@ -142,6 +151,8 @@ ALTER TABLE `roles_users`
 ALTER TABLE `user_tokens`
   ADD CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
+ALTER TABLE `user_logins`
+  ADD CONSTRAINT `user_logins_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

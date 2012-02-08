@@ -20,5 +20,13 @@ return array(
     'Authors'=>'Autoren',
     'Last Updates from :date'=>'Letzte aktualisierung der Seite am :date',
     'Historical Statistics'=>'Historische Statistik',
-    'go top' =>'nach oben'
+    'go top' =>'nach oben',
+    'Edit info' => 'Informationen bearbeiten',
+    'Change password'=>'Passwort ändern',
+    'Profile'=>'Profil',
+    'Logged in: :name :surname' =>'Angemeldet als: :name :surname',
+    'Cart [:value/:total]' => 'Warenkorb [:value/:total]',
+    'Logout'=>'Abmelden'
+    
+    
 );
