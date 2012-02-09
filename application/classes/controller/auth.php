@@ -33,6 +33,7 @@ class Controller_Auth extends Controller_Index {
         
        
         if (HTTP_Request::POST == $this->request->method()) {
+            Auth::instance()->logout(); //Logout guest
             // Attempt to login user
             $remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
             $user = Auth::instance()->login($this->request->post('username'), $this->request->post('password'), $remember);
@@ -41,6 +42,7 @@ class Controller_Auth extends Controller_Index {
                 $this->request->redirect($this->session->get('referrer',I18n::$lang.'/index'));
             } else {
                 $view->incorrect = TRUE;
+                Auth::instance()->force_login('guest');
             }
         }
         $this->layout->content = $view->render();

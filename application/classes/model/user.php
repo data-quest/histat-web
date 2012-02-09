@@ -146,7 +146,7 @@ class Model_User extends Model_Auth_User {
 
             // Set the last login date
             $this->last_login = time();
-        
+            
             // Save the user
             $this->update();
 
