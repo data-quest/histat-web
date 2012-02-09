@@ -1173,7 +1173,7 @@ class Kohana_ORM extends Model implements serializable {
 		{
                     
 			$exception = new ORM_Validation_Exception($this->errors_filename(), $array);
-                         echo Debug::vars($exception);
+                       
 			if ($extra_errors)
 			{
 				// Merge any possible errors from the external object
