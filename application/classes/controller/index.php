@@ -145,6 +145,7 @@ class Controller_Index extends Controller_Template {
         $view->partners = View::factory(I18n::$lang . '/partners')->render(); //render view/<lang>/partners.php
         //Render View and setup Content
         $this->content = $view->render();
+     
     }
 
     public function after() {

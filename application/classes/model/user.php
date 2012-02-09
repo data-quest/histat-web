@@ -75,16 +75,16 @@ class Model_User extends Model_Auth_User {
                 array('alpha', array(':value', TRUE))
             ),
             'phone' => array(
-               // array('phone')
+            // array('phone')
             ),
             'title' => array(
-                array('alpha', array(':value', TRUE))
+              //  array('alpha', array(':value', TRUE))
             ),
             'institution' => array(
-                array('alpha', array(':value', TRUE))
+           //     array('alpha', array(':value', TRUE))
             ),
             'department' => array(
-                array('alpha', array(':value', TRUE))
+              //  array('alpha', array(':value', TRUE))
                 ));
     }
 
@@ -138,7 +138,7 @@ class Model_User extends Model_Auth_User {
     }
 
     public function complete_login() {
-     
+
         if ($this->_loaded) {
 
             // Update the number of logins
@@ -146,7 +146,7 @@ class Model_User extends Model_Auth_User {
 
             // Set the last login date
             $this->last_login = time();
-            
+
             // Save the user
             $this->update();
 
