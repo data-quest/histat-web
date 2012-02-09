@@ -89,7 +89,7 @@ class Model_User extends Model_Auth_User {
     }
 
     public function extra_rules() {
-        
+        return array();
     }
 
     public static function get_password_validation($values) {
