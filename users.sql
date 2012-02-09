@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
 --
 
 INSERT INTO `roles_users` (`user_id`, `role_id`) 
-SELECT `ID` AS `user_id` ,1 AS `role_id` FROM `auth_user` WHERE `status`  = 'user';
+SELECT `ID` AS `user_id` ,1 AS `role_id` FROM `auth_user`;
 INSERT INTO `roles_users` (`user_id`, `role_id`) 
 SELECT `ID` AS `user_id` ,2 AS `role_id` FROM `auth_user` WHERE `status`  = 'admin';
 

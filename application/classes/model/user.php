@@ -1,4 +1,6 @@
-<?php defined('SYSPATH') or die('No direct access allowed.');
+<?php
+
+defined('SYSPATH') or die('No direct access allowed.');
 
 class Model_User extends Model_Auth_User {
 
@@ -73,7 +75,7 @@ class Model_User extends Model_Auth_User {
                 array('alpha', array(':value', TRUE))
             ),
             'phone' => array(
-                array('phone')
+               // array('phone')
             ),
             'title' => array(
                 array('alpha', array(':value', TRUE))
@@ -87,8 +89,7 @@ class Model_User extends Model_Auth_User {
     }
 
     public function extra_rules() {
-        return array(
-        );
+        
     }
 
     public static function get_password_validation($values) {
@@ -102,9 +103,9 @@ class Model_User extends Model_Auth_User {
     }
 
     public function update_password($values, $expected = NULL) {
-       
+
         $validation = Validation::factory($values)
-                ->rule('password','not_empty')
+                ->rule('password', 'not_empty')
                 ->rule('password', 'min_length', array(':value', 6))
                 ->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
         return $this->values($values, $expected)->update($validation);
@@ -137,6 +138,7 @@ class Model_User extends Model_Auth_User {
     }
 
     public function complete_login() {
+     
         if ($this->_loaded) {
 
             // Update the number of logins
@@ -144,7 +146,7 @@ class Model_User extends Model_Auth_User {
 
             // Set the last login date
             $this->last_login = time();
-
+        
             // Save the user
             $this->update();
 
