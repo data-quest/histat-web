@@ -1,32 +1,16 @@
 $(function(){
-    var target = null;
-    $('td.details').live('click',function(){
-        target = $(this);
-      
-        $('.tooltip').hide();
-        target.find('.tooltip').fadeIn('slow');
 
-    });
-
-   
-    
+ 
     $('.more').live('click',function(e){
         var target = $(this);
-        var full =target.prev('span.full');
-        var short_text = full.prev('span.short');
-        short_text.toggle(); 
-        full.slideToggle('slow',function(){
-            target.text(less).attr('class','less');
-        });  
+        var text =target.prev('div.text');
+        text.css('height', 'auto').css('overflow', 'visible');
+        target.text(less).attr('class','less');
     });
     $('.less').live('click',function(e){
         var target = $(this);
-        var full =target.prev('span.full');
-        var short_text = full.prev('span.short');
-        full.slideToggle('slow',function(){
-            short_text.toggle(); 
-            target.text(more).attr('class','more');
-        }); 
-      
+        var text =target.prev('div.text');
+        text.css('height', '40px').css('overflow', 'hidden');
+        target.text(more).attr('class','more');
     });
 });

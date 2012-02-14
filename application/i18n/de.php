@@ -25,7 +25,7 @@ return array(
     'Change password'=>'Passwort ändern',
     'Profile'=>'Profil',
     'Logged in: :name :surname' =>'Angemeldet als: :name :surname',
-    'Cart [:value/:total]' => 'Warenkorb [:value/:total]',
+    'Cart [:value]' => 'Warenkorb [:value]',
     'Logout'=>'Abmelden'
     
     

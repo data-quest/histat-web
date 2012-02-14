@@ -42,15 +42,17 @@
                         ?>
                     </ul>
                 <?php endif; ?>
-                <?php if (Arr::get($user->has_roles(),'login')): ?>
+                <?php if (Arr::get($user->has_roles(), 'login')): ?>
                     <div class="userinfo">
-                        <?= __('Logged in: :name :surname', array(':name' => $user->name, ':surname' => $user->surname)) ?>
+                        <?= HTML::anchor('profile', __('Logged in: :name :surname', array(':name' => $user->name, ':surname' => $user->surname))) ?>
                         <ul>
-                            <li><?= HTML::anchor('cart', __('Cart [:value/:total]', array(':value' => 12, ':total' => 145))) ?></li>
-                            <li><?= HTML::anchor('profile', __('Profile')) ?></li>
-                            <?php if (Arr::get($user->has_roles(),'admin')): ?>
-                            <li><?= HTML::anchor('admin', __('Admin')) ?></li>
+                            <li><?= HTML::anchor('auth/logout',__('Logout'))?></li>
+                            <?php if (Arr::get($user->has_roles(), 'admin')): ?>
+                                <li><?= HTML::anchor('admin', __('Admin')) ?></li>
                             <?php endif; ?>
+                               
+                            <li><?= HTML::anchor('cart', __('Cart [:value]', array(':value' => 12))) ?></li>
+
                         </ul>
                     </div>
 

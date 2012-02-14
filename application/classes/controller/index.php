@@ -119,10 +119,8 @@ class Controller_Index extends Controller_Template {
         }
 
         //If user has roles login OR admin, display logout button
-        if($this->user->has_roles(array('login','admin'))){
-             $this->main_navi->add('auth/logout', __('Logout'));
-        }else{
-            $this->main_navi->add('auth', __('Login'));  
+        if(!$this->user->has_roles(array('login','admin'))){
+             $this->main_navi->add('auth', __('Login')); 
         }
         //Bind Assets Directories global to all Views
         View::bind_global('assets', $this->assets);

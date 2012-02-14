@@ -54,7 +54,7 @@ td.details{
     text-align: center;
 
 }
-td.details span{
+td.details span a{
     display:block;
     width:70px;
     color: #ffffff;
@@ -258,7 +258,10 @@ table tr td.even {
     font-size: 1.1em;
     padding-left:10px;
     padding-right:10px;
-    border-left:1px solid #ffffff;
+  
+}
+#sub_navi ul li a{
+     border-left:1px solid #ffffff; 
 }
 #sub_navi li:first-child a{
     border-left:0px solid;
@@ -397,15 +400,65 @@ table tr td.even {
 #project_details{
     padding:10px 0px;
 }
-#project_details h1,#project_details h3,#project_details p,#project_details span{
+#project_details h1,#project_details h3,#project_details span{
     padding:0px 10px;
 }
 #project_details span{
     padding-top:10px;
     display:block;
+    position: relative;
 }
-#project_details span .button{
+#project_details span a.button{
     float:right;
+    
+}
+#project_details div.text{
+    overflow:hidden;
+    height:40px;
+}
+#project_details div.text table{
+    float: left;
+    border:0px;
+}
+
+#project_details div.text .pages a.prev{
+    float:left;
+    width:150px;
+    text-align: right;
+    color:#ffffff;
+    border-top:1px solid #aaaaaa;
+    border-bottom:1px solid #aaaaaa;
+    background:url(../img/layout/button-details-left.png) right center no-repeat;
+}
+#project_details div.text .pages a.next{
+    float:left;
+    width:150px;
+    text-align: left;
+    color:#ffffff;
+    border-top:1px solid #aaaaaa;
+    border-bottom:1px solid #aaaaaa;
+    background:url(../img/layout/button-details.png) left center no-repeat;
+}
+#project_details div.text .pages a{
+    float:left;
+    display:block;
+    width:50px;
+    padding:10px;
+    color:#aaa;
+    text-decoration: none;
+    font-size: 1.3em;
+    text-align: center;
+    border-left:1px solid #aaaaaa;
+}
+#project_details div.text .pages div{
+    max-width:355px;
+    height:40px;
+    float:left;
+    overflow: hidden;
+  
+}
+#project_details div.text table td{
+    border:0px;
 }
 #project_details span.more{
     color:#72777a;
@@ -427,11 +480,9 @@ table tr td.even {
     padding-left: 20px;
     margin-top:5px;
     margin-left: 5px;
-    background: url(../img/layout/content-pfeil-bottom.png) no-repeat left center;
+    background: url(../img/layout/content-pfeil-top.png) no-repeat left center;
 }
-#project_details p{
-    display:none;
-}
+
 #project_details hr{
     margin:10px 0px;
 }
@@ -528,9 +579,9 @@ table tr td.even {
 #auth input{
     border:1px solid #72777a;
     padding:3px 0px 3px 3px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 #auth input:focus{
     border:1px solid #FF8F00;
@@ -596,9 +647,9 @@ table tr td.even {
 #profile input{
     border:1px solid #72777a;
     padding:3px 0px 3px 3px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 #profile input:focus{
     border:1px solid #FF8F00;
