@@ -12,7 +12,7 @@
     <div class="list">
         <h1>Autorenliste</h1><br/>
         <?php foreach ($author_list as $key => $authors): ?>
-        <div class="key" id="<?= $key ?>"><span><?= $key ?></span>
+        <div class="key"><span  id="<?= $key ?>"><?= $key ?></span>
             <?php foreach ($authors as $id => $author): ?>
             <div class="author" id="<?=$id ?>"><?= HTML::anchor('data/authors/'.urlencode($author).'#'.$id,$author) ?></div><?= ($name === $author)? '<div class="project">'.$projects.'</div>':'' ?>
             <?php endforeach; ?>
