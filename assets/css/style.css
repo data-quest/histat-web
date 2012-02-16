@@ -198,7 +198,7 @@ table tr td.even {
 }
 
 #header{
-    background:url(../img/layout/hg-header-logo.jpg)no-repeat center center;
+    background:url(../img/layout/hg-header.jpg)no-repeat top right #ffffff;
     height:80px;
     width: 100%;
 }
@@ -258,10 +258,10 @@ table tr td.even {
     font-size: 1.1em;
     padding-left:10px;
     padding-right:10px;
-  
+
 }
 #sub_navi ul li a{
-     border-left:1px solid #ffffff; 
+    border-left:1px solid #ffffff; 
 }
 #sub_navi li:first-child a{
     border-left:0px solid;
@@ -410,7 +410,7 @@ table tr td.even {
 }
 #project_details span a.button{
     float:right;
-    
+
 }
 #project_details div.text{
     overflow:hidden;
@@ -455,7 +455,7 @@ table tr td.even {
     height:40px;
     float:left;
     overflow: hidden;
-  
+
 }
 #project_details div.text table td{
     border:0px;
@@ -522,7 +522,7 @@ table tr td.even {
     padding:0px 6px;
 }
 #authors .list .key div.author{
-   
+
     text-decoration: none;
     margin:5px 0px;
     padding:0px 6px;
@@ -678,7 +678,7 @@ table tr td.even {
 #profile #edit{
     width:360px;
     margin: 10px auto;
-    
+
 }
 #profile #edit form{
     line-height: 25px;
@@ -698,7 +698,7 @@ table tr td.even {
 #profile #edit_password{
     width:400px;
     margin: 10px auto;
-    
+
 }
 #profile #edit_password form{
     line-height: 25px;
@@ -710,3 +710,42 @@ table tr td.even {
     width:100%;
 }
 /*Style profile/edit_password end*/
+/*Style table/details/id*/
+#table_details h1{
+    padding: 1em;
+}
+#table_details div.details{
+    margin:2em;
+}
+#table_details div.details .name{
+    background:#72777a;
+    color:#ffffff;
+    line-height: 40px;
+    padding-left:15px;
+    font-size: 1.1em;
+}
+#table_details div.details .overflow{
+    overflow:auto;
+    height:500px;
+}
+#table_details div.details .overflow table{
+    border:1px solid #ffffff;
+    padding:0px;
+    margin:0px;
+    width:100%;
+    border-collapse:collapse;
+    border-spacing: 0 0.4em;
+    background:#dddddd;
+}
+#table_details div.details table td div.text{
+    overflow:hidden;
+    height:70px;
+    width:110px;
+}
+#table_details div.details table td{
+    border:1px solid #ffffff;
+    vertical-align: top;
+    padding:5px;
+  
+}
+/*Style table/details/id end*/

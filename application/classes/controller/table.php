@@ -26,14 +26,24 @@ class Controller_Table extends Controller_Data {
 
     public function action_details() {
         $keymask = ORM::factory('keymask', $this->id_hs);
-       
+
         $view = View::factory(I18n::$lang . '/table/details');
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects = $keymask->project;
         //assign the referrer uri
-        $list->uri = URL::site(I18n::$lang . '/table/details/'.$this->id_hs);
-        $view->details = $keymask->getDetails();
+        $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
+        $details = array();
+        foreach ($keymask->getDetails() as $detail) {
+            $details[$detail->CodeBeschreibung][] = $detail;
+            $keys [$detail->Schluessel] = $detail->Schluessel;
+        }
+        $data = $keymask->getData($keys);
+        $view->details = $details;
+        $view->keys = $keys;
+        $view->data = $data;
+        $view->keymask = $keymask;
+
         $view->project = $list->render();
         $this->content = $view->render();
     }
