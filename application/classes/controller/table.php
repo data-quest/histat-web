@@ -26,7 +26,7 @@ class Controller_Table extends Controller_Data {
 
     public function action_details() {
         $keymask = ORM::factory('keymask', $this->id_hs);
-
+        $this->scripts[]='table.js';
         $view = View::factory(I18n::$lang . '/table/details');
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview

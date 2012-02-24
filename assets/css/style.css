@@ -351,12 +351,14 @@ table tr td.even {
 /* Style data/themes */
 #themes_cloud{
     overflow:hidden;
+    cursor: move;
 }
 #themes_cloud ul li{
     list-style: none;
     margin:auto;
     display: block;
     text-align: center;
+    white-space: nowrap;
 }
 #themes_cloud ul li a{
     color:#72777a;
@@ -717,6 +719,7 @@ table tr td.even {
 #table_details div.details{
     margin:2em;
 }
+
 #table_details div.details .name{
     background:#72777a;
     color:#ffffff;
@@ -728,7 +731,7 @@ table tr td.even {
     overflow:auto;
     height:500px;
 }
-#table_details div.details .overflow table{
+#table_details div.details table{
     border:1px solid #ffffff;
     padding:0px;
     margin:0px;
@@ -740,12 +743,22 @@ table tr td.even {
 #table_details div.details table td div.text{
     overflow:hidden;
     height:70px;
-    width:110px;
+    width:100px;
 }
 #table_details div.details table td{
     border:1px solid #ffffff;
     vertical-align: top;
     padding:5px;
   
+}
+
+#table_details div.details table tbody tr:nth-child(2n){
+     background:#ffffff;
+}
+#table_details div.details table tbody tr:hover{
+     background:#FE8F00;
+}
+#table_details div.details table  td.hover{
+    background:#FE8F00;
 }
 /*Style table/details/id end*/
