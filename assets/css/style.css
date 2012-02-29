@@ -8,6 +8,10 @@
 .clear{
     clear:both;
 }
+.debug{
+    color:#ffffff;
+    
+}
 body {
     background: url(../img/layout/hg-verlauf.jpg) repeat-x top center #1F2B39;
 }
@@ -753,13 +757,13 @@ table tr td.even {
   
 }
 #table_details div.details table td .tooltip{
-    width:800px;
-    height:400px;
+    width:auto;
+    height:auto;
     margin-top:24px;
     margin-left:30px;
     display: none;
 }
-#table_details div.details table td.blue:hover .tooltip{
+#table_details div.details table td:hover .tooltip{
     display:block;
 }
 #table_details div.details table td.blue{

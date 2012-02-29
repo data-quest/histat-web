@@ -10,33 +10,30 @@
         <div id="scrollX" style="height:auto;overflow-y:hidden;overflow-x: auto;">
             <table style="width:100%;" id="headline">
                 <thead>
-                
-                        <?php foreach ($details as $beschreibung=>$details) : ?>
-               
-                    
-                            <tr >
-                                <?php $i = 0; ?>
-                                <td><div class="text"><?= $beschreibung ?></div></td>
 
-                                <?php foreach ($details as $detail) : ?>
-                                    <td class="col<?= $i ?>"><div class="text">
+                    <?php foreach ($details as $beschreibung => $details) : ?>
 
 
+                        <tr >
+                            <?php $i = 0; ?>
+                            <td><div class="text"><?= $beschreibung ?></div></td>
 
-                                            <?php $str = substr($detail->CodeBezeichnung, 0, 30); ?>
-                                            <?= (strlen($str) >= 30 ? $str . '...' : $str) ?>
+                            <?php foreach ($keys as $key) : ?>
+                                <td class="col<?= $i ?>"><div class="text">
+                                            
+                               
+                                        <?php $str = substr($details[$key]->CodeBezeichnung, 0, 30); ?>
+                                        <?= (strlen($str) >= 30 ? $str . '...' : $str) ?>
+                                         <div class="tooltip"><span></span><?= $details[$key]->CodeBezeichnung?></div>
+                                    </div>
+                                </td>
+                                <?php $i++; ?>
+
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </tr>
 
 
-                                        </div>
-                                      
-                                    </td>
-                                    <?php $i++; ?>
-                                   
-                                <?php endforeach; ?>
-                            <?php  endforeach; ?>
-                        </tr>
-                      
-                
 
 
 

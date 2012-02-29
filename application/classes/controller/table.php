@@ -35,11 +35,14 @@ class Controller_Table extends Controller_Data {
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
         $details = array();
         foreach ($keymask->getDetails() as $detail) {
-            $details[$detail->CodeBeschreibung][] = $detail;
+            $details[$detail->CodeBeschreibung][$detail->Schluessel] = $detail;
             $keys [$detail->Schluessel] = $detail->Schluessel;
         }
+       
         $data = $keymask->getData($keys);
-     
+
+         
+    
         $view->details = $details;
         $view->keys = $keys;
         $view->data = $data;
@@ -49,7 +52,7 @@ class Controller_Table extends Controller_Data {
 
         ini_set('max_execution_time', '1600');
 
-
+       
         //echo Debug::vars($details);
         foreach ($data as $y => $d) {
             foreach ($keys as $key) {
