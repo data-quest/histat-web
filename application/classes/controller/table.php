@@ -34,8 +34,10 @@ class Controller_Table extends Controller_Data {
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
         $details = array();
+        $titels = array();
         foreach ($keymask->getDetails() as $detail) {
             $details[$detail->CodeBeschreibung][$detail->Schluessel] = $detail;
+            $titels [$detail->Schluessel][]=$detail->CodeBezeichnung;
             $keys [$detail->Schluessel] = $detail->Schluessel;
         }
        
@@ -47,8 +49,8 @@ class Controller_Table extends Controller_Data {
         $view->keys = $keys;
         $view->data = $data;
         $view->keymask = $keymask;
-
-
+        $view->titles = $titels;
+        
 
 
         $view->project = $list->render();

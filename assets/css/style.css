@@ -111,7 +111,7 @@ table tr td.even {
 .ui-dialog-title{
     overflow:hidden;
     float:left;
-    width:88.3%;
+    width:87%;
     height:30px;
 }
 .ui-widget-overlay{
@@ -746,7 +746,7 @@ table tr td.even {
 }
 #table_details div.details table td div.text{
     overflow:hidden;
-    height:70px;
+    max-height:100px;
     width:100px;
     padding:5px;
 }
