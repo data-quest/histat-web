@@ -37,11 +37,12 @@ class Model_Keymask extends ORM {
     }
 
     public function getData($keys) {
+        
         $rows = DB::select("Data", "Jahr_Sem", "Schluessel")
                 ->distinct(true)
                 ->from("Daten__Aka")
                 ->where("ID_HS", "=", $this->ID_HS)
-                ->where("Schluessel", "IN", $keys)
+                ->where("Schluessel", is_array($keys)?"IN":"=", $keys)
                 ->order_by("Jahr_Sem")
                 ->execute();
         $result = array();

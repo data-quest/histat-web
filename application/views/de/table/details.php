@@ -23,8 +23,8 @@
                                             
                                
                                         <?php $str = substr($details[$key]->CodeBezeichnung, 0, 30); ?>
-                                        <?= (strlen($str) >= 30 ? $str . '...' : $str) ?>
-                                         <div class="tooltip"><span></span><?= $details[$key]->CodeBezeichnung?></div>
+                                        <?= (strlen($str) >= 30 ? $str . '... <div class="tooltip"><span></span>'.$details[$key]->CodeBezeichnung.'</div>' : $str) ?>
+                                        
                                     </div>
                                 </td>
                                 <?php $i++; ?>
@@ -40,14 +40,14 @@
                     <tr>
                         <td class="blue"><div class="text" style="height:auto">Grafik</div></td>
                         <?php foreach ($keys as $key): ?>
-                            <td class="blue"><div class="text" style="height:24px;text-align:center;margin:auto;padding:0;"><div class="tooltip"><span></span><?= HTML::image($assets['img'] . 'charts/' . $keymask->ID_HS . '-' . $key . '.png') ?></div><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
+                            <td class="blue"><div class="text"  id="chart" style="height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><div class="tooltip"><span></span></div><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
 
                         <?php endforeach; ?>
                     </tr>
                     <tr>
                         <td class="blue"> <div class="text" style="height:auto">Warenkorb</div></td>
                         <?php foreach ($keys as $key): ?>
-                            <td class="blue"><div class="text" style="height:24px;text-align:center;margin:auto;padding:0;"><?= HTML::anchor('cart/add/' . $key, HTML::image($assets['img'] . 'layout/button-warenkorb.png')) ?></div></td>
+                            <td class="blue" ><div class="text" style="height:24px;text-align:center;margin:auto;padding:0;"><?= HTML::anchor('cart/add/' .$keymask->ID_HS.'/'. $key, HTML::image($assets['img'] . 'layout/button-warenkorb.png')) ?></div></td>
 
                         <?php endforeach; ?>
                     </tr>
