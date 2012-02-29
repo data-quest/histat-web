@@ -9,33 +9,63 @@
 
         <div id="scrollX" style="height:auto;overflow-y:hidden;overflow-x: auto;">
             <table style="width:100%;" id="headline">
-                <thead >
-                    <?php foreach ($details as $beschreibung => $details) : ?>
-                        <tr >
-                            <?php $i = 0; ?>
-                            <td><div class="text"><?= $beschreibung ?></div></td>
-                            <?php foreach ($details as $detail) : ?>
-                                <td class="col<?= $i ?>"><div class="text">
-                                        <?php $str = substr($detail->CodeBezeichnung, 0, 30); ?>
-                                        <?= (strlen($str) >= 30 ? $str . '...' : $str) ?>
-                                    </div>
+                <thead>
+                
+                        <?php foreach ($details as $beschreibung=>$details) : ?>
+               
+                    
+                            <tr >
+                                <?php $i = 0; ?>
+                                <td><div class="text"><?= $beschreibung ?></div></td>
 
-                                </td>
-                                <?php $i++; ?>
-                            <?php endforeach; ?>
+                                <?php foreach ($details as $detail) : ?>
+                                    <td class="col<?= $i ?>"><div class="text">
+
+
+
+                                            <?php $str = substr($detail->CodeBezeichnung, 0, 30); ?>
+                                            <?= (strlen($str) >= 30 ? $str . '...' : $str) ?>
+
+
+                                        </div>
+                                      
+                                    </td>
+                                    <?php $i++; ?>
+                                   
+                                <?php endforeach; ?>
+                            <?php  endforeach; ?>
                         </tr>
-                    <?php endforeach; ?>
+                      
+                
+
+
+
+                    <tr>
+                        <td class="blue"><div class="text" style="height:auto">Grafik</div></td>
+                        <?php foreach ($keys as $key): ?>
+                            <td class="blue"><div class="text" style="height:24px;text-align:center;margin:auto;padding:0;"><div class="tooltip"><span></span><?= HTML::image($assets['img'] . 'charts/' . $keymask->ID_HS . '-' . $key . '.png') ?></div><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
+
+                        <?php endforeach; ?>
+                    </tr>
+                    <tr>
+                        <td class="blue"> <div class="text" style="height:auto">Warenkorb</div></td>
+                        <?php foreach ($keys as $key): ?>
+                            <td class="blue"><div class="text" style="height:24px;text-align:center;margin:auto;padding:0;"><?= HTML::anchor('cart/add/' . $key, HTML::image($assets['img'] . 'layout/button-warenkorb.png')) ?></div></td>
+
+                        <?php endforeach; ?>
+                    </tr>
                 </thead>
+
             </table>
-            <div id="scrollY" style="overflow:hidden;overflow-y:auto;height:100px">
+            <div id="scrollY" style="overflow:hidden;overflow-y:scroll;height:100px">
                 <table>
                     <tbody>
-                      
-                        <?php foreach ($data as $years => $data): ?>
+
+                        <?php foreach ($data as $y => $data): ?>
                             <tr >
-                               
+
                                 <?php $i = 0; ?>
-                                <td><div class="text" style="height:auto"><?= $years ?></div></td>
+                                <td><div class="text" style="height:auto"><?= $y ?></div></td>
                                 <?php foreach ($keys as $key): ?>
                                     <td class="col<?= $i ?>"><div class="text" style="height:auto;text-align:center;margin:auto"><?= Arr::get($data, $key, '&nbsp;') ?></div></td>
                                     <?php $i++; ?>

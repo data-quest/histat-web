@@ -744,14 +744,30 @@ table tr td.even {
     overflow:hidden;
     height:70px;
     width:100px;
+    padding:5px;
 }
 #table_details div.details table td{
     border:1px solid #ffffff;
     vertical-align: top;
-    padding:5px;
+    padding:0px;
   
 }
-
+#table_details div.details table td .tooltip{
+    width:800px;
+    height:400px;
+    margin-top:24px;
+    margin-left:30px;
+    display: none;
+}
+#table_details div.details table td.blue:hover .tooltip{
+    display:block;
+}
+#table_details div.details table td.blue{
+    background: url(../img/layout/hg-tab.png) center left;
+}
+#table_details div.details table td.blue div.text{
+    color:#ffffff;
+}
 #table_details div.details table tbody tr:nth-child(2n){
      background:#ffffff;
 }
