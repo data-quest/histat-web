@@ -24,13 +24,17 @@ class Controller_Table extends Controller_Data {
         $this->sub_navi->activate($this->sub_navis[$index]);
         $this->id_hs = $this->request->param('id');
         
-         if($this->user->has_roles(array('guest')))
-            $this->request->redirect(I18n::$lang.'/auth/login');
+   
     }
 
     public function action_details() {
         $keymask = ORM::factory('keymask', $this->id_hs);
         $this->scripts[] = 'table.js';
+         $this->session->set('referrer',$this->request->uri());
+        
+        if($this->user->has_roles(array('guest')))
+            $this->request->redirect(I18n::$lang.'/auth/login');
+        
         $view = View::factory(I18n::$lang . '/table/details');
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
@@ -43,6 +47,7 @@ class Controller_Table extends Controller_Data {
             $details[$detail->CodeBeschreibung][$detail->Schluessel] = $detail;
             $titels [$detail->Schluessel][]=$detail->CodeBezeichnung;
             $keys [$detail->Schluessel] = $detail->Schluessel;
+            $filters[$detail->CodeBeschreibung][$detail->CodeBezeichnung]=$detail->CodeBezeichnung;
         }
        
         $data = $keymask->getData($keys);
@@ -54,7 +59,7 @@ class Controller_Table extends Controller_Data {
         $view->data = $data;
         $view->keymask = $keymask;
         $view->titles = $titels;
-        
+        $view->filters = $filters;
 
 
         $view->project = $list->render();
