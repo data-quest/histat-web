@@ -16,7 +16,9 @@
 
                         <tr >
                             <?php $i = 0; ?>
-                            <td><div class="text"><?= $beschreibung ?></div></td>
+                            <td><div class="text">
+                                    <?php $filters[$beschreibung][$beschreibung]=$beschreibung.' *' ?>
+                                <?= Form::select('filter_'.$beschreibung, Arr::get($filters,$beschreibung),$beschreibung,array('style'=>'width:100px')) ?></div></td>
 
                             <?php foreach ($keys as $key) : ?>
                                 <td class="col<?= $i ?>"><div class="text">
