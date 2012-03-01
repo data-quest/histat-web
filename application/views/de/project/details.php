@@ -50,18 +50,21 @@
     </div>
 
     <span class="more">Mehr...</span>
-    <hr/>
-    <h3>Tabellenverzeichnis:</h3>
     <?php
     $tabellenverzeichnis = '';
     foreach ($project->getUsedTables() as $table):
         $tabellenverzeichnis .= $table->Tabelle . ' ';
     endforeach;
+    if(strlen(trim($tabellenverzeichnis)) > 0):
     ?>
+    <hr/>
+    <h3>Tabellenverzeichnis:</h3>
+
     <span>
         <?= $tabellenverzeichnis ?>
     </span>
     <span class="more">Mehr...</span>
+    <?php endif; ?>
     <hr/>
     <h3>Sachliche Untergliederung:</h3>
     <div class="text" style="height:130px">

@@ -11,6 +11,7 @@ class Controller_Table extends Controller_Data {
     private $id_hs = null;
 
     public function before() {
+       
         parent::before();
         $this->sub_navis = array(
             'index' => __('New'),
@@ -22,6 +23,9 @@ class Controller_Table extends Controller_Data {
         $index = Arr::get($this->session->get('action'), 'name', 'index');
         $this->sub_navi->activate($this->sub_navis[$index]);
         $this->id_hs = $this->request->param('id');
+        
+         if($this->user->has_roles(array('guest')))
+            $this->request->redirect(I18n::$lang.'/auth/login');
     }
 
     public function action_details() {

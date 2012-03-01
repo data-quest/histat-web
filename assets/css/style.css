@@ -2,8 +2,8 @@
 *{
     margin: 0px;
     padding:0px;
-    font-size: 12px;
-    font-family: Arial,Verdana,Helvetica,sans-serif;
+    font-size: 11px;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
 }
 .clear{
     clear:both;
@@ -206,8 +206,8 @@ table tr td.even {
     height:80px;
     width: 100%;
 }
-#header *{
-    display:none;
+#header .logo{
+    margin:20px 10px;
 }
 #main_navi{
     color:#ffffff;
@@ -773,7 +773,8 @@ table tr td.even {
         
 }
 #table_details div.details table td.blue{
-    background: url(../img/layout/hg-tab.png) center left;
+    background: url(../img/layout/hg-tab.png) top center;
+
 }
 #table_details div.details table td.blue div.text{
     color:#ffffff;
