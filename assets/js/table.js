@@ -29,13 +29,28 @@ $(function(){
             buttons:[],
             closeText:closeText,
             close:function(){
-               $(this).html('');
+                $(this).html('');
             }
         }).dialog("Open");
       
        
     });
-  
+    $('select').change(function(){
+        $('#scrollX td').show();
+        var index = new Array();
+        var filter = $(this).val();
+        $(this).parents('tr').find('.text').each(function(i){
+            if(i > 0 && filter !=$.trim($(this).text()))
+                index.push(i);
+        });
+        $('#scrollX table tr').each(function(){
+            for(var i in index){
+                $(this).find('td').eq(index[i]).hide();
+            }
+        });
+        if($(':selected',this).index()== 0) $('#scrollX td').show();
+       
+    });
 });
 function scrollbarWidth() {
     var div = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');

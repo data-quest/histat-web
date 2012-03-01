@@ -17,22 +17,25 @@
                         <tr >
                             <?php $i = 0; ?>
                             <td><div class="text">
-                                    <?php $filters[$beschreibung][$beschreibung]=$beschreibung.' *' ?>
-                                <?= Form::select('filter_'.$beschreibung, Arr::get($filters,$beschreibung),$beschreibung,array('style'=>'width:100px')) ?></div></td>
+                                    <?php
+                                    $filters[$beschreibung][$beschreibung] = $beschreibung . ' *';
+                                    $filters_reversed = array_reverse(Arr::get($filters, $beschreibung));
+                                    ?>
+                            <?= Form::select('filter_' . $beschreibung, $filters_reversed, $beschreibung, array('style' => 'width:100px')) ?></div></td>
 
-                            <?php foreach ($keys as $key) : ?>
-                                <td class="col<?= $i ?>"><div class="text">
-                                            
-                               
+    <?php foreach ($keys as $key) : ?>
+                                <td class="<?= $details[$key]->CodeBezeichnung?>"><div class="text">
+
+
                                         <?php $str = substr($details[$key]->CodeBezeichnung, 0, 30); ?>
-                                        <?= (strlen($str) >= 30 ? $str . '... <div class="tooltip"><span></span>'.$details[$key]->CodeBezeichnung.'</div>' : $str) ?>
-                                        
+        <?= (strlen($str) >= 30 ? $str . '... <div class="tooltip"><span></span>' . $details[$key]->CodeBezeichnung . '</div>' : $str) ?>
+
                                     </div>
                                 </td>
                                 <?php $i++; ?>
 
                             <?php endforeach; ?>
-                        <?php endforeach; ?>
+<?php endforeach; ?>
                     </tr>
 
 
@@ -41,17 +44,17 @@
 
                     <tr>
                         <td class="blue"><div class="text" style="height:auto">Grafik</div></td>
-                        <?php foreach ($keys as $key): ?>
-                            <td class="blue"><div class="text"  id="chart" style="height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title',implode(' - ',Arr::get($titles,$key))) ?> <?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
+<?php foreach ($keys as $key): ?>
+                            <td class="blue"><div class="text"  id="chart" style="height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title', implode(' - ', Arr::get($titles, $key))) ?> <?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
 
-                        <?php endforeach; ?>
+<?php endforeach; ?>
                     </tr>
                     <tr>
                         <td class="blue"> <div class="text" style="height:auto">Warenkorb</div></td>
-                        <?php foreach ($keys as $key): ?>
-                            <td class="blue" ><div class="text" style="height:24px;text-align:center;margin:auto;padding:0;"><?= HTML::anchor('cart/add/' .$keymask->ID_HS.'/'. $key, HTML::image($assets['img'] . 'layout/button-warenkorb.png')) ?></div></td>
+<?php foreach ($keys as $key): ?>
+                            <td class="blue" ><div class="text" style="height:24px;text-align:center;margin:auto;padding:0;"><?= HTML::anchor('cart/add/' . $keymask->ID_HS . '/' . $key, HTML::image($assets['img'] . 'layout/button-warenkorb.png')) ?></div></td>
 
-                        <?php endforeach; ?>
+<?php endforeach; ?>
                     </tr>
                 </thead>
 
@@ -60,7 +63,7 @@
                 <table>
                     <tbody>
 
-                        <?php foreach ($data as $y => $data): ?>
+<?php foreach ($data as $y => $data): ?>
                             <tr >
 
                                 <?php $i = 0; ?>
@@ -68,9 +71,9 @@
                                 <?php foreach ($keys as $key): ?>
                                     <td class="col<?= $i ?>"><div class="text" style="height:auto;text-align:center;margin:auto"><?= Arr::get($data, $key, '&nbsp;') ?></div></td>
                                     <?php $i++; ?>
-                                <?php endforeach; ?>
+                            <?php endforeach; ?>
                             </tr>
-                        <?php endforeach; ?> 
+<?php endforeach; ?> 
                     </tbody>
                 </table>
             </div>
