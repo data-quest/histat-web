@@ -36,19 +36,7 @@ $(function(){
        
     });
     $('select').change(function(){
-        $('#scrollX td').show();
-        var index = new Array();
-        var filter = $(this).val();
-        $(this).parents('tr').find('.text').each(function(i){
-            if(i > 0 && filter !=$.trim($(this).text()))
-                index.push(i);
-        });
-        $('#scrollX table tr').each(function(){
-            for(var i in index){
-                $(this).find('td').eq(index[i]).hide();
-            }
-        });
-        if($(':selected',this).index()== 0) $('#scrollX td').show();
+    $('form').submit();
        
     });
 });

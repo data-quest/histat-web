@@ -11,7 +11,7 @@ class Controller_Table extends Controller_Data {
     private $id_hs = null;
 
     public function before() {
-       
+
         parent::before();
         $this->sub_navis = array(
             'index' => __('New'),
@@ -23,18 +23,16 @@ class Controller_Table extends Controller_Data {
         $index = Arr::get($this->session->get('action'), 'name', 'index');
         $this->sub_navi->activate($this->sub_navis[$index]);
         $this->id_hs = $this->request->param('id');
-        
-   
     }
 
     public function action_details() {
         $keymask = ORM::factory('keymask', $this->id_hs);
         $this->scripts[] = 'table.js';
-         $this->session->set('referrer',$this->request->uri());
-        
-        if($this->user->has_roles(array('guest')))
-            $this->request->redirect(I18n::$lang.'/auth/login');
-        
+        $this->session->set('referrer', $this->request->uri());
+
+        if ($this->user->has_roles(array('guest')))
+            $this->request->redirect(I18n::$lang . '/auth/login');
+
         $view = View::factory(I18n::$lang . '/table/details');
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
@@ -43,16 +41,24 @@ class Controller_Table extends Controller_Data {
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
         $details = array();
         $titels = array();
+        $keys = array();
+        $filter = $this->request->post('filter', NULL);
+        //echo Debug::vars($filter);
         foreach ($keymask->getDetails() as $detail) {
-            $details[$detail->CodeBeschreibung][$detail->Schluessel] = $detail;
-            $titels [$detail->Schluessel][]=$detail->CodeBezeichnung;
-            $keys [$detail->Schluessel] = $detail->Schluessel;
-            $filters[$detail->CodeBeschreibung][$detail->CodeBezeichnung]=$detail->CodeBezeichnung;
+
+            //if (in_array($detail->CodeBezeichnung, $filter)) {
+                $details[$detail->CodeBeschreibung][$detail->Schluessel] = $detail;
+                $titels [$detail->Schluessel][] = $detail->CodeBezeichnung;
+                $keys [$detail->Schluessel] = $detail->Schluessel;
+            //}
+
+
+            $filters[$detail->CodeBeschreibung][$detail->CodeBezeichnung] = $detail->CodeBezeichnung;
         }
-       
+        //echo Debug::vars($details);
         $data = $keymask->getData($keys);
 
-         
+
         $view->id_hs = $this->id_hs;
         $view->details = $details;
         $view->keys = $keys;
@@ -60,7 +66,7 @@ class Controller_Table extends Controller_Data {
         $view->keymask = $keymask;
         $view->titles = $titels;
         $view->filters = $filters;
-
+        $view->post = $this->request->post('filter', NULL);
 
         $view->project = $list->render();
         $this->content = $view->render();

@@ -7,7 +7,7 @@
     <span class="more">Mehr...</span>
     <hr/>
     <h3>Beschreibung:</h3>
-    <div class="text">
+    <div class="text" style="height:80px;">
         <a href="#" style="visbility:hidden"></a>
         <span>
             <?= nl2br($project->Projektbeschreibung) ?>
@@ -82,7 +82,7 @@
                     <tr>
                         <?php for ($col = 0; $col < $maxCols; $col++): ?>
                             <?php $index = ceil((($i + 1) / $maxCols) + ($col * ($maxRows))) - 1; ?>
-                            <td style="width:30%"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS, $keymasks[$index]->Name) : ''; ?></td>
+                            <td style="width:30%"><?= isset($keymasks[$i]->Name) ? HTML::anchor('table/details/' . $keymasks[$i]->ID_HS, $keymasks[$i]->Name) : ''; ?></td>
                             <?php $i++; ?>
                         <?php endfor; ?>
                     </tr>

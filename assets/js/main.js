@@ -10,7 +10,8 @@ $(function(){
     $('.less').live('click',function(e){
         var target = $(this);
         var text =target.prev('div.text');
-        text.css('height', '40px').css('overflow', 'hidden');
+      
+        text.css('height', '70px').css('overflow', 'hidden');
         target.text(more).attr('class','more');
     });
     
