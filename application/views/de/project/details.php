@@ -67,22 +67,22 @@
     <?php endif; ?>
     <hr/>
     <h3>Sachliche Untergliederung:</h3>
-    <div class="text" style="height:130px">
+    
         <?php
         $keymasks = $project->keymasks->order_by('Name')->find_all();
-        $maxRows = 10;
+        $maxRows = 6;
         $maxCols = 3;
         $countTables = ceil(count($keymasks) / ($maxRows * $maxCols));
         $i = 0;
 
         for ($table = 0; $table < $countTables; $table++):
             ?>
-            <table border="0" <?= $table > 0 ? 'style="display:none"' : '' ?>>
+            <table border="0" style="<?= $table > 0 ? 'display:none;' : '' ?>border:0px">
                 <?php for ($row = 0; $row < $maxRows; $row++): ?>
-                    <tr>
+                    <tr >
                         <?php for ($col = 0; $col < $maxCols; $col++): ?>
                             <?php $index = ceil((($i + 1) / $maxCols) + ($col * ($maxRows))) - 1; ?>
-                            <td style="width:30%"><?= isset($keymasks[$i]->Name) ? HTML::anchor('table/details/' . $keymasks[$i]->ID_HS, $keymasks[$i]->Name) : ''; ?></td>
+                            <td valign="top" style="width:30%;border:0px"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS, $keymasks[$index]->Name) : ''; ?></td>
                             <?php $i++; ?>
                         <?php endfor; ?>
                     </tr>
@@ -103,8 +103,7 @@
             </div>
             <div class="clear"></div>
         <?php endif; ?>
-    </div>
-    <span class="more">Mehr...</span>
+   
 
 </div>
 <script type="text/javascript">
