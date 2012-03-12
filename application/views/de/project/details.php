@@ -1,11 +1,5 @@
 <div id="project_details" style="display:none" >
 
-    <h3>Kurzportrait:</h3>
-    <div class="text">
-        <span> Lorem Ipsum usw</span>
-    </div>
-    <span class="more">Mehr...</span>
-    <hr/>
     <h3>Beschreibung:</h3>
     <div class="text" style="height:80px;">
         <a href="#" style="visbility:hidden"></a>
