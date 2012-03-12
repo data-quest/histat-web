@@ -75,6 +75,7 @@ class Controller_Table extends Controller_Data {
         $view->keys = $details['keys'];
         $view->data = $data;
         $view->keymask = $keymask;
+        $view->tables = $details['tables'];
         $view->titles = $details['titles'];
         $view->filters = $details['filters'];
         $view->post = $this->request->post('filter', NULL);

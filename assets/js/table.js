@@ -1,6 +1,6 @@
 $(function(){
     var y =  $('#scrollX');
-    var w = $('#scrollX > table').innerWidth();
+    var w = $('#scrollX table#headline').innerWidth();
     var h =  $('#scrollY').position();
     h = $(document).innerHeight()-h.top-$('#footer').innerHeight()-$('#header').innerHeight();
     
@@ -11,7 +11,7 @@ $(function(){
         $('.tooltip').hide();
         $(this).find('.tooltip').show();
     });
-     
+    $('#gotop').remove();
     $('#chart').live('click',function(e){
       
         var id = $(this).find('input[name="chart"]').val();
@@ -38,14 +38,14 @@ $(function(){
             close:function(){
                 $(this).html('');
                 $('.ui-dialog-title').html('');
-                 $('.ui-dialog-titlebar-close > span').height(30);
+                $('.ui-dialog-titlebar-close > span').height(30);
             }
         }).dialog("Open");
       
        
     });
     $('select').change(function(){
-    $('form').submit();
+        $('form').submit();
        
     });
 });

@@ -786,6 +786,14 @@ table tr td.even {
 #table_details div.details table td.blue div.text{
     color:#ffffff;
 }
+
+#table_details div.details table td.grey{
+    background:#606567;
+
+}
+#table_details div.details table td.grey div.text{
+    color:#ffffff;
+}
 #table_details div.details table tbody tr:nth-child(2n){
     background:#ffffff;
 }

@@ -34,14 +34,15 @@ class Model_Keymask extends ORM {
 
         $result = array();
         $keys = $this->getKeys($filter);
-   
+
         foreach ($keys as $key) {
             foreach ($details as $detail) {
                 if ($detail->Code === substr($key->key, $detail->Position - 1, $detail->Zeichen)) {
                     $result['details'][$detail->ID_CodeKuerz][$key->key] = $detail;
-                    $result['titles'][$key->key][]=$detail->CodeBezeichnung;
+                    $result['titles'][$key->key][] = $detail->CodeBezeichnung;
                     $result['filters'][$detail->ID_CodeKuerz][$detail->Code . '_' . $detail->Position . '_' . $detail->Zeichen] = $detail->CodeBezeichnung;
                     $result['keys'][$key->key] = $key->key;
+                    $result['tables'][$key->key] = $key->Tabelle;
                 }
             }
         }
@@ -49,26 +50,7 @@ class Model_Keymask extends ORM {
         return $result;
     }
 
-    public function getFilter($filter = NULL) {
-        if ($filter) {
-
-
-            $details = DB::select(array("INSERT(REPEAT('_',LENGTH(Schluessel)),Position+1,Zeichen,CONCAT(Code))", "subkey"), "Zeichen", "Position", "Code")
-                    ->distinct(TRUE)
-                    ->from(array("Aka_CodeInhalt", 'ci'))
-                    ->join(array("Aka_Codes", "c"), "LEFT")
-                    ->on("c.ID_CodeKuerz", "=", "ci.ID_CodeKuerz")
-                    ->join(array("Aka_SchluesselCode", "sc"), 'LEFT')
-                    ->on("c.ID_CodeKuerz", "=", "sc.ID_CodeKuerz")
-                    ->join(array("aka_schluesselindex", "si"), "LEFT")
-                    ->on("si.ID_HS", "=", "sc.ID_HS")
-                    ->where("ci.Code", "IN", $filter)
-                    ->where("sc.ID_HS", "=", $this->ID_HS)
-                    ->as_object()
-                    ->execute();
-            return $details;
-        }
-    }
+ 
 
     public function getData($keys) {
 
@@ -87,11 +69,10 @@ class Model_Keymask extends ORM {
     }
 
     public function getKeys($filter) {
-        return DB::select(array("Schluessel", "`key`"))->distinct(true)
+        return DB::select(array("Schluessel", "`key`"),"Tabelle")->distinct(true)
                         ->from("Lit_ZR")
                         ->where('ID_HS', '=', $this->ID_HS)
                         ->where("Schluessel", "LIKE", $filter)
-                
                         ->as_object()
                         ->execute();
     }

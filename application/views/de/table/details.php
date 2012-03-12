@@ -1,11 +1,11 @@
-<div id="table_details">
+<div id="table_details" >
     <h1>Tabellenansicht der Studie</h1>
     <?= $project ?>
 
 
     <div class="details">
         <div class="name"><?= $keymask->Name ?></div>
-        <?= Form::open('table/details/' . $keymask->ID_HS); ?>
+
 
         <div id="scrollX" style="height:auto;overflow-y:hidden;overflow-x: auto;">
             <?= Form::open('table/details/' . $keymask->ID_HS) ?>
@@ -42,17 +42,24 @@
 
                         </tr>
                     <?php endforeach; ?>
+                     <tr>
+                        <td class="grey"><div class="text" style="height:auto">Tabelle</div></td>
+                        <?php foreach ($keys as $key): ?>
+                            <td class="grey"><div class="text" style="width:100%;text-align:center"><?= $tables[$key] ?></div></td>
+
+                        <?php endforeach; ?>
+                    </tr>
                     <tr>
                         <td class="blue"><div class="text" style="height:auto">Grafik</div></td>
                         <?php foreach ($keys as $key): ?>
-                            <td class="blue"><div class="text"  id="chart" style="height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title', implode('<br/>', $titles[$key])) ?> <?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
+                            <td class="blue"><div class="text"  id="chart" style="width:100%;height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title', implode('<br/>', $titles[$key])) ?> <?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
 
                         <?php endforeach; ?>
                     </tr>
                     <tr>
                         <td class="blue"> <div class="text" style="height:auto">Warenkorb</div></td>
                         <?php foreach ($keys as $key): ?>
-                            <td class="blue" ><div class="text" style="height:24px;text-align:center;margin:auto;padding:0;"><?= HTML::anchor('cart/add/' . $keymask->ID_HS . '/' . $key, HTML::image($assets['img'] . 'layout/button-warenkorb.png')) ?></div></td>
+                            <td class="blue" ><div class="text" style="width:100%;height:24px;text-align:center;margin:auto;padding:0;"><?= HTML::anchor('cart/add/' . $keymask->ID_HS . '/' . $key, HTML::image($assets['img'] . 'layout/button-warenkorb.png')) ?></div></td>
 
                         <?php endforeach; ?>
                     </tr>
@@ -60,6 +67,7 @@
 
             </table>
             <?= Form::close(); ?>
+      
             <div id="scrollY" style="overflow:hidden;overflow-y:scroll;height:100px">
                 <table>
                     <tbody>
@@ -80,8 +88,11 @@
             </div>
         </div>
     </div>
+   
 </div>
+
 <div class="dialog"></div>
+
 <script type="text/javascript">
 
 
