@@ -109,7 +109,6 @@ table tr td.even {
     font-size: 1.2em;
     padding:0px;
     float:left;
-    height:100%;
 }
 .ui-dialog-title{
 
@@ -135,6 +134,7 @@ table tr td.even {
 .ui-dialog-titlebar{
     font-weight: bold;
     font-size: 1.2em;
+    
 }
 .ui-dialog-content {
     background: #ffffff;
@@ -154,14 +154,12 @@ table tr td.even {
     display: block;
     float:right;
     width:100px;
-    height:100%;
     background: url(../img/layout/button-close.png) no-repeat left center;
     cursor: pointer;
 }
 .ui-dialog-titlebar-close span{
     display:block;
     float: right;
-    height:100%;
     width: 80px;
 
 }

@@ -3,12 +3,12 @@
     <?= $project ?>
 
 
-    <div class="details">
+    <div class="details" id="tabelle">
         <div class="name"><?= $keymask->Name ?></div>
 
 
         <div id="scrollX" style="height:auto;overflow-y:hidden;overflow-x: auto;">
-            <?= Form::open('table/details/' . $keymask->ID_HS) ?>
+            <?= Form::open('table/details/' . $keymask->ID_HS . '#tabelle') ?>
             <table style="width:100%;" id="headline">
                 <thead>
                     <?php $i = 0; ?>
@@ -20,7 +20,7 @@
                                     <?php
                                     $k = array_keys($detail);
                                     $beschreibung = $detail[$k[0]]->CodeBeschreibung;
-                                   
+
                                     $filters[$codeKurz]["all"] = $beschreibung . ' *';
 
                                     $filters_reversed = array_reverse(Arr::get($filters, $codeKurz));
@@ -29,8 +29,6 @@
                             <?php $i++ ?>
                             <?php foreach ($detail as $key => $value) : ?>
                                 <td ><div class="text">
-
-
                                         <?php $str = substr($detail[$key]->CodeBezeichnung, 0, 30); ?>
                                         <?= (strlen($str) >= 30 ? $str . '... <div class="tooltip"><span></span>' . $detail[$key]->CodeBezeichnung . '</div>' : $str) ?>
 
@@ -42,7 +40,7 @@
 
                         </tr>
                     <?php endforeach; ?>
-                     <tr>
+                    <tr>
                         <td class="grey"><div class="text" style="height:auto">Tabelle</div></td>
                         <?php foreach ($keys as $key): ?>
                             <td class="grey"><div class="text" style="width:100%;text-align:center"><?= $tables[$key] ?></div></td>
@@ -67,7 +65,7 @@
 
             </table>
             <?= Form::close(); ?>
-      
+
             <div id="scrollY" style="overflow:hidden;overflow-y:scroll;height:100px">
                 <table>
                     <tbody>
@@ -88,7 +86,7 @@
             </div>
         </div>
     </div>
-   
+
 </div>
 
 <div class="dialog"></div>
