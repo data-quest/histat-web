@@ -50,23 +50,8 @@
     </div>
 
     <span class="more">Mehr...</span>
-    <?php
-    $tabellenverzeichnis = '';
-    foreach ($project->getUsedTables() as $table):
-        $tabellenverzeichnis .= $table->Tabelle . ' ';
-    endforeach;
-    if(strlen(trim($tabellenverzeichnis)) > 0):
-    ?>
     <hr/>
-    <h3>Tabellenverzeichnis:</h3>
-
-    <span>
-        <?= $tabellenverzeichnis ?>
-    </span>
-    <span class="more">Mehr...</span>
-    <?php endif; ?>
-    <hr/>
-    <h3>Sachliche Untergliederung:</h3>
+    <h3>Tabellen:</h3>
     
         <?php
         $keymasks = $project->keymasks->order_by('Name')->find_all();

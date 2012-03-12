@@ -19,29 +19,55 @@ class Model_Keymask extends ORM {
         'timelines' => array('model' => 'timeline', 'foreign_key' => 'ID_HS', 'far_key' => 'ID_HS'),
     );
 
-    public function getDetails($filter = NULL) {
-        $details = DB::select("k.ID_CodeKuerz", "Position", "CodeBeschreibung", "Zeichen", "disabled", "Schluessel", array("SUBSTR(Schluessel,Position,Zeichen)", "subkey"), "Code", "CodeBezeichnung")
+    public function getDetails($filter) {
+        $details = DB::select("k.ID_CodeKuerz", "Position", "CodeBeschreibung", "Zeichen", "disabled", "Code", "CodeBezeichnung")
                 ->distinct(true)
                 ->from(array("Aka_SchluesselCode", "k"))
                 ->join(array('Aka_Codes', 'c'), 'LEFT')
                 ->on('k.ID_CodeKuerz', '=', 'c.ID_CodeKuerz')
                 ->join(array('Aka_CodeInhalt', 'ci'), 'LEFT')
                 ->on('ci.ID_CodeKuerz', '=', 'c.ID_CodeKuerz')
-                ->join(array('Daten__Aka', 'da'), 'LEFT')
-                ->on('da.ID_HS', '=', 'k.ID_HS')
                 ->where("k.ID_HS", "=", $this->ID_HS)
-                ->where('Code', '=', DB::expr("SUBSTR(Schluessel,Position,Zeichen)"))
-               
-              
-                
-                ->order_by('Position');
-        if (is_array($filter))
-        //  $details->where('CodeBezeichnung','IN',$filter);
-            echo Debug::vars($filter);
+                ->order_by('Position')
+                ->as_object()
+                ->execute();
+
+        $result = array();
+        $keys = $this->getKeys($filter);
+   
+        foreach ($keys as $key) {
+            foreach ($details as $detail) {
+                if ($detail->Code === substr($key->key, $detail->Position - 1, $detail->Zeichen)) {
+                    $result['details'][$detail->ID_CodeKuerz][$key->key] = $detail;
+                    $result['titles'][]=$detail->CodeBezeichnung;
+                    $result['filters'][$detail->ID_CodeKuerz][$detail->Code . '_' . $detail->Position . '_' . $detail->Zeichen] = $detail->CodeBezeichnung;
+                    $result['keys'][$key->key] = $key->key;
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    public function getFilter($filter = NULL) {
+        if ($filter) {
 
 
-        return $details->as_object()
-                        ->execute();
+            $details = DB::select(array("INSERT(REPEAT('_',LENGTH(Schluessel)),Position+1,Zeichen,CONCAT(Code))", "subkey"), "Zeichen", "Position", "Code")
+                    ->distinct(TRUE)
+                    ->from(array("Aka_CodeInhalt", 'ci'))
+                    ->join(array("Aka_Codes", "c"), "LEFT")
+                    ->on("c.ID_CodeKuerz", "=", "ci.ID_CodeKuerz")
+                    ->join(array("Aka_SchluesselCode", "sc"), 'LEFT')
+                    ->on("c.ID_CodeKuerz", "=", "sc.ID_CodeKuerz")
+                    ->join(array("aka_schluesselindex", "si"), "LEFT")
+                    ->on("si.ID_HS", "=", "sc.ID_HS")
+                    ->where("ci.Code", "IN", $filter)
+                    ->where("sc.ID_HS", "=", $this->ID_HS)
+                    ->as_object()
+                    ->execute();
+            return $details;
+        }
     }
 
     public function getData($keys) {
@@ -60,10 +86,12 @@ class Model_Keymask extends ORM {
         return $result;
     }
 
-    public function getKeys() {
+    public function getKeys($filter) {
         return DB::select(array("Schluessel", "`key`"))->distinct(true)
-                        ->from("Daten__Aka")
+                        ->from("Lit_ZR")
                         ->where('ID_HS', '=', $this->ID_HS)
+                        ->where("Schluessel", "LIKE", $filter)
+                
                         ->as_object()
                         ->execute();
     }

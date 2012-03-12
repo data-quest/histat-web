@@ -39,33 +39,44 @@ class Controller_Table extends Controller_Data {
         $list->projects = $keymask->project;
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
-        $details = array();
-        $titels = array();
-        $keys = array();
-        $filter = $this->request->post('filter', NULL);
-        //echo Debug::vars($filter);
-        foreach ($keymask->getDetails() as $detail) {
 
-            //if (in_array($detail->CodeBezeichnung, $filter)) {
-                $details[$detail->CodeBeschreibung][$detail->Schluessel] = $detail;
-                $titels [$detail->Schluessel][] = $detail->CodeBezeichnung;
-                $keys [$detail->Schluessel] = $detail->Schluessel;
-            //}
+      
 
+        $filters = $this->request->post('filter', NULL);
 
-            $filters[$detail->CodeBeschreibung][$detail->CodeBezeichnung] = $detail->CodeBezeichnung;
+        $string = '________________________________';
+        if ($filters) {
+            foreach ($filters as $filter) {
+                if ($filter !== "all") {
+
+                    $filter = explode('_', $filter);
+                    $code = $filter[0];
+                    $pos = $filter[1];
+                    $len = $filter[2];
+                    $c = 0; 
+                    for ($i = 0; $i < strlen($string); $i++) {
+                        if ($i == $pos-1) {
+                            for ($l = $i; $l < $pos+$len-1; $l++) {
+                                $string[$l] = $code[$c];
+                                $c++;
+                            }
+                        }
+                    }
+                }
+            }
         }
-        //echo Debug::vars($details);
-        $data = $keymask->getData($keys);
+
+        $details = $keymask->getDetails($string);
+        $data = $keymask->getData($details['keys']);
 
 
         $view->id_hs = $this->id_hs;
-        $view->details = $details;
-        $view->keys = $keys;
+        $view->details = $details['details'];
+        $view->keys = $details['keys'];
         $view->data = $data;
         $view->keymask = $keymask;
-        $view->titles = $titels;
-        $view->filters = $filters;
+        $view->titles = $details['titles'];
+        $view->filters = $details['filters'];
         $view->post = $this->request->post('filter', NULL);
 
         $view->project = $list->render();

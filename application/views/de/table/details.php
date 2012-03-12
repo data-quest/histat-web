@@ -8,40 +8,44 @@
         <?= Form::open('table/details/' . $keymask->ID_HS); ?>
 
         <div id="scrollX" style="height:auto;overflow-y:hidden;overflow-x: auto;">
-             <?= Form::open('table/details/'.$keymask->ID_HS) ?>
+            <?= Form::open('table/details/' . $keymask->ID_HS) ?>
             <table style="width:100%;" id="headline">
                 <thead>
-                  <?php $i = 0; ?>
-                    <?php foreach ($details as $beschreibung => $details) : ?>
+                    <?php $i = 0; ?>
+
+                    <?php foreach ($details as $codeKurz => $detail) : ?>
                         <tr >
-                           
+
                             <td><div class="text">
                                     <?php
-                                    $filters[$beschreibung][$beschreibung] = $beschreibung . ' *';
-                                    $filters_reversed = array_reverse(Arr::get($filters, $beschreibung));
-                                    
+                                    $k = array_keys($detail);
+                                    $beschreibung = $detail[$k[0]]->CodeBeschreibung;
+                                   
+                                    $filters[$codeKurz]["all"] = $beschreibung . ' *';
+
+                                    $filters_reversed = array_reverse(Arr::get($filters, $codeKurz));
                                     ?>
-                                    <?= Form::select('filter[]', $filters_reversed, Arr::get($post,$i,$beschreibung), array('style' => 'width:100px')) ?></div></td>
-                           <?php $i++?>
-                            <?php foreach ($keys as $key) : ?>
+                                    <?= Form::select('filter[]', $filters_reversed, Arr::get($post, $i, "all"), array('style' => 'width:100px')) ?></div></td>
+                            <?php $i++ ?>
+                            <?php foreach ($detail as $key => $value) : ?>
                                 <td ><div class="text">
 
 
-                                        <?php $str = substr($details[$key]->CodeBezeichnung, 0, 30); ?>
-                                        <?= (strlen($str) >= 30 ? $str . '... <div class="tooltip"><span></span>' . $details[$key]->CodeBezeichnung . '</div>' : $str) ?>
+                                        <?php $str = substr($detail[$key]->CodeBezeichnung, 0, 30); ?>
+                                        <?= (strlen($str) >= 30 ? $str . '... <div class="tooltip"><span></span>' . $detail[$key]->CodeBezeichnung . '</div>' : $str) ?>
 
                                     </div>
                                 </td>
 
 
                             <?php endforeach; ?>
-                           
+
                         </tr>
-                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                     <tr>
                         <td class="blue"><div class="text" style="height:auto">Grafik</div></td>
                         <?php foreach ($keys as $key): ?>
-                            <td class="blue"><div class="text"  id="chart" style="height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title', implode(' - ', Arr::get($titles, $key))) ?> <?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
+                            <td class="blue"><div class="text"  id="chart" style="height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title', implode('-', $titles)) ?> <?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
 
                         <?php endforeach; ?>
                     </tr>
@@ -55,7 +59,7 @@
                 </thead>
 
             </table>
-                <?= Form::close();?>
+            <?= Form::close(); ?>
             <div id="scrollY" style="overflow:hidden;overflow-y:scroll;height:100px">
                 <table>
                     <tbody>
