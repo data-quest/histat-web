@@ -10,7 +10,7 @@
 }
 .debug{
     color:#ffffff;
-    
+
 }
 body {
     background: url(../img/layout/hg-verlauf.jpg) repeat-x top center #1F2B39;
@@ -100,19 +100,22 @@ table tr td.even {
 .ui-dialog .ui-dialog-titlebar{
     background: url(../img/layout/verlauf-orange_150x5.jpg) repeat-x center center; 
     text-align: center;
-    height: 30px;
+    min-height: 30px;
+    max-height: 150px;
     line-height: 30px;
+    width:100%;
     border-bottom:1px solid #757576;
     color:#ffffff;
     font-size: 1.2em;
     padding:0px;
-
+    float:left;
+    height:100%;
 }
 .ui-dialog-title{
-    overflow:hidden;
+
     float:left;
     width:87%;
-    height:30px;
+    height:auto;
 }
 .ui-widget-overlay{
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
@@ -151,12 +154,16 @@ table tr td.even {
     display: block;
     float:right;
     width:100px;
+    height:100%;
     background: url(../img/layout/button-close.png) no-repeat left center;
+    cursor: pointer;
 }
 .ui-dialog-titlebar-close span{
     display:block;
     float: right;
+    height:100%;
     width: 80px;
+
 }
 .ui-dialog-buttonpane{
     background: #505050;
@@ -754,7 +761,7 @@ table tr td.even {
     border:1px solid #ffffff;
     vertical-align: top;
     padding:0px;
-  
+
 }
 #table_details div.details table td .tooltip{
     width:auto;
@@ -770,7 +777,7 @@ table tr td.even {
 }
 #table_details div.details table td.blue:hover{
     cursor: pointer;
-        
+
 }
 #table_details div.details table td.blue{
     background: url(../img/layout/hg-tab.png) top center;
@@ -780,10 +787,10 @@ table tr td.even {
     color:#ffffff;
 }
 #table_details div.details table tbody tr:nth-child(2n){
-     background:#ffffff;
+    background:#ffffff;
 }
 #table_details div.details table tbody tr:hover{
-     background:#FE8F00;
+    background:#FE8F00;
 }
 #table_details div.details table  td.hover{
     background:#FE8F00;

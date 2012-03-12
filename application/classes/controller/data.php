@@ -18,7 +18,7 @@ class Controller_Data extends Controller_Index {
         $this->sub_navi->add('data/top', __('Top'));
         $this->sub_navi->add('data/times', __('Times'));
         $this->sub_navi->add('data/themes', __('Themes'));
-        $this->sub_navi->add('data/authors', __('Authors'));
+        $this->sub_navi->add('data/names', __('Names'));
     }
 
     public function action_index() {
@@ -95,14 +95,14 @@ class Controller_Data extends Controller_Index {
         $this->session->set('action', array('name' => 'themes', 'param' => $id));
     }
 
-    public function action_authors($id = NULL) {
-        $this->sub_navi->activate(__('Authors'));
+    public function action_names($id = NULL) {
+        $this->sub_navi->activate(__('Names'));
 
         if (!$id)
             $id = urldecode($this->request->param('id'));
 
         $orm = ORM::factory('project');
-        $view = View::factory(I18n::$lang . '/data/authors/overview');
+        $view = View::factory(I18n::$lang . '/data/names/overview');
         $authors = $orm->getAuthors();
         $author_list = array();
         $key_list = array();
@@ -136,7 +136,7 @@ class Controller_Data extends Controller_Index {
             $list = View::factory(I18n::$lang . '/project/list');
             $list->projects = $projects;
             //assign the referrer uri
-            $list->uri = URL::site(I18n::$lang . '/data/authors/' . urlencode($id));
+            $list->uri = URL::site(I18n::$lang . '/data/names/' . urlencode($id));
             $view->projects = $list->render();
         }
         $view->name = $id;

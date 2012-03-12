@@ -39,7 +39,7 @@ class Model_Keymask extends ORM {
             foreach ($details as $detail) {
                 if ($detail->Code === substr($key->key, $detail->Position - 1, $detail->Zeichen)) {
                     $result['details'][$detail->ID_CodeKuerz][$key->key] = $detail;
-                    $result['titles'][]=$detail->CodeBezeichnung;
+                    $result['titles'][$key->key][]=$detail->CodeBezeichnung;
                     $result['filters'][$detail->ID_CodeKuerz][$detail->Code . '_' . $detail->Position . '_' . $detail->Zeichen] = $detail->CodeBezeichnung;
                     $result['keys'][$key->key] = $key->key;
                 }

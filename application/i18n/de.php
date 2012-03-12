@@ -17,6 +17,7 @@ return array(
     'Top'=>'Top',
     'Times' =>'Zeiten',
     'Themes'=>'Themen',
+    'Names' =>'Namen',
     'Authors'=>'Autoren',
     'Last Updates from :date'=>'Letzte aktualisierung der Seite am :date',
     'Historical Statistics'=>'Historische Statistik',

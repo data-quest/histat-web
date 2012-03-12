@@ -27,9 +27,18 @@ $(function(){
             show: "blind",
             hide: "blind",
             buttons:[],
+            top:100+'px',
             closeText:closeText,
+            open:function(){
+                var span = $('.ui-dialog-titlebar-close > span');
+                var h = $('span.ui-dialog-title').innerHeight();
+         
+                span.attr('style','height:'+h+'px;line-height:'+h+'px');
+            },
             close:function(){
                 $(this).html('');
+                $('.ui-dialog-title').html('');
+                 $('.ui-dialog-titlebar-close > span').height(30);
             }
         }).dialog("Open");
       
