@@ -51,12 +51,12 @@
     }
 
     public function getUsedTables() {
-        return DB::select("Tabelle")->distinct(true)
+        return DB::select("lz.ID_HS")->distinct(true)
                         ->from(array("Aka_Projekte", "p"))
                         ->join(array('Aka_Schluesselmaske', 'sm'), 'INNER')->on('p.ID_Projekt', '=', 'sm.ID_Projekt')
                         ->join(array('Lit_ZR', 'lz'), 'INNER')->on('sm.ID_HS', '=', 'lz.ID_HS')
                         ->where('p.ID_Projekt', '=', $this->ID_Projekt)
-                        ->order_by('Tabelle')->as_object()->execute();
+                        ->order_by('lz.ID_HS')->as_object()->execute();
     }
     public function getAuthors(){
    

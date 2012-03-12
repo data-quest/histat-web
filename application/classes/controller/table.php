@@ -45,6 +45,7 @@ class Controller_Table extends Controller_Data {
         $filters = $this->request->post('filter', NULL);
 
         $string = '________________________________';
+       
         if ($filters) {
             foreach ($filters as $filter) {
                 if ($filter !== "all") {
@@ -65,9 +66,9 @@ class Controller_Table extends Controller_Data {
                 }
             }
         }
-
+        echo $string;
         $details = $keymask->getDetails($string);
-        $data = $keymask->getData($details['keys']);
+        $data = $keymask->getData(Arr::get($details,'keys',array()));
 
 
         $view->id_hs = $this->id_hs;

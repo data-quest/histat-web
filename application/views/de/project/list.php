@@ -22,7 +22,7 @@
             <td class="even" width="13%"><?= $projects->theme->Thema ?></td>
             <td  width="50%"><?= $projects->Projektautor ?>, <?= $projects->Projektname ?></td>
             <td class="even" width="22%">
-                <?= $projects->Anzahl_Zeitreihen; ?> Zeitreihen (<?= $projects->Zeitraum ?>)
+                <?= $projects->Anzahl_Zeitreihen; ?> Zeitreihen <br/>(<?= $projects->Zeitraum ?>)
                 <?php $tabellen = $projects->getUsedTables(); ?>
                 <?= count($tabellen) > 0 ? '<br/>' . count($tabellen) . ' Tabellen' : '' ?> 
             </td>

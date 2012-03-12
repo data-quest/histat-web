@@ -39,7 +39,7 @@ class Model_Keymask extends ORM {
             foreach ($details as $detail) {
                 if ($detail->Code === substr($key->key, $detail->Position - 1, $detail->Zeichen)) {
                     $result['details'][$detail->ID_CodeKuerz][$key->key] = $detail;
-                    $result['titles'][$key->key][] = $detail->CodeBezeichnung;
+                    $result['titles'][$key->key][] = $detail->CodeBeschreibung.': '.$detail->CodeBezeichnung;
                     $result['filters'][$detail->ID_CodeKuerz][$detail->Code . '_' . $detail->Position . '_' . $detail->Zeichen] = $detail->CodeBezeichnung;
                     $result['keys'][$key->key] = $key->key;
                     $result['tables'][$key->key] = $key->Tabelle;
@@ -69,12 +69,13 @@ class Model_Keymask extends ORM {
     }
 
     public function getKeys($filter) {
-        return DB::select(array("Schluessel", "`key`"),"Tabelle")->distinct(true)
+        $result = DB::select(array("Schluessel", "`key`"),"Tabelle")->distinct(true)
                         ->from("Lit_ZR")
                         ->where('ID_HS', '=', $this->ID_HS)
-                        ->where("Schluessel", "LIKE", $filter)
-                        ->as_object()
-                        ->execute();
+                        ->where("Schluessel", "LIKE", $filter);
+                      
+       
+        return $result->as_object()->execute();
     }
 
 }

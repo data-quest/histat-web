@@ -803,4 +803,7 @@ table tr td.even {
 #table_details div.details table  td.hover{
     background:#FE8F00;
 }
+#table_details div.details{
+    min-height: 800px;
+}
 /*Style table/details/id end*/
