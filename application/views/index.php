@@ -54,7 +54,7 @@
                 <div class="clear"></div>
             </div>
             <div id="footer">
-                © GESIS <?= HTML::anchor('pages/impressum', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date', array(':date' => $date)) ?>
+                © GESIS <?= HTML::anchor('http://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date', array(':date' => $date)) ?>
             </div>
             <script type="text/javascript">
                 var xsrf = "<?= $xsrf ?>";
