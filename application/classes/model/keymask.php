@@ -39,7 +39,7 @@ class Model_Keymask extends ORM {
             foreach ($details as $detail) {
                 if ($detail->Code === substr($key->key, $detail->Position - 1, $detail->Zeichen)) {
                     $result['details'][$detail->ID_CodeKuerz][$key->key] = $detail;
-                    $result['titles'][$key->key][] = $detail->CodeBeschreibung.': '.$detail->CodeBezeichnung;
+                    $result['titles'][$key->key][] = $detail->CodeBeschreibung . ': ' . $detail->CodeBezeichnung;
                     $result['filters'][$detail->ID_CodeKuerz][$detail->Code . '_' . $detail->Position . '_' . $detail->Zeichen] = $detail->CodeBezeichnung;
                     $result['keys'][$key->key] = $key->key;
                     $result['tables'][$key->key] = $key->Tabelle;
@@ -50,15 +50,13 @@ class Model_Keymask extends ORM {
         return $result;
     }
 
- 
-
-    public function getData($keys) {
+    public function getData($filter) {
 
         $rows = DB::select("Data", "Jahr_Sem", "Schluessel")
                 ->distinct(true)
                 ->from("Daten__Aka")
                 ->where("ID_HS", "=", $this->ID_HS)
-                ->where("Schluessel", is_array($keys) ? "IN" : "=", $keys)
+                ->where("Schluessel", "LIKE", $filter)
                 ->order_by("Jahr_Sem")
                 ->execute();
         $result = array();
@@ -69,12 +67,12 @@ class Model_Keymask extends ORM {
     }
 
     public function getKeys($filter) {
-        $result = DB::select(array("Schluessel", "`key`"),"Tabelle")->distinct(true)
-                        ->from("Lit_ZR")
-                        ->where('ID_HS', '=', $this->ID_HS)
-                        ->where("Schluessel", "LIKE", $filter);
-                      
-       
+        $result = DB::select(array("Schluessel", "`key`"), "Tabelle")->distinct(true)
+                ->from("Lit_ZR")
+                ->where('ID_HS', '=', $this->ID_HS)
+                ->where("Schluessel", "LIKE", $filter);
+
+
         return $result->as_object()->execute();
     }
 

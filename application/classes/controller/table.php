@@ -68,7 +68,7 @@ class Controller_Table extends Controller_Data {
         }
         echo $string;
         $details = $keymask->getDetails($string);
-        $data = $keymask->getData(Arr::get($details,'keys',array()));
+        $data = $keymask->getData($string);
 
 
         $view->id_hs = $this->id_hs;
