@@ -143,7 +143,7 @@ class Controller_Data extends Controller_Index {
         //Setup Dialog
         $view->dialog = $this->dialog;
         $this->content = $view->render();
-        $this->session->set('action', array('name' => 'authors', 'param' => $id));
+        $this->session->set('action', array('name' => 'names', 'param' => $id));
     }
 
     private function shuffle_assoc($array) {

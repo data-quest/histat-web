@@ -18,7 +18,7 @@ class Controller_Table extends Controller_Data {
             'top' => __('Top'),
             'times' => __('Times'),
             'themes' => __('Themes'),
-            'authors' => __('Authors')
+            'names' => __('Names')
         );
         $index = Arr::get($this->session->get('action'), 'name', 'index');
         $this->sub_navi->activate($this->sub_navis[$index]);
