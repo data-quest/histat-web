@@ -9,6 +9,7 @@ class Controller_Table extends Controller_Data {
 
     private $sub_navis = array();
     private $id_hs = null;
+    private $filter = '________________________________';
 
     public function before() {
 
@@ -23,6 +24,28 @@ class Controller_Table extends Controller_Data {
         $index = Arr::get($this->session->get('action'), 'name', 'index');
         $this->sub_navi->activate($this->sub_navis[$index]);
         $this->id_hs = $this->request->param('id');
+    }
+
+    public function set_filter($filters) {
+        if ($filters) {
+            foreach ($filters as $filter) {
+                if ($filter !== "all") {
+                    $filter = explode('_', $filter);
+                    $code = $filter[0];
+                    $pos = $filter[1];
+                    $len = $filter[2];
+                    $c = 0;
+                    for ($i = 0; $i < strlen($this->filter); $i++) {
+                        if ($i == $pos - 1) {
+                            for ($l = $i; $l < $pos + $len - 1; $l++) {
+                                $this->filter[$l] = $code[$c];
+                                $c++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public function action_details() {
@@ -40,38 +63,16 @@ class Controller_Table extends Controller_Data {
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
 
-      
 
-        $filters = $this->request->post('filter', NULL);
+        $this->set_filter($this->request->post('filter', NULL));
 
-        $string = '________________________________';
-       
-        if ($filters) {
-            foreach ($filters as $filter) {
-                if ($filter !== "all") {
-
-                    $filter = explode('_', $filter);
-                    $code = $filter[0];
-                    $pos = $filter[1];
-                    $len = $filter[2];
-                    $c = 0; 
-                    for ($i = 0; $i < strlen($string); $i++) {
-                        if ($i == $pos-1) {
-                            for ($l = $i; $l < $pos+$len-1; $l++) {
-                                $string[$l] = $code[$c];
-                                $c++;
-                            }
-                        }
-                    }
-                }
-            }
+        $details = $keymask->getDetails($this->filter);
+        $data = null;
+    
+        if( count($details['keys']) <= $this->config->get('max_timelines')){
+             $data = $keymask->getData($this->filter);
         }
-        echo $string;
-        $details = $keymask->getDetails($string);
-        $data = $keymask->getData($string);
-
-
-        $view->id_hs = $this->id_hs;
+       // $data = array();
         $view->details = $details['details'];
         $view->keys = $details['keys'];
         $view->data = $data;
@@ -83,6 +84,10 @@ class Controller_Table extends Controller_Data {
 
         $view->project = $list->render();
         $this->content = $view->render();
+    }
+
+    public function action_load() {
+        
     }
 
 }

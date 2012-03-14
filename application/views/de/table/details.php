@@ -40,49 +40,50 @@
 
                         </tr>
                     <?php endforeach; ?>
-                    <tr>
-                        <td class="grey"><div class="text" style="height:auto">Tabelle</div></td>
-                        <?php foreach ($keys as $key): ?>
-                            <td class="grey"><div class="text" style="width:100%;text-align:center"><?= $tables[$key] ?></div></td>
+                    <?php if ($data): ?>
+                        <tr>
+                            <td class="grey"><div class="text" style="height:auto">Tabelle</div></td>
+                            <?php foreach ($keys as $key): ?>
+                                <td class="grey"><div class="text" style="width:100%;text-align:center"><?= $tables[$key] ?></div></td>
 
-                        <?php endforeach; ?>
-                    </tr>
-                    <tr>
-                        <td class="blue"><div class="text" style="height:auto">Grafik</div></td>
-                        <?php foreach ($keys as $key): ?>
-                            <td class="blue"><div class="text"  id="chart" style="width:100%;height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title', implode('<br/>', $titles[$key])) ?> <?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="blue"><div class="text" style="height:auto">Grafik</div></td>
+                            <?php foreach ($keys as $key): ?>
+                                <td class="blue"><div class="text"  id="chart" style="width:100%;height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title', implode('<br/>', $titles[$key])) ?> <?= Form::hidden('chart', $keymask->ID_HS . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
 
-                        <?php endforeach; ?>
-                    </tr>
-                    <tr>
-                        <td class="blue"> <div class="text" style="height:auto">Warenkorb</div></td>
-                        <?php foreach ($keys as $key): ?>
-                            <td class="blue" ><div class="text" style="width:100%;height:24px;text-align:center;margin:auto;padding:0;"><?= HTML::anchor('cart/add/' . $keymask->ID_HS . '/' . $key, HTML::image($assets['img'] . 'layout/button-warenkorb.png')) ?></div></td>
-
-                        <?php endforeach; ?>
-                    </tr>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endif; ?>
                 </thead>
 
             </table>
             <?= Form::close(); ?>
 
             <div id="scrollY" style="overflow:hidden;overflow-y:scroll;height:100px">
-                <table>
-                    <tbody>
+                <?php if ($data): ?>
+                    <table>
+                        <tbody>
 
-                        <?php foreach ($data as $y => $data): ?>
-                            <tr >
+                            <?php foreach ($data as $y => $data): ?>
+                                <tr >
 
-                                <?php $i = 0; ?>
-                                <td><div class="text" style="height:auto"><?= $y ?></div></td>
-                                <?php foreach ($keys as $key): ?>
-                                    <td class="col<?= $i ?>"><div class="text" style="height:auto;text-align:center;margin:auto"><?= Arr::get($data, $key, '&nbsp;') ?></div></td>
-                                    <?php $i++; ?>
-                                <?php endforeach; ?>
-                            </tr>
-                        <?php endforeach; ?> 
-                    </tbody>
-                </table>
+                                  
+                                    <td><div class="text" style="height:auto"><?= $y ?></div></td>
+                                    <?php foreach ($keys as $key): ?>
+                                        <td ><div class="text" style="height:auto;text-align:center;margin:auto"><?= Arr::get($data, $key, '&nbsp;') ?></div></td>
+                                      
+                                    <?php endforeach; ?>
+                                </tr>
+                            <?php endforeach; ?> 
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                <div style="position: fixed;left:50%;margin-top:50px;margin-left:-250px;width:300px" class="tooltip">
+                   Die Studie <b><?= $keymask->Name ?></b> enthält <b><?= count($keys)?></b> Zeitreihen. <br/>Bitte verwenden Sie die Filtermöglichkeit um die Anzahl der Zeitreihen zu beschränken
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
