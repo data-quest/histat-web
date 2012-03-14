@@ -69,7 +69,7 @@ class Controller_Table extends Controller_Data {
         $details = $keymask->getDetails($this->filter);
         $data = null;
     
-        if( count($details['keys']) <= $this->config->get('max_timelines')){
+        if( count(Arr::get($details,'keys',array())) <= $this->config->get('max_timelines')){
              $data = $keymask->getData($this->filter);
         }
        // $data = array();
@@ -80,6 +80,7 @@ class Controller_Table extends Controller_Data {
         $view->tables = $details['tables'];
         $view->titles = $details['titles'];
         $view->filters = $details['filters'];
+          $view->sources = $details['sources'];
         $view->post = $this->request->post('filter', NULL);
 
         $view->project = $list->render();

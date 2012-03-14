@@ -101,6 +101,7 @@ class Controller_Data extends Controller_Index {
         if (!$id)
             $id = urldecode($this->request->param('id'));
 
+       
         $orm = ORM::factory('project');
         $view = View::factory(I18n::$lang . '/data/names/overview');
         $authors = $orm->getAuthors();
@@ -136,7 +137,7 @@ class Controller_Data extends Controller_Index {
             $list = View::factory(I18n::$lang . '/project/list');
             $list->projects = $projects;
             //assign the referrer uri
-            $list->uri = URL::site(I18n::$lang . '/data/names/' . urlencode($id));
+            $list->uri = URL::site(I18n::$lang . '/data/names/' . urlencode($id)).'#'.md5($id);
             $view->projects = $list->render();
         }
         $view->name = $id;

@@ -1,4 +1,5 @@
 $(function(){
+    
     $('#project_details').dialog({
         minWidth:914,
         maxWidth:914,

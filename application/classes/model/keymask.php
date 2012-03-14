@@ -33,7 +33,7 @@ class Model_Keymask extends ORM {
                 ->execute();
 
         $result = array();
-     
+
 
         $keys = $this->getKeys($filter);
         foreach ($keys as $key) {
@@ -44,10 +44,11 @@ class Model_Keymask extends ORM {
                     $result['filters'][$detail->ID_CodeKuerz][$detail->Code . '_' . $detail->Position . '_' . $detail->Zeichen] = $detail->CodeBezeichnung;
                     $result['keys'][$key->key] = $key->key;
                     $result['tables'][$key->key] = $key->Tabelle;
+                    $result['sources'][$key->key] = $key->Quelle;
                 }
             }
         }
-      
+
         return $result;
     }
 
@@ -68,7 +69,7 @@ class Model_Keymask extends ORM {
     }
 
     public function getKeys($filter) {
-        $result = DB::select(array("Schluessel", "`key`"), "Tabelle", array(DB::expr("CONCAT(ID_HS,'-',Schluessel)"), "new_key"))->distinct(true)
+        $result = DB::select(array("Schluessel", "`key`"), "Tabelle", "Quelle")->distinct(true)
                 ->from("Lit_ZR")
                 ->where('ID_HS', '=', $this->ID_HS)
                 ->where("Schluessel", "LIKE", $filter);

@@ -53,23 +53,22 @@ table td{
 
 td.details{
     padding:0px;
-    background: url(../img/layout/button-details.png) no-repeat left center;
-    min-width: 90px;
+    background: url(../img/layout/button-details.png) no-repeat right center;
+    min-width: 130px;
     text-align: center;
 
 }
+
 td.details span a{
     display:block;
-    width:70px;
+    width:120px;
     color: #ffffff;
     font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
 }
-td .tooltip span{
 
-}
-td .tooltip{
+ .tooltip{
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
@@ -80,8 +79,9 @@ td .tooltip{
     margin-top:10px;
     margin-left:5px;
     text-align: left;
+    color:#000000;
 }
-td .tooltip span{
+ .tooltip span{
     position: absolute;
     margin-top:-21px; /*height + padding*/
     width:16px;
@@ -752,19 +752,19 @@ table tr td.even {
 #table_details div.details table td div.text{
     overflow:hidden;
     max-height:100px;
-    width:100px;
-    padding:5px;
+    max-width:150px;
+ 
 }
 #table_details div.details table td{
     border:1px solid #ffffff;
     vertical-align: top;
-    padding:0px;
+    padding:5px;
 
 }
 #table_details div.details table td .tooltip{
     width:auto;
     height:auto;
-    margin-top:24px;
+    margin-top:5px;
     margin-left:30px;
     display: none;
 }
@@ -778,18 +778,23 @@ table tr td.even {
 
 }
 #table_details div.details table td.blue{
-    background: url(../img/layout/hg-tab.png) top center;
+    background: url(../img/layout/hg-tab.png) center center;
+    padding:0px;
 
 }
 #table_details div.details table td.blue div.text{
     color:#ffffff;
+    padding:4px;
 }
 
 #table_details div.details table td.grey{
+    padding:5px;
     background:#606567;
 
 }
 #table_details div.details table td.grey div.text{
+    padding:0px;
+    width: auto;
     color:#ffffff;
 }
 #table_details div.details table tbody tr:nth-child(2n){
@@ -802,6 +807,6 @@ table tr td.even {
     background:#FE8F00;
 }
 #table_details div.details{
-    min-height: 800px;
+    min-height: 600px;
 }
 /*Style table/details/id end*/

@@ -2,13 +2,14 @@ $(function(){
     var y =  $('#scrollX');
     var w = $('#scrollX table#headline').innerWidth();
     var h =  $('#scrollY').position();
+    var scrollbarW = scrollbarWidth();
     h = $(document).innerHeight()-h.top-$('#footer').innerHeight()-$('#header').innerHeight();
     
-    $('#scrollY').width(w +scrollbarWidth()+1).height(h);
+    $('#scrollY').width(w +scrollbarW+1).height(h);
 
     var x = $('td.blue').eq(1).width();
     $('#headline td').live('click',function(e){
-        $('.tooltip').hide();
+        $('td .tooltip').hide();
         $(this).find('.tooltip').show();
     });
     $('#gotop').remove();
@@ -46,8 +47,8 @@ $(function(){
     });
     $('select').change(function(){
         $('form').submit();
-       
     });
+
 });
 function scrollbarWidth() {
     var div = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');

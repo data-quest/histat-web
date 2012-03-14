@@ -4,5 +4,5 @@ return array(
     'from'=>array('noreply@studip.de'=>'StudIP'), //Sender Mail at registration
     'cookie_salt' => 'hisstat',//salt of cookie
     'example_theme_id'=> '14', //ID of Example theme
-    'max_timelines'=>'255' //Maximum Timelines in Table
+    'max_timelines'=>'250' //Maximum Timelines in Table
 );

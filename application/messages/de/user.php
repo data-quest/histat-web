@@ -22,8 +22,8 @@ return array(
         'not_empty' => 'Straße, Nr. /Postfach wurde nicht angegeben.',
     ),
     'zip' => array(
-        'not_empty' => 'Postleizahl wurde nicht angegeben.',
-        'numeric' => 'Postleizahl ist nicht gültig.'
+        'not_empty' => 'Postleitzahl wurde nicht angegeben.',
+        'numeric' => 'Postleitzahl ist nicht gültig.'
     ),
     'location' => array(
         'not_empty' => 'Ort wurde nicht angegeben.',
