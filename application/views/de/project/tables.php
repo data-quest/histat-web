@@ -17,7 +17,7 @@
                 <tr >
                     <?php for ($col = 0; $col < $maxCols; $col++): ?>
                         <?php $index = ceil((($i + 1) / $maxCols) + ($col * ($maxRows))) - 1; ?>
-                        <td valign="top" style="width:30%;border:0px"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS, $keymasks[$index]->Name) : ''; ?></td>
+                        <td valign="top" style="width:30%;border:0px"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS.'#thead', $keymasks[$index]->Name) : ''; ?></td>
                         <?php $i++; ?>
                     <?php endfor; ?>
                 </tr>

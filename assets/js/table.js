@@ -1,20 +1,31 @@
 $(function(){
-    var y =  $('#scrollX');
-    var w = $('#scrollX table#headline').innerWidth();
-    var h =  $('#scrollY').position();
-    var scrollbarW = scrollbarWidth();
-    h = $(document).innerHeight()-h.top-$('#footer').innerHeight()-$('#header').innerHeight();
-    
-    $('#scrollY').width(w +scrollbarW+1).height(h);
+   
 
-    var x = $('td.blue').eq(1).width();
-    $('#headline td').live('click',function(e){
+    $('#layout').width("98%");
+    $('#gotop').remove();
+    var name = $('.name');
+    var scrollY = $('.scrollY');
+    var thead = $('#thead');
+    var tdata = $('#tdata');
+    var scrollBar = scrollbar();
+  
+    if( tdata.width() < scrollY.width()){
+        scrollBar.w = 0;
+    }
+
+    scrollY.height($(window).height()-name.height()-thead.height()-50).width(thead.width()+1+scrollBar.w);
+    tdata.find('tr').eq(0).find('td').each(function(i){
+        $(this).width(thead.find('td').eq(i).width()); 
+    });
+   
+
+    $('#thead td').live('click',function(e){
         $('td .tooltip').hide();
         $(this).find('.tooltip').show();
     });
-    $('#gotop').remove();
+
+    
     $('#chart').live('click',function(e){
-      
         var id = $(this).find('input[name="chart"]').val();
         var title = $(this).find('input[name="title"]').val();
         var tt = $('.dialog');
@@ -28,7 +39,7 @@ $(function(){
             show: "blind",
             hide: "blind",
             buttons:[],
-            top:100+'px',
+            position:["center",100],
             closeText:closeText,
             open:function(){
                 var span = $('.ui-dialog-titlebar-close > span');
@@ -46,17 +57,22 @@ $(function(){
        
     });
     $('select').change(function(){
+      
         $('form').submit();
     });
 
 });
-function scrollbarWidth() {
-    var div = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');
+function scrollbar() {
+    var div = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:0xp;left:0xp;"><div style="height:100px"></div></div>');
     // Append our div, do our calculation and then remove it
     $('body').append(div);
     var w1 = $('div', div).innerWidth();
     div.css('overflow-y', 'scroll');
     var w2 = $('div', div).innerWidth();
+    
     $(div).remove();
-    return (w1 - w2);
+    
+    return {
+        w:(w1 - w2)
+    } 
 }

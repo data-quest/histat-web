@@ -15,7 +15,5 @@ $(function(){
         target.text(more).attr('class','more');
     });
     
-    if($('#table_details').length > 0){
-        $('#layout').width('98%');
-    }
+    
 });
