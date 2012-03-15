@@ -4,7 +4,15 @@
 
 
     <div class="details">
-        <div class="name" id="tabelle"><?= $keymask->Name ?></div>
+        <div style="margin:auto;padding:15px 0;text-align: center">
+            <?php $data ? $class='button' : $class='button disabled'?>
+            <?= HTML::anchor($data ? 'table/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS , 'Download: .XLS', array('class' => $class)) ?>
+            <?= HTML::anchor($data ? 'table/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS , 'Download: .CSV', array('class'=> $class)) ?>
+            <?= HTML::anchor($data ? 'cart/add/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS , 'In den Warenkorb', array('class'=> $class)) ?>
+
+            <div class="clear"></div>
+        </div>
+        <div class="name" id="tabelle"><?= $keymask->Name ?> (Gefundene Zeitreiehen: <b><?= count($keys) ?></b>)</div>
         <?= Form::open('table/details/' . $keymask->ID_HS . '#thead') ?>
 
 
@@ -85,7 +93,7 @@
 
                     </table>
                 <?php else: ?>
-                    <div class="tooltip">
+                    <div class="tooltip" id="info">
                         Die Studie <b><?= $keymask->Name ?></b> enthält <b><?= count($keys) ?></b> Zeitreihen. <br/>Bitte verwenden Sie die Filtermöglichkeit um die Anzahl der Zeitreihen zu beschränken
                     </div>
                 <?php endif; ?>

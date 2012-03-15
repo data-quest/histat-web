@@ -110,7 +110,8 @@ Kohana::modules(array(
     // 'unittest'   => MODPATH.'unittest',   // Unit testing
     // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
     'swiftmailer' => MODPATH . 'swift', //Swiftmailer Module
-    'pchart' => MODPATH . 'pchart' //pChart Module
+    'pchart' => MODPATH . 'pchart', //pChart Module
+    'phpexcel' => MODPATH . 'phpexcel' //PHPExcel Module
 ));
 
 $langs = implode('|', Kohana::$config->load('config')->get('avaliable_languages',array()));

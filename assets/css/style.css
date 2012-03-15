@@ -799,11 +799,13 @@ table tr td.even {
 #table_details div.details table .tooltip{
     display:none;
 }
-#table_details div.details .tooltip{
+#table_details div.details #info{
     position: absolute;
     width: 400px;
     left:50%;
     margin-left: -200px;
 }
-
+#table_details div.details .button.disabled{
+  background:  url("../img/layout/hg-navi-grau.jpg") repeat-x scroll center center transparent;
+}
 /*Style table/details/id end*/
