@@ -23,7 +23,7 @@ class Controller_Chart extends Controller_Data {
   
 
     public function action_draw() {
-
+        
         $keymask = ORM::factory('keymask', $this->id_hs);
         $data = $keymask->getData($this->key);
         $pData = new pData();
@@ -31,7 +31,8 @@ class Controller_Chart extends Controller_Data {
 
         foreach ($data as $y => $d) {
             foreach ($d as $value) {
-                $points[] = $value;
+                
+                $points[] = $value['data'];
             }
             $yAxis[$y] = $y;
         }

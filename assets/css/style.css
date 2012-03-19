@@ -432,40 +432,50 @@ table tr td.even {
     float: left;
     border:0px;
 }
+#project_details .pages{
+    position: absolute;
+    width:100%;
+    border-top:1px solid #aaaaaa;
+    border-bottom:1px solid #aaaaaa;
+    height:38px;
+    background: #ffffff;
+}
 
-#project_details div.text .pages a.prev{
-    float:left;
-    width:150px;
+#project_details .pages a.prev{
+    position: absolute;
+    left:0px;
+    width:100px;
     text-align: right;
     color:#ffffff;
-    border-top:1px solid #aaaaaa;
-    border-bottom:1px solid #aaaaaa;
+    padding-right: 10px;
     background:url(../img/layout/button-details-left.png) right center no-repeat;
 }
-#project_details div.text .pages a.next{
-    float:left;
-    width:150px;
+#project_details .pages a.next{
+   position: absolute;
+   right:0px;
+    bottom:0px;
+    width:100px;
     text-align: left;
+    padding-left:10px;
     color:#ffffff;
-    border-top:1px solid #aaaaaa;
-    border-bottom:1px solid #aaaaaa;
-    background:url(../img/layout/button-details.png) left center no-repeat;
+    background:url(../img/layout/button-details-right.png) left center no-repeat;
 }
-#project_details div.text .pages a{
-    float:left;
+#project_details .pages a{
+   position: absolute;
     display:block;
     width:50px;
-    padding:10px;
+    line-height: 38px;
     color:#aaa;
     text-decoration: none;
     font-size: 1.3em;
     text-align: center;
     border-left:1px solid #aaaaaa;
 }
-#project_details div.text .pages div{
-    max-width:355px;
-    height:40px;
-    float:left;
+#project_details .pages div{
+    position: absolute;
+    width:672px;
+    height:38px;
+    left: 110px;
     overflow: hidden;
 
 }
@@ -806,6 +816,6 @@ table tr td.even {
     margin-left: -200px;
 }
 #table_details div.details .button.disabled{
-  background:  url("../img/layout/hg-navi-grau.jpg") repeat-x scroll center center transparent;
+    background:  url("../img/layout/hg-navi-grau.jpg") repeat-x scroll center center transparent;
 }
 /*Style table/details/id end*/

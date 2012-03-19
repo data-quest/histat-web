@@ -25,19 +25,20 @@
         </table>
     <?php endfor; ?>
     <div class="clear"></div>
-    <?php if (1 == 2): ?>
+    
+   <?php if($countTables > 1) : ?>
         <div class="pages">
             <a href="prev" class="prev">zurück</a>
-            <div>
-                <?php for ($i = 0; $i < 100; $i++): ?>
-                    <a href="#<?= $i + 1 ?>"><?= $i + 1 ?></a>
+            <div class="list">
+                <?php for ($i = 0; $i < $countTables; $i++): ?>
+                    <a href="#<?= $i + 1 ?>" style="left:<?= $i*50 ?>px"><?= $i + 1 ?></a>
                 <?php endfor; ?>
             </div>
             <a href="next" class="next">vor</a>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
-    <?php endif; ?>
+   <?php endif;?>
 
 
 </div>

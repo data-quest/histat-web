@@ -157,12 +157,7 @@ class Spreadsheet {
         }
         $writer->save('php://output');
 
-        $request = Request::current();
-        $response = $request->headers(array(
-                    'Content-Type' => $mime,
-                    'Content-Disposition' => 'attachment;filename="' . $settings['name'] . '.' . $ext . '"',
-                    'Cache-Control' => 'max-age=0'
-                ))->response()->send_headers();
+        $response = Request::current()->response();
         $response->body(ob_get_clean())->send_file(TRUE, $settings['name'] . '.' . $ext);
     }
 

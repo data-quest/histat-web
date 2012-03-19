@@ -54,7 +54,7 @@ class Model_Keymask extends ORM {
     }
 
     public function getData($filter) {
-
+       
         $rows = DB::select("Data", "Jahr_Sem", "Schluessel","Anmerkung")
                 ->distinct(true)
                 ->from("Daten__Aka")
