@@ -182,6 +182,7 @@ class PHPExcel_Writer_Excel5 implements PHPExcel_Writer_IWriter
 
 		$root = new PHPExcel_Shared_OLE_PPS_Root(time(), time(), array($OLE));
 		// save the OLE file
+                
 		$res = $root->save($pFilename);
 
 		PHPExcel_Calculation_Functions::setReturnDateType($saveDateReturnType);

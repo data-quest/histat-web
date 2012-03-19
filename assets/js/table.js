@@ -21,10 +21,13 @@ $(function(){
    
 
     $('#thead td').live('click',function(e){
-        $('td .tooltip').hide();
+        $('#thead td .tooltip').hide();
         $(this).find('.tooltip').show();
     });
-
+     $('#tdata td').live('click',function(e){
+        $('#tdata td .tooltip').hide();
+        $(this).find('.tooltip').show();
+    });
     
     $('#chart').live('click',function(e){
         var id = $(this).find('input[name="chart"]').val();

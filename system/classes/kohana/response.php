@@ -392,12 +392,13 @@ class Kohana_Response implements HTTP_Response {
 	 */
 	public function send_file($filename, $download = NULL, array $options = NULL)
 	{
+           
 		if ( ! empty($options['mime_type']))
 		{
 			// The mime-type has been manually set
 			$mime = $options['mime_type'];
 		}
-
+              
 		if ($filename === TRUE)
 		{
 			if (empty($download))
@@ -412,11 +413,12 @@ class Kohana_Response implements HTTP_Response {
 			{
 				// Guess the mime using the file extension
 				$mime = File::mime_by_ext(strtolower(pathinfo($download, PATHINFO_EXTENSION)));
+                              
 			}
 
 			// Force the data to be rendered if
 			$file_data = (string) $this->_body;
-
+                       
 			// Get the content size
 			$size = strlen($file_data);
 

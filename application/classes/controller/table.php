@@ -79,10 +79,12 @@ class Controller_Table extends Controller_Data {
         $view->keys = $details['keys'];
         $view->data = $data;
         $view->keymask = $keymask;
+       
         $view->tables = $details['tables'];
         $view->titles = $details['titles'];
         $view->filters = $details['filters'];
         $view->sources = $details['sources'];
+        $view->notes = $details['notes'];
         $view->filter = $this->filter;
         $view->post = $this->request->post('filter', NULL);
 
@@ -94,7 +96,7 @@ class Controller_Table extends Controller_Data {
         $param = explode('/', $this->request->param('id'));
         $this->id_hs = $param[0];
         $this->filter = $param[1];
-        $this->auto_render = FALSE;
+       // $this->auto_render = FALSE;
 
         $keymask = ORM::factory('keymask', $this->id_hs);
         $details = $keymask->getDetails($this->filter);
@@ -109,7 +111,29 @@ class Controller_Table extends Controller_Data {
             $ws = new Spreadsheet();
             $ws->set_active_sheet(0);
             $ws->set_data($grid);
-            $ws->send(array('name' => $keymask->Name,'format'=>'Excel5'));
+            $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel5'));
+        }
+    }
+     public function action_xlsx() {
+        $param = explode('/', $this->request->param('id'));
+        $this->id_hs = $param[0];
+        $this->filter = $param[1];
+       // $this->auto_render = FALSE;
+
+        $keymask = ORM::factory('keymask', $this->id_hs);
+        $details = $keymask->getDetails($this->filter);
+        $details['data'] = null;
+
+        if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
+            $details['data'] = $keymask->getData($this->filter);
+        }
+        if ($details['data']) {
+            $grid = $this->create_grid($details);
+            $grid[1] = array($keymask->Name);
+            $ws = new Spreadsheet();
+            $ws->set_active_sheet(0);
+            $ws->set_data($grid);
+            $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel2007'));
         }
     }
     public function action_csv() {
@@ -131,9 +155,10 @@ class Controller_Table extends Controller_Data {
             $ws = new Spreadsheet();
             $ws->set_active_sheet(0);
             $ws->set_data($grid);
-            $ws->send(array('name' => $keymask->Name,'format'=>'CSV'));
+            $ws->send(array('name' => $keymask->Name, 'format' => 'CSV'));
         }
     }
+
     private function create_grid($details) {
         $grid = array();
         $i = 2;
@@ -142,7 +167,7 @@ class Controller_Table extends Controller_Data {
         $sources = Arr::get($details, 'sources', array());
         $data = Arr::get($details, 'data', array());
         $keys = Arr::get($details, 'keys', array());
-       
+         $notes = Arr::get($details, 'notes', array());
         foreach ($headers as $header) {
             $row = array();
             $key = array_keys($header);
@@ -153,32 +178,45 @@ class Controller_Table extends Controller_Data {
             $grid[$i] = $row;
             $i++;
         }
-        if (count(Arr::get($tables, $keys[$key[0]], array())) > 0) {
+        if (count(array_filter($tables)) > 0) {
             $row = array();
             $row[] = 'Tabelle';
             foreach ($keys as $k) {
-                $row[] = $tables[$k];
+                $row[] = str_replace(array("\r\n", "\n", "\r"), ' ', $tables[$k]);
             }
             $grid[$i] = $row;
             $i++;
         }
-        if (count(Arr::get($sources, $keys[$key[0]], array())) > 0) {
+        if (count(array_filter($sources)) > 0) {
             $row = array();
             $row[] = 'Quellen';
             foreach ($keys as $k) {
-                $row[] = $sources[$k];
+                $row[] = str_replace(array("\r\n", "\n", "\r"), ' ', $sources[$k]);
             }
             $grid[$i] = $row;
             $i++;
         }
-       
+       if (count(array_filter($notes)) > 0) {
+            $row = array();
+            $row[] = 'Anmerkungen';
+            foreach ($keys as $k) {
+                $row[] = str_replace(array("\r\n", "\n", "\r"), ' ', $notes[$k]);
+            }
+            $grid[$i] = $row;
+            $i++;
+        }
         foreach ($data as $y => $d) {
             $row = array();
             $row[] = $y;
-             
+
             foreach ($keys as $k) {
-              
-                $row[] = Arr::get($d,$k,'');
+                $newData =  Arr::get($d, $k, array('data'=>'','note'=>NULL));
+                if(Arr::get($newData,'note')){
+                  $row[] = $newData;  
+                }else{
+                    $row[] = Arr::get($newData,'data');
+                }
+                
             }
             $grid[$i] = $row;
             $i++;

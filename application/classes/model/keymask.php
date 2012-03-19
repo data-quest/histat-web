@@ -45,6 +45,7 @@ class Model_Keymask extends ORM {
                     $result['keys'][$key->key] = $key->key;
                     $result['tables'][$key->key] = $key->Tabelle;
                     $result['sources'][$key->key] = $key->Quelle;
+                    $result['notes'][$key->key] = $key->Anmerkung;
                 }
             }
         }
@@ -54,7 +55,7 @@ class Model_Keymask extends ORM {
 
     public function getData($filter) {
 
-        $rows = DB::select("Data", "Jahr_Sem", "Schluessel")
+        $rows = DB::select("Data", "Jahr_Sem", "Schluessel","Anmerkung")
                 ->distinct(true)
                 ->from("Daten__Aka")
                 ->where("ID_HS", "=", $this->ID_HS)
@@ -63,13 +64,13 @@ class Model_Keymask extends ORM {
                 ->execute();
         $result = array();
         foreach ($rows as $row) {
-            $result[$row['Jahr_Sem']][$row['Schluessel']] = $row['Data'];
+            $result[$row['Jahr_Sem']][$row['Schluessel']] = array('data'=>$row['Data'],'note'=>Arr::get($row,'Anmerkung'));
         }
         return $result;
     }
 
     public function getKeys($filter) {
-        $result = DB::select(array("Schluessel", "`key`"), "Tabelle", "Quelle")->distinct(true)
+        $result = DB::select(array("Schluessel", "`key`"), "Tabelle", "Quelle","Anmerkung")->distinct(true)
                 ->from("Lit_ZR")
                 ->where('ID_HS', '=', $this->ID_HS)
                 ->where("Schluessel", "LIKE", $filter);

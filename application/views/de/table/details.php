@@ -5,14 +5,16 @@
 
     <div class="details">
         <div style="margin:auto;padding:15px 0;text-align: center">
-            <?php $data ? $class='button' : $class='button disabled'?>
-            <?= HTML::anchor($data ? 'table/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS , 'Download: .XLS', array('class' => $class)) ?>
-            <?= HTML::anchor($data ? 'table/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS , 'Download: .CSV', array('class'=> $class)) ?>
-            <?= HTML::anchor($data ? 'cart/add/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS , 'In den Warenkorb', array('class'=> $class)) ?>
+            <?php $data ? $class = 'button' : $class = 'button disabled' ?>
+             <?= HTML::anchor($data ? 'table/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLS', array('class' => $class)) ?>
+           
+            <?= HTML::anchor($data ? 'table/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLSX', array('class' => $class)) ?>
+            <?= HTML::anchor($data ? 'table/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .CSV', array('class' => $class)) ?>
+            <?= HTML::anchor($data ? 'cart/add/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'In den Warenkorb', array('class' => $class)) ?>
 
             <div class="clear"></div>
         </div>
-        <div class="name" id="tabelle"><?= $keymask->Name ?> (Gefundene Zeitreiehen: <b><?= count($keys) ?></b>)</div>
+        <div class="name" id="tabelle"><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div>
         <?= Form::open('table/details/' . $keymask->ID_HS . '#thead') ?>
 
 
@@ -44,7 +46,7 @@
                     </tr>
                 <?php endforeach; ?>
                 <?php if ($data): ?>
-                    <?php if (count(Arr::get($tables, $keys[$k[0]], array())) > 0) : ?>
+                    <?php if (count(array_filter($tables)) > 0) : ?>
                         <tr>
                             <td class="grey"><div class="text" style="height:auto">Tabelle</div></td>   
                             <?php foreach ($keys as $key): ?>
@@ -53,14 +55,29 @@
                             <?php endforeach; ?>
                         </tr>
                     <?php endif; ?>
-                    <?php if (count(Arr::get($sources, $keys[$k[0]], array())) > 0) : ?>
+                    <?php if (count(array_filter($sources)) > 0) : ?>
                         <tr>
-                            <td class="grey"><div class="text" style="height:auto">Quelle</div></td>   
+                            <td class="grey"><div class="text" style="height:auto">Quellen</div></td>   
                             <?php foreach ($keys as $key): ?>
 
                                 <td class="grey">
                                     <?php $str = substr($sources[$key], 0, 30); ?>
                                     <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $sources[$key] . '</div></div>' : '<div class="text" style="width:100%">' . $str . '</div>') ?>
+
+
+                                </td>
+
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endif; ?>
+                    <?php if (count(array_filter($notes)) > 0) : ?>
+                        <tr>
+                            <td class="grey"><div class="text" style="height:auto">Anmerkungen</div></td>   
+                            <?php foreach ($keys as $key): ?>
+
+                                <td class="grey">
+                                    <?php $str = substr($notes[$key], 0, 30); ?>
+                                    <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $notes[$key] . '</div></div>' : '<div class="text" style="width:100%">' . $str . '</div>') ?>
 
 
                                 </td>
@@ -85,7 +102,18 @@
                             <tr >
                                 <td><div class="text" style="height:auto"><?= $y ?></div></td>
                                 <?php foreach ($keys as $key): ?>
-                                    <td ><div class="text" style="height:auto;text-align:center;margin:auto"><?= Arr::get($data, $key, '&nbsp;') ?></div></td>
+                                    <?php $d = Arr::get($data, $key, array('data' => '&nbsp;', 'note' => NULL)); ?>
+                                    <td >
+                                        <?php if ($d['note']) : ?>
+                                            <div class="text" style="height:auto;text-align:center;margin:auto;text-decoration: underline;cursor: pointer;font-weight: bold"> <?= $d['data'] ?> 
+                                                <div class="tooltip" style="display:none;margin-left:20px"><span></span><?= $d['note'] ?></div>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="text" style="height:auto;text-align:center;margin:auto"> <?= $d['data'] ?> </div>
+                                        <?php endif; ?>
+
+
+                                    </td>
 
                                 <?php endforeach; ?>
                             </tr>
