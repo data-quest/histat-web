@@ -165,3 +165,32 @@ LEFT OUTER JOIN Lit_ZR lz
 USING ( ID_HS )
 WHERE lz.ID_HS IS NULL
 GROUP BY da.ID_HS, da.Schluessel
+
+
+DROP TABLE IF EXISTS `Aka_Zeiten`;
+ CREATE  TABLE  `Aka_Zeiten` (  
+ `Zeit` varchar( 255  ) NOT  NULL DEFAULT  '',
+ `ID_Zeit` int( 11  )  NOT  NULL AUTO_INCREMENT,
+ `Position` int( 11  )  NOT  NULL DEFAULT  '0',
+ `chdate` timestamp NOT  NULL  DEFAULT CURRENT_TIMESTAMP  ON  UPDATE  CURRENT_TIMESTAMP ,
+ PRIMARY  KEY (  `ID_Thema`  ) ,
+ KEY  `Position` (  `Position` ,  `ID_Thema`  )  ) ENGINE  =  MyISAM  ;
+
+ALTER TABLE `Aka_Projekte` ADD `ID_Zeit` INT( 11 ) NOT NULL AFTER `ID_Thema`;
+INSERT INTO  `Aka_Zeiten` (Zeit)
+VALUES
+('Mittelalter'),
+('Frühe Neuzeit'),
+('Dreissigjähriger Krieg'),
+('Aufklärung'),
+('Deutscher Bund'),
+('Kaiserreich'),
+('Industrialisierung'),
+('Weimarer Republik'),
+('Nationalsozialismus'),
+('Zweiter Weltkrieg'),
+('DDR'),
+('alte Bundesrepublik'),
+('Wirtschaftswunder'),
+('Grenzen des Wachstums'),
+('Vereintes Deutschland')

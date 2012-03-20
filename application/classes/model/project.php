@@ -1,22 +1,26 @@
-<?php defined('SYSPATH') or die('No direct access allowed.');
+<?php
 
- class Model_Project extends ORM {
+defined('SYSPATH') or die('No direct access allowed.');
+
+class Model_Project extends ORM {
 
     protected $_table_name = 'Aka_Projekte';
     protected $_primary_key = 'ID_Projekt';
     protected $_has_many = array(
         'keymasks' => array('model' => 'keymask', 'foreign_key' => 'ID_Projekt', 'far_key' => 'ID_Projekt'),
-        
     );
     protected $_has_one = array(
-        'theme'=>array('model'=>'theme','foreign_key'=>'ID_Thema','far_key'=>'ID_Thema')
+        'theme' => array('model' => 'theme', 'foreign_key' => 'ID_Thema', 'far_key' => 'ID_Thema'),
+        'time' => array('model' => 'theme', 'foreign_key' => 'ID_Zeit', 'far_key' => 'ID_Zeit')
     );
     protected $_belongs_to = array(
-          'theme'=>array('model'=>'theme','foreign_key'=>'ID_Thema','far_key'=>'ID_Thema')
+        'theme' => array('model' => 'theme', 'foreign_key' => 'ID_Thema', 'far_key' => 'ID_Thema'),
+        'time' => array('model' => 'theme', 'foreign_key' => 'ID_Zeit', 'far_key' => 'ID_Zeit')
     );
     protected $_table_columns = array(
         'ID_Projekt' => array(),
         'ID_Thema' => array(),
+        'ID_Zeit' => array(),
         'Projektautor' => array(),
         'Projektname' => array(),
         'Projektbeschreibung' => array(),
@@ -58,14 +62,15 @@
                         ->where('p.ID_Projekt', '=', $this->ID_Projekt)
                         ->order_by('lz.ID_HS')->as_object()->execute();
     }
-    public function getAuthors(){
-   
-        return DB::select('ID_Projekt','Projektautor')
-                ->from(array('Aka_Projekte','p'))
-                ->where('p.ID_Thema','!=',Kohana::$config->load('config.example_theme_id'))
-                ->where('p.Projektautor','IS NOT',NULL)
-                ->as_object()
-                ->execute();
-                
+
+    public function getAuthors() {
+
+        return DB::select('ID_Projekt', 'Projektautor')
+                        ->from(array('Aka_Projekte', 'p'))
+                        ->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
+                        ->where('p.Projektautor', 'IS NOT', NULL)
+                        ->as_object()
+                        ->execute();
     }
+
 }

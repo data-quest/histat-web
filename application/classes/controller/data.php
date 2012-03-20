@@ -48,10 +48,6 @@ class Controller_Data extends Controller_Index {
         $this->sub_navi->activate(__('Top'));
     }
 
-    public function action_times() {
-        $this->sub_navi->activate(__('Times'));
-    }
-
     public function action_themes($id = NULL) {
         $this->sub_navi->activate(__('Themes'));
         if (!$id)
@@ -72,7 +68,7 @@ class Controller_Data extends Controller_Index {
                 $themes[$theme->Thema] = array('top' => ($i < 5) ? true : false, 'count' => 15 + ceil(($theme->summe / $total) * 100), 'id' => $theme->ID_Thema);
                 $i++;
             }
-            
+
             $view = View::factory(I18n::$lang . '/data/themes/cloud');
             $view->themes = $this->shuffle_assoc($themes);
         } else {
@@ -95,13 +91,56 @@ class Controller_Data extends Controller_Index {
         $this->session->set('action', array('name' => 'themes', 'param' => $id));
     }
 
+    public function action_times($id = NULL) {
+        $this->sub_navi->activate(__('Times'));
+        if (!$id)
+            $id = $this->request->param('id');
+
+        if (!$id) {
+            $this->scripts[] = 'jquery.tagsphere.min.js';
+            $this->scripts[] = 'themes.js';
+            $orm = ORM::factory('time');
+            $total = 0;
+            $times_tmp = $orm->getTimes()->order_by('summe', 'DESC')->as_object()->execute();
+            foreach ($times_tmp as $time) {
+                $total += $time->summe;
+            }
+            $times = array();
+            $i = 0;
+            foreach ($times_tmp as $time) {
+                $times[$time->Zeit] = array('top' => ($i < 5) ? true : false, 'count' => 15 + ceil(($time->summe / $total) * 100), 'id' => $time->ID_Zeit);
+                $i++;
+            }
+
+            $view = View::factory(I18n::$lang . '/data/times/cloud');
+            $view->times = $this->shuffle_assoc($times);
+        } else {
+            $orm = ORM::factory('time', $id);
+            $view = View::factory(I18n::$lang . '/data/times/overview');
+            $view->time_list = $orm->getTimes()->as_object()->execute();
+
+            //Load view/<lang>/project/list.php prepare the subview
+            $list = View::factory(I18n::$lang . '/project/list');
+            //assign new projects to subview
+            $list->projects = $orm->projects;
+            //assign the referrer uri
+            $list->uri = URL::site(I18n::$lang . '/data/times/' . $id);
+            //Assign list in view
+            $view->list = $list->render();
+        }
+        //Setup Dialog
+        $view->dialog = $this->dialog;
+        $this->content = $view->render();
+        $this->session->set('action', array('name' => 'times', 'param' => $id));
+    }
+
     public function action_names($id = NULL) {
         $this->sub_navi->activate(__('Names'));
 
         if (!$id)
             $id = urldecode($this->request->param('id'));
 
-       
+
         $orm = ORM::factory('project');
         $view = View::factory(I18n::$lang . '/data/names/overview');
         $authors = $orm->getAuthors();
@@ -137,7 +176,7 @@ class Controller_Data extends Controller_Index {
             $list = View::factory(I18n::$lang . '/project/list');
             $list->projects = $projects;
             //assign the referrer uri
-            $list->uri = URL::site(I18n::$lang . '/data/names/' . urlencode($id)).'#'.md5($id);
+            $list->uri = URL::site(I18n::$lang . '/data/names/' . urlencode($id)) . '#' . md5($id);
             $view->projects = $list->render();
         }
         $view->name = $id;

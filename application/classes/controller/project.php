@@ -86,7 +86,7 @@ class Controller_Project extends Controller_Data {
     }
 
     public function after() {
-        $action = $this->session->get('action');
+        $action = $this->session->get('action',array('name'=>'index','param'=>''));
         $param = Arr::get($action, 'param');
         $action = 'action_' . $action['name'];
 

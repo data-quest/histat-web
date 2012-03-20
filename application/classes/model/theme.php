@@ -24,4 +24,5 @@
                 ->where('Aka_Projekte.ID_Projekt', 'IS NOT ', NULL)
                 ->group_by('Thema');        
     }
+   
 }
