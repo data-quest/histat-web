@@ -8,37 +8,54 @@
     $maxRows = 6;
     $maxCols = 3;
     $countTables = ceil(count($keymasks) / ($maxRows * $maxCols));
-    $i = 0;
 
+    if ($page <= 1) {
+        $page = 1;
+    } elseif ($page >= $countTables) {
+        $page = $countTables;
+    }
+    $index = 0;
     for ($table = 0; $table < $countTables; $table++):
         ?>
-        <table border="0" style="<?= $table > 0 ? 'display:none;' : '' ?>border:0px">
+        <table border="0" style="<?= $table + 1 != $page ? 'display:none;' : '' ?>border:0px">
+
             <?php for ($row = 0; $row < $maxRows; $row++): ?>
+                <?php $index = $row + $maxRows * $maxCols * $table; ?>
                 <tr >
                     <?php for ($col = 0; $col < $maxCols; $col++): ?>
-                        <?php $index = ceil((($i + 1) / $maxCols) + ($col * ($maxRows))) - 1; ?>
-                        <td valign="top" style="width:30%;border:0px"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS.'#thead', $keymasks[$index]->Name) : ''; ?></td>
-                        <?php $i++; ?>
+                        <td valign="top" style="width:30%;border:0px"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS . '#thead', $keymasks[$index]->Name) : ''; ?></td>
+                        <?php $index +=$maxRows; ?>
                     <?php endfor; ?>
+
                 </tr>
             <?php endfor; ?>
         </table>
     <?php endfor; ?>
     <div class="clear"></div>
-    
-   <?php if($countTables > 1) : ?>
+
+    <?php if ($countTables > 1) : ?>
         <div class="pages">
-            <a href="prev" class="prev">zurück</a>
+
+
+            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page - 1), "zurück", array('class' => 'prev')) ?>
+
             <div class="list">
                 <?php for ($i = 0; $i < $countTables; $i++): ?>
-                    <a href="#<?= $i + 1 ?>" style="left:<?= $i*50 ?>px"><?= $i + 1 ?></a>
+                    <?php
+                    $attr = array('style' => 'left:' . ($i * 50) . 'px');
+                    if ($page == $i + 1) {
+                        $attr['class'] = 'current';
+                    }
+                    ?>
+                    <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($i + 1), ($i + 1), $attr) ?>
                 <?php endfor; ?>
             </div>
-            <a href="next" class="next">vor</a>
+            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page + 1), "vor", array('class' => 'next')) ?>
+
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
-   <?php endif;?>
+    <?php endif; ?>
 
 
 </div>

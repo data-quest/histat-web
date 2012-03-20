@@ -433,7 +433,7 @@ table tr td.even {
     border:0px;
 }
 #project_details .pages{
-    position: absolute;
+    position: relative;
     width:100%;
     border-top:1px solid #aaaaaa;
     border-bottom:1px solid #aaaaaa;
@@ -442,7 +442,7 @@ table tr td.even {
 }
 
 #project_details .pages a.prev{
-    position: absolute;
+    float: left;
     left:0px;
     width:100px;
     text-align: right;
@@ -451,7 +451,7 @@ table tr td.even {
     background:url(../img/layout/button-details-left.png) right center no-repeat;
 }
 #project_details .pages a.next{
-   position: absolute;
+    float:right;
    right:0px;
     bottom:0px;
     width:100px;
@@ -461,23 +461,36 @@ table tr td.even {
     background:url(../img/layout/button-details-right.png) left center no-repeat;
 }
 #project_details .pages a{
-   position: absolute;
+   
     display:block;
     width:50px;
+    height:38px;
     line-height: 38px;
-    color:#aaa;
+    color:#222;
+   
     text-decoration: none;
     font-size: 1.3em;
     text-align: center;
     border-left:1px solid #aaaaaa;
 }
-#project_details .pages div{
+#project_details .pages a{
     position: absolute;
-    width:672px;
+}
+#project_details .pages div.list{
+    position: absolute;
+    width:693px;
     height:38px;
     left: 110px;
     overflow: hidden;
-
+ 
+}
+#project_details .pages div a.current{
+     background: #dddddd;
+    font-weight: bold;
+    
+}
+#project_details .pages div a:last-child{
+    border-right:1px solid #aaaaaa;
 }
 #project_details div.text table td{
     border:0px;

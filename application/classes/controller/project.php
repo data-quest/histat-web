@@ -38,10 +38,13 @@ class Controller_Project extends Controller_Data {
         if ($this->id == NULL)
             throw new HTTP_Exception_404(); //If ID not given throw Exception
         $this->scripts[] = 'project_details_dialog.js';
-        $project = ORM::factory('project', $this->id);
+        $param = explode('/',$this->id);
+        
+        $project = ORM::factory('project', $param[0]);
         if ($project->loaded()) {
             $view = View::factory(I18n::$lang . '/project/tables');
             $view->project = $project;
+            $view->page = Arr::get($param,1,1);
             $content = $view->render();
         } else {
             $content = __('Project not found');
