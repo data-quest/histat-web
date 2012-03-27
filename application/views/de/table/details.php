@@ -6,11 +6,12 @@
     <div class="details">
         <div style="margin:auto;padding:15px 0;text-align: center">
             <?php $data ? $class = 'button' : $class = 'button disabled' ?>
-             <?= HTML::anchor($data ? 'table/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLS', array('class' => $class)) ?>
-           
+            <?php $data ? $id = array('class' => $class, 'id' => 'cart') : $id = array() ?>
+            <?= HTML::anchor($data ? 'table/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLS', array('class' => $class)) ?>
+
             <?= HTML::anchor($data ? 'table/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLSX', array('class' => $class)) ?>
             <?= HTML::anchor($data ? 'table/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .CSV', array('class' => $class)) ?>
-            <?= HTML::anchor($data ? 'cart/add/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'In den Warenkorb', array('class' => $class)) ?>
+            <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter, 'In den Warenkorb', $id) ?>
 
             <div class="clear"></div>
         </div>
@@ -29,12 +30,16 @@
                             <?php
                             $k = array_keys($detail);
                             $beschreibung = $detail[$k[0]]->CodeBeschreibung;
-
+                             $selected = Arr::get($post, $i, "all");
+                            echo Form::hidden('filter_text[]', $beschreibung . ' : ' . Arr::get($filters[$codeKurz], $selected, __('All')));
+                            echo Form::hidden('id', $keymask->ID_HS);
+                            echo Form::hidden('filter_string', $filter);
                             $filters[$codeKurz]["all"] = $beschreibung . ' *';
 
                             $filters_reversed = array_reverse(Arr::get($filters, $codeKurz));
+                           
                             ?>
-                            <?= Form::select('filter[]', $filters_reversed, Arr::get($post, $i, "all"), array('style' => 'width:100px')) ?>
+                            <?= Form::select('filter[]', $filters_reversed, $selected, array('style' => 'width:100px')) ?>
                         </td>
                         <?php $i++ ?>
                         <?php foreach ($detail as $key => $value) : ?>

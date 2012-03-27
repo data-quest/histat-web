@@ -8,6 +8,7 @@ class Model_User extends Model_Auth_User {
         'user_tokens' => array('model' => 'user_token'),
         'user_logins' => array('model' => 'user_login'),
         'roles' => array('model' => 'role', 'through' => 'roles_users'),
+        'cart_items' => array('model' =>'cart')
     );
     protected $_table_name = 'users';
     protected $_table_columns = array(

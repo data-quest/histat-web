@@ -8,6 +8,9 @@
 .clear{
     clear:both;
 }
+#content .debug{
+    color: #000000;
+}
 .debug{
     color:#ffffff;
 
@@ -832,3 +835,48 @@ table tr td.even {
     background:  url("../img/layout/hg-navi-grau.jpg") repeat-x scroll center center transparent;
 }
 /*Style table/details/id end*/
+/* Style cart*/
+#cart{
+        padding:15px;
+}
+#cart ul{
+    width:100%;
+    background: #DDDDDD;
+    border:1px solid #000000;
+}
+#cart ul span.more,#cart ul span.less{
+   
+    display:block;
+    width:16px;
+    height:16px;
+    float:left;
+    margin-right: 5px;
+    cursor: pointer;
+}
+#cart ul span.less{
+     background: url("../img/layout/content-pfeil-bottom.png") no-repeat center center;
+}
+#cart ul span.more{
+     background: url("../img/layout/content-pfeil-right.png") no-repeat center center;
+}
+#cart .tables,#cart .filters{
+   display:none;
+}
+#cart li.header{
+    background: #72777a;
+    color:#FFFFFF;
+}
+#cart li.header h3{
+     color:#FFFFFF;
+}
+#cart ul li:nth-child(2n){
+    background:#ffffff;
+}
+#cart ul li{
+    list-style: none;
+    padding:5px;
+}
+#cart ul a{
+    color:#000000;
+}
+/* Style cart end */

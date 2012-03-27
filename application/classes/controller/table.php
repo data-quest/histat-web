@@ -7,9 +7,9 @@ defined('SYSPATH') or die('No direct script access.');
  */
 class Controller_Table extends Controller_Data {
 
-    private $sub_navis = array();
-    private $id_hs = null;
-    private $filter = '________________________________';
+    protected $sub_navis = array();
+    protected $id_hs = null;
+    protected $filter = '________________________________';
 
     public function before() {
 
@@ -23,14 +23,20 @@ class Controller_Table extends Controller_Data {
         );
         $index = Arr::get($this->session->get('action'), 'name', 'index');
         $this->sub_navi->activate($this->sub_navis[$index]);
-        $this->id_hs = $this->request->param('id');
+       
+        $param = explode('/', $this->request->param('id'));
+      
+        $this->id_hs = $param[0];
+        $this->filter = Arr::get($param,1, $this->filter);
+        
         $this->session->set('referrer', $this->request->uri());
         if ($this->user->has_roles(array('guest')))
             $this->request->redirect(I18n::$lang . '/auth/login');
     }
 
     public function set_filter($filters) {
-        if ($filters) {
+        if (count($filters)>0 ) {
+            
             foreach ($filters as $filter) {
                 if ($filter !== "all") {
                     $filter = explode('_', $filter);
@@ -56,17 +62,16 @@ class Controller_Table extends Controller_Data {
         $this->scripts[] = 'table.js';
 
 
-
-
         $view = View::factory(I18n::$lang . '/table/details');
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects = $keymask->project;
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
+        
+        $post = $this->request->post('filter');
 
-
-        $this->set_filter($this->request->post('filter', NULL));
+        $this->set_filter($post);
 
         $details = $keymask->getDetails($this->filter);
         $data = null;
@@ -79,24 +84,22 @@ class Controller_Table extends Controller_Data {
         $view->keys = $details['keys'];
         $view->data = $data;
         $view->keymask = $keymask;
-       
+
         $view->tables = $details['tables'];
         $view->titles = $details['titles'];
         $view->filters = $details['filters'];
         $view->sources = $details['sources'];
         $view->notes = $details['notes'];
         $view->filter = $this->filter;
-        $view->post = $this->request->post('filter', NULL);
-
+        $view->post = $post;
+        
         $view->project = $list->render();
         $this->content = $view->render();
     }
 
     public function action_xls() {
-        $param = explode('/', $this->request->param('id'));
-        $this->id_hs = $param[0];
-        $this->filter = $param[1];
-       // $this->auto_render = FALSE;
+
+        // $this->auto_render = FALSE;
 
         $keymask = ORM::factory('keymask', $this->id_hs);
         $details = $keymask->getDetails($this->filter);
@@ -114,12 +117,8 @@ class Controller_Table extends Controller_Data {
             $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel5'));
         }
     }
-     public function action_xlsx() {
-        $param = explode('/', $this->request->param('id'));
-        $this->id_hs = $param[0];
-        $this->filter = $param[1];
-       // $this->auto_render = FALSE;
 
+    public function action_xlsx() {
         $keymask = ORM::factory('keymask', $this->id_hs);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
@@ -136,12 +135,8 @@ class Controller_Table extends Controller_Data {
             $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel2007'));
         }
     }
+  
     public function action_csv() {
-        $param = explode('/', $this->request->param('id'));
-        $this->id_hs = $param[0];
-        $this->filter = $param[1];
-        $this->auto_render = FALSE;
-
         $keymask = ORM::factory('keymask', $this->id_hs);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
@@ -167,7 +162,7 @@ class Controller_Table extends Controller_Data {
         $sources = Arr::get($details, 'sources', array());
         $data = Arr::get($details, 'data', array());
         $keys = Arr::get($details, 'keys', array());
-         $notes = Arr::get($details, 'notes', array());
+        $notes = Arr::get($details, 'notes', array());
         foreach ($headers as $header) {
             $row = array();
             $key = array_keys($header);
@@ -196,7 +191,7 @@ class Controller_Table extends Controller_Data {
             $grid[$i] = $row;
             $i++;
         }
-       if (count(array_filter($notes)) > 0) {
+        if (count(array_filter($notes)) > 0) {
             $row = array();
             $row[] = 'Anmerkungen';
             foreach ($keys as $k) {
@@ -210,13 +205,12 @@ class Controller_Table extends Controller_Data {
             $row[] = $y;
 
             foreach ($keys as $k) {
-                $newData =  Arr::get($d, $k, array('data'=>'','note'=>NULL));
-                if(Arr::get($newData,'note')){
-                  $row[] = $newData;  
-                }else{
-                    $row[] = Arr::get($newData,'data');
+                $newData = Arr::get($d, $k, array('data' => '', 'note' => NULL));
+                if (Arr::get($newData, 'note')) {
+                    $row[] = $newData;
+                } else {
+                    $row[] = Arr::get($newData, 'data');
                 }
-                
             }
             $grid[$i] = $row;
             $i++;

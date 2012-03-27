@@ -27,7 +27,8 @@ return array(
     'Profile'=>'Profil',
     'Logged in: :name :surname' =>'Angemeldet als: :name :surname',
     'Cart [:value]' => 'Warenkorb [:value]',
-    'Logout'=>'Abmelden'
-    
-    
+    'Logout'=>'Abmelden',
+    'All' => 'Alle',
+    'Delete' => 'Löschen',
+    'Show'=>'Anzeigen'
 );

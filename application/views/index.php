@@ -40,7 +40,7 @@
                                 <li><?= HTML::anchor('admin', __('Admin')) ?></li>
                             <?php endif; ?>
                                
-                            <li><?= HTML::anchor('cart', __('Cart [:value]', array(':value' => 12))) ?></li>
+                            <li><?= HTML::anchor('cart', __('Cart [:value]', array(':value' => '<span id="cart_items">'.$user->cart_items->find_all()->count().'</span>'))) ?></li>
 
                         </ul>
                     </div>

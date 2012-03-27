@@ -97,7 +97,7 @@ ALTER TABLE `users`
   ADD `ip` VARCHAR( 15 ) NOT NULL ,
   ADD `last_login` INT( 10 ) UNSIGNED NOT NULL ,
   DROP `status`;
-ALTER TABLE `users` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE `users` ENGINE = InnoDB;
 --
 -- Daten für Tabelle `users`
 --
@@ -194,3 +194,14 @@ VALUES
 ('Wirtschaftswunder'),
 ('Grenzen des Wachstums'),
 ('Vereintes Deutschland')
+
+DROP TABLE IF EXISTS `warenkorb`;
+CREATE TABLE IF NOT EXISTS `warenkorb` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_HS` varchar(32) NOT NULL,
+  `filter` varchar(32) NOT NULL,
+  `filter_text` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `chdate` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
