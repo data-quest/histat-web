@@ -3,7 +3,7 @@
     <h3>Beschreibung:</h3>
 
     <a href="#" style="visbility:hidden"></a>
-    <span>
+    <span class="normal">
         <?= nl2br($project->Projektbeschreibung) ?>
     </span>
 
@@ -17,28 +17,28 @@
         <hr/>
     <?php endif ?>
     <h3>Name der Studie:</h3>
-    <span><?= $project->Projektname ?></span>
+    <span class="normal" ><?= $project->Projektname ?></span>
     <hr/>
 
     <h3>Leiter der Studie:</h3>
-    <span><?= $project->Projektautor ?></span>
+    <span class="normal" ><?= $project->Projektautor ?></span>
     <hr/>
     <h3>Zeitraum:</h3>
-    <span><?= $project->Zeitraum ?></span>
+    <span class="normal"><?= $project->Zeitraum ?></span>
     <hr/>
     <h3>Anzahl der Zeitreihen:</h3>
-    <span><?= $project->Anzahl_Zeitreihen ?></span>
+    <span class="normal" ><?= $project->Anzahl_Zeitreihen ?></span>
     <hr/>
     <h3>Untersuchungsgebiet:</h3>
-    <span><?= $project->Untersuchsungsgebiet ?></span>
+    <span class="normal" ><?= $project->Untersuchsungsgebiet ?></span>
     <hr/>
     <h3>Veröffentlichung:</h3>
-    <span><?= $project->Veroeffentlichung ?></span>
+    <span class="normal" ><?= $project->Veroeffentlichung ?></span>
     <hr/>
 
     <h3>Quellentypen:</h3>
     <div class="text">
-        <span><?= nl2br($project->Quellen) ?></span>
+        <span class="normal" ><?= nl2br($project->Quellen) ?></span>
     </div>
 
 

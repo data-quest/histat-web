@@ -1,6 +1,6 @@
 <h3>Kooperationspartner</h3>
 <br/>
-<ul>
+<ul class="normal">
     <li>
         <strong>Statistisches Bundesamt</strong>
         <br/>

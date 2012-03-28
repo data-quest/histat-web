@@ -1,5 +1,5 @@
 <h3>Zeitreihen zu folgenden Schwerpunkten:</h3>
-<ul>
+<ul class="normal">
     <li>
         Historische Statistik von Deutschland
     </li>

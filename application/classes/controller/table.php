@@ -66,6 +66,7 @@ class Controller_Table extends Controller_Data {
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects = $keymask->project;
+         $this->project = $keymask->project->Projektname;
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
 

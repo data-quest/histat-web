@@ -78,6 +78,8 @@ class Controller_Index extends Controller_Template {
     protected $sub_navi;
     protected $xsrf;
 
+    protected $desription = 'Startseite';
+    protected $project = '';
     public function before() {
         //Setup layout
         $this->template = 'index';
@@ -145,7 +147,9 @@ class Controller_Index extends Controller_Template {
         $this->content = $view->render();
      
     }
-    
+    private function page_name(){
+        return urlencode('HISTAT/'.$this->desription.':'.$this->request->controller().'/'.$this->request->action().($this->project ? '/'.$this->project :''));
+    }
     public function after() {
         //Disable assign vars if template is not a view(ajax Request)
         if($this->template instanceof View){
@@ -161,7 +165,7 @@ class Controller_Index extends Controller_Template {
             $this->template->values = 1000000;
             $this->template->date = date("d.m.Y", time());
             $this->template->user = $this->user;
-            $this->template->pagename = "";//"HISTAT%2F".urlencode($structure[$view]['description'] . ':' . $view . ($_SESSION['SelectTimeSeriesData']["project_id"] ? '/' . $_SESSION['SelectTimeSeriesData']["project_name"] : ''));
+            $this->template->pagename = $this->page_name();
             //Main Layout will be rendered in after method
         }
         parent::after();
