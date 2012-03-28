@@ -16,7 +16,7 @@
             <div class="clear"></div>
         </div>
         <div class="name" id="tabelle"><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div>
-        <?= Form::open('details/' . $keymask->ID_HS . '#thead') ?>
+        <?= Form::open('table/details/' . $keymask->ID_HS . '#thead') ?>
 
 
         <div class="scrollX">
