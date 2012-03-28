@@ -23,20 +23,20 @@ class Controller_Table extends Controller_Data {
         );
         $index = Arr::get($this->session->get('action'), 'name', 'index');
         $this->sub_navi->activate($this->sub_navis[$index]);
-       
+
         $param = explode('/', $this->request->param('id'));
-      
+
         $this->id_hs = $param[0];
-        $this->filter = Arr::get($param,1, $this->filter);
-        
+        $this->filter = Arr::get($param, 1, $this->filter);
+
         $this->session->set('referrer', $this->request->uri());
         if ($this->user->has_roles(array('guest')))
             $this->request->redirect(I18n::$lang . '/auth/login');
     }
 
     public function set_filter($filters) {
-        if (count($filters)>0 ) {
-            
+        if (count($filters) > 0) {
+
             foreach ($filters as $filter) {
                 if ($filter !== "all") {
                     $filter = explode('_', $filter);
@@ -68,7 +68,7 @@ class Controller_Table extends Controller_Data {
         $list->projects = $keymask->project;
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
-        
+
         $post = $this->request->post('filter');
 
         $this->set_filter($post);
@@ -76,10 +76,29 @@ class Controller_Table extends Controller_Data {
         $details = $keymask->getDetails($this->filter);
         $data = null;
 
+        if (!$post) {
+            $post = array();
+            $i = 0;
+            foreach ($details['filters'] as $filters) {
+                foreach ($filters as $key => $filter) {
+                    $f = explode('_', $key);
+                    $code = $f[0];
+                    $pos = $f[1];
+                    $len = $f[2];
+                    if (substr($this->filter, $pos - 1, $len) === $code) {
+                        $post[$i] = $key;
+                    } else {
+                        $post[$i] = "all";
+                    }
+                }
+                $i++;
+            }
+        }
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $data = $keymask->getData($this->filter);
         }
-        // $data = array();
+
+
         $view->details = $details['details'];
         $view->keys = $details['keys'];
         $view->data = $data;
@@ -92,7 +111,7 @@ class Controller_Table extends Controller_Data {
         $view->notes = $details['notes'];
         $view->filter = $this->filter;
         $view->post = $post;
-        
+
         $view->project = $list->render();
         $this->content = $view->render();
     }
@@ -135,7 +154,7 @@ class Controller_Table extends Controller_Data {
             $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel2007'));
         }
     }
-  
+
     public function action_csv() {
         $keymask = ORM::factory('keymask', $this->id_hs);
         $details = $keymask->getDetails($this->filter);
