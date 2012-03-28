@@ -15,6 +15,7 @@ $(function(){
         target.text(more).attr('class','more');
     });
     */
+  // _etc(); //etracker
     $('#cart .more').live('click',function(e){
         $(this).removeClass('more').addClass('less').parent('li').next('li').slideToggle('slow');
     });

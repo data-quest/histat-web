@@ -7,14 +7,24 @@
         foreach ($scripts as $file)
             echo HTML::script($assets['js'] . $file) . "\n";
         ?>
+        <!-- Copyright (c) 2000-2009 etracker GmbH. All rights reserved. -->
+        <!-- This material may not be reproduced, displayed, modified or distributed -->
+        <!-- without the express prior written permission of the copyright holder. -->
+        <!-- BEGIN etracker code ETRC 3.0 -->
+        <script type="text/javascript">document.write(String.fromCharCode(60)+"script type=\"text/javascript\" src=\"http"+("https:"==document.location.protocol?"s":"")+"://web.gesis.org/t.js?et=qPKGYV\">"+String.fromCharCode(60)+"/script>");</script>
+        <!-- etracker PARAMETER 3.0 -->
+        <script type="text/javascript">
+            var et_pagename     = "<?= $pagename?>";
+       </script>
+        <!-- etracker PARAMETER END -->
         <title><?= $title ?></title>
     </head>
     <body>
-
+        <noscript><p><a href="http://www.etracker.com"><img class="trackimage" style="border:0px;" alt="" src="http://www.etracker.com/nscnt.php?et=qPKGYV" /></a></p></noscript>
         <div id="top"></div>
         <div id="layout">
             <div id="header">
-                <a href=""><?= HTML::image($assets['img'].'/layout/logo.png',array('class'=>'logo')) ?></a>
+                <a href=""><?= HTML::image($assets['img'] . '/layout/logo.png', array('class' => 'logo')) ?></a>
             </div>
             <div id="main_navi">
                 <?php
@@ -35,12 +45,12 @@
                     <div class="userinfo">
                         <?= HTML::anchor('profile', __('Logged in: :name :surname', array(':name' => $user->name, ':surname' => $user->surname))) ?>
                         <ul>
-                            <li><?= HTML::anchor('auth/logout',__('Logout'))?></li>
+                            <li><?= HTML::anchor('auth/logout', __('Logout')) ?></li>
                             <?php if (Arr::get($user->has_roles(), 'admin')): ?>
                                 <li><?= HTML::anchor('admin', __('Admin')) ?></li>
                             <?php endif; ?>
-                               
-                            <li><?= HTML::anchor('cart', __('Cart [:value]', array(':value' => '<span id="cart_items">'.$user->cart_items->find_all()->count().'</span>'))) ?></li>
+
+                            <li><?= HTML::anchor('cart', __('Cart [:value]', array(':value' => '<span id="cart_items">' . $user->cart_items->find_all()->count() . '</span>'))) ?></li>
 
                         </ul>
                     </div>

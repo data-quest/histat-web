@@ -15,6 +15,9 @@
     color:#ffffff;
 
 }
+p.normal{
+    line-height: 1.5em;
+}
 body {
     background: url(../img/layout/hg-verlauf.jpg) repeat-x top center #1F2B39;
 }
