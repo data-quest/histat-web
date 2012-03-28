@@ -11,12 +11,12 @@
 
             <?= HTML::anchor($data ? 'table/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLSX', array('class' => $class)) ?>
             <?= HTML::anchor($data ? 'table/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .CSV', array('class' => $class)) ?>
-            <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter.'/#', 'In den Warenkorb', $id) ?>
+            <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter.'#', 'In den Warenkorb', $id) ?>
 
             <div class="clear"></div>
         </div>
         <div class="name" id="tabelle"><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div>
-        <?= Form::open('table/details/' . $keymask->ID_HS . '#thead') ?>
+        <?= Form::open('details/' . $keymask->ID_HS . '#thead') ?>
 
 
         <div class="scrollX">
@@ -66,7 +66,7 @@
                             <?php foreach ($keys as $key): ?>
 
                                 <td class="grey">
-                                    <?php $str = substr($sources[$key], 0, 30); ?>
+                                    <?php $str = mb_substr($sources[$key], 0, 30); ?>
                                     <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $sources[$key] . '</div></div>' : '<div class="text" style="width:100%">' . $str . '</div>') ?>
 
 
@@ -81,7 +81,7 @@
                             <?php foreach ($keys as $key): ?>
 
                                 <td class="grey">
-                                    <?php $str = substr($notes[$key], 0, 30); ?>
+                                    <?php $str = mb_substr($notes[$key], 0, 30); ?>
                                     <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $notes[$key] . '</div></div>' : '<div class="text" style="width:100%">' . $str . '</div>') ?>
 
 

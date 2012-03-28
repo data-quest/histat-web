@@ -34,8 +34,9 @@ class Model_Keymask extends ORM {
 
         $result = array();
 
-
+      
         $keys = $this->getKeys($filter);
+     
         foreach ($keys as $key) {
             foreach ($details as $detail) {
                 if ($detail->Code === substr($key->key, $detail->Position - 1, $detail->Zeichen)) {

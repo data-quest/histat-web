@@ -23,12 +23,8 @@ class Controller_Table extends Controller_Data {
         );
         $index = Arr::get($this->session->get('action'), 'name', 'index');
         $this->sub_navi->activate($this->sub_navis[$index]);
-
-        $param = explode('/', $this->request->param('id'));
-
-        $this->id_hs = $param[0];
-        $this->filter = Arr::get($param, 1, $this->filter);
-
+        $this->id_hs = $this->request->param('id');
+        $this->filter = $this->request->param('filter', $this->filter);
         $this->session->set('referrer', $this->request->uri());
         if ($this->user->has_roles(array('guest')))
             $this->request->redirect(I18n::$lang . '/auth/login');
@@ -66,7 +62,7 @@ class Controller_Table extends Controller_Data {
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects = $keymask->project;
-         $this->project = $keymask->project->Projektname;
+        $this->project = $keymask->project->Projektname;
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
 
@@ -75,12 +71,13 @@ class Controller_Table extends Controller_Data {
         $this->set_filter($post);
 
         $details = $keymask->getDetails($this->filter);
+
         $data = null;
 
         if (!$post) {
             $post = array();
             $i = 0;
-            foreach ($details['filters'] as $filters) {
+            foreach (Arr::get($details, 'filters', array()) as $filters) {
                 foreach ($filters as $key => $filter) {
                     $f = explode('_', $key);
                     $code = $f[0];
@@ -95,6 +92,7 @@ class Controller_Table extends Controller_Data {
                 $i++;
             }
         }
+
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $data = $keymask->getData($this->filter);
         }
@@ -115,6 +113,10 @@ class Controller_Table extends Controller_Data {
 
         $view->project = $list->render();
         $this->content = $view->render();
+    }
+
+    public function action_download() {
+        
     }
 
     public function action_xls() {
@@ -154,6 +156,7 @@ class Controller_Table extends Controller_Data {
             $ws->set_data($grid);
             $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel2007'));
         }
+        //   return sprintf('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=%s&lnkname=%s', $GLOBALS['HISTAT_URL'] . urlencode($url), urlencode('HISTAT/download/' . $name));
     }
 
     public function action_csv() {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head lang="<?= I18n::$lang ?>">
+        <meta charset="UTF-8" />
         <?php
         foreach ($styles as $file)
             echo HTML::style($assets['css'] . $file) . "\n";

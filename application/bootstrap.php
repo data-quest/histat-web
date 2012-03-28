@@ -116,6 +116,14 @@ Kohana::modules(array(
 
 $langs = implode('|', Kohana::$config->load('config')->get('avaliable_languages',array()));
 
+
+
+Route::set('details', '(<lang>/)table/details/<id>(/<filter>)', 
+        array('lang' => '(' . $langs . ')','id'=>'.{32}','filter'=>'.{32}'))
+        ->defaults(array(
+            'controller' => 'table',
+            'action' => 'details'));
+
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.

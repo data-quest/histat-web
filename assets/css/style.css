@@ -231,7 +231,7 @@ table tr td.even {
 
 #header .infos .histat{
     position: absolute;
-    left:40%;
+  right: 350px;
     color: #58748f;
     font-size: 1.5em;
     top:10px;
@@ -255,7 +255,7 @@ table tr td.even {
 }
 #header .infos .timelines{
     position: absolute;
-    right:12%;
+    right:120px;
     top:35px;
     font-size: 1.3em;
     color:#ffffff;
