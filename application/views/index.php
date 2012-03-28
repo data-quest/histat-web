@@ -20,7 +20,19 @@
         <div id="layout">
             <div id="header">
                 <a href=""><?= HTML::image($assets['img'] . '/layout/logo.png', array('class' => 'logo')) ?></a>
+                <div class="infos">
+                    <div class="histat">
+                        <span class="orange">histat:</span> <br/> <span class="description">Historische Statistik</span>
+                    </div>
+                    <div class="values">
+                        <span class="orange"><?= $values ?></span> Werte
+                    </div>
+                    <div class="timelines">
+                        <span class="orange"><?= $times ?></span> Zeitreihen
+                    </div>
+                </div>
             </div>
+            
             <div id="main_navi">
                 <?php
                 foreach ($main_navi as $item)
@@ -61,7 +73,6 @@
             <div id="footer">
                 © GESIS <?= HTML::anchor('http://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date', array(':date' => $date)) ?>
             </div>
-            <span style="color:#FFFFFF"><?= ''//$pagename ?></span>
             <script type="text/javascript">
                 var xsrf = "<?= $xsrf ?>";
                 var base_url = "<?= URL::base() ?>";

@@ -80,6 +80,8 @@ class Controller_Index extends Controller_Template {
 
     protected $desription = 'Startseite';
     protected $project = '';
+    protected $table = '';
+    protected $table_filters ='';
     public function before() {
         //Setup layout
         $this->template = 'index';
@@ -148,11 +150,17 @@ class Controller_Index extends Controller_Template {
      
     }
     private function page_name(){
-        return urlencode('HISTAT/'.$this->desription.':'.$this->request->controller().'/'.$this->request->action().($this->project ? '/'.$this->project :''));
+        $c = $this->request->controller();
+        $a = $this->request->action();
+        return urlencode('HISTAT/'.Kohana::$config->load('etracker')->get($c.'/'.$a).':'.$c.'/'.$a.($this->project ? '/'.$this->project :''));
     }
     public function after() {
+       
         //Disable assign vars if template is not a view(ajax Request)
         if($this->template instanceof View){
+            $values = DB::select(array(DB::expr('COUNT(Data)'),'amount'))->from('Daten__Aka')->as_object()->execute();
+            $times = DB::select(array(DB::expr('COUNT(ID_HS)'),'amount'))->from('Lit_ZR')->as_object()->execute();
+           
             //Assign vars to layout
             $this->template->main_navi = $this->main_navi->get_items();
             $this->template->sub_navi = $this->sub_navi->get_items();
@@ -161,8 +169,8 @@ class Controller_Index extends Controller_Template {
             $this->template->styles = $this->styles;
             $this->template->scripts = $this->scripts;
             $this->template->xsrf = $this->xsrf;
-            $this->template->times = 10000;
-            $this->template->values = 1000000;
+            $this->template->times = number_format($times[0]->amount,0,',','.');
+            $this->template->values = number_format($values[0]->amount,0,',','.');
             $this->template->date = date("d.m.Y", time());
             $this->template->user = $this->user;
             $this->template->pagename = $this->page_name();

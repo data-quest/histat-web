@@ -3,7 +3,7 @@
     margin: 0px;
     padding:0px;
     font-size: 11px;
-    
+
     font-family: Verdana,Arial,Helvetica,sans-serif;
 }
 .clear{
@@ -17,7 +17,7 @@
 
 }
 .normal{
-   line-height: 1.5em;
+    line-height: 1.5em;
 }
 body {
     background: url(../img/layout/hg-verlauf.jpg) repeat-x top center #1F2B39;
@@ -217,9 +217,49 @@ table tr td.even {
     background:url(../img/layout/hg-header.jpg)no-repeat top right #ffffff;
     height:80px;
     width: 100%;
+    position: relative;
 }
 #header .logo{
     margin:15px 10px;
+}
+#header .infos{
+    position: absolute;
+    width:100%;
+    top:0px;
+    left:0px;
+}
+
+#header .infos .histat{
+    position: absolute;
+    left:40%;
+    color: #58748f;
+    font-size: 1.5em;
+    top:10px;
+}
+#header .infos .histat .description{
+    margin-left: 15px;
+       color: #58748f;
+    font-size: 1em;
+}
+#header .infos .orange{
+    font-size:1.6em;
+    color: #ff6100;
+    padding: 0px;
+}
+#header .infos .values{
+    position: absolute;
+    right:15px;
+    color:#ffffff;
+    top:10px;
+    font-size: 1.3em;
+}
+#header .infos .timelines{
+    position: absolute;
+    right:12%;
+    top:35px;
+    font-size: 1.3em;
+    color:#ffffff;
+
 }
 #main_navi{
     color:#ffffff;
@@ -419,7 +459,7 @@ table tr td.even {
 #project_details{
     padding: 10px 0px;
     padding-top:40px;
-        
+
 }
 #project_details h1,#project_details h3,#project_details span{
     padding:0px 10px;
@@ -461,7 +501,7 @@ table tr td.even {
 }
 #project_details .pages a.next{
     float:right;
-   right:0px;
+    right:0px;
     bottom:0px;
     width:100px;
     text-align: left;
@@ -470,13 +510,13 @@ table tr td.even {
     background:url(../img/layout/button-details-right.png) left center no-repeat;
 }
 #project_details .pages a{
-   
+
     display:block;
     width:50px;
     height:38px;
     line-height: 38px;
     color:#222;
-   
+
     text-decoration: none;
     font-size: 1.3em;
     text-align: center;
@@ -491,12 +531,12 @@ table tr td.even {
     height:38px;
     left: 110px;
     overflow: hidden;
- 
+
 }
 #project_details .pages div a.current{
-     background: #dddddd;
+    background: #dddddd;
     font-weight: bold;
-    
+
 }
 #project_details .pages div a:last-child{
     border-right:1px solid #aaaaaa;
@@ -843,7 +883,7 @@ table tr td.even {
 /*Style table/details/id end*/
 /* Style cart*/
 #cart{
-        padding:15px;
+    padding:15px;
 }
 #cart ul{
     width:100%;
@@ -851,7 +891,7 @@ table tr td.even {
     border:1px solid #000000;
 }
 #cart ul span.more,#cart ul span.less{
-   
+
     display:block;
     width:16px;
     height:16px;
@@ -860,20 +900,20 @@ table tr td.even {
     cursor: pointer;
 }
 #cart ul span.less{
-     background: url("../img/layout/content-pfeil-bottom.png") no-repeat center center;
+    background: url("../img/layout/content-pfeil-bottom.png") no-repeat center center;
 }
 #cart ul span.more{
-     background: url("../img/layout/content-pfeil-right.png") no-repeat center center;
+    background: url("../img/layout/content-pfeil-right.png") no-repeat center center;
 }
 #cart .tables,#cart .filters{
-   display:none;
+    display:none;
 }
 #cart li.header{
     background: #72777a;
     color:#FFFFFF;
 }
 #cart li.header h3{
-     color:#FFFFFF;
+    color:#FFFFFF;
 }
 #cart ul li:nth-child(2n){
     background:#ffffff;
