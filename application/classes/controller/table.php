@@ -28,9 +28,6 @@ class Controller_Table extends Controller_Data {
         $this->session->set('referrer', $this->request->uri());
         if ($this->user->has_roles(array('guest')))
             $this->request->redirect(I18n::$lang . '/auth/login');
-
-        if (!$this->id_hs)
-            throw new HTTP_Exception_404();
     }
 
     public function set_filter($filters) {
@@ -57,6 +54,8 @@ class Controller_Table extends Controller_Data {
     }
 
     public function action_details() {
+        if (!$this->id_hs)
+            throw new HTTP_Exception_404();
         $keymask = ORM::factory('keymask', $this->id_hs);
         $this->scripts[] = 'table.js';
 
