@@ -28,6 +28,9 @@ class Controller_Table extends Controller_Data {
         $this->session->set('referrer', $this->request->uri());
         if ($this->user->has_roles(array('guest')))
             $this->request->redirect(I18n::$lang . '/auth/login');
+
+        if (!$this->id_hs)
+            throw new HTTP_Exception_404();
     }
 
     public function set_filter($filters) {
@@ -116,13 +119,16 @@ class Controller_Table extends Controller_Data {
     }
 
     public function action_download() {
-        
+
+        if (HTTP_Request::POST == $this->request->method()) {
+            $keymask = ORM::factory('keymask', $this->id_hs);
+            $name = $keymask->project->Projektname;
+            $url = URL::site(I18n::$lang . '/table/' . $this->request->param('type') . '/' . $this->id_hs . '/' . $this->filter, 'http');
+            Request::factory()->redirect('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
+        }
     }
 
     public function action_xls() {
-
-        // $this->auto_render = FALSE;
-
         $keymask = ORM::factory('keymask', $this->id_hs);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
@@ -156,7 +162,6 @@ class Controller_Table extends Controller_Data {
             $ws->set_data($grid);
             $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel2007'));
         }
-        //   return sprintf('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=%s&lnkname=%s', $GLOBALS['HISTAT_URL'] . urlencode($url), urlencode('HISTAT/download/' . $name));
     }
 
     public function action_csv() {

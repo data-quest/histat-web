@@ -1,19 +1,17 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
+
+defined('SYSPATH') or die('No direct script access.');
 
 // -- Environment setup --------------------------------------------------------
-
 // Load the core Kohana class
-require SYSPATH.'classes/kohana/core'.EXT;
+require SYSPATH . 'classes/kohana/core' . EXT;
 
-if (is_file(APPPATH.'classes/kohana'.EXT))
-{
-	// Application extends the core
-	require APPPATH.'classes/kohana'.EXT;
-}
-else
-{
-	// Load empty core extension
-	require SYSPATH.'classes/kohana'.EXT;
+if (is_file(APPPATH . 'classes/kohana' . EXT)) {
+    // Application extends the core
+    require APPPATH . 'classes/kohana' . EXT;
+} else {
+    // Load empty core extension
+    require SYSPATH . 'classes/kohana' . EXT;
 }
 
 /**
@@ -62,7 +60,7 @@ I18n::lang('de');
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
 if (isset($_SERVER['KOHANA_ENV'])) {
-    Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
+    Kohana::$environment = constant('Kohana::' . strtoupper($_SERVER['KOHANA_ENV']));
 } else {
     Kohana::$environment = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' ? Kohana::DEVELOPMENT : Kohana::PRODUCTION);
 }
@@ -81,16 +79,16 @@ if (isset($_SERVER['KOHANA_ENV'])) {
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/histat/',
-        'index_file' => FALSE, // SEO (avoid index.php/mycontroller/action)
-        'profile' => (Kohana::$environment !== Kohana::PRODUCTION), //see how good you are
-        'caching' => (Kohana::$environment === Kohana::PRODUCTION),
+    'base_url' => '/histat/',
+    'index_file' => FALSE, // SEO (avoid index.php/mycontroller/action)
+    'profile' => (Kohana::$environment !== Kohana::PRODUCTION), //see how good you are
+    'caching' => (Kohana::$environment === Kohana::PRODUCTION),
 ));
 
 /**
  * Attach the file write to logging. Multiple writers are supported.
  */
-Kohana::$log->attach(new Log_File(APPPATH.'logs'));
+Kohana::$log->attach(new Log_File(APPPATH . 'logs'));
 
 /**
  * Attach a file reader to config. Multiple readers are supported.
@@ -114,22 +112,55 @@ Kohana::modules(array(
     'phpexcel' => MODPATH . 'phpexcel' //PHPExcel Module
 ));
 
-$langs = implode('|', Kohana::$config->load('config')->get('avaliable_languages',array()));
+$langs = implode('|', Kohana::$config->load('config')->get('avaliable_languages', array()));
 
 
 
-Route::set('details', '(<lang>/)table/details/<id>(/<filter>)', 
-        array('lang' => '(' . $langs . ')','id'=>'.{32}','filter'=>'.{32}'))
+
+
+/**
+ * Route to show table details 
+ */
+Route::set('details', '(<lang>/)table/details/<id>/(<filter>)', array('lang' => '(' . $langs . ')', 'id' => '.+', 'filter' => '.{32}'))
         ->defaults(array(
             'controller' => 'table',
             'action' => 'details'));
+/**
+ * Route to track download 
+ */
+Route::set('download_redirect', '(<lang>/)table/download/<type>/<id>/<filter>', array('lang' => '(' . $langs . ')', 'type' => '(xls|xlsx|csv)', 'id' => '.+', 'filter' => '.{32}'))
+        ->defaults(array(
+            'controller' => 'table',
+            'action' => 'download'));
 
+/*
+ * Route to create data file and download it
+ */
+Route::set('download_real', '(<lang>/)table/<action>/<id>/<filter>', array('lang' => '(' . $langs . ')', 'action' => '(xls|xlsx|csv)', 'id' => '.+', 'filter' => '.{32}'))
+        ->defaults(array(
+            'controller' => 'table'));
+
+
+
+/**
+ * Route to show download dialog 
+ */
+Route::set('download_message', '(<lang>/)download/<action>/<id>/<filter>', array('lang' => '(' . $langs . ')', 'action' => '(xls|xlsx|csv)', 'id' => '.+', 'filter' => '.{32}'))
+        ->defaults(array(
+            'controller' => 'download'));
+
+/**
+ * Route to delete Cart filters 
+ */
+Route::set('delete_cart', '(<lang>/)cart/delete/<id>/(<filter>)', array('lang' => '(' . $langs . ')', 'id' => '.+', 'filter' => '.{32}'))
+        ->defaults(array(
+            'controller' => 'cart',
+            'action' => 'delete'));
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-Route::set('default', '(<lang>/)(<controller>(/<action>(/<id>)))', 
-        array('lang' => '(' . $langs . ')','id'=>'.+'))
+Route::set('default', '(<lang>/)(<controller>(/<action>(/<id>)))', array('lang' => '(' . $langs . ')', 'id' => '.+'))
         ->defaults(array(
             'controller' => 'index',
             'action' => 'index'));

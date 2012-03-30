@@ -7,10 +7,10 @@
         <div style="margin:auto;padding:15px 0;text-align: center">
             <?php $data ? $class = 'button' : $class = 'button disabled' ?>
             <?php $data ? $id = array('class' => $class, 'id' => 'cart') : $id = array('class' => $class) ?>
-            <?= HTML::anchor($data ? 'table/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLS', array('class' => $class)) ?>
+            <?= HTML::anchor($data ? 'download/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLS', array('class' => $class)) ?>
 
-            <?= HTML::anchor($data ? 'table/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLSX', array('class' => $class)) ?>
-            <?= HTML::anchor($data ? 'table/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .CSV', array('class' => $class)) ?>
+            <?= HTML::anchor($data ? 'download/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLSX', array('class' => $class)) ?>
+            <?= HTML::anchor($data ? 'download/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .CSV', array('class' => $class)) ?>
             <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter.'#', 'In den Warenkorb', $id) ?>
 
             <div class="clear"></div>
@@ -44,7 +44,7 @@
                         <?php $i++ ?>
                         <?php foreach ($detail as $key => $value) : ?>
                             <td >
-                                <?php $str = substr($detail[$key]->CodeBezeichnung, 0, 30); ?>
+                                <?php $str = mb_substr($detail[$key]->CodeBezeichnung, 0, 30); ?>
                                 <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer">' . $str . '... <div class="tooltip"><span></span>' . $detail[$key]->CodeBezeichnung . '</div></div>' : '<div class="text">' . $str . '</div>') ?>
                             </td>
                         <?php endforeach; ?>

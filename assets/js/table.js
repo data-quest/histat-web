@@ -60,7 +60,7 @@ $(function(){
       
        
     });
-    $('select').change(function(){
+    $('#table_details select').change(function(){
       
         $('form').submit();
     });
@@ -91,7 +91,14 @@ $(function(){
             }
         });
     });
-
+    $('#download select').change(function(){
+        if($(this).val() === '-1'){
+            $('#download input[name="uses"]').slideDown(500);
+        }else{
+            $('#download input[name="uses"]').slideUp(500).val("");
+        }
+     
+    });
 });
 function scrollbar() {
     var div = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:0xp;left:0xp;"><div style="height:100px"></div></div>');

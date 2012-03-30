@@ -30,5 +30,6 @@ return array(
     'Logout'=>'Abmelden',
     'All' => 'Alle',
     'Delete' => 'Löschen',
-    'Show'=>'Anzeigen'
+    'Show'=>'Anzeigen',
+    'Start Download' =>'Download starten'
 );

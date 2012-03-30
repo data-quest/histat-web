@@ -35,7 +35,7 @@ class Controller_Cart extends Controller_Table {
     }
 
     public function action_delete() {
-
+        echo $this->id_hs;
         $cart = ORM::factory('cart')
                 ->where('user_id','=',$this->user->id)
                 ->where('ID_HS', '=', $this->id_hs)
@@ -45,7 +45,7 @@ class Controller_Cart extends Controller_Table {
             $cart->delete();
             $this->request->redirect(I18n::$lang . '/cart/index/success');
         }
-        $this->request->redirect(I18n::$lang . '/cart/index/error');
+      $this->request->redirect(I18n::$lang . '/cart/index/error');
     }
 
     public function action_add() {
