@@ -9,7 +9,7 @@
         </p>
         <?= Form::open('table/download/'.$action.'/'.$id_hs.'/'.$filter)?>
         <?= Form::select('uses', $options)?>
-        <?= Form::input('uses')?>
+        <?= Form::input('custom')?>
         <?= Form::submit('download', __('Start Download'),array('class'=>'button'))?>
         <?= Form::close()?>
     </div>

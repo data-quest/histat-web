@@ -93,11 +93,16 @@ $(function(){
     });
     $('#download select').change(function(){
         if($(this).val() === '-1'){
-            $('#download input[name="uses"]').slideDown(500);
+            $('#download input[name="custom"]').slideDown(500);
         }else{
-            $('#download input[name="uses"]').slideUp(500).val("");
+            $('#download input[name="custom"]').slideUp(500).val("");
         }
      
+    });
+    $('#download form').submit(function(){
+        $('#download').fadeOut(500, function(){
+            
+        });
     });
 });
 function scrollbar() {

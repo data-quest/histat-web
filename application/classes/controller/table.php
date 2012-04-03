@@ -121,9 +121,27 @@ class Controller_Table extends Controller_Data {
 
         if (HTTP_Request::POST == $this->request->method()) {
             $keymask = ORM::factory('keymask', $this->id_hs);
+            $details =  $keymask->getDetails($this->filter);
             $name = $keymask->project->Projektname;
-            $url = URL::site(I18n::$lang . '/table/' . $this->request->param('type') . '/' . $this->id_hs . '/' . $this->filter, 'http');
-            Request::factory()->redirect('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
+            $type = $this->request->param('type');
+            $uses = $this->request->post('uses');
+            if($uses == '-1')
+                $uses = $this->request->post('custom');
+            
+            
+            $download = ORM::factory('download');
+            $download->username = $this->user->username;
+            $download->projekt_id = $keymask->project->ID_Projekt;
+            $download->anzahl = count($details['keys']);
+            $download->type = $type;
+            $download->intended_use =$uses;
+            $download->za_nummer = $keymask->project->ZA_Studiennummer;
+            $download->name = $name;
+            $download->mkdate = time();
+            $download->create();
+
+            $url = URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
+            $this->request->redirect('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
         }
     }
 

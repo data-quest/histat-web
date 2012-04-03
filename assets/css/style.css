@@ -969,7 +969,7 @@ table tr td.even {
 #download form{
     text-align: center;
 }
-#download form input[name="uses"]{
+#download form input[name="custom"]{
     display:none;
     width:495px;
     margin: 5px 0;
