@@ -39,6 +39,7 @@
                 foreach ($main_navi as $item)
                     echo HTML::anchor($item['uri'], $item['active'] == 1 ? $item['title'] . '<span></span>' : $item['title'], $item['active'] == 1 ? array('class' => 'active') : null);
                 ?>
+                <?= $searchbar ?>
             </div>
             <div id="sub_navi">
                 <?php if (count($sub_navi) > 0): ?>

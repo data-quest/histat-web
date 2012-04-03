@@ -31,5 +31,8 @@ return array(
     'All' => 'Alle',
     'Delete' => 'Löschen',
     'Show'=>'Anzeigen',
-    'Start Download' =>'Download starten'
+    'Start Download' =>'Download starten',
+    'Searchtext' =>'Suchbegriff',
+    'search' =>'suchen',
+    'reset' =>'zurücksetzen'
 );

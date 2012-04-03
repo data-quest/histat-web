@@ -1,4 +1,6 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
+
+defined('SYSPATH') or die('No direct script access.');
 
 /**
  * Controller <b>Index</b> is the Main Controller
@@ -77,11 +79,11 @@ class Controller_Index extends Controller_Template {
      */
     protected $sub_navi;
     protected $xsrf;
-
     protected $desription = 'Startseite';
     protected $project = '';
     protected $table = '';
-    protected $table_filters ='';
+    protected $table_filters = '';
+
     public function before() {
         //Setup layout
         $this->template = 'index';
@@ -93,6 +95,7 @@ class Controller_Index extends Controller_Template {
         //Setup Scripts
         $this->scripts [] = 'jquery.min.js';
         $this->scripts [] = 'jquery-ui.min.js';
+        $this->scripts [] = 'search.js';
         $this->scripts [] = 'main.js';
 
         //Setup Cookie
@@ -115,16 +118,16 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('data', __('Data'));
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
-        
+
         //If user is not loged in
-        if(!$this->user){
+        if (!$this->user) {
             Auth::instance()->force_login('guest');
             $this->user = Auth::instance()->get_user();
         }
 
         //If user has roles login OR admin, display logout button
-        if(!$this->user->has_roles(array('login','admin'))){
-             $this->main_navi->add('auth', __('Login')); 
+        if (!$this->user->has_roles(array('login', 'admin'))) {
+            $this->main_navi->add('auth', __('Login'));
         }
         //Bind Assets Directories global to all Views
         View::bind_global('assets', $this->assets);
@@ -147,21 +150,23 @@ class Controller_Index extends Controller_Template {
         $view->partners = View::factory(I18n::$lang . '/partners')->render(); //render view/<lang>/partners.php
         //Render View and setup Content
         $this->content = $view->render();
-     
     }
-    private function page_name(){
+
+    private function page_name() {
         $c = $this->request->controller();
         $a = $this->request->action();
-        return urlencode('HISTAT/'.Kohana::$config->load('etracker')->get($c.'/'.$a).':'.$c.'/'.$a.($this->project ? '/'.$this->project :''));
+        return urlencode('HISTAT/' . Kohana::$config->load('etracker')->get($c . '/' . $a) . ':' . $c . '/' . $a . ($this->project ? '/' . $this->project : ''));
     }
+
     public function after() {
-       
+
         //Disable assign vars if template is not a view(ajax Request)
-        if($this->template instanceof View){
-            $values = DB::select(array(DB::expr('COUNT(Data)'),'amount'))->from('Daten__Aka')->as_object()->execute();
-            $times = DB::select(array(DB::expr('COUNT(ID_HS)'),'amount'))->from('Lit_ZR')->as_object()->execute();
-           
+        if ($this->template instanceof View) {
+            $values = DB::select(array(DB::expr('COUNT(Data)'), 'amount'))->from('Daten__Aka')->as_object()->execute();
+            $times = DB::select(array(DB::expr('COUNT(ID_HS)'), 'amount'))->from('Lit_ZR')->as_object()->execute();
+
             //Assign vars to layout
+            $this->template->searchbar = View::factory(I18n::$lang . '/searchbar')->render(); //render view/<lang>/searchbar.php
             $this->template->main_navi = $this->main_navi->get_items();
             $this->template->sub_navi = $this->sub_navi->get_items();
             $this->template->title = $this->title;
@@ -169,8 +174,8 @@ class Controller_Index extends Controller_Template {
             $this->template->styles = $this->styles;
             $this->template->scripts = $this->scripts;
             $this->template->xsrf = $this->xsrf;
-            $this->template->times = number_format($times[0]->amount,0,',','.');
-            $this->template->values = number_format($values[0]->amount,0,',','.');
+            $this->template->times = number_format($times[0]->amount, 0, ',', '.');
+            $this->template->values = number_format($values[0]->amount, 0, ',', '.');
             $this->template->date = date("d.m.Y", time());
             $this->template->user = $this->user;
             $this->template->pagename = $this->page_name();

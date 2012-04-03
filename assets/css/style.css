@@ -203,6 +203,7 @@ table tr td.even {
     text-decoration: none;
     color:#ffffff;
     padding:10px;
+    border:0px;
     font-size: 1.1em;
     background: url(../img/layout/hg-navi-orange.jpg) repeat-x left center;
 }
@@ -231,14 +232,14 @@ table tr td.even {
 
 #header .infos .histat{
     position: absolute;
-  right: 350px;
+    right: 350px;
     color: #58748f;
     font-size: 1.5em;
     top:10px;
 }
 #header .infos .histat .description{
     margin-left: 15px;
-       color: #58748f;
+    color: #58748f;
     font-size: 1em;
 }
 #header .infos .orange{
@@ -936,20 +937,20 @@ table tr td.even {
     left:0px;
 }
 #download .transparent{
-      /* IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 
-  /* IE 5-7 */
-  filter: alpha(opacity=50);
+    /* IE 5-7 */
+    filter: alpha(opacity=50);
 
-  /* Netscape */
-  -moz-opacity: 0.5;
+    /* Netscape */
+    -moz-opacity: 0.5;
 
-  /* Safari 1.x */
-  -khtml-opacity: 0.5;
+    /* Safari 1.x */
+    -khtml-opacity: 0.5;
 
-  /* Good browsers */
-  opacity: 0.5;
+    /* Good browsers */
+    opacity: 0.5;
 }
 #download .dialog{
     width:500px;
@@ -980,3 +981,89 @@ table tr td.even {
     cursor:pointer;
 }
 /*Style download end*/
+/*Style searchbar*/
+#searchbar {
+    float:right;
+    margin: 0px 0px;
+    margin-right: 30px;
+}
+
+#searchbar a{
+    width:30px;
+    height:30px;
+    display:block;
+    position: absolute;
+    margin:0px;
+    margin-right: -10px;
+    padding:0px;
+    border:0px;
+    background: url(../img/layout/icon-suchliste.png)  no-repeat center center;
+
+}
+#searchbar input[type="text"]{
+    background-color: #ffffff;
+    border: 0 none;
+    border-radius: 13px;
+    -webkit-border-radius: 13px;
+    -moz-border-radius: 13px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset, 0 1px 0 rgba(0, 0, 0, 0.3) inset;
+    color: #8C9194;
+    font-size: 12px;
+    height: 19px;
+    line-height: 1;
+    padding: 1px 30px 1px 30px;
+    width: 120px;
+}
+#searchbar input[type="submit"]{
+    position: absolute;
+    width:30px;
+    height:30px;
+    background: url(../img/layout/icon-lupe.png) no-repeat center center;
+    border:0px;
+    cursor: pointer;
+    margin-left: -30px;
+}
+#searchbar a:first-child{border:0px;padding:0px}
+/*Style end*/
+/*Extended Search*/
+#search > div{
+    padding:2em;
+}
+#search .left{
+    float:left;
+    width:50%;
+}
+#search p{
+    display:block;
+    margin:5px 0;
+}
+#search #slider{
+
+}
+.ui-slider{
+    width:90%;
+    height:100px;
+    background: #607F9E;
+    position: relative;
+}
+.ui-slider-range{
+    background:#FF8F00;
+    position: absolute;
+    height:3px;
+}
+.ui-slider-handle{
+
+    margin-left: -0.6em;
+    top: -0.3em;
+    background:#FF8F00;
+    cursor: pointer;
+    height: 1.2em;
+    position: absolute;
+    width: 1.2em;
+    z-index: 2;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset, 0 1px 0 rgba(0, 0, 0, 0.3) inset;
+}
+/*Extended Search end*/
