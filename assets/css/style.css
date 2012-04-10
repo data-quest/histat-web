@@ -205,6 +205,7 @@ table tr td.even {
     padding:10px;
     border:0px;
     font-size: 1.1em;
+    cursor: pointer;
     background: url(../img/layout/hg-navi-orange.jpg) repeat-x left center;
 }
 /*General Styles end*/
@@ -1045,6 +1046,7 @@ table tr td.even {
     height:100px;
     background: #607F9E;
     position: relative;
+    cursor: pointer;
 }
 .ui-slider-range{
     background:#FF8F00;

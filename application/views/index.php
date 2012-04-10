@@ -13,6 +13,7 @@
         <!-- without the express prior written permission of the copyright holder. -->
         <!-- BEGIN etracker code ETRC 3.0 -->
         <script type="text/javascript">document.write(String.fromCharCode(60)+"script type=\"text/javascript\" src=\"http"+("https:"==document.location.protocol?"s":"")+"://web.gesis.org/t.js?et=qPKGYV\">"+String.fromCharCode(60)+"/script>");</script>
+
         <title><?= $title ?></title>
     </head>
     <body>
@@ -33,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="main_navi">
                 <?php
                 foreach ($main_navi as $item)
@@ -75,11 +76,15 @@
             <div id="footer">
                 © GESIS <?= HTML::anchor('http://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date', array(':date' => $date)) ?>
             </div>
+            <!-- etracker PARAMETER 3.0 -->
             <script type="text/javascript">
                 var xsrf = "<?= $xsrf ?>";
                 var base_url = "<?= URL::base() ?>";
                 var et_pagename     = "<?= $pagename ?>";
             </script>
+            <!-- etracker PARAMETER END -->
+            <script type="text/javascript">_etc();</script>
+            <!-- etracker CODE END -->
         </div>
 
     </body>

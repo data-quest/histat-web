@@ -7,6 +7,8 @@ return array(
     'auth/index' =>'Anmelden',
     'auth/create'=>'Registrieren',
     'auth/send' => 'Neues Passwort versenden',
+    'search/index' =>'Schnellsuche',
+    'search/extended' =>'Erweiterte Suche',
     //Daten seiten
     'data/index' => 'Liste der neuen Studien',
     'data/top' =>'Liste der Top Studien',

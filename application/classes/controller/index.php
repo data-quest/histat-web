@@ -144,10 +144,10 @@ class Controller_Index extends Controller_Template {
         //Get the view home.php
         $view = View::factory('home');
         //Assign Vars to home.php
-        $view->welcome = View::factory(I18n::$lang . '/welcome')->render(); //render view/<lang>/welcome.php
-        $view->stats = View::factory(I18n::$lang . '/stats')->render(); //render view/<lang>/stats.php
-        $view->priorities = View::factory(I18n::$lang . '/priorities')->render(); //render view/<lang>/priorities.php
-        $view->partners = View::factory(I18n::$lang . '/partners')->render(); //render view/<lang>/partners.php
+        $view->welcome = View::factory(I18n::$lang . '/pages/welcome')->render(); //render view/<lang>/welcome.php
+        $view->stats = View::factory(I18n::$lang . '/pages/stats')->render(); //render view/<lang>/stats.php
+        $view->priorities = View::factory(I18n::$lang . '/pages/priorities')->render(); //render view/<lang>/priorities.php
+        $view->partners = View::factory(I18n::$lang . '/pages/partners')->render(); //render view/<lang>/partners.php
         //Render View and setup Content
         $this->content = $view->render();
     }
@@ -155,7 +155,7 @@ class Controller_Index extends Controller_Template {
     private function page_name() {
         $c = $this->request->controller();
         $a = $this->request->action();
-        return urlencode('HISTAT/' . Kohana::$config->load('etracker')->get($c . '/' . $a) . ':' . $c . '/' . $a . ($this->project ? '/' . $this->project : ''));
+        return ('HISTAT/' . urlencode(Kohana::$config->load('etracker')->get($c . '/' . $a)) . ':' . $c . '/' . $a . ($this->project ? '/' . $this->project : ''));
     }
 
     public function after() {
@@ -166,7 +166,7 @@ class Controller_Index extends Controller_Template {
             $times = DB::select(array(DB::expr('COUNT(ID_HS)'), 'amount'))->from('Lit_ZR')->as_object()->execute();
 
             //Assign vars to layout
-            $this->template->searchbar = View::factory(I18n::$lang . '/searchbar')->render(); //render view/<lang>/searchbar.php
+            $this->template->searchbar = View::factory(I18n::$lang . '/search/bar')->render(); //render view/<lang>/searchbar.php
             $this->template->main_navi = $this->main_navi->get_items();
             $this->template->sub_navi = $this->sub_navi->get_items();
             $this->template->title = $this->title;
@@ -178,7 +178,7 @@ class Controller_Index extends Controller_Template {
             $this->template->values = number_format($values[0]->amount, 0, ',', '.');
             $this->template->date = date("d.m.Y", time());
             $this->template->user = $this->user;
-            $this->template->pagename = $this->page_name();
+            $this->template->pagename = urlencode($this->page_name());
             //Main Layout will be rendered in after method
         }
         parent::after();
