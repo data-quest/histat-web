@@ -804,7 +804,25 @@ table tr td.even {
     min-height: 400px;
     padding:2em;
 }
+#table_details .name .buttons{
+   float:right;
+   display: none;
+}
+#table_details .name .download_icons:hover .buttons{
+    display:block;
+}
 
+#table_details .name .download{
+    float:right;
+    margin:0 20px;
+    padding:0 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background:#FF7E00;
+}
+#table_details .name .download.disabled{
+     background:#BABEBF;
+}
 #table_details div.details .name{
     background:#72777a;
     color:#ffffff;

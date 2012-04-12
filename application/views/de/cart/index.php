@@ -33,7 +33,7 @@
                 <?php endforeach; ?>
                                             </ul>
                                         </li>
-                                        <li><?= HTML::anchor('cart/delete/' . $tableID . '/' . $filter, __('Delete')) ?> | <?= HTML::anchor('table/details/' . $tableID . '/' . $filter.'#thead', __('Show'), array('target' => 'blank')) ?> </li>
+                                        <li><?= HTML::anchor('cart/delete/' . $tableID . '/' . $filter, __('Delete')) ?> | <?= HTML::anchor('table/details/' . $tableID . '/' . $filter.'#tabelle', __('Show'), array('target' => 'blank')) ?> </li>
             <?php endforeach; ?>
                                 </ul>
                             </li>

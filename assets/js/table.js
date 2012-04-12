@@ -9,7 +9,9 @@ $(function(){
     var thead = $('#thead');
     var tdata = $('#tdata');
     var scrollBar = scrollbar();
+
     
+  
     if( tdata.width() < scrollY.width()){
         scrollBar.w = 0;
     }

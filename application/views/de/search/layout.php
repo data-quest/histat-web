@@ -16,9 +16,6 @@
             <p><?= Form::checkbox('title',NULL,(bool)Arr::get($_POST,'title',TRUE)) ?> In den Tabellentiteln und den Variablenbezeichnungen der Datentabellen</p>
             <p><?= Form::checkbox('source',NULL,(bool)Arr::get($_POST,'source',TRUE)) ?> In dem Quellenteil der Datentabellen (z.B. Primärforscher, Institutionen, etc.)</p>
             <p><?= Form::checkbox('description',NULL,(bool)Arr::get($_POST,'description',TRUE)) ?> In den Studienbeschreibungen</p>
-            <p><?= Form::checkbox('all',NULL,(bool)Arr::get($_POST,'all',TRUE)) ?> Überall suchen</p>
-
-
             <?= Form::submit('search', __('search'), array('class' => 'button','style'=>'width:150px')) ?>
             <?= Form::reset('reset', __('reset'), array('class' => 'button','style'=>'width:150px')) ?>
 

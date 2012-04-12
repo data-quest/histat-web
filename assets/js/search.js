@@ -11,7 +11,7 @@ $(function(){
         range: true,
         min: 1200,
         max: 2200,
-        step:100,
+        step:10,
         animate:true,
         values:[value.min.val(),value.max.val()],
         slide: function( event, ui ) {

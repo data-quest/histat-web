@@ -23,7 +23,7 @@
                 <?php $index = $row + $maxRows * $maxCols * $table; ?>
                 <tr >
                     <?php for ($col = 0; $col < $maxCols; $col++): ?>
-                        <td valign="top" style="width:30%;border:0px"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS . '#thead', $keymasks[$index]->Name) : ''; ?></td>
+                        <td valign="top" style="width:30%;border:0px"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS . '#tabelle', $keymasks[$index]->Name) : ''; ?></td>
                         <?php $index +=$maxRows; ?>
                     <?php endfor; ?>
 

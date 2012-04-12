@@ -1,5 +1,3 @@
 <div id="search_result">
-    <?php foreach($results as $result): ?>
-   
-    <?php endforeach; ?>
+  <?= Debug::vars($results)?>
 </div>

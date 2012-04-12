@@ -1,22 +1,25 @@
 <div id="table_details" >
     <h1>Tabellenansicht der Studie</h1>
     <?= $project ?>
-
+    <?php $data ? $download = 'download enabled' : $download = 'download disabled' ?>
 
     <div class="details">
-        <div style="margin:auto;padding:15px 0;text-align: center">
-            <?php $data ? $class = 'button' : $class = 'button disabled' ?>
-            <?php $data ? $id = array('class' => $class, 'id' => 'cart') : $id = array('class' => $class) ?>
-            <?= HTML::anchor($data ? 'download/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLS', array('class' => $class)) ?>
 
-            <?= HTML::anchor($data ? 'download/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLSX', array('class' => $class)) ?>
-            <?= HTML::anchor($data ? 'download/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .CSV', array('class' => $class)) ?>
-            <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter.'#', 'In den Warenkorb', $id) ?>
-
-            <div class="clear"></div>
+        <div class="name" id="tabelle"><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>) 
+            <div class="download_icons"style="float:right">
+                <div class="<?= $download ?>"><?= __('Download') ?></div>
+                <div class="buttons" >
+                    <?php $data ? $class = 'button' : $class = 'button disabled' ?>
+                    <?php $data ? $id = array('class' => $class, 'id' => 'cart') : $id = array('class' => $class) ?>
+                    <?= HTML::anchor($data ? 'download/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLS', array('class' => $class)) ?>
+                    <?= HTML::anchor($data ? 'download/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLSX', array('class' => $class)) ?>
+                    <?= HTML::anchor($data ? 'download/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .CSV', array('class' => $class)) ?>
+                    <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter . '#tabelle', 'In den Warenkorb', $id) ?>
+                </div> 
+               
+            </div>
         </div>
-        <div class="name" id="tabelle"><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div>
-        <?= Form::open('table/details/' . $keymask->ID_HS . '#thead') ?>
+        <?= Form::open('table/details/' . $keymask->ID_HS . '#tabelle') ?>
 
 
         <div class="scrollX">
@@ -30,14 +33,13 @@
                             <?php
                             $k = array_keys($detail);
                             $beschreibung = $detail[$k[0]]->CodeBeschreibung;
-                             $selected = Arr::get($post, $i, "all");
+                            $selected = Arr::get($post, $i, "all");
                             echo Form::hidden('filter_text[]', $beschreibung . ' : ' . Arr::get($filters[$codeKurz], $selected, __('All')));
                             echo Form::hidden('id', $keymask->ID_HS);
                             echo Form::hidden('filter_string', $filter);
                             $filters[$codeKurz]["all"] = $beschreibung . ' *';
 
                             $filters_reversed = array_reverse(Arr::get($filters, $codeKurz));
-                           
                             ?>
                             <?= Form::select('filter[]', $filters_reversed, $selected, array('style' => 'width:100px')) ?>
                         </td>

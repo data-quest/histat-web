@@ -74,31 +74,52 @@ class Model_Project extends ORM {
     }
 
     public function search($post = NULL) {
-        
-        
-        $result = DB::select('p.ID_Projekt', 'p.Projektname', 'p.Projektbeschreibung', 'p.Anmerkungsteil', 'p.Untergliederung')
-                        ->from(array('Aka_Projekte', 'p'))
-                        ->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
-                        ->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Anmerkungsteil, Untergliederung)"), ' ', DB::expr("AGAINST('".Arr::get($post, 'text','')."' IN BOOLEAN MODE)"))
-                        ->as_object()->execute();
 
-        echo Debug::vars($post);
-        echo Debug::vars($result);
+        $theme = Arr::get($post, 'theme');
+        if ($theme === '-1')
+            $theme = null;
+
+        $text = Arr::get($post, 'text', '');
+     
+ 
+      
+        $db = DB::select('p.ID_Projekt', 'p.Projektname', 'p.Projektbeschreibung', 'p.Anmerkungsteil', 'p.Untergliederung')
+                ->from(array('Aka_Projekte', 'p'));
+        if ($theme) {
+            $db->where('p.ID_Thema', '=', $theme);
+        } else {
+            $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
+        }
+
+
+
+        $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Anmerkungsteil, Untergliederung)"), ' ', DB::expr("AGAINST('" . Arr::get($post, 'text', '') . "' IN BOOLEAN MODE)"))
+              ;
+
+        //echo '<pre>'.print_r($db->execute(),true).'</pre>';
+        //echo Debug::vars($data);
+       // echo Debug::vars($post);
+
         /*
          * SELECT ID_Projekt, Projektname, Projektbeschreibung, Anmerkungsteil, Untergliederung FROM Aka_Projekte
           WHERE MATCH(Projektname, Projektbeschreibung, Anmerkungsteil, Untergliederung)
           AGAINST ('Getreide' IN BOOLEAN MODE) AND ID_Thema!='14'
          * 
-         * SELECT asx.ID_HS,asx.Schluessel,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem,MD5(Quelle) as q_index FROM Aka_Projekte INNER JOIN aka_schluesselindex asx USING(ID_Projekt)
-          INNER JOIN Lit_ZR USING (ID_HS,Schluessel) WHERE
+         * SELECT asx.ID_HS,asx.Schluessel,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem,MD5(Quelle) as q_index 
+         * FROM Aka_Projekte INNER JOIN aka_schluesselindex asx USING(ID_Projekt)
+          INNER JOIN Lit_ZR
+         * USING (ID_HS,Schluessel) 
+         * WHERE
           ID_Thema!='14' AND MATCH(Quelle)
           AGAINST ('Getreide' IN BOOLEAN MODE)
          * 
-         * SELECT asx.ID_HS,asx.Schluessel,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem FROM Aka_Projekte INNER JOIN aka_schluesselindex asx USING(ID_Projekt) WHERE 
+         * SELECT asx.ID_HS,asx.Schluessel,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem FROM Aka_Projekte 
+         * INNER JOIN aka_schluesselindex asx 
+         * USING(ID_Projekt) WHERE 
           ID_Thema!='14' AND MATCH(schluessel_index,hs_name)
           AGAINST ('Getreide' IN BOOLEAN MODE)
          */
-        return $result;
+        return array();
     }
 
 }
