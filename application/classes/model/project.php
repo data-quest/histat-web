@@ -80,17 +80,18 @@ class Model_Project extends ORM {
             $theme = null;
 
         $text = Database::instance()->quote(Arr::get($post, 'text', ''));
-        $title = Arr::get($post, 'title', TRUE);
-        $source = Arr::get($post, 'source', TRUE);
-        $description = Arr::get($post, 'description', TRUE);
+        $title = Arr::get($post, 'title', NULL);
+        $source = Arr::get($post, 'source', NULL);
+        $description = Arr::get($post, 'description', NULL);
         $min = Arr::get($post, 'min', 1200);
         $max = Arr::get($post, 'max', 2000);
         
         $result = array();
+       
         if ($title) {
            
             $db = DB::select('p.ID_Projekt')
-                    ->distinct(TRUE)
+                   
                     ->from(array('Aka_Projekte', 'p'))
                     ->join(array('aka_schluesselindex', 'asx'), 'INNER')
                     ->using('ID_Projekt')
@@ -108,14 +109,15 @@ class Model_Project extends ORM {
                     
 
             foreach ($db->as_object()->execute() as $value) {
-                $result[$value->ID_Projekt] = $value->ID_Projekt;
+           
+                $result[$value->ID_Projekt]['data'] = true;
             }
             
         }
 
         if ($source) {
             $db = DB::select('p.ID_Projekt')
-                    ->distinct(TRUE)
+                   
                     ->from(array('Aka_Projekte', 'p'))
                     ->join(array('aka_schluesselindex', 'asx'), 'INNER')
                     ->using('ID_Projekt')
@@ -133,13 +135,13 @@ class Model_Project extends ORM {
             }
             $db->where(DB::expr("MATCH(Quelle)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)",array(':text'=>$text)));
             foreach ($db->as_object()->execute() as $value) {
-                $result[$value->ID_Projekt] = $value->ID_Projekt;
+                $result[$value->ID_Projekt]['data'] = true;
             }
         }
 
         if ($description) {
             $db = DB::select('p.ID_Projekt')
-                    ->distinct(TRUE)
+                 
                     ->from(array('Aka_Projekte', 'p'))
                     ->join(array('aka_schluesselindex', 'asx'), 'INNER')
                     ->using('ID_Projekt')
@@ -155,7 +157,7 @@ class Model_Project extends ORM {
             }
             $db->where(DB::expr("MATCH(schluessel_index,hs_name)"), ' ',DB::expr("AGAINST(:text IN BOOLEAN MODE)",array(':text'=>$text)));
             foreach ($db->as_object()->execute() as $value) {
-                $result[$value->ID_Projekt] = $value->ID_Projekt;
+               $result[$value->ID_Projekt]['description'] = true;
             }
         }
 

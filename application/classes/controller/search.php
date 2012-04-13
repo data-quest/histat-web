@@ -24,6 +24,7 @@ class Controller_Search extends Controller_Data {
         $this->layout->checked = true;
         $this->layout->themes = $themes;
         $results = array();
+        $data = array();
         if (HTTP_Request::POST == $this->request->method()) {
             $this->show = true;
             $orm = ORM::factory('project');
@@ -31,11 +32,11 @@ class Controller_Search extends Controller_Data {
            
             if(count($results) > 0){
               
-               $results = $orm->where('ID_Projekt','IN',$results)->find_all();
+               $data = $orm->where('ID_Projekt','IN',  array_keys($results))->find_all();
              
             }
              
-            $this->results =$results;
+            $this->results =array("results"=>$results,"data"=>$data);
         }
     }
 

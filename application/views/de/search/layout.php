@@ -8,7 +8,8 @@
             <div id="slider"></div>
             <?= Form::hidden('min', HTML::chars(Arr::get($_POST, 'min', 1200))) ?>
             <?= Form::hidden('max', HTML::chars(Arr::get($_POST, 'max', 2200))) ?>
-            <p>Suchbergriff(e):    <?= Form::input('text', Arr::get($_POST, 'text', __('Searchtext'))) ?></p>
+            <p>Suchbergriff(e):    <?= Form::input('text', Arr::get($_POST, 'text', __('Searchtext')),array('style'=>'width:310px')) ?></p>
+            
             <p>Thesaurus aktivieren :<?= Form::checkbox('thesaurus', NULL, (bool) Arr::get($_POST, 'thesaurus', FALSE)) ?></p>
         </div>
         <div class="left">
