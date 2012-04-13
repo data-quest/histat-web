@@ -206,6 +206,7 @@ table tr td.even {
     border:0px;
     font-size: 1.1em;
     cursor: pointer;
+    max-height: 35px;
     background: url(../img/layout/hg-navi-orange.jpg) repeat-x left center;
 }
 /*General Styles end*/
@@ -1045,7 +1046,7 @@ table tr td.even {
 #searchbar a:first-child{border:0px;padding:0px}
 /*Style end*/
 /*Extended Search*/
-#search > div{
+#search .extended{
     padding:2em;
 }
 #search .left{
@@ -1058,6 +1059,10 @@ table tr td.even {
 }
 #search #slider{
 
+}
+#search_result .result{
+    list-style: none inside;
+    margin-top:1em;
 }
 .ui-slider{
     width:90%;

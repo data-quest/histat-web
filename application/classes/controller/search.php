@@ -9,7 +9,7 @@ class Controller_Search extends Controller_Data {
 
     private $layout;
     private $results = array();
-
+    private $show = false;
     public function before() {
         parent::before();
         $this->layout = View::factory(I18n::$lang . '/search/layout');
@@ -21,10 +21,11 @@ class Controller_Search extends Controller_Data {
         foreach ($orm->order_by("Thema")->find_all() as $theme) {
             $themes[$theme->ID_Thema] = $theme->Thema;
         }
+        $this->layout->checked = true;
         $this->layout->themes = $themes;
         $results = array();
         if (HTTP_Request::POST == $this->request->method()) {
-
+            $this->show = true;
             $orm = ORM::factory('project');
             $results = $orm->search($this->request->post());
            
@@ -44,13 +45,14 @@ class Controller_Search extends Controller_Data {
 
     public function action_extended() {
         if (HTTP_Request::POST == $this->request->method()) {
-          
+            $this->layout->checked = false;
         }
     }
 
     public function after() {
         $view = View::factory(I18n::$lang . '/search/result');
         $view->results = $this->results;
+        $view->show = $this->show;
         $this->layout->results = $view->render();
         $this->content = $this->layout->render();
         parent::after();
