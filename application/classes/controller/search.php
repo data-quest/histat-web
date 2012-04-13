@@ -22,10 +22,19 @@ class Controller_Search extends Controller_Data {
             $themes[$theme->ID_Thema] = $theme->Thema;
         }
         $this->layout->themes = $themes;
+        $results = array();
         if (HTTP_Request::POST == $this->request->method()) {
 
             $orm = ORM::factory('project');
-            $this->results = $orm->search($this->request->post());
+            $results = $orm->search($this->request->post());
+           
+            if(count($results) > 0){
+              
+               $results = $orm->where('ID_Projekt','IN',$results)->find_all();
+             
+            }
+             
+            $this->results =$results;
         }
     }
 
@@ -35,20 +44,7 @@ class Controller_Search extends Controller_Data {
 
     public function action_extended() {
         if (HTTP_Request::POST == $this->request->method()) {
-            $orm = ORM::factory('project');
-            $orm->search();
-            $this->results = array(
-                '12345' => array(
-                    'header' => array(
-                    ),
-                    'source' => array(),
-                    'details' => array()
-                ),
-                'asdasd123' => array(
-                ),
-                'asd23123' => array(
-                )
-            );
+          
         }
     }
 
