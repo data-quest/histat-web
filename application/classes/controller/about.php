@@ -5,7 +5,7 @@
 class Controller_About extends Controller_Index {
     
     public function action_index(){
-        $view = View::factory(I18n::$lang.'/about');
+        $view = View::factory(I18n::$lang.'/pages/about');
         $this->content = $view->render();
     }
 }

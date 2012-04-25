@@ -5,20 +5,22 @@
 
     <div class="details">
 
-        <div class="name" id="tabelle"><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>) 
-            <div class="download_icons"style="float:right">
+        <div class="name" id="tabelle"><div ><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
+            <div class="download_icons">
                 <div class="<?= $download ?>"><?= __('Download') ?></div>
-                <div class="buttons" >
+                <div class="buttons" style="position: absolute" >
                     <?php $data ? $class = 'button' : $class = 'button disabled' ?>
                     <?php $data ? $id = array('class' => $class, 'id' => 'cart') : $id = array('class' => $class) ?>
-                    <?= HTML::anchor($data ? 'download/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLS', array('class' => $class)) ?>
-                    <?= HTML::anchor($data ? 'download/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .XLSX', array('class' => $class)) ?>
-                    <?= HTML::anchor($data ? 'download/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, 'Download: .CSV', array('class' => $class)) ?>
+                    <?= HTML::anchor($data ? 'download/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.XLS', array('class' => $class)) ?>
+                    <?= HTML::anchor($data ? 'download/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.XLSX', array('class' => $class)) ?>
+                    <?= HTML::anchor($data ? 'download/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.CSV', array('class' => $class)) ?>
                     <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter . '#tabelle', 'In den Warenkorb', $id) ?>
                 </div> 
                
             </div>
+            <div class="clear"></div>
         </div>
+        
         <?= Form::open('table/details/' . $keymask->ID_HS . '#tabelle') ?>
 
 

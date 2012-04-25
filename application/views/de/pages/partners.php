@@ -2,54 +2,26 @@
 <br/>
 <ul class="normal">
     <li>
-        <strong>Statistisches Bundesamt</strong>
-        <br/>
-        Gustav-Stresemann-Ring 11
-        <br/>
-        65189 Wiesbaden
-    </li>
-    <li>
-        <strong>
-            Lehrstuhl für Methodenlehre
-            <br/>
-            Prof. Dr. Volker Müller-Benedict
-        </strong>
-        <br/>
+        <b> Prof. Dr. Volker Müller-Benedict</b><br/>
+        <b> Lehrstuhl für Methodenlehre</b><br/>
         Universität Flensburg
-        <br/>
-        Auf dem Campus 1
-        <br/>
-        24943 Flensburg
     </li>
     <li>
-        <strong>
-            Prof. Dr. Carsten Burhop
-            <br/>
-            Universität zu Köln
-            <br/>
-            Seminar für Wirtschafts- und Unternehmensgeschichte
-        </strong>
-        <br/>
-        Albertus-Magnus-Platz
-        <br/>
-        50923 Köln
+        <b>Prof. Dr. Carsten Burhop</b><br/>
+        <b> Seminar für Wirtschafts- und Unternehmensgeschichte</b><br/>
+        Universität zu Köln
     </li>
     <li>
-        <strong>
-            Prof. Dr. Claude Diebolt
-            <br/>
-            Directuer de Recherche au CNRS (Research Professor in Economics)
-            <br/>
-            BETA/CNRS (UMR 7522)
-        </strong>
-        <br/>
+        <b>Prof. Dr. Claude Diebolt</b><br/>
+        <b>BETA/CNRS (UMR 7522)</b><br/>
         Université de Strasbourg
-        <br/>
-        61 avenue de la Forêt Noire
-        <br/>
-        FR-67085 STRASBOURG Cedex
+
     </li>
 </ul>
 <br/>
-<h3>technische Realisation</h3>
-<?= HTML::anchor("http://data-quest.de/",HTML::image("http://www.data-quest.de/fileadmin/dq_homepage/assets/bilder/logo.png",array("alt"=>"http://data-quest.de")),array(),"http")?>
+<h3>Layout:</h3>
+<?= HTML::anchor("http://metavor.de/", HTML::image("http://metavor.de/images/logo-trans.png", array("alt" => "http://metavor.de/")), array(), "http") ?>
+
+<br/>
+<h3>Technische Realisation:</h3>
+<?= HTML::anchor("http://data-quest.de/", HTML::image("http://www.data-quest.de/fileadmin/dq_homepage/assets/bilder/logo.png", array("alt" => "http://data-quest.de")), array(), "http") ?>
