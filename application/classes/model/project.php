@@ -73,7 +73,7 @@ class Model_Project extends ORM {
                         ->execute();
     }
 
-    public function search($post = NULL, $id = null) {
+    public function search($post = NULL) {
 
         $theme = Arr::get($post, 'theme');
         if ($theme === '-1')
@@ -85,13 +85,20 @@ class Model_Project extends ORM {
         $description = Arr::get($post, 'description', NULL);
         $min = Arr::get($post, 'min', 1200);
         $max = Arr::get($post, 'max', 2000);
-        
+        $id = Arr::get($post, 'id', NULL);
+        $select = 'p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,p.ID_Thema';
         $result = array();
-       
+
+        Search::set_search_query(Arr::get($post, 'text', ''));
+
         if ($title) {
-           
-            $db = DB::select('p.ID_Projekt')
-                   
+
+            if ($id) {
+                $select = 'asx.ID_HS,asx.Schluessel,asx.hs_name,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem';
+            }
+
+            //schluessel index match
+            $db = DB::select($select)
                     ->from(array('Aka_Projekte', 'p'))
                     ->join(array('aka_schluesselindex', 'asx'), 'INNER')
                     ->using('ID_Projekt')
@@ -105,19 +112,106 @@ class Model_Project extends ORM {
             } else {
                 $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
             }
-            $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Anmerkungsteil, Untergliederung)"), ' ', DB::expr('AGAINST(:text IN BOOLEAN MODE)',array(':text'=>$text)));
-                    
-
+            $db->where(DB::expr("MATCH(schluessel_index)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
             foreach ($db->as_object()->execute() as $value) {
+                if ($id) {
+                    $result['tables'][$value->ID_HS]['name'] = $value->hs_name;
+                    $result['tables'][$value->ID_HS]['keys'][$value->Schluessel] = $value->Schluessel;
+                    $result['tables'][$value->ID_HS]['filter'] = '________________________________';
+                  
+                } else {
+                    $result[$value->ID_Projekt] = Arr::get($result, $value->ID_Projekt, array(
+                                'name' => $value->Projektname,
+                                'za' => $value->ZA_Studiennummer,
+                                'theme' => $value->ID_Thema
+                            ));
+                    $result[$value->ID_Projekt]['data'] = true;
+                }
+            }
            
-                $result[$value->ID_Projekt]['data'] = true;
+            if($id){
+              foreach(Arr::get($result,'tables',array()) as $id_hs => $value){
+                   $result['tables'][$id_hs]['filter'] = Search::create_filter($value['keys']);
+              }  
             }
             
+            
+            //hs_name match
+
+            $db = DB::select($select)
+                    ->from(array('Aka_Projekte', 'p'))
+                    ->join(array('aka_schluesselindex', 'asx'), 'INNER')
+                    ->using('ID_Projekt')
+                    ->where('asx.min_jahr_sem', '>=', $min)
+                    ->where('asx.max_jahr_sem', '<=', $max);
+            if ($id) {
+                $db->where('p.ID_Projekt', '=', $id);
+            }
+            if ($theme) {
+                $db->where('p.ID_Thema', '=', $theme);
+            } else {
+                $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
+            }
+            $db->where(DB::expr("MATCH(hs_name)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
+            foreach ($db->as_object()->execute() as $value) {
+                if ($id) {
+                    $result['tables'][$value->ID_HS]['name'] = $value->hs_name;
+                    $result['tables'][$value->ID_HS]['keys'][] = $value->Schluessel;
+                    //$result['tables'][$value->ID_HS]['values'][] = $value;
+                } else {
+                    $result[$value->ID_Projekt] = Arr::get($result, $value->ID_Projekt, array(
+                                'name' => $value->Projektname,
+                                'za' => $value->ZA_Studiennummer,
+                                'theme' => $value->ID_Thema
+                            ));
+                    $result[$value->ID_Projekt]['data'] = true;
+                }
+            }
+        }
+        if ($description) {
+            if ($id) {
+                $select = 'p.ID_Projekt,p.Projektname, p.Projektbeschreibung, p.Anmerkungsteil, p.Untergliederung';
+            }
+            $db = DB::select($select)
+                    ->from(array('Aka_Projekte', 'p'))
+                    ->join(array('aka_schluesselindex', 'asx'), 'INNER')
+                    ->using('ID_Projekt')
+                    ->where('asx.min_jahr_sem', '>=', $min)
+                    ->where('asx.max_jahr_sem', '<=', $max);
+            if ($id) {
+                $db->where('p.ID_Projekt', '=', $id);
+            }
+            if ($theme) {
+                $db->where('p.ID_Thema', '=', $theme);
+            } else {
+                $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
+            }
+            $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Anmerkungsteil, Untergliederung)"), ' ', DB::expr('AGAINST(:text IN BOOLEAN MODE)', array(':text' => $text)));
+
+
+            foreach ($db->as_object()->execute() as $value) {
+
+                if ($id) {
+                    $result['Projektname'] = Search::get_search_excerpt($value->Projektname);
+                    $result['Projektbeschreibung'] = Search::get_search_excerpt($value->Projektbeschreibung);
+                    $result['Anmerkungsteil'] = Search::get_search_excerpt($value->Anmerkungsteil);
+                    $result['Untergliederung'] = Search::get_search_excerpt($value->Untergliederung);
+                } else {
+                    $result[$value->ID_Projekt] = Arr::get($result, $value->ID_Projekt, array(
+                                'name' => $value->Projektname,
+                                'za' => $value->ZA_Studiennummer,
+                                'theme' => $value->ID_Thema
+                            ));
+                    $result[$value->ID_Projekt]['description'] = true;
+                }
+            }
         }
 
         if ($source) {
-            $db = DB::select('p.ID_Projekt')
-                   
+            if ($id) {
+                $select = 'asx.ID_HS,asx.hs_name,asx.Schluessel,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem,MD5(Quelle) as q_index';
+            }
+            $db = DB::select($select)
                     ->from(array('Aka_Projekte', 'p'))
                     ->join(array('aka_schluesselindex', 'asx'), 'INNER')
                     ->using('ID_Projekt')
@@ -133,33 +227,25 @@ class Model_Project extends ORM {
             } else {
                 $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
             }
-            $db->where(DB::expr("MATCH(Quelle)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)",array(':text'=>$text)));
+            $db->where(DB::expr("MATCH(Quelle)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
             foreach ($db->as_object()->execute() as $value) {
-                $result[$value->ID_Projekt]['data'] = true;
+
+                if ($id) {
+                    $result['tables'][$value->ID_HS]['name'] = $value->hs_name;
+                    $result['tables'][$value->ID_HS]['keys'][] = $value->Schluessel;
+                    //$result['tables'][$value->ID_HS]['values'][] = $value;
+                } else {
+                    $result[$value->ID_Projekt] = Arr::get($result, $value->ID_Projekt, array(
+                                'name' => $value->Projektname,
+                                'za' => $value->ZA_Studiennummer,
+                                'theme' => $value->ID_Thema
+                            ));
+                    $result[$value->ID_Projekt]['data'] = true;
+                }
             }
         }
 
-        if ($description) {
-            $db = DB::select('p.ID_Projekt')
-                 
-                    ->from(array('Aka_Projekte', 'p'))
-                    ->join(array('aka_schluesselindex', 'asx'), 'INNER')
-                    ->using('ID_Projekt')
-                    ->where('asx.min_jahr_sem', '>=', $min)
-                    ->where('asx.max_jahr_sem', '<=', $max);
-            if ($id) {
-                $db->where('p.ID_Projekt', '=', $id);
-            }
-            if ($theme) {
-                $db->where('p.ID_Thema', '=', $theme);
-            } else {
-                $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
-            }
-            $db->where(DB::expr("MATCH(schluessel_index,hs_name)"), ' ',DB::expr("AGAINST(:text IN BOOLEAN MODE)",array(':text'=>$text)));
-            foreach ($db->as_object()->execute() as $value) {
-               $result[$value->ID_Projekt]['description'] = true;
-            }
-        }
+
 
         return $result;
     }

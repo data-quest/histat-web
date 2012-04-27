@@ -1,6 +1,6 @@
 <div id="search">
     <div class="extended">
-        <?= Form::open('search/extended') ?>
+        <?= Form::open('search/extended',array('id'=>'search_form')) ?>
         <h1>Erweiterte Suche</h1>
         <div class="left">
             <p>Suche beschränken auf ein Thema: <?= Form::select('theme', $themes, HTML::chars(Arr::get($_POST, 'theme', 'all')), array('style' => 'width:205px')) ?></p>
@@ -11,7 +11,7 @@
             <div class="skala"></div>
             <?= Form::hidden('min', HTML::chars(Arr::get($_POST, 'min', 1200))) ?>
             <?= Form::hidden('max', HTML::chars(Arr::get($_POST, 'max', 2200))) ?>
-            <p>Suchbergriff(e) :    <?= Form::input('text', Arr::get($_POST, 'text', __('Searchtext')),array('style'=>'width:310px')) ?></p>
+            <p>Suchbegriff(e) :    <?= Form::input('text', Arr::get($_POST, 'text', __('Searchtext')),array('style'=>'width:310px')) ?></p>
             
             <p>Thesaurus aktivieren :<?= Form::checkbox('thesaurus', NULL, (bool) Arr::get($_POST, 'thesaurus', FALSE)) ?></p>
         </div>

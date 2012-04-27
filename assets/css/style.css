@@ -9,6 +9,9 @@
 .clear{
     clear:both;
 }
+.nopadding{
+    padding: 0px;
+}
 #content .debug{
     color: #000000;
 }
@@ -1091,20 +1094,56 @@ table tr td.even {
     margin-bottom:10px;
 }
 #search_result .result{
-
+    position: relative;
     margin-top:1em;
 }
+#search_result .result .notfound{
+    background:url(../img/layout/details-transparent-rechts.png) #E6E6E6 no-repeat center right;
 
-#search_result .result .found{
-    background:url(../img/layout/verlauf-orange_150x5.jpg) repeat-x center left;
+}
+#search_result .result .found.show{
+    background:url(../img/layout/button-table-details-right.png) repeat-x center right;
     color:white;
     cursor: pointer;
+
 }
-#search_result .result .details{
+#search_result .result .found.hide{
+    background:url(../img/layout/button-table-details-left.png) repeat-x center left;
+    color:white;
+    cursor: pointer;
+    padding-left: 30px;
+    padding-right:0px;
+}
+#search_result .result .details.show{
     min-width: 80px;
+    background:url(../img/layout/button-table-details2-right.png) repeat-x center right;
+    color:#FFFFFF;
+    cursor:pointer;
 }
-#search_result .result .tables{
+#search_result .result .values{
     border:0px;
+}
+#search_result .result .tables div{
+   padding:15px 10px;
+}
+#search_result .result .tables .link{
+    background: url(../img/layout/details.png) center center;
+    padding:2px;
+    width: 80px;
+    margin-right:20px;
+    float:right;
+}
+#search_result .result .tables .link a{
+    background:url(../img/layout/content-pfeil.png) no-repeat left center;
+     color:#FFFFFF;
+     font-weight: bold;
+     padding-left: 20px;
+}
+#search_result .result td span{
+    display:block;
+    position: relative;
+    width:100%;
+    height:auto;
 }
 .ui-slider{
     width:90%;

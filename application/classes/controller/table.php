@@ -99,7 +99,7 @@ class Controller_Table extends Controller_Data {
             $data = $keymask->getData($this->filter);
         }
 
-
+       
         $view->details = $details['details'];
         $view->keys = $details['keys'];
         $view->data = $data;

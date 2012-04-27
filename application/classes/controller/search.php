@@ -39,12 +39,8 @@ class Controller_Search extends Controller_Data {
             $orm = ORM::factory('project');
             $results = $orm->search($this->request->post());
 
-            if (count($results) > 0) {
 
-                $data = $orm->where('ID_Projekt', 'IN', array_keys($results))->find_all();
-            }
-
-            $this->results = array("results" => $results, "data" => $data);
+            $this->results = $results;
         }
     }
 
@@ -54,21 +50,28 @@ class Controller_Search extends Controller_Data {
         if (HTTP_Request::POST == $this->request->method()) {
             $this->layout->checked = false;
             $this->show = true;
-     
+
             $orm = ORM::factory('project');
             $results = $orm->search($this->request->post());
+           
+           
+       
+            $this->results = $results;
+        }
+    }
 
-            if (count($results) > 0) {
+    public function action_detailed() {
+        $this->auto_render = false;
+        if (HTTP_Request::POST == $this->request->method()) {
 
-                $data = $orm->where('ID_Projekt', 'IN', array_keys($results))->find_all();
-            }
-
-            $this->results = array("results" => $results, "data" => $data);
+            $orm = ORM::factory('project');
+            echo json_encode($orm->search($this->request->post()));
         }
     }
 
     public function after() {
         $view = View::factory(I18n::$lang . '/search/result');
+        
         $view->results = $this->results;
         $view->show = $this->show;
         $this->layout->results = $view->render();

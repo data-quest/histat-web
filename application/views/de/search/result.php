@@ -5,34 +5,45 @@
             <h1>
                 Suchergebnisse
             </h1>
-            <p> <?= count($results["results"]) ?> Studien(n) mit Suchergebnissen: </p>
+            <p> <?= count($results) ?> Studien(n) mit Suchergebnissen: </p>
         <?php endif; ?>
         <?php if (count($results) > 0): ?>
             <table class="result">
 
-                <?php foreach ($results["data"] as $project) : ?>
-                    <?php $hasTables = Arr::get($results["results"][$project->ID_Projekt], "data", false); ?>
-                    <?php $hasDescription = Arr::get($results["results"][$project->ID_Projekt], "description", false); ?>
+                <?php foreach ($results as $id => $project) : ?>
+               
+                    <?php $hasTables = Arr::get($project, "data", false); ?>
+                    <?php $hasDescription = Arr::get($project, "description", false); ?>
                     <tr>
-                        <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>
-                        <td class="even"><?= $project->theme->Thema ?></td>
-                        <td width="50%"><?= $project->Projektname ?></td>
+                        <td width="10%">ZA <?= $project['za']; ?></td>
+                        <td class="even"><?= "";//roject->theme->Thema ?></td>
+                        <td width="40%"><?= $project['name'] ?></td>
                         <?php if ($hasTables): ?>
-                            <td width="22%" class="even found">Gefundene Tabellen anzeigen</td>
-                           
+                            <td width="23%" class="even found show"><input type="hidden" name="id" value="<?= $id ?>" />Gefundene Tabellen anzeigen</td>
+                            <td style="display:none" width="23%" class="even found hide"><input type="hidden" name="id" value="<?= $id ?>" />Gefundene Tabellen schließen</td>
                         <?php else: ?>
-                            <td width="22%" class="even">keine Tabellen gefunden</td>
+                            <td width="23%" class="even notfound">keine Tabellen gefunden</td>
                         <?php endif; ?>
-                        <td width="100" class="details">Details...</td>  
-
-
+                        <?php if ($hasDescription): ?>
+                            <td width="100" class="details found show">Details...</td>  
+                            <td style="display:none" width="100" class="details found hide">Details...</td>  
+                        <?php else: ?>
+                            <td width="100" class="details notfound">keine Details</td>
+                        <?php endif; ?>
                     </tr>
-                     <?php if ($hasTables): ?>
-                    <tr>
-                        <td width="10%" style="border:0px"></td>
-                        <td class="tables" colspan="4">asd</td>
-                    </tr>
-                       <?php endif; ?>
+                    <?php if ($hasTables): ?>
+                        <tr class="empty" id="<?=$id ?>" style="display:none">
+                            <td width="10%" style="border:0px"></td>
+                            <td class="nopadding values tables" colspan="4"></td>
+                            
+                        </tr>
+                    <?php endif; ?>
+
+                    <?php if ($hasDescription): ?>
+                        <tr class="empty" id="<?= $id ?>" style="display:none">
+                            <td class="values details" colspan="5"></td>
+                        </tr>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </table>
         <?php endif; ?>
