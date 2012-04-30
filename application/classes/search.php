@@ -46,8 +46,8 @@ class Search {
         return self::$search_words;
     }
 
-    function highlight_search($str, $html_ready = 0) {
-        return preg_replace(get_search_words($html_ready), '<span style="background-color:lime">$0</span>', $str);
+    public static  function highlight_search($str) {
+        return preg_replace(get_search_words(), '<span style="background-color:lime">$0</span>', $str);
     }
 
     public static function get_search_excerpt($str) {
@@ -67,28 +67,34 @@ class Search {
 
         if (count($grepped) > 0)
             $ret = array('');
+        
         foreach ($grepped as $grep_key => $detail) {
             if ($grep_key > 0) {
-                $ret[$count] = $str_a[$grep_key - 1];
+                $ret[$count] = ($str_a[$grep_key - 1]);
             }
-            $ret[$count] .= " " . $detail;
+          
+            $ret[$count] .= " " . ($detail);
             if ($grep_key < count($str_a) - 1) {
-                $ret[$count] .= " " . $str_a[$grep_key + 1];
+                $ret[$count] .= " " . ($str_a[$grep_key + 1]);
             }
             ++$count;
         }
 
-        return $ret;
+        return ($ret);
     }
 
     public static function create_filter(array $keys) {
         $diff = '';
+        $out = '';
         $keys = array_keys($keys);
-        for ($i = 1, $c = count($keys); $i < $c; ++$i) {
+        
+        for ($i = 0, $c = count($keys); $i < $c; ++$i) {
             $diff |= $keys[0] ^ $keys[$i];
         }
+        
         $out = $keys[0];
-        for ($i = 1, $c = strlen($out); $i < $c; ++$i) {
+       
+        for ($i = 0, $c = strlen($out); $i < $c; ++$i) {
             if ($diff[$i] !== "\x0") {
                 $out[$i] = '_';
             }

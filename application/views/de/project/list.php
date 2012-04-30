@@ -6,7 +6,7 @@
                 <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>
                 <td class="even" width="13%"><?= $project->theme->Thema ?></td>
                 <td  width="50%"><?= $project->Projektautor ?>, <?= $project->Projektname ?></td>
-                <td class="even" width="22%">
+                <td class="timelines" width="22%">
     
                     <?php $tabellen = $project->getUsedTables(); ?>
                     <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen ='' ?> 

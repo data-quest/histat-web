@@ -35,6 +35,10 @@ h3{
     font-weight: normal;
     color: #505050;
 }
+h4{
+    font-weight: normal;
+    color: #2b405e;
+}
 table th{
     background: #FA912F;
     color:#ffffff;
@@ -63,12 +67,18 @@ table td{
 
 td.details{
     padding:0px;
-    background: url(../img/layout/button-details.png) no-repeat right center;
+    background:url(../img/layout/button-table-details2-right.png) repeat-x center right;
     min-width: 130px;
     text-align: center;
 
 }
-
+td.timelines a{
+    color:#fff;
+}
+td.timelines{
+    
+     background:url(../img/layout/button-table-details-right.png) repeat-x center right; 
+}
 td.details span a{
     display:block;
     width:120px;
@@ -1097,6 +1107,15 @@ table tr td.even {
     position: relative;
     margin-top:1em;
 }
+#search_result .values h1{
+    margin-bottom: 5px;
+}
+#search_result .values h4{
+    margin:5px 0px;
+}
+#search_result .values .highlight{
+    color:#FE8F00;
+}
 #search_result .result .notfound{
     background:url(../img/layout/details-transparent-rechts.png) #E6E6E6 no-repeat center right;
 
@@ -1120,6 +1139,15 @@ table tr td.even {
     color:#FFFFFF;
     cursor:pointer;
 }
+#search_result .result .details.hide{
+    min-width: 80px;
+    background:url(../img/layout/button-table-details2-left.png) repeat-x center left;
+    color:#FFFFFF;
+    cursor:pointer;
+}
+#search_result .values div{
+    display:none;
+}
 #search_result .result .values{
     border:0px;
 }
@@ -1129,7 +1157,7 @@ table tr td.even {
 #search_result .result .tables .link{
     background: url(../img/layout/details.png) center center;
     padding:2px;
-    width: 80px;
+    width:150px;
     margin-right:20px;
     float:right;
 }
