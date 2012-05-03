@@ -22,7 +22,8 @@ class Model_Time extends ORM {
                         ->join('Aka_Projekte', 'LEFT')
                         ->on('Aka_Zeiten.ID_Zeit', '=', 'Aka_Projekte.ID_Zeit')
                         ->where('Aka_Projekte.ID_Projekt', 'IS NOT ', NULL)
-                        ->group_by('Zeit');
+                        ->group_by('Zeit')
+                        ->order_by('Position');
     }
 
 }

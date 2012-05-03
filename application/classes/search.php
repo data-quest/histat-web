@@ -47,7 +47,7 @@ class Search {
     }
 
     public static  function highlight_search($str) {
-        return preg_replace(get_search_words(), '<span style="background-color:lime">$0</span>', $str);
+        return preg_replace(self::$search_words, '<span style="color:#FE8F00">$0</span>', $str);
     }
 
     public static function get_search_excerpt($str) {
@@ -70,12 +70,12 @@ class Search {
         
         foreach ($grepped as $grep_key => $detail) {
             if ($grep_key > 0) {
-                $ret[$count] = ($str_a[$grep_key - 1]);
+                $ret[$count] = self::highlight_search($str_a[$grep_key - 1]);
             }
           
-            $ret[$count] .= " " . ($detail);
+            $ret[$count] .= " " . self::highlight_search($detail);
             if ($grep_key < count($str_a) - 1) {
-                $ret[$count] .= " " . ($str_a[$grep_key + 1]);
+                $ret[$count] .= " " . self::highlight_search($str_a[$grep_key + 1]);
             }
             ++$count;
         }

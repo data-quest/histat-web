@@ -23,7 +23,7 @@
             <td width="10%">ZA <?= $projects->ZA_Studiennummer ?></td>
             <td class="even" width="13%"><?= $projects->theme->Thema ?></td>
             <td  width="50%"><?= $projects->Projektautor ?>, <?= $projects->Projektname ?></td>
-            <td class="even" width="22%">
+            <td class="timelines" width="22%">
                 <?php $tabellen = $projects->getUsedTables(); ?>
                 <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen = '' ?> 
                 <?= HTML::anchor('project/tables/' . $projects->ID_Projekt, $projects->Anzahl_Zeitreihen . ' Zeitreihen<br/>(' . $projects->Zeitraum . ')' . $tabellen) ?>

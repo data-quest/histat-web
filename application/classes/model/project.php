@@ -191,7 +191,7 @@ class Model_Project extends ORM {
             } else {
                 $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
             }
-            $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Anmerkungsteil, Untergliederung,Veroeffentlichung,Quellen)"), ' ', DB::expr('AGAINST(:text IN BOOLEAN MODE)', array(':text' => $text)));
+            $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Untergliederung,Veroeffentlichung,Quellen)"), ' ', DB::expr('AGAINST(:text IN BOOLEAN MODE)', array(':text' => $text)));
 
 
             foreach ($db->as_object()->execute() as $value) {

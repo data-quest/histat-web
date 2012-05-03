@@ -70,14 +70,14 @@ td.details{
     background:url(../img/layout/button-table-details2-right.png) repeat-x center right;
     min-width: 130px;
     text-align: center;
-
+    padding-right: 20px;
 }
 td.timelines a{
     color:#fff;
 }
 td.timelines{
-    
-     background:url(../img/layout/button-table-details-right.png) repeat-x center right; 
+
+    background:url(../img/layout/button-table-details-right.png) no-repeat left center; 
 }
 td.details span a{
     display:block;
@@ -486,8 +486,12 @@ table tr td.even {
     padding-top:40px;
 
 }
-#project_details h1,#project_details h3,#project_details span{
+#project_details h1,#project_details h3,#project_details span,#project_details h4{
+
     padding:0px 10px;
+}
+#project_details h4{
+    font-size: 1.1em;
 }
 #project_details span{
     padding-top:10px;
@@ -836,7 +840,7 @@ table tr td.even {
 #table_details .name .download_icons{
     margin-top: -40px;
     position: absolute;
-    right:0px;
+    right:2%;
 
 }
 #table_details .name .download_icons:hover .buttons{
@@ -941,6 +945,14 @@ table tr td.even {
     background: #DDDDDD;
     border:1px solid #000000;
 }
+#cart .more{
+    background:url(../img/layout/more-btn.jpg) no-repeat center left;
+    color:#FFFFFF;
+    font-weight: bold;
+    padding:4px 20px;
+    height:20px;
+    line-height: 20px;
+}
 #cart ul span.more,#cart ul span.less{
 
     display:block;
@@ -956,8 +968,8 @@ table tr td.even {
 #cart ul span.more{
     background: url("../img/layout/content-pfeil-right.png") no-repeat center center;
 }
-#cart .tables,#cart .filters{
-    display:none;
+#cart li.tables,#cart li.filters{
+    display: none;
 }
 #cart li.header{
     background: #72777a;
@@ -1098,9 +1110,10 @@ table tr td.even {
     position: absolute;
 }
 #search .skala{
-    background: url(../img/layout/skala_100-jahre.png);
+    background: url(../img/layout/skala_100-jahre.png) repeat-x;
     width:90%;
     height:11px;
+    margin-top:5px;
     margin-bottom:10px;
 }
 #search_result .result{
@@ -1116,11 +1129,11 @@ table tr td.even {
 #search_result .values .highlight{
     color:#FE8F00;
 }
-#search_result .result .notfound{
+#search_result .result .notfound,#cart .result .notfound{
     background:url(../img/layout/details-transparent-rechts.png) #E6E6E6 no-repeat center right;
 
 }
-#search_result .result .found.show{
+#search_result .result .found.show,#cart .result .found.show{
     background:url(../img/layout/button-table-details-right.png) repeat-x center right;
     color:white;
     cursor: pointer;
@@ -1152,7 +1165,7 @@ table tr td.even {
     border:0px;
 }
 #search_result .result .tables div{
-   padding:15px 10px;
+    padding:15px 10px;
 }
 #search_result .result .tables .link{
     background: url(../img/layout/details.png) center center;
@@ -1163,20 +1176,22 @@ table tr td.even {
 }
 #search_result .result .tables .link a{
     background:url(../img/layout/content-pfeil.png) no-repeat left center;
-     color:#FFFFFF;
-     font-weight: bold;
-     padding-left: 20px;
+    color:#FFFFFF;
+    font-weight: bold;
+    padding-left: 20px;
 }
-#search_result .result td span{
-    display:block;
-    position: relative;
-    width:100%;
-    height:auto;
+#search_result .values .more{
+    background:url(../img/layout/more-btn.jpg) no-repeat center left;
+    color:#FFFFFF;
+    font-weight: bold;
+    padding:4px 20px;
+    height:20px;
+    line-height: 20px;
 }
 .ui-slider{
     width:90%;
     height:3px;
-  
+
     background: #61809D;
     position: relative;
     cursor: pointer;

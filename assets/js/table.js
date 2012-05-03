@@ -64,7 +64,7 @@ $(function(){
     });
     $('#table_details select').change(function(){
       
-        $('form').submit();
+        $('.details form').submit();
     });
     $('#cart').live('click',function(){
         var filter_text = [];

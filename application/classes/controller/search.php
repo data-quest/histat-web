@@ -1,4 +1,6 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
+
+defined('SYSPATH') or die('No direct script access.');
 
 /**
  *
@@ -33,7 +35,7 @@ class Controller_Search extends Controller_Data {
             $this->request->post('title', TRUE);
             $this->request->post('source', TRUE);
             $this->request->post('description', TRUE);
-
+            Session::instance()->set('searchtext', $this->request->post('text'));
             $orm = ORM::factory('project');
             $results = $orm->search($this->request->post());
 
@@ -45,16 +47,19 @@ class Controller_Search extends Controller_Data {
     public function action_extended() {
         $results = array();
         $data = array();
+
         if (HTTP_Request::POST == $this->request->method()) {
             $this->layout->checked = false;
             $this->show = true;
-
+            Session::instance()->set('searchtext', $this->request->post('text'));
             $orm = ORM::factory('project');
             $results = $orm->search($this->request->post());
-           
-           
-       
+
+
+
             $this->results = $results;
+        } else {
+            Session::instance()->delete('searchtext');
         }
     }
 
@@ -69,7 +74,7 @@ class Controller_Search extends Controller_Data {
 
     public function after() {
         $view = View::factory(I18n::$lang . '/search/result');
-        
+
         $view->results = $this->results;
         $view->show = $this->show;
         $this->layout->results = $view->render();

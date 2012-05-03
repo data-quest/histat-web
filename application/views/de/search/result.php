@@ -19,16 +19,16 @@
                         <td class="even"><?= $project['theme']  ?></td>
                         <td width="40%"><?= $project['name'] ?></td>
                         <?php if ($hasTables): ?>
-                            <td width="23%" class="even found show"><input type="hidden" name="id" value="<?= $id ?>" />Gefundene Tabellen anzeigen</td>
+                            <td width="23%" class="even found show"><input type="hidden" name="id" value="<?= $id ?>" />Treffer in Tabellen anzeigen</td>
                             <td style="display:none" width="23%" class="even found hide"><input type="hidden" name="id" value="<?= $id ?>" />Gefundene Tabellen schließen</td>
                         <?php else: ?>
-                            <td width="23%" class="even notfound">keine Tabellen gefunden</td>
+                            <td width="23%" class="even notfound">keine Treffer in Tabellen</td>
                         <?php endif; ?>
                         <?php if ($hasDescription): ?>
-                            <td width="100" class="details found show"><input type="hidden" name="id" value="<?= $id ?>" />Details...</td>  
+                            <td width="100" class="details found show"><input type="hidden" name="id" value="<?= $id ?>" />Beschreibung anzeigen</td>  
                             <td style="display:none" width="100" class="details found hide"><input type="hidden" name="id" value="<?= $id ?>" />Detailansicht schließen</td>  
                         <?php else: ?>
-                            <td width="100" class="details notfound">keine Details</td>
+                            <td width="100" class="details notfound">keine Treffer in der Beschreibung</td>
                         <?php endif; ?>
                     </tr>
                     <?php if ($hasTables): ?>
@@ -45,19 +45,19 @@
                                 <h1>Studiendetails</h1>
 
                                 <div class="normal data">
-                                    <h4>Datensatz (in empfohlener Zitierweise)</h4>
+                                    <h4>Datensatz (in empfohlener Zitierweise) <?= HTML::anchor('project/details/'.$id,__('mehr'),array('class'=>'more'))?></h4>
                                     <p></p>
                                 </div>
 
                                 <div class="normal publication">
-                                    <h4>Gedruckte Publikation</h4>
+                                    <h4>Gedruckte Publikation <?= HTML::anchor('project/details/'.$id,__('mehr'),array('class'=>'more'))?></h4>
                                     <p></p>
                                 </div>
 
-                                <div class="normal description"> <h4>Studienbeschreibung</h4><p></p></div>
+                                <div class="normal description"> <h4>Studienbeschreibung <?= HTML::anchor('project/details/'.$id,__('mehr'),array('class'=>'more'))?></h4><p></p></div>
 
-                                <div class="normal sources">   <h4>Quellenverzeichnis</h4><p></p></div>
-                                  <div class="normal reintegration">   <h4>Untergliederung</h4><p></p></div>
+                                <div class="normal sources">   <h4>Quellenverzeichnis <?= HTML::anchor('project/details/'.$id,__('mehr'),array('class'=>'more'))?></h4><p></p></div>
+                                  <div class="normal reintegration">   <h4>Untergliederung <?= HTML::anchor('project/details/'.$id,__('mehr'),array('class'=>'more'))?></h4><p></p></div>
                             </td>
                         </tr>
                     <?php endif; ?>
