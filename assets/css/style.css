@@ -77,14 +77,13 @@ td.timelines a{
 }
 td.timelines{
 
-    background:url(../img/layout/button-table-details-right.png) no-repeat left center; 
+    background:url(../img/layout/button-table-details-right.png) no-repeat right center; 
 }
 td.details span a{
     display:block;
     width:120px;
     color: #ffffff;
     font-size: 1.1em;
-    font-weight: bold;
     cursor: pointer;
 }
 
@@ -118,17 +117,7 @@ table tr td.even {
     border:1px solid #72777a;
 }
 .ui-dialog .ui-dialog-titlebar{
-    background: url(../img/layout/verlauf-orange_150x5.jpg) repeat-x center center; 
-    text-align: center;
-    min-height: 30px;
-    max-height: 150px;
-    line-height: 30px;
-    width:100%;
-    border-bottom:1px solid #757576;
-    color:#ffffff;
-    font-size: 1.2em;
-    padding:0px;
-    float:left;
+ 
 }
 .ui-dialog-title{
 
@@ -152,8 +141,7 @@ table tr td.even {
     left:0px;
 }
 .ui-dialog-titlebar{
-    font-weight: bold;
-    font-size: 1.2em;
+    display: none;
 
 }
 .ui-dialog-content {
@@ -481,22 +469,55 @@ table tr td.even {
 
 /* Style data/index end*/
 /*Style project/details/id */
-#project_details{
-    padding: 10px 0px;
-    padding-top:40px;
+#project_details table{
+    border:0px;
+
 
 }
-#project_details h1,#project_details h3,#project_details span,#project_details h4{
-
-    padding:0px 10px;
+#project_details .details.hide{
+    min-width: 50px;
+    background:url(../img/layout/button-table-details2-left.png) repeat-x center left;
+    color:#FFFFFF;
+    cursor:pointer;
 }
-#project_details h4{
-    font-size: 1.1em;
+#project_details  .timelines.hide{
+    background:url(../img/layout/button-table-details-left.png) repeat-x center left;
+    color:white;
+    cursor: pointer;
+    text-align: right;
+  min-width: 80px;
+}
+#project_details h1{
+       padding: 10px; 
 }
 #project_details span{
-    padding-top:10px;
-    display:block;
+
+ padding: 5px 10px; 
+}
+#project_details h4{
+    font-size: 1.2em;
+     padding:5px 10px;
+}
+#project_details div.content{
+    padding-left:10px;
+    padding-bottom: 20px;
     position: relative;
+}
+#project_details div.content div.left{
+    float:left;
+    width:80%;
+}
+#project_details div.content .short{
+    overflow: hidden;
+    height:52px;
+}
+#project_details div.content div.right{
+    float:right;
+       width:19%;
+}
+#project_details div.content div.right *{
+    float:right;
+    margin-right: 10px;
 }
 #project_details span a.button{
     float:right;
@@ -573,27 +594,30 @@ table tr td.even {
 #project_details div.text table td{
     border:0px;
 }
+#project_details .button{
+     width: 110px;
+     display: block;
+}
 #project_details span.more{
-    color:#72777a;
+    color:#fff;
     cursor: pointer;
-    padding-top:0px;
-    height: 16px;
-    line-height: 16px;
+    height: 15px;
+    line-height: 14px;
+    width: 100px;
+    display:block;
     padding-left: 20px;
-    margin-top:5px;
-    margin-left: 5px;
-    background: url(../img/layout/content-pfeil-right.png) no-repeat left center;
+    background: url(../img/layout/more-btn.jpg) no-repeat left center;
 }
 #project_details span.less{
-    color:#72777a;
+     color:#fff;
     cursor: pointer;
-    padding-top:0px;
-    height: 16px;
-    line-height: 16px;
-    padding-left: 20px;
-    margin-top:5px;
-    margin-left: 5px;
-    background: url(../img/layout/content-pfeil-top.png) no-repeat left center;
+    height: 15px;
+    line-height: 14px;
+    width: 100px;
+    display:block;
+    padding-left: 23px;
+
+    background: url(../img/layout/less-btn.jpg) no-repeat left center;
 }
 
 #project_details hr{
@@ -834,8 +858,12 @@ table tr td.even {
 #table_details .name .buttons{
     position: absolute;
     width:400px;
-    margin-left:-300px;
+    margin-left:-200px;
     display: none;
+}
+
+#table_details td.timelines{
+    width: 200px;
 }
 #table_details .name .download_icons{
     margin-top: -40px;
@@ -1077,7 +1105,9 @@ table tr td.even {
     width: 120px;
 }
 #searchbar input[type="submit"]{
-    position: absolute;
+    position: relative;
+    right: 5px;
+    top:1px;
     width:30px;
     height:30px;
     background: url(../img/layout/icon-lupe.png) no-repeat center center;
@@ -1164,8 +1194,11 @@ table tr td.even {
 #search_result .result .values{
     border:0px;
 }
-#search_result .result .tables div{
+#search_result .result .tables>div{
     padding:15px 10px;
+}
+#search_result .result .tables div.name{
+    float:left;width:75%;
 }
 #search_result .result .tables .link{
     background: url(../img/layout/details.png) center center;

@@ -14,7 +14,7 @@
                     <?= HTML::anchor($data ? 'download/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.XLS', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.XLSX', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.CSV', array('class' => $class)) ?>
-                    <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter . '#tabelle', 'In den Warenkorb', $id) ?>
+                    <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter . '#tabelle',HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
                 </div> 
                
             </div>

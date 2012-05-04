@@ -47,7 +47,7 @@ $(function(){
                         filter = '';
                        
                         if(t.filter) filter = '/'+t.filter;
-                        tables.append('<div>'+t.name+'<div class="link"><a href="'+base_url+'table/details/'+i+filter+'">'+t.keys.length+' Zeitreihen</a></div><div style="clear:both;padding:0"></div></div>');
+                        tables.append('<div><div class="name">'+t.name+'</div><div class="link"><a href="'+base_url+'table/details/'+i+filter+'">'+t.keys.length+' Zeitreihen</a></div><div style="clear:both;padding:0"></div></div>');
                     }  
                 }
                 if(data.Quellen){
@@ -91,7 +91,7 @@ $(function(){
     }
     $('#search_result .even.found.show').live('click',function(){
         $(this).hide().next('td.found.hide').show();
-        id = $(this).find('input[name="id"]').val();
+      id = $(this).find('.id').text();
         $('#search_result .details.found.show').show();
         $('#search_result .details.found.hide').hide();
         $('tr.data.'+id).fadeOut('slow');
@@ -103,14 +103,14 @@ $(function(){
     });
     $('#search_result .even.found.hide').live('click',function(){
         $(this).hide().prev('td.found.show').show();
-        id = $(this).find('input[name="id"]').val();
+     id = $(this).find('.id').text();
         
         $('tr.tables.'+id).fadeOut('slow');
     });
     
     $('#search_result .details.found.show').live('click',function(){
         $(this).hide().next('td.found.hide').show();
-        id = $(this).find('input[name="id"]').val();
+        id = $(this).find('.id').text();
         $('tr.tables.'+id).fadeOut('slow');
         $('#search_result .even.found.hide').hide();
         $('#search_result .even.found.show').show();
@@ -122,7 +122,7 @@ $(function(){
     });
     $('#search_result .details.found.hide').live('click',function(){
         $(this).hide().prev('td.found.show').show();
-        id = $(this).find('input[name="id"]').val();
+        id = $(this).find('.id').text();
          
         $('tr.data.'+id).fadeOut('slow');
     });

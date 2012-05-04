@@ -1,7 +1,17 @@
 <div id="project_details" style="display:none" >
+   <table border="0" cellpadding="0" cellspacing="0">
+        <tr >
+            <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>
+            <td class="even" width="13%"><?= $project->theme->Thema ?></td>
+            <td  width="50%"><?= $project->Projektautor ?>, <?= $project->Projektname ?></td>
+            <td class="timelines hide" width="22%">Tabellenverzeichnis schließen</td>
+            <td class="details"><span style="width:100%;display:block;text-align: right;"><?= HTML::anchor('project/details/' . $project->ID_Projekt, 'Beschreibung...') ?></span></div></td>
+
+        </tr>
+    </table>
 
 
-    <h3>Tabellen:</h3>
+    <h1>Tabellen:</h1>
 
     <?php
     $keymasks = $project->keymasks->order_by('Name')->find_all();

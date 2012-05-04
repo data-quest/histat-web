@@ -28,7 +28,7 @@ $(function(){
             range.end.text(value.max.val());
         }
     });
-    $('input[name="all"]:checked').click(function(){console.log("test")});
+    
     $('input[name="text"]').focus(function(){
        var t = $(this);
        if(t.val() === "Suchbegriff") t.val("");

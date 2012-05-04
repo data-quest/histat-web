@@ -24,7 +24,10 @@ class Controller_Cart extends Controller_Table {
             $filter = $item->filter;
             $filterText = json_decode($item->filter_text);
             $filters[$projectID][$tableID][$filter] = $filterText;
-            $projects[$projectID] = $projectName;
+            $projects[$projectID] = array('name'=>$projectName,
+                    'za'=>$keymask->project->ZA_Studiennummer,
+                    'theme'=>$keymask->project->theme->Thema);
+            
             $tables[$projectID][$tableID] = $tableName;
         }
         $view->message = $this->request->param('id',FALSE);

@@ -22,54 +22,51 @@ class Controller_Search extends Controller_Data {
         foreach ($orm->order_by("Thema")->find_all() as $theme) {
             $themes[$theme->ID_Thema] = $theme->Thema;
         }
+        if (HTTP_Request::POST == $this->request->method()) {
+            $post = $this->request->post();
+            $search = array(
+                'text' => Arr::get($post,'text',__('Searchtext')),
+                'theme' => Arr::get($post,'theme','-1'),
+                'min' => Arr::get($post,'min',1200),
+                'max' => Arr::get($post,'max',2200),
+                'title' => Arr::get($post,'title'),
+                'source' => Arr::get($post,'source'),
+                'description' => Arr::get($post,'description')
+            );
+            Session::instance()->set('search',$search);
+            //Session::instance()->set('search', Arr::merge(Session::instance()->get('search', array()), $this->request->post()));
+        }
+
         $this->layout->checked = true;
         $this->layout->themes = $themes;
     }
 
     public function action_index() {
-        $results = array();
-        $data = array();
         if (HTTP_Request::POST == $this->request->method()) {
             $this->show = true;
-
-            $this->request->post('title', TRUE);
-            $this->request->post('source', TRUE);
-            $this->request->post('description', TRUE);
-            Session::instance()->set('searchtext', $this->request->post('text'));
-            $orm = ORM::factory('project');
-            $results = $orm->search($this->request->post());
-
-
-            $this->results = $results;
+            $this->results = ORM::factory('project')->search(Session::instance()->get('search'));
         }
     }
 
     public function action_extended() {
-        $results = array();
-        $data = array();
+
 
         if (HTTP_Request::POST == $this->request->method()) {
             $this->layout->checked = false;
             $this->show = true;
-            Session::instance()->set('searchtext', $this->request->post('text'));
-            $orm = ORM::factory('project');
-            $results = $orm->search($this->request->post());
-
-
-
-            $this->results = $results;
-        } else {
-            Session::instance()->delete('searchtext');
+            $this->results = ORM::factory('project')->search(Session::instance()->get('search'));;
         }
     }
 
     public function action_detailed() {
         $this->auto_render = false;
         if (HTTP_Request::POST == $this->request->method()) {
-
-            $orm = ORM::factory('project');
-            echo json_encode($orm->search($this->request->post()));
+            echo json_encode(ORM::factory('project')->search($this->request->post()));
         }
+    }
+
+    public function action_clear() {
+        Session::instance()->set('search',array());
     }
 
     public function after() {
@@ -77,6 +74,7 @@ class Controller_Search extends Controller_Data {
 
         $view->results = $this->results;
         $view->show = $this->show;
+     
         $this->layout->results = $view->render();
         $this->content = $this->layout->render();
         parent::after();

@@ -11,7 +11,7 @@
             <table class="result">
 
                 <?php foreach ($results as $id => $project) : ?>
-
+                
                     <?php $hasTables = Arr::get($project, "data", false); ?>
                     <?php $hasDescription = Arr::get($project, "description", false); ?>
                     <tr>
@@ -19,14 +19,14 @@
                         <td class="even"><?= $project['theme']  ?></td>
                         <td width="40%"><?= $project['name'] ?></td>
                         <?php if ($hasTables): ?>
-                            <td width="23%" class="even found show"><input type="hidden" name="id" value="<?= $id ?>" />Treffer in Tabellen anzeigen</td>
-                            <td style="display:none" width="23%" class="even found hide"><input type="hidden" name="id" value="<?= $id ?>" />Gefundene Tabellen schließen</td>
+                            <td width="23%" class="even found show"><span style="display:none" class="id" ><?= $id ?></span>Treffer in Tabellen anzeigen</td>
+                            <td style="display:none" width="23%" class="even found hide"><span style="display:none" class="id" ><?= $id ?></span>Gefundene Tabellen schließen</td>
                         <?php else: ?>
                             <td width="23%" class="even notfound">keine Treffer in Tabellen</td>
                         <?php endif; ?>
                         <?php if ($hasDescription): ?>
-                            <td width="100" class="details found show"><input type="hidden" name="id" value="<?= $id ?>" />Beschreibung anzeigen</td>  
-                            <td style="display:none" width="100" class="details found hide"><input type="hidden" name="id" value="<?= $id ?>" />Detailansicht schließen</td>  
+                            <td width="100" class="details found show"><span style="display:none" class="id" ><?= $id ?></span>Beschreibung anzeigen</td>  
+                            <td style="display:none" width="100" class="details found hide"><span style="display:none" class="id" ><?= $id ?></span>Detailansicht schließen</td>  
                         <?php else: ?>
                             <td width="100" class="details notfound">keine Treffer in der Beschreibung</td>
                         <?php endif; ?>
