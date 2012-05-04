@@ -10,32 +10,36 @@
                 <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen = '' ?> 
                 <?= HTML::anchor('project/tables/' . $project->ID_Projekt, $project->Anzahl_Zeitreihen . ' Zeitreihen<br/>(' . $project->Zeitraum . ')' . $tabellen) ?>
             </td>
-            <td class="details hide"><span style="width:100%;display:block;text-align: right;"> Detailansicht schließen</span></div></td>
+            <td class="details hide"><span style="width:100%;display:block;text-align: right;">Beschreibungsansicht schließen</span></div></td>
 
         </tr>
     </table>
 
-    <h1>Studiendetails:</h1>
+    <h1>Studienbeschreibung:</h1>
     <a href="#" style="visbility:hidden"></a>
 
     <?php $publication = nl2br($project->Veroeffentlichung); ?>
-    <h4>Gedruckte Publikation</h4>
-    <div class="content">
-        <div class="right"><?= strlen($publication) > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-        <div class="normal left short"><?= $publication ?></div>
-        <div class="clear"></div>
-    </div>
-
+    <?php $len = strlen($publication); ?>
+    <?php if ($len > 0) : ?>
+        <h4>Gedruckte Publikation</h4>
+        <div class="content">
+            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $publication ?></div>
+            <div class="clear"></div>
+        </div>
+    <?php endif; ?>
 
 
     <?php $description = nl2br($project->Projektbeschreibung); ?>
-    <h4>Studienbeschreibung </h4>
-    <div class="content">
-        <div class="right"><?= strlen($description) > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-        <div class="normal left short"><?= $description ?></div>
-        <div class="clear"></div>
-    </div>
-
+    <?php $len = strlen($description); ?>
+    <?php if ($len > 0) : ?>
+        <h4>Studienbeschreibung </h4>
+        <div class="content">
+            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $description ?></div>
+            <div class="clear"></div>
+        </div>
+    <?php endif; ?>
 
     <?php if (!empty($project->datei_name)): ?>
         <h4>Download:</h4>
@@ -46,27 +50,35 @@
         </div>
     <?php endif ?>
     <?php $sources = nl2br($project->Quellen) ?>
-    <h4>Verwendete Quellen:</h4>
-    <div class="content">
-        <div class="right"><?= strlen($sources) > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-        <div class="normal left short"><?= $sources ?></div>
-        <div class="clear"></div>
-    </div>
+    <?php $len = strlen($sources); ?>
+    <?php if ($len > 0) : ?>
+        <h4>Verwendete Quellen:</h4>
+        <div class="content">
+            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $sources ?></div>
+            <div class="clear"></div>
+        </div>
+    <?php endif; ?>
     <?php $fundort = nl2br($project->Fundort) ?>
-    <h4>Untersuchungsgebiet:</h4>
-    <div class="content">
-        <div class="right"><?= strlen($fundort) > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-        <div class="normal left short"><?= $fundort ?></div>
-        <div class="clear"></div>
-    </div>
-
+    <?php $len = strlen($fundort); ?>
+    <?php if ($len > 0) : ?>
+        <h4>Untersuchungsgebiet:</h4>
+        <div class="content">
+            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $fundort ?></div>
+            <div class="clear"></div>
+        </div>
+    <?php endif; ?>
     <?php $quellenverzeichnis = nl2br($project->Fundort) ?>
-    <h4>Quellenverzeichnis:</h4>
-    <div class="content">
-        <div class="right"><?= strlen($quellenverzeichnis) > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-        <div class="normal left short"><?= $quellenverzeichnis ?></div>
-        <div class="clear"></div>
-    </div>
+    <?php $len = strlen($quellenverzeichnis); ?>
+    <?php if ($len > 0) : ?>
+        <h4>Quellenverzeichnis:</h4>
+        <div class="content">
+            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $quellenverzeichnis ?></div>
+            <div class="clear"></div>
+        </div>
+    <?php endif; ?>
 </div>
 <script type="text/javascript">
     var more = "Mehr...";

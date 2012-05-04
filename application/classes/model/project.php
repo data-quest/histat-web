@@ -54,6 +54,27 @@ class Model_Project extends ORM {
                         ->limit('30');
     }
 
+    public function top_projects() {
+        $ids = DB::select('projekt_id,SUM(anzahl)')
+                ->from('user_downloads')
+                ->order_by(DB::expr('SUM(anzahl)'), 'DESC')
+                ->group_by('projekt_id')
+                ->limit('30')
+               ->as_object()
+                ->execute()
+              ;
+       $result = array();
+        foreach($ids as $id){
+           $result []=$id->projekt_id;
+        }
+      
+        return $this->select(
+                                array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt'
+                        )
+                        ->where('ID_Thema', 'IN', DB::expr("('".implode("','",$result)."')"))
+                        ->limit('30');
+    }
+
     public function getUsedTables() {
         return DB::select("lz.ID_HS")->distinct(true)
                         ->from(array("Aka_Projekte", "p"))
@@ -88,7 +109,7 @@ class Model_Project extends ORM {
         $id = Arr::get($post, 'id', NULL);
         $select = 'p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema';
         $result = array();
-       
+
         Search::set_search_query(Arr::get($post, 'text', ''));
 
         if ($title) {

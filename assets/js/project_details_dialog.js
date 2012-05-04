@@ -11,6 +11,11 @@ $(function(){
         buttons:[],
        
         close:function(){
+          //  history.go(-1);
+           // console.log( );
+           if(document.referrer.match('/search/') != null){
+               uri = document.referrer;
+           }
             window.location.href = uri;
         }
     });

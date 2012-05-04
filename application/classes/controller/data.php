@@ -46,6 +46,24 @@ class Controller_Data extends Controller_Index {
 
     public function action_top() {
         $this->sub_navi->activate(__('Top'));
+           //Load model/project.php
+        $project = ORM::factory('project');
+        //Load view/<lang>/data/index.php
+        $view = View::factory(I18n::$lang . '/data/top');
+        //Load view/<lang>/project/list.php prepare the subview
+        $list = View::factory(I18n::$lang . '/project/list');
+        //assign new projects to subview
+        $list->projects = $project->top_projects();
+        //assign the referrer uri
+        $list->uri = URL::site(I18n::$lang . '/data/index');
+        //Assign list in view
+        $view->list = $list->render();
+        //Setup Dialog
+        $view->dialog = $this->dialog;
+        //set content
+        $this->content = $view->render();
+        //Setup last action
+        $this->session->set('action', array('name' => 'index'));
     }
 
     public function action_themes($id = NULL) {

@@ -15,7 +15,8 @@ class Controller_Project extends Controller_Data {
         parent::before();
         $this->id = $this->request->param('id', $this->request->post('id'));
         $this->token = $this->request->post('xsrf');
-        $this->session->set('referrer', NULL);
+       
+        $this->session->set('referrer',null);
     }
 
     public function action_details() {

@@ -26,7 +26,7 @@
                         <?php endif; ?>
                         <?php if ($hasDescription): ?>
                             <td width="100" class="details found show"><span style="display:none" class="id" ><?= $id ?></span>Beschreibung anzeigen</td>  
-                            <td style="display:none" width="100" class="details found hide"><span style="display:none" class="id" ><?= $id ?></span>Detailansicht schließen</td>  
+                            <td style="display:none" width="100" class="details found hide"><span style="display:none" class="id" ><?= $id ?></span>Beschreibungsansicht schließen</td>  
                         <?php else: ?>
                             <td width="100" class="details notfound">keine Treffer in der Beschreibung</td>
                         <?php endif; ?>
@@ -42,7 +42,7 @@
                     <?php if ($hasDescription): ?>
                         <tr class="empty data <?= $id ?>" style="display:none">
                             <td class="values" colspan="5">
-                                <h1>Studiendetails</h1>
+                                <h1>Studiendbeschreibung</h1>
 
                                 <div class="normal data">
                                     <h4>Datensatz (in empfohlener Zitierweise) <?= HTML::anchor('project/details/'.$id,__('mehr'),array('class'=>'more'))?></h4>

@@ -23,23 +23,21 @@ class Controller_Search extends Controller_Data {
             $themes[$theme->ID_Thema] = $theme->Thema;
         }
         $checked = "on";
-        
+
 
         if (HTTP_Request::POST == $this->request->method()) {
             $post = $this->request->post();
             $checked = null;
             $search = array(
-              
                 'text' => Arr::get($post, 'text', __('Searchtext')),
                 'theme' => Arr::get($post, 'theme', '-1'),
                 'min' => Arr::get($post, 'min', 1200),
                 'max' => Arr::get($post, 'max', 2200),
-                'title' => Arr::get($post, 'title',$checked),
-                'source' => Arr::get($post, 'source',$checked),
-                'description' => Arr::get($post, 'description',$checked)
+                'title' => Arr::get($post, 'title', $checked),
+                'source' => Arr::get($post, 'source', $checked),
+                'description' => Arr::get($post, 'description', $checked)
             );
             Session::instance()->set('search', $search);
-          
         }
         $this->layout->checked = $checked;
         $this->layout->themes = $themes;
@@ -72,15 +70,20 @@ class Controller_Search extends Controller_Data {
     }
 
     public function action_clear() {
-        Session::instance()->set('search',null);
+        Session::instance()->set('search', null);
     }
 
     public function after() {
         $view = View::factory(I18n::$lang . '/search/result');
 
-        $view->results = $this->results;
-        $view->show = $this->show;
-
+        if (Session::instance()->get('search')) {
+            $view->results = ORM::factory('project')->search(Session::instance()->get('search'));
+            $view->show = true;
+          
+        } else {
+            $view->show = false;
+            $view->results = array();
+        }
         $this->layout->results = $view->render();
         $this->content = $this->layout->render();
         parent::after();
