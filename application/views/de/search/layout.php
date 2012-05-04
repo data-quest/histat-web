@@ -17,12 +17,14 @@
             <p>Thesaurus aktivieren :<?= Form::checkbox('thesaurus', NULL, (bool) Arr::get($_POST, 'thesaurus', FALSE)) ?></p>
         </div>
         <div class="left">
-            <p>Suchbereich:</p>
+            <p>Suchbereich:
+     
+            </p>
             <p><?= Form::checkbox('title', NULL, (bool) Arr::get($search, 'title', $checked)) ?> In den Tabellentiteln und den Variablenbezeichnungen der Datentabellen</p>
             <p><?= Form::checkbox('source', NULL, (bool) Arr::get($search, 'source', $checked)) ?> In dem Quellenteil der Datentabellen (z.B. Primärforscher, Institutionen, etc.)</p>
             <p><?= Form::checkbox('description', NULL, (bool) Arr::get($search, 'description', $checked)) ?> In den Studienbeschreibungen</p>
             <div style="float:left;"> <?= Form::submit('search', __('search'), array('class' => 'button', 'style' => 'width:150px;float:left;margin: 0px 5px;')) ?>
-                <?= HTML::anchor('search/extended/clear', __('reset'), array('class' => 'button', 'style' => 'width:130px;display:block;text-align:center;float:left;margin: 0px 5px;')) ?>
+                <?= HTML::anchor('search/clear', __('reset'), array('class' => 'button', 'style' => 'width:130px;display:block;text-align:center;float:left;margin: 0px 5px;')) ?>
             </div>
         </div>
         <?= Form::close() ?>

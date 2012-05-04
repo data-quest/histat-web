@@ -8,9 +8,9 @@
     <?= Form::hidden('max', HTML::chars(Arr::get($search, 'max', 2200))) ?>
 
 
-    <?= Form::hidden('title',  Arr::get($search, 'title')) ?> 
-    <?= Form::hidden('source', Arr::get($search, 'source')) ?> 
-    <?= Form::hidden('description', Arr::get($search, 'description')) ?> 
+    <?= Form::hidden('title',  Arr::get($search, 'title','on')) ?> 
+    <?= Form::hidden('source', Arr::get($search, 'source','on')) ?> 
+    <?= Form::hidden('description', Arr::get($search, 'description','on')) ?> 
 
     <?= Form::submit('search', '') ?>
     <?= Form::close() ?>
