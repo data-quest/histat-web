@@ -968,10 +968,30 @@ table tr td.even {
 #cart{
     padding:15px;
 }
-#cart ul{
-    width:100%;
-    background: #DDDDDD;
-    border:1px solid #000000;
+#cart .right{
+    float:right;
+    width:28%;
+}
+#cart .right span{
+     background: url("../img/layout/details.png") repeat scroll center center transparent;
+    float: right;
+    margin-right: 20px;
+    padding: 2px;
+    width: 150px;
+    
+}
+#cart .right span a{
+       background: url("../img/layout/content-pfeil.png") no-repeat scroll left center transparent;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding-left: 20px;
+}
+#cart .left{
+    float: left;
+    width:70%;
+}
+#cart ul li{
+    list-style: none inside;
 }
 #cart .more{
     background:url(../img/layout/more-btn.jpg) no-repeat center left;
@@ -981,41 +1001,11 @@ table tr td.even {
     height:20px;
     line-height: 20px;
 }
-#cart ul span.more,#cart ul span.less{
 
-    display:block;
-    width:16px;
-    height:16px;
-    float:left;
-    margin-right: 5px;
-    cursor: pointer;
-}
-#cart ul span.less{
-    background: url("../img/layout/content-pfeil-bottom.png") no-repeat center center;
-}
-#cart ul span.more{
-    background: url("../img/layout/content-pfeil-right.png") no-repeat center center;
-}
-#cart li.tables,#cart li.filters{
-    display: none;
-}
-#cart li.header{
-    background: #72777a;
-    color:#FFFFFF;
-}
-#cart li.header h3{
-    color:#FFFFFF;
-}
-#cart ul li:nth-child(2n){
-    background:#ffffff;
-}
-#cart ul li{
-    list-style: none;
-    padding:5px;
-}
-#cart ul a{
-    color:#000000;
-}
+
+
+
+
 /* Style cart end */
 /*Style download*/
 #download .overlay{

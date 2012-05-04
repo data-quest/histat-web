@@ -35,16 +35,23 @@
                     <td width="10%" style="border:0px"></td>
                     <td class="nopadding tabes" style="border:0px" colspan="3" >
                         <?php foreach ($tables[$projectID] as $tableID => $tableName) : ?>
-                         <div class="normal" style="margin:5px"><?= $tableName ?> <a href="#" class="more" style="float:right">mehr</a>
+                        <div style="padding:5px">
                             <?php foreach ($filters[$projectID][$tableID] as $filter => $values) : ?>
-                             <ul style="display:none">
-                                                <?php foreach ($values as $value) : ?>
-                                                    <li><?= $value ?></li>
-                                                <?php endforeach; ?>
-                                     
-                                <?= HTML::anchor('table/details/' . $tableID . '/' . $filter . '#tabelle', __('Show'), array('target' => 'blank')) ?>
-                                    </ul>                       
-                         <?php endforeach; ?>
+                                <div class="normal left"><h4><?= $tableName ?></h4></div>
+                                <div class="right">
+                                    <span><?= HTML::anchor('table/details/' . $tableID . '/' . $filter . '#tabelle', __(':timelines Zeitreihen', array(':timelines' => $values['timelines'])), array('target' => 'blank')) ?></span>
+                                       <span> <?= HTML::anchor('cart/delete/' . $tableID . '/' . $filter , __('Delete')) ?></span>
+                                </div>
+                            <div class="clear"></div>
+
+                                <?php foreach ($values['text'] as $value) : ?>
+                             
+                                    <?php if (!stristr($value, __('All'))) : ?>
+                                        <p><?= $value ?><p>
+                                    <?php endif ?>
+                                <?php endforeach; ?>
+
+                            <?php endforeach; ?>
                         </div>
                         <?php endforeach; ?>
                     </td>

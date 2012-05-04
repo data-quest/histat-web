@@ -55,7 +55,7 @@ class Controller_Data extends Controller_Index {
         //assign new projects to subview
         $list->projects = $project->top_projects();
         //assign the referrer uri
-        $list->uri = URL::site(I18n::$lang . '/data/index');
+        $list->uri = URL::site(I18n::$lang . '/data/top');
         //Assign list in view
         $view->list = $list->render();
         //Setup Dialog
@@ -63,7 +63,7 @@ class Controller_Data extends Controller_Index {
         //set content
         $this->content = $view->render();
         //Setup last action
-        $this->session->set('action', array('name' => 'index'));
+        $this->session->set('action', array('name' => 'top'));
     }
 
     public function action_themes($id = NULL) {

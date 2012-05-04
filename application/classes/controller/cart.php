@@ -23,10 +23,11 @@ class Controller_Cart extends Controller_Table {
             $tableName = $keymask->Name;
             $filter = $item->filter;
             $filterText = json_decode($item->filter_text);
-            $filters[$projectID][$tableID][$filter] = $filterText;
+            $filters[$projectID][$tableID][$filter] = array('text'=>$filterText,'timelines'=>$item->timelines);
             $projects[$projectID] = array('name'=>$projectName,
                     'za'=>$keymask->project->ZA_Studiennummer,
-                    'theme'=>$keymask->project->theme->Thema);
+                    'theme'=>$keymask->project->theme->Thema
+                    );
             
             $tables[$projectID][$tableID] = $tableName;
         }
@@ -58,6 +59,7 @@ class Controller_Cart extends Controller_Table {
         $this->auto_render = FALSE;
         $this->id_hs = $this->request->post('id');
         $this->filter = $this->request->post('filter');
+        
         $filter_text = json_encode($this->request->post('filter_text'));
 
         $cart = $this->user->cart_items
@@ -69,6 +71,7 @@ class Controller_Cart extends Controller_Table {
             $cart = ORM::factory('cart');
             $cart->ID_HS = $this->id_hs;
             $cart->filter = $this->filter;
+            $cart->timelines = $this->request->post('timelines');
             $cart->filter_text = $filter_text;
             $cart->user_id = $this->user->id;
             $cart->chdate = time();

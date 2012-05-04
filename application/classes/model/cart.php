@@ -12,7 +12,8 @@ class Model_Cart extends ORM {
         'filter' => array(),
         'filter_text' => array(),
         'user_id' => array(),
-        'chdate' => array()
+        'chdate' => array(),
+        'timelines' => array()
     );
     protected $_belongs_to = array(
         'user' => array('model' => 'user', 'foreign_key' => 'user_id', 'far_key' => 'id'),

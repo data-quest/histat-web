@@ -74,10 +74,12 @@ $(function(){
         
         var filter = $('input[name="filter_string"]').val();
         var id = $('input[name="id"]').val();
+        var timelines = $('#tabelle > div > b').text();
         $.ajax({
             url: base_url+'cart/add',
             data:{
                 filter:filter,
+                timelines:timelines,
                 id:id,
                 filter_text:filter_text,
                 xsfr:xsrf
