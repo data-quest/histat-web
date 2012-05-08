@@ -18,5 +18,7 @@ class Model_Download extends ORM {
         'mkdate'=>array()
     );
 
-
+ protected $_belongs_to = array(
+          'project'=>array('model'=>'project','foreign_key'=>'projekt_id')
+    );
 }

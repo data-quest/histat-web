@@ -51,7 +51,7 @@ class Controller_Data extends Controller_Index {
         //Load view/<lang>/data/index.php
         $view = View::factory(I18n::$lang . '/data/top');
         //Load view/<lang>/project/list.php prepare the subview
-        $list = View::factory(I18n::$lang . '/project/list');
+        $list = View::factory(I18n::$lang . '/project/top');
         //assign new projects to subview
         $list->projects = $project->top_projects();
         //assign the referrer uri

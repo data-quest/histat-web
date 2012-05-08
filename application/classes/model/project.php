@@ -34,7 +34,7 @@ class Model_Project extends ORM {
         'Bearbeiter_im_ZA' => array(),
         'Bemerkungen' => array(),
         'Zugangsklasse' => array(),
-        'Anzahl_Zeitreiehen' => array(),
+        'Anzahl_Zeitreihen' => array(),
         'Zeitraum' => array(),
         'exportable' => array(),
         'Fundort' => array(),
@@ -45,34 +45,34 @@ class Model_Project extends ORM {
     );
 
     public function new_projects() {
-
+    
         return $this->select(
-                                array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt'
+                                array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Anzahl_Zeitreihen'
                         )
                         ->where('ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
                         ->order_by('chdate', 'DESC')
-                        ->limit('30');
+                        ->limit('20');
     }
 
     public function top_projects() {
-        $ids = DB::select('projekt_id,SUM(anzahl)')
-                ->from('user_downloads')
-                ->order_by(DB::expr('SUM(anzahl)'), 'DESC')
+
+
+        $result = DB::select(
+                     'Zeitraum', 'Anzahl_Zeitreihen',array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt','Thema'
+                )
+                ->from('Aka_Projekte')
+                ->join('user_downloads', 'INNER')
+                ->on('ID_Projekt', '=', 'projekt_id')
+                ->join('Aka_Themen','INNER')
+                ->using('ID_Thema')
+                ->where('ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
                 ->group_by('projekt_id')
-                ->limit('30')
-               ->as_object()
-                ->execute()
-              ;
-       $result = array();
-        foreach($ids as $id){
-           $result []=$id->projekt_id;
-        }
-      
-        return $this->select(
-                                array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt'
-                        )
-                        ->where('ID_Thema', 'IN', DB::expr("('".implode("','",$result)."')"))
-                        ->limit('30');
+                ->order_by(DB::expr('count(user_downloads.id)'), 'DESC')
+                ->limit('20')
+                ->as_object($this)
+                ->execute();
+
+        return $result;
     }
 
     public function getUsedTables() {
