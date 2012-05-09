@@ -29,6 +29,7 @@ class Model_Project extends ORM {
         'Quellen' => array(),
         'Untergliederung' => array(),
         'ZA_Studiennummer' => array(),
+        'Publikationsjahr' => array(),
         'Datum_der_Archivierung' => array(),
         'Datum_de_Bearbeitung' => array(),
         'Bearbeiter_im_ZA' => array(),
