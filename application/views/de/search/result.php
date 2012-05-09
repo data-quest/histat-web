@@ -42,7 +42,7 @@
                     <?php if ($hasDescription): ?>
                         <tr class="empty data <?= $id ?>" style="display:none">
                             <td class="values" colspan="5">
-                                <h1>Studiendbeschreibung</h1>
+                                <h1>Studienbeschreibung</h1>
 
                                 <div class="normal data">
                                     <h4>Datensatz (in empfohlener Zitierweise) <?= HTML::anchor('project/details/'.$id,__('mehr'),array('class'=>'more'))?></h4>
