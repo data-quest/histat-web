@@ -972,7 +972,7 @@ table tr td.even {
     float:right;
     width:21%;
 }
-#cart .right span.more{
+#cart .right span.timelines{
     background: url("../img/layout/more-btn.jpg") no-repeat scroll left center transparent;
     float: left;
     margin-right: 10px;

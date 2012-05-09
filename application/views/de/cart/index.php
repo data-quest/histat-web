@@ -40,7 +40,7 @@
                                     <div class="left" style="width:10%;text-align: center"><?= Form::checkbox('selected[]', $tableID.'/'.$filter); ?></div>
                                     <div class="normal left"><h4><?= $tableName ?></h4></div>
                                     <div class="right">
-                                        <span class="more"><?= HTML::anchor('table/details/' . $tableID . '/' . $filter . '#tabelle', __(':timelines Zeitreihen', array(':timelines' => $values['timelines']))) ?></span>
+                                        <span class="timelines"><?= HTML::anchor('table/details/' . $tableID . '/' . $filter . '#tabelle', __(':timelines Zeitreihen', array(':timelines' => $values['timelines']))) ?></span>
                                         <span class="delete"> <?= HTML::anchor('cart/delete/' . $tableID . '/' . $filter, '') ?></span>
                                     </div>
                                     <div class="clear"></div>
