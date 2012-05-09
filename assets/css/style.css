@@ -1180,7 +1180,7 @@ table tr td.even {
     cursor: pointer;
 
 }
-#search_result .result .found.hide{
+#search_result .result .found.hide,#cart .result .found.hide{
     background:url(../img/layout/button-table-details-left.png) repeat-x center left;
     color:white;
     cursor: pointer;

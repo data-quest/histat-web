@@ -26,12 +26,12 @@
                     <td width="10%">ZA <?= $project['za'] ?></td>
                     <td width="15%" class="even"><?= $project['theme'] ?></td>
                     <td width="55%"><?= $project['name'] ?></td>
-                    <td width="23%" class="even found show"><input type="hidden" name="id" value="<?= $projectID ?>" />Tabellen anzeigen</td>
-                    <td style="display:none" width="23%" class="even found hide"><input type="hidden" name="id" value="<?= $projectID ?>" />Tabellen schließen</td>
+                    <td width="23%" class="even found show"><span class="id" style="display:none"><?= $projectID ?></span>Tabellen anzeigen</td>
+                    <td style="display:none" width="23%" class="even found hide"><span class="id" style="display:none"><?= $projectID ?></span>Tabellen schließen</td>
 
                 </tr>
 
-                <tr class="empty tables <?= $projectID ?>" style="display: display">
+                <tr class="empty tables <?= $projectID ?>" style="display: none">
                    
                     <td class="nopadding tabes" style="border:0px" colspan="4" >
                         <?php foreach ($tables[$projectID] as $tableID => $tableName) : ?>
