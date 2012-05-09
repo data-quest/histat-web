@@ -117,7 +117,7 @@ table tr td.even {
     border:1px solid #72777a;
 }
 .ui-dialog .ui-dialog-titlebar{
- 
+
 }
 .ui-dialog-title{
 
@@ -485,18 +485,18 @@ table tr td.even {
     color:white;
     cursor: pointer;
     text-align: right;
-  min-width: 80px;
+    min-width: 80px;
 }
 #project_details h1{
-       padding: 10px; 
+    padding: 10px; 
 }
 #project_details span{
 
- padding: 5px 10px; 
+    padding: 5px 10px; 
 }
 #project_details h4{
     font-size: 1.2em;
-     padding:5px 10px;
+    padding:5px 10px;
 }
 #project_details div.content{
     padding-left:10px;
@@ -513,7 +513,7 @@ table tr td.even {
 }
 #project_details div.content div.right{
     float:right;
-       width:19%;
+    width:19%;
 }
 #project_details div.content div.right *{
     float:right;
@@ -595,8 +595,8 @@ table tr td.even {
     border:0px;
 }
 #project_details .button{
-     width: 110px;
-     display: block;
+    width: 110px;
+    display: block;
 }
 #project_details span.more{
     color:#fff;
@@ -609,7 +609,7 @@ table tr td.even {
     background: url(../img/layout/more-btn.jpg) no-repeat left center;
 }
 #project_details span.less{
-     color:#fff;
+    color:#fff;
     cursor: pointer;
     height: 15px;
     line-height: 14px;
@@ -970,25 +970,46 @@ table tr td.even {
 }
 #cart .right{
     float:right;
-    width:28%;
+    width:21%;
 }
-#cart .right span{
-     background: url("../img/layout/details.png") repeat scroll center center transparent;
-    float: right;
-    margin-right: 20px;
+#cart .right span.more{
+    background: url("../img/layout/more-btn.jpg") no-repeat scroll left center transparent;
+    float: left;
+    margin-right: 10px;
     padding: 2px;
     width: 150px;
+
+}
+
+#cart p.filter{
+    width:90%;
+    left:10%;
+    position: relative;
+}
+#cart .right span.delete{
+    float: left;
+    width:25px;
+    height:25px;
     
+    background: url("../img/layout/more-btn.jpg") no-repeat scroll right center transparent;
+}
+#cart .right span.delete a{
+      background: url("../img/layout/trash.png") no-repeat scroll center center transparent;
+      width:25px;
+      height:25px;
+      margin: 10px 3px;
+      position: relative;
+      top:5px;
 }
 #cart .right span a{
-       background: url("../img/layout/content-pfeil.png") no-repeat scroll left center transparent;
+
     color: #FFFFFF;
     font-weight: bold;
     padding-left: 20px;
 }
 #cart .left{
     float: left;
-    width:70%;
+    width:69%;
 }
 #cart ul li{
     list-style: none inside;

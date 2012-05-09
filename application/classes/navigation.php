@@ -30,8 +30,15 @@ class Navigation {
      * $navi->add('index/foobar','FooBar'); <br/>
      * $navi->activate('Bar'); //Activate the Navi Point "Bar" <br/>
      */
-    public function activate($title){
-         $this->items[$this->level][$title]['active'] = true;
+    public function activate($title = NULL){
+        if($title) {
+         $this->items[$this->level][$title]['active'] = true;   
+        }else{
+            foreach( $this->items[$this->level] as $title => $value){
+               $this->items[$this->level][$title]['active'] = false; 
+            }
+        }
+         
     }
     /**
      * Return all Points of the Navigation Object

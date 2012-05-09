@@ -6,6 +6,7 @@ class Controller_Cart extends Controller_Table {
 
     public function before() {
         parent::before();
+            $this->sub_navi->activate();
     }
 
     public function action_index() {
@@ -18,7 +19,19 @@ class Controller_Cart extends Controller_Table {
         foreach ($this->user->cart_items->find_all() as $item) {
             $keymask = $item->keymask;
             $projectID = $keymask->project->ID_Projekt;
-            $projectName = $keymask->project->Projektname;
+                 $bearbeitung = '';
+                    $datum = substr($keymask->project->Datum_der_Bearbeitung, -4);
+                    if (!empty($datum)) {
+                        $bearbeitung = '[' . $datum . ']';
+                    }
+
+                    $projectName = __(':author, (:pub_year :edit_year) :project', array(':author' => $keymask->project->Projektautor,
+                        ':pub_year' => $keymask->project->Publikationsjahr,
+                        ':edit_year' => $bearbeitung,
+                        ':project' => $keymask->project->Projektname
+                            ));
+
+           
             $tableID = $item->ID_HS;
             $tableName = $keymask->Name;
             $filter = $item->filter;

@@ -32,27 +32,28 @@
                 </tr>
 
                 <tr class="empty tables <?= $projectID ?>" style="display: display">
-                    <td width="10%" style="border:0px"></td>
-                    <td class="nopadding tabes" style="border:0px" colspan="3" >
+                   
+                    <td class="nopadding tabes" style="border:0px" colspan="4" >
                         <?php foreach ($tables[$projectID] as $tableID => $tableName) : ?>
-                        <div style="padding:5px">
-                            <?php foreach ($filters[$projectID][$tableID] as $filter => $values) : ?>
-                                <div class="normal left"><h4><?= $tableName ?></h4></div>
-                                <div class="right">
-                                    <span><?= HTML::anchor('table/details/' . $tableID . '/' . $filter . '#tabelle', __(':timelines Zeitreihen', array(':timelines' => $values['timelines'])), array('target' => 'blank')) ?></span>
-                                       <span> <?= HTML::anchor('cart/delete/' . $tableID . '/' . $filter , __('Delete')) ?></span>
-                                </div>
-                            <div class="clear"></div>
+                            <div style="padding:5px">
+                                <?php foreach ($filters[$projectID][$tableID] as $filter => $values) : ?>
+                                    <div class="left" style="width:10%;text-align: center"><?= Form::checkbox('selected[]', $tableID.'/'.$filter); ?></div>
+                                    <div class="normal left"><h4><?= $tableName ?></h4></div>
+                                    <div class="right">
+                                        <span class="more"><?= HTML::anchor('table/details/' . $tableID . '/' . $filter . '#tabelle', __(':timelines Zeitreihen', array(':timelines' => $values['timelines']))) ?></span>
+                                        <span class="delete"> <?= HTML::anchor('cart/delete/' . $tableID . '/' . $filter, '') ?></span>
+                                    </div>
+                                    <div class="clear"></div>
 
-                                <?php foreach ($values['text'] as $value) : ?>
-                             
-                                    <?php if (!stristr($value, __('All'))) : ?>
-                                        <p><?= $value ?><p>
-                                    <?php endif ?>
-                                <?php endforeach; ?>
+                                    <?php foreach ($values['text'] as $value) : ?>
 
-                            <?php endforeach; ?>
-                        </div>
+                                        <?php if (!stristr($value, __('All'))) : ?>
+                                            <p class="filter"><?= $value ?><p>
+                                            <?php endif ?>
+                                        <?php endforeach; ?>
+
+                                    <?php endforeach; ?>
+                            </div>
                         <?php endforeach; ?>
                     </td>
 
