@@ -976,9 +976,10 @@ table tr td.even {
     background: url("../img/layout/more-btn.jpg") no-repeat scroll left center transparent;
     float: left;
     margin-right: 10px;
-    padding: 2px;
+    
     width: 150px;
-
+    height:25px;
+    line-height: 25px;
 }
 
 #cart p.filter{
