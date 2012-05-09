@@ -47,7 +47,7 @@ class Search {
     }
 
     public static  function highlight_search($str) {
-        return preg_replace(self::$search_words, '<span style="color:#FE8F00">$0</span>', $str);
+        return preg_replace(self::$search_words, '<span style="color:#FE8F00;font-weight:bold">$0</span>', $str);
     }
 
     public static function get_search_excerpt($str) {

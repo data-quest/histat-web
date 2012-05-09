@@ -5,7 +5,14 @@
             <tr >
                 <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>
                 <td class="even" width="13%"><?= $project->theme->Thema ?></td>
-                <td  width="50%"><?= $project->Projektautor ?>, <?= $project->Projektname ?></td>
+                <?php 
+                $bearbeitung = '';
+                $datum = substr($project->Datum_der_Bearbeitung,-4);
+                if(!empty($datum)){
+                    $bearbeitung = '['.$datum.']';
+                }
+                ?>
+                <td  width="50%"><?= $project->Projektautor ?> (<?= $project->Publikationsjahr ?> <?= $bearbeitung ?>), <?= $project->Projektname ?></td>
                 <td class="timelines" width="22%">
     
                     <?php $tabellen = $project->getUsedTables(); ?>
@@ -22,7 +29,14 @@
         <tr >
             <td width="10%">ZA <?= $projects->ZA_Studiennummer ?></td>
             <td class="even" width="13%"><?= $projects->theme->Thema ?></td>
-            <td  width="50%"><?= $projects->Projektautor ?>, <?= $projects->Projektname ?></td>
+              <?php 
+                $bearbeitung = '';
+                $datum = substr($projects->Datum_der_Bearbeitung,-4);
+                if(!empty($datum)){
+                    $bearbeitung = '['.$datum.']';
+                }
+                ?>
+            <td  width="50%"><?= $projects->Projektautor ?> (<?= $projects->Publikationsjahr ?> <?= $bearbeitung ?>), <?= $projects->Projektname ?></td>
             <td class="timelines" width="22%">
                 <?php $tabellen = $projects->getUsedTables(); ?>
                 <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen = '' ?> 

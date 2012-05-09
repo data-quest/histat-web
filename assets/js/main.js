@@ -50,6 +50,13 @@ $(function(){
                         tables.append('<div><div class="name">'+t.name+'</div><div class="link"><a href="'+base_url+'table/details/'+i+filter+'">'+t.keys.length+' Zeitreihen</a></div><div style="clear:both;padding:0"></div></div>');
                     }  
                 }
+                if(data.Zitierpflicht){
+                    p = details.find('.data').show().find('p');
+                    for(var i in data.Zitierpflicht){
+                        p.append(data.Zitierpflicht[i]);
+                    }
+                  
+                }
                 if(data.Quellen){
                     p = details.find('.sources').show().find('p');
                     for(var i in data.Quellen){

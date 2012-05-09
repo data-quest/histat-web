@@ -45,7 +45,7 @@ class Model_Project extends ORM {
     );
 
     public function new_projects() {
-    
+
         return $this->select(
                                 array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Anzahl_Zeitreihen'
                         )
@@ -58,12 +58,12 @@ class Model_Project extends ORM {
 
 
         $result = DB::select(
-                     'Zeitraum', 'Anzahl_Zeitreihen',array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt','Thema'
+                        'Zeitraum', 'Anzahl_Zeitreihen', array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Thema'
                 )
                 ->from('Aka_Projekte')
                 ->join('user_downloads', 'INNER')
                 ->on('ID_Projekt', '=', 'projekt_id')
-                ->join('Aka_Themen','INNER')
+                ->join('Aka_Themen', 'INNER')
                 ->using('ID_Thema')
                 ->where('ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
                 ->group_by('projekt_id')
@@ -107,7 +107,7 @@ class Model_Project extends ORM {
         $min = Arr::get($post, 'min', 1200);
         $max = Arr::get($post, 'max', 2000);
         $id = Arr::get($post, 'id', NULL);
-        $select = 'p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema';
+        $select = 'p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema,p.Datum_der_Bearbeitung,p.Projektautor,p.Publikationsjahr';
         $result = array();
 
         Search::set_search_query(Arr::get($post, 'text', ''));
@@ -141,8 +141,20 @@ class Model_Project extends ORM {
                     $result['tables'][$value->ID_HS]['name'] = $value->hs_name;
                     $result['tables'][$value->ID_HS]['keys'][$value->Schluessel] = $value->Schluessel;
                 } else {
+                    $bearbeitung = '';
+                    $datum = substr($value->Datum_der_Bearbeitung, -4);
+                    if (!empty($datum)) {
+                        $bearbeitung = '[' . $datum . ']';
+                    }
+
+                    $name = __(':author, (:pub_year :edit_year) :project', array(':author' => $value->Projektautor,
+                        ':pub_year' => $value->Publikationsjahr,
+                        ':edit_year' => $bearbeitung,
+                        ':project' => $value->Projektname
+                            ));
+
                     $result[$value->ID_Projekt] = Arr::get($result, $value->ID_Projekt, array(
-                                'name' => $value->Projektname,
+                                'name' => $name,
                                 'za' => $value->ZA_Studiennummer,
                                 'theme' => $value->Thema
                             ));
@@ -183,8 +195,20 @@ class Model_Project extends ORM {
                     $result['tables'][$value->ID_HS]['keys'][$value->Schluessel] = $value->Schluessel;
                     $result['tables'][$value->ID_HS]['filter'] = false;
                 } else {
+                          $bearbeitung = '';
+                    $datum = substr($value->Datum_der_Bearbeitung, -4);
+                    if (!empty($datum)) {
+                        $bearbeitung = '[' . $datum . ']';
+                    }
+
+                    $name = __(':author, (:pub_year :edit_year) :project', array(':author' => $value->Projektautor,
+                        ':pub_year' => $value->Publikationsjahr,
+                        ':edit_year' => $bearbeitung,
+                        ':project' => $value->Projektname
+                            ));
+
                     $result[$value->ID_Projekt] = Arr::get($result, $value->ID_Projekt, array(
-                                'name' => $value->Projektname,
+                                'name' => $name,
                                 'za' => $value->ZA_Studiennummer,
                                 'theme' => $value->Thema
                             ));
@@ -194,8 +218,9 @@ class Model_Project extends ORM {
         }
         if ($description) {
             if ($id) {
-                $select = 'p.ID_Projekt,p.Projektname, p.Projektbeschreibung, p.Anmerkungsteil, p.Untergliederung,p.Veroeffentlichung,p.Quellen';
+                $select = 'p.ID_Projekt,p.Projektname, p.Projektbeschreibung, p.Anmerkungsteil, p.Untergliederung,p.Veroeffentlichung,p.Quellen,CONCAT(Veroeffentlichung, \' GESIS Köln, Deutschland ZA\', CONCAT_WS(\' \', ZA_Studiennummer,\'Datenfile\',Bemerkungen)) as quote';
             }
+
             $db = DB::select($select)
                     ->from(array('Aka_Projekte', 'p'))
                     ->join(array('aka_schluesselindex', 'asx'), 'INNER')
@@ -218,6 +243,7 @@ class Model_Project extends ORM {
             foreach ($db->as_object()->execute() as $value) {
 
                 if ($id) {
+                    $result['Zitierpflicht'] = Search::get_search_excerpt($value->quote);
                     $result['Projektname'] = Search::get_search_excerpt($value->Projektname);
                     $result['Projektbeschreibung'] = Search::get_search_excerpt($value->Projektbeschreibung);
                     $result['Anmerkungsteil'] = Search::get_search_excerpt($value->Anmerkungsteil);
@@ -225,8 +251,20 @@ class Model_Project extends ORM {
                     $result['Veroeffentlichung'] = Search::get_search_excerpt($value->Veroeffentlichung);
                     $result['Quellen'] = Search::get_search_excerpt($value->Quellen);
                 } else {
+                         $bearbeitung = '';
+                    $datum = substr($value->Datum_der_Bearbeitung, -4);
+                    if (!empty($datum)) {
+                        $bearbeitung = '[' . $datum . ']';
+                    }
+
+                    $name = __(':author, (:pub_year :edit_year) :project', array(':author' => $value->Projektautor,
+                        ':pub_year' => $value->Publikationsjahr,
+                        ':edit_year' => $bearbeitung,
+                        ':project' => $value->Projektname
+                            ));
+
                     $result[$value->ID_Projekt] = Arr::get($result, $value->ID_Projekt, array(
-                                'name' => $value->Projektname,
+                                'name' => $name,
                                 'za' => $value->ZA_Studiennummer,
                                 'theme' => $value->Thema
                             ));
@@ -267,8 +305,20 @@ class Model_Project extends ORM {
                     $result['tables'][$value->ID_HS]['filter'] = false;
                     //$result['tables'][$value->ID_HS]['values'][] = $value;
                 } else {
+                        $bearbeitung = '';
+                    $datum = substr($value->Datum_der_Bearbeitung, -4);
+                    if (!empty($datum)) {
+                        $bearbeitung = '[' . $datum . ']';
+                    }
+
+                    $name = __(':author, (:pub_year :edit_year) :project', array(':author' => $value->Projektautor,
+                        ':pub_year' => $value->Publikationsjahr,
+                        ':edit_year' => $bearbeitung,
+                        ':project' => $value->Projektname
+                            ));
+
                     $result[$value->ID_Projekt] = Arr::get($result, $value->ID_Projekt, array(
-                                'name' => $value->Projektname,
+                                'name' => $name,
                                 'za' => $value->ZA_Studiennummer,
                                 'theme' => $value->Thema
                             ));

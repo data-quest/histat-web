@@ -17,8 +17,32 @@
 
     <h1>Studienbeschreibung:</h1>
     <a href="#" style="visbility:hidden"></a>
-
+    <?php
+    $bearbeitung = '';
+    $datum = substr($project->Datum_der_Bearbeitung, -4);
+    if (!empty($datum)) {
+        $bearbeitung = '[' . $datum . ']';
+    }
+    ?>
+    <?php
+    $quote = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutschland ZA:za Datenfile :file', array(':author' => $project->Projektautor,
+        ':pub_year' => $project->Publikationsjahr,
+        ':edit_year' => $bearbeitung,
+        ':project' => $project->Projektname,
+        ':za' => $project->ZA_Studiennummer,
+        ':file' => $project->Bemerkungen));
+    ?>
+    <?php $len = strlen($quote); ?>
+    <?php if ($len > 0) : ?>
+        <h4>Datensatz (in empfohlener Zitierweise)</h4>
+        <div class="content">
+            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $quote ?></div>
+            <div class="clear"></div>
+        </div>
+    <?php endif; ?>
     <?php $publication = nl2br($project->Veroeffentlichung); ?>
+        
     <?php $len = strlen($publication); ?>
     <?php if ($len > 0) : ?>
         <h4>Gedruckte Publikation</h4>
