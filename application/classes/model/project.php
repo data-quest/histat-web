@@ -59,7 +59,7 @@ class Model_Project extends ORM {
 
 
         $result = DB::select(
-                        'Zeitraum', 'Anzahl_Zeitreihen', array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Thema'
+                        'Zeitraum', 'Anzahl_Zeitreihen', array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Thema','Datum_der_Bearbeitung','Publikationsjahr'
                 )
                 ->from('Aka_Projekte')
                 ->join('user_downloads', 'INNER')

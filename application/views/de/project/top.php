@@ -5,7 +5,16 @@
             <tr >
                 <td width="10%">ZA <?= $project->Studiennummer ?></td>
                 <td class="even" width="13%"><?= $project->Thema ?></td>
-                <td  width="50%"><?= $project->Autor ?>, <?= $project->Studientitel ?></td>
+                    <?php 
+                $bearbeitung = '';
+                $datum = substr($project->Datum_der_Bearbeitung,-4);
+                if(!empty($datum)){
+                    $bearbeitung = '['.$datum.']';
+                }
+                ?>
+            <td  width="50%"><?= $project->Autor ?> (<?= $project->Publikationsjahr ?> <?= $bearbeitung ?>), <?= $project->Studientitel ?></td>
+          
+           
                 <td class="timelines" width="22%">
     
                     <?php $tabellen = ORM::factory('Project',$project->ID_Projekt)->getUsedTables(); ?>

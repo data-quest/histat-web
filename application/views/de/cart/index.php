@@ -17,7 +17,7 @@
     <?php if (count($filters) > 0): ?>
 
 
-        <table class="result">
+        <table class="result" style="margin:10px 0px">
 
             <?php foreach ($projects as $projectID => $project): ?>
 
@@ -63,7 +63,7 @@
 
             <?php endforeach; ?>
         </table>
-
+ 
 
 
     <?php else : ?>
