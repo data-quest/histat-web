@@ -72,7 +72,7 @@ class Controller_Cart extends Controller_Table {
                 ->execute();
 
 
-        if ($cart) {
+        if ($result) {
 
             $this->request->redirect(I18n::$lang . '/cart/index/success');
         }
