@@ -124,36 +124,66 @@ class Controller_Cart extends Controller_Table {
             'csv' => 'CSV'
         );
         if (!is_dir('/tmp/histat/')) {
-            mkdir('/tmp/histat/');
+            mkdir('/tmp/histat/', 0777, true);
         }
-        $zip = new ZipArchive();
-        if ($zip->open('/tmp/histat/download_' . $this->user->id . '.zip', ZipArchive::CREATE) === TRUE) {
-            foreach ($cart as $nr => $item) {
+        if (!is_dir('/tmp/histat/download_' . $this->user->id)) {
+            mkdir('/tmp/histat/download_' . $this->user->id);
+        }
+        if (file_exists('/tmp/histat/download_' . $this->user->id . '.zip')) {
+            unlink('/tmp/histat/download_' . $this->user->id . '.zip');
+        }
 
-                $keymask = ORM::factory('keymask', $item->ID_HS);
-                $details = $keymask->getDetails($item->filter);
-                $details['data'] = null;
-                $names = array();
-                if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
-                    $details['data'] = $keymask->getData($item->filter);
-                }
-                if ($details['data']) {
-                    $grid = $this->create_grid($details);
-                    $grid[1] = array($keymask->Name);
-                    $ws = new Spreadsheet();
-                    $ws->set_active_sheet(0);
-                    $ws->set_data($grid);
-                    $name = $ws->save(array('name' => ($keymask->Name . '-' . $nr), 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/'));
+        foreach ($cart as $nr => $item) {
 
-                    $zip->addFile($name);
-                    unlink($name);
-                }
-                
+            $keymask = ORM::factory('keymask', $item->ID_HS);
+            $details = $keymask->getDetails($item->filter);
+            $details['data'] = null;
+            $names = array();
+            if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
+                $details['data'] = $keymask->getData($item->filter);
             }
-             
-            $zip->close();
-            //$this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip');
-        } 
+            if ($details['data']) {
+                $grid = $this->create_grid($details);
+                $grid[1] = array($keymask->Name);
+                $ws = new Spreadsheet();
+                $ws->set_active_sheet(0);
+                $ws->set_data($grid);
+                $name = $ws->save(array('name' => ($keymask->Name . '-' . $nr), 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/download_' . $this->user->id . '/'));
+
+
+                // unlink($name);
+            }
+        }
+        $path = '/tmp/histat/';
+
+
+        $command = sprintf("zip -r -D /tmp/histat/download_%d.zip  /tmp/histat/download_%d/", $this->user->id, $this->user->id);
+
+        system($command, $return);
+
+        $this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
+
+
+
+        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', NULL,array('mime_type'=>'application/octet-stream'));
+    }
+
+    private function rrmdir($dir) {
+        $fp = opendir($dir);
+        if ($fp) {
+            while ($f = readdir($fp)) {
+                $file = $dir . "/" . $f;
+                if ($f == "." || $f == "..") {
+                    continue;
+                } else if (is_dir($file) && !is_link($file)) {
+                    rrmdir($file);
+                } else {
+                    unlink($file);
+                }
+            }
+            closedir($fp);
+            rmdir($dir);
+        }
     }
 
 }
