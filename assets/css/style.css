@@ -1023,8 +1023,12 @@ table tr td.even {
     height:20px;
     line-height: 20px;
 }
-
-
+#cart .download .buttons{
+    display: none;
+}
+#cart .download:hover .buttons{
+    display:block;
+}
 
 
 

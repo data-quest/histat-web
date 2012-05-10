@@ -199,7 +199,7 @@ class Controller_Table extends Controller_Data {
         }
     }
 
-    private function create_grid($details) {
+    protected function create_grid($details) {
         $grid = array();
         $i = 2;
         $headers = Arr::get($details, 'details', array());

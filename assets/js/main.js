@@ -22,6 +22,31 @@ $(function(){
     $('#cart .less').live('click',function(e){
         $(this).removeClass('less').addClass('more').parent('li').next('li').slideToggle('slow');
     });
+    
+    $('#cart .result input[name="selected[]"]').change(function(){
+        var val = $(this).val();
+        var form = $('form.selected');
+        var id =$(this).prop('position');
+        var elem = form.find('.class_'+id);
+        if( $(this).attr('checked') == 'checked'){
+           
+            if(elem.length == 0){
+                form.prepend('<input type="hidden" name="selected[]" class="class_'+id+'" value="'+val+'" />');
+            }
+        }else{
+      
+            if(elem.length > 0){
+                elem.remove();
+              
+            }
+        }
+        
+    });
+    
+    $('#cart .download .button').on('click',function(){
+        $(this).parents('form').find('input[name="format"]').val($(this).attr('id'));
+        $('form#download').submit();
+    });
     var id = 0;
     function search(elem,id){
         var data = $('#search_form').serialize(),tables,details;

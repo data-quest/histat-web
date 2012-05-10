@@ -32,12 +32,12 @@
                 </tr>
 
                 <tr class="empty tables <?= $projectID ?>" style="display: none">
-                   
+
                     <td class="nopadding tabes" style="border:0px" colspan="4" >
                         <?php foreach ($tables[$projectID] as $tableID => $tableName) : ?>
                             <div style="padding:5px">
                                 <?php foreach ($filters[$projectID][$tableID] as $filter => $values) : ?>
-                                    <div class="left" style="width:10%;text-align: center"><?= Form::checkbox('selected[]', $tableID.'/'.$filter); ?></div>
+                                    <div class="left" style="width:10%;text-align: center"><?= Form::checkbox('selected[]', $tableID . '/' . $filter); ?></div>
                                     <div class="normal left"><h4><?= $tableName ?></h4></div>
                                     <div class="right">
                                         <span class="timelines"><?= HTML::anchor('table/details/' . $tableID . '/' . $filter . '#tabelle', __(':timelines Zeitreihen', array(':timelines' => $values['timelines']))) ?></span>
@@ -63,9 +63,25 @@
 
             <?php endforeach; ?>
         </table>
- 
+        <div class="clear"></div>
+        <div style="position: relative;"> 
+            <?= Form::open('cart/delete_selected', array('class' => 'selected')) ?>
+            <?= Form::submit('delete', __('Delete'), array('class' => 'button', 'style' => 'width:150px;margin: 0px 0px;position:absolute;left:0px')) ?>
+            <?= Form::close() ?>
+            <?= Form::open('cart/download_selected', array('class' => 'selected','id'=>'download')) ?>
+            <div class="download" style="position: absolute;left:160px">
+                <div class="button" style="width:150px;position: relative;text-align: center">Download</div>
+                <div class="buttons" style="position: relative;padding: 10px 0;top:-36px;left:180px;">
+                    <a class="button" id="xls" href="#" >.XLS</a>
+                    <a class="button" id="xlsx" href="#">.XLSX</a>
+                    <a class="button" id="csv" href="#">.CSV</a>
+                </div>
+            </div>
+            <?= Form::hidden('format', null) ?>
+            <?= Form::close() ?>
+        </div>
 
-
+        <div class="clear"></div>
     <?php else : ?>
         <h3>Ihr Warenkorb ist leer</h3>
     <?php endif; ?>

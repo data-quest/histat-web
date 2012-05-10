@@ -6,7 +6,7 @@ class Controller_Cart extends Controller_Table {
 
     public function before() {
         parent::before();
-            $this->sub_navi->activate();
+        $this->sub_navi->activate();
     }
 
     public function action_index() {
@@ -19,32 +19,32 @@ class Controller_Cart extends Controller_Table {
         foreach ($this->user->cart_items->find_all() as $item) {
             $keymask = $item->keymask;
             $projectID = $keymask->project->ID_Projekt;
-                 $bearbeitung = '';
-                    $datum = substr($keymask->project->Datum_der_Bearbeitung, -4);
-                    if (!empty($datum)) {
-                        $bearbeitung = '[' . $datum . ']';
-                    }
+            $bearbeitung = '';
+            $datum = substr($keymask->project->Datum_der_Bearbeitung, -4);
+            if (!empty($datum)) {
+                $bearbeitung = '[' . $datum . ']';
+            }
 
-                    $projectName = __(':author, (:pub_year :edit_year) :project', array(':author' => $keymask->project->Projektautor,
-                        ':pub_year' => $keymask->project->Publikationsjahr,
-                        ':edit_year' => $bearbeitung,
-                        ':project' => $keymask->project->Projektname
-                            ));
+            $projectName = __(':author, (:pub_year :edit_year) :project', array(':author' => $keymask->project->Projektautor,
+                ':pub_year' => $keymask->project->Publikationsjahr,
+                ':edit_year' => $bearbeitung,
+                ':project' => $keymask->project->Projektname
+                    ));
 
-           
+
             $tableID = $item->ID_HS;
             $tableName = $keymask->Name;
             $filter = $item->filter;
             $filterText = json_decode($item->filter_text);
-            $filters[$projectID][$tableID][$filter] = array('text'=>$filterText,'timelines'=>$item->timelines);
-            $projects[$projectID] = array('name'=>$projectName,
-                    'za'=>$keymask->project->ZA_Studiennummer,
-                    'theme'=>$keymask->project->theme->Thema
-                    );
-            
+            $filters[$projectID][$tableID][$filter] = array('text' => $filterText, 'timelines' => $item->timelines);
+            $projects[$projectID] = array('name' => $projectName,
+                'za' => $keymask->project->ZA_Studiennummer,
+                'theme' => $keymask->project->theme->Thema
+            );
+
             $tables[$projectID][$tableID] = $tableName;
         }
-        $view->message = $this->request->param('id',FALSE);
+        $view->message = $this->request->param('id', FALSE);
         $view->projects = $projects;
         $view->tables = $tables;
         $view->filters = $filters;
@@ -52,9 +52,9 @@ class Controller_Cart extends Controller_Table {
     }
 
     public function action_delete() {
-        echo $this->id_hs;
+
         $cart = ORM::factory('cart')
-                ->where('user_id','=',$this->user->id)
+                ->where('user_id', '=', $this->user->id)
                 ->where('ID_HS', '=', $this->id_hs)
                 ->where('filter', '=', $this->filter)
                 ->find();
@@ -62,7 +62,21 @@ class Controller_Cart extends Controller_Table {
             $cart->delete();
             $this->request->redirect(I18n::$lang . '/cart/index/success');
         }
-      $this->request->redirect(I18n::$lang . '/cart/index/error');
+        $this->request->redirect(I18n::$lang . '/cart/index/error');
+    }
+
+    public function action_delete_selected() {
+        $result = DB::delete('warenkorb')
+                ->where('user_id', '=', $this->user->id)
+                ->where(DB::expr('CONCAT_WS("/",ID_HS,filter)'), 'IN', DB::expr("('" . implode("','", $this->request->post('selected')) . "')"))
+                ->execute();
+
+
+        if ($cart) {
+
+            $this->request->redirect(I18n::$lang . '/cart/index/success');
+        }
+        $this->request->redirect(I18n::$lang . '/cart/index/error');
     }
 
     public function action_add() {
@@ -72,7 +86,7 @@ class Controller_Cart extends Controller_Table {
         $this->auto_render = FALSE;
         $this->id_hs = $this->request->post('id');
         $this->filter = $this->request->post('filter');
-        
+
         $filter_text = json_encode($this->request->post('filter_text'));
 
         $cart = $this->user->cart_items
@@ -93,6 +107,56 @@ class Controller_Cart extends Controller_Table {
         }
         echo false;
         //  $this->request->redirect(I18n::$lang . '/table/details/' . $this->id_hs . '/' . $this->filter);
+    }
+
+    public function action_download_selected() {
+
+        if (HTTP_Request::POST != $this->request->method() || $this->request->post('selected') == NULL) {
+            $this->request->redirect(I18n::$lang . '/cart/index');
+        }
+        $cart = ORM::factory('cart')
+                ->where('user_id', '=', $this->user->id)
+                ->where(DB::expr('CONCAT_WS("/",ID_HS,filter)'), 'IN', DB::expr("('" . implode("','", $this->request->post('selected')) . "')"))
+                ->find_all();
+        $formats = array(
+            'xsl' => 'Excel5',
+            'xslx' => 'Excel2007',
+            'csv' => 'CSV'
+        );
+        if (!is_dir('/tmp/histat/')) {
+            mkdir('/tmp/histat/');
+        }
+        $zip = new ZipArchive();
+        if ($zip->open('/tmp/histat/download_' . $this->user->id . '.zip', ZipArchive::CREATE) === TRUE) {
+            foreach ($cart as $nr => $item) {
+
+                $keymask = ORM::factory('keymask', $item->ID_HS);
+                $details = $keymask->getDetails($item->filter);
+                $details['data'] = null;
+                $names = array();
+                if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
+                    $details['data'] = $keymask->getData($item->filter);
+                }
+                if ($details['data']) {
+                    $grid = $this->create_grid($details);
+                    $grid[1] = array($keymask->Name);
+                    $ws = new Spreadsheet();
+                    $ws->set_active_sheet(0);
+                    $ws->set_data($grid);
+                    $name = $ws->save(array('name' => ($keymask->Name . '-' . $nr), 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/'));
+
+                    $zip->addFile($name);
+                    unlink($name);
+                }
+                
+            }
+             
+            $zip->close();
+            //$this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip');
+        } else {
+           
+            echo "Geht nicht";
+        }
     }
 
 }
