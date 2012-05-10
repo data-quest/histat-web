@@ -153,10 +153,7 @@ class Controller_Cart extends Controller_Table {
              
             $zip->close();
             //$this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip');
-        } else {
-           
-            echo "Geht nicht";
-        }
+        } 
     }
 
 }

@@ -64,12 +64,13 @@
             <?php endforeach; ?>
         </table>
         <div class="clear"></div>
+       
         <div style="position: relative;"> 
             <?= Form::open('cart/delete_selected', array('class' => 'selected')) ?>
             <?= Form::submit('delete', __('Delete'), array('class' => 'button', 'style' => 'width:150px;margin: 0px 0px;position:absolute;left:0px')) ?>
             <?= Form::close() ?>
             <?= Form::open('cart/download_selected', array('class' => 'selected','id'=>'download')) ?>
-            <div class="download" style="position: absolute;left:160px">
+            <div class="download" style="position: absolute;left:160px;width:500px">
                 <div class="button" style="width:150px;position: relative;text-align: center">Download</div>
                 <div class="buttons" style="position: relative;padding: 10px 0;top:-36px;left:180px;">
                     <a class="button" id="xls" href="#" >.XLS</a>
