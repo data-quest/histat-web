@@ -151,21 +151,21 @@ class Controller_Cart extends Controller_Table {
                 $name = $ws->save(array('name' => ($keymask->Name . '-' . $nr), 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/download_' . $this->user->id . '/'));
 
 
-                // unlink($name);
+         
             }
         }
         $path = '/tmp/histat/';
 
 
-        $command = sprintf("zip -r -D /tmp/histat/download_%d.zip  /tmp/histat/download_%d/", $this->user->id, $this->user->id);
+        $command = sprintf("cd /tmp/histat/ ;zip -r download_%d.zip  download_%d/", $this->user->id, $this->user->id);
 
-        system($command, $return);
+        exec($command);
 
         $this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
 
 
-
-        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', NULL,array('mime_type'=>'application/octet-stream'));
+        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip',sprintf("Warenkorb_%s.zip",date("m-d-y-h-i",time())));
+       
     }
 
     private function rrmdir($dir) {
