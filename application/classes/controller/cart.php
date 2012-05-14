@@ -48,6 +48,7 @@ class Controller_Cart extends Controller_Table {
         $view->projects = $projects;
         $view->tables = $tables;
         $view->filters = $filters;
+        $view->options = Kohana::$config->load('download')->get('options');
         $this->content = $view->render();
     }
 
@@ -129,9 +130,13 @@ class Controller_Cart extends Controller_Table {
         if (!is_dir('/tmp/histat/download_' . $this->user->id)) {
             mkdir('/tmp/histat/download_' . $this->user->id);
         }
-        if (file_exists('/tmp/histat/download_' . $this->user->id . '.zip')) {
-            unlink('/tmp/histat/download_' . $this->user->id . '.zip');
-        }
+        $uses = $this->request->post('uses');
+        if ($uses == '-1')
+            $uses = $this->request->post('custom');
+
+
+
+
 
         foreach ($cart as $nr => $item) {
 
@@ -142,6 +147,17 @@ class Controller_Cart extends Controller_Table {
             if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
                 $details['data'] = $keymask->getData($item->filter);
             }
+            $download = ORM::factory('download');
+            $download->username = $this->user->username;
+            $download->projekt_id = $keymask->project->ID_Projekt;
+            $download->anzahl = count($details['keys']);
+            $download->type =  $this->request->post('format');
+            $download->intended_use = $uses;
+            $download->za_nummer = $keymask->project->ZA_Studiennummer;
+            $download->name = $keymask->project->Projektname;
+            $download->mkdate = time();
+            $download->create();
+
             if ($details['data']) {
                 $grid = $this->create_grid($details);
                 $grid[1] = array($keymask->Name);
@@ -149,9 +165,6 @@ class Controller_Cart extends Controller_Table {
                 $ws->set_active_sheet(0);
                 $ws->set_data($grid);
                 $name = $ws->save(array('name' => ($keymask->Name . '-' . $nr), 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/download_' . $this->user->id . '/'));
-
-
-         
             }
         }
         $path = '/tmp/histat/';
@@ -164,8 +177,7 @@ class Controller_Cart extends Controller_Table {
         $this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
 
 
-        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip',sprintf("Warenkorb_%s.zip",date("m-d-y-h-i",time())));
-       
+        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', sprintf("Warenkorb_%s.zip", date("m-d-y-h-i", time())), array('delete' => TRUE));
     }
 
     private function rrmdir($dir) {

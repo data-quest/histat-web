@@ -1070,18 +1070,18 @@ table tr td.even {
 #download p.normal{
     margin-bottom: 5px;
 }
-#download form select{
+#download select{
     width:100%;
 }
-#download form{
+#download{
     text-align: center;
 }
-#download form input[name="custom"]{
+#download input[name="custom"]{
     display:none;
     width:495px;
     margin: 5px 0;
 }
-#download form input[type="submit"]{
+#download input[type="submit"]{
     margin:5px 0;
     border:0px;
     cursor:pointer;

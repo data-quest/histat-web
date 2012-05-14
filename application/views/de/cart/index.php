@@ -64,19 +64,33 @@
             <?php endforeach; ?>
         </table>
         <div class="clear"></div>
-       
+
         <div style="position: relative;"> 
             <?= Form::open('cart/delete_selected', array('class' => 'selected')) ?>
             <?= Form::submit('delete', __('Delete'), array('class' => 'button', 'style' => 'width:150px;margin: 0px 0px;position:absolute;left:0px')) ?>
             <?= Form::close() ?>
-            <?= Form::open('cart/download_selected', array('class' => 'selected','id'=>'download')) ?>
+            <?= Form::open('cart/download_selected', array('class' => 'selected', 'id' => 'download')) ?>
             <div class="download" style="position: absolute;left:160px;width:500px">
                 <div class="button" style="width:150px;position: relative;text-align: center">Download</div>
-                <div class="buttons" style="position: relative;padding: 10px 0;top:-36px;left:180px;">
+                <div class="buttons" style="position: relative;padding: 10px 0;top:-36px;left:10px;">
                     <a class="button" id="xls" href="#" >.XLS</a>
                     <a class="button" id="xlsx" href="#">.XLSX</a>
                     <a class="button" id="csv" href="#">.CSV</a>
                 </div>
+            </div>
+            <div class="overlay transparent" style="display:none"></div>
+            <div class="dialog tooltip" style="display:none">
+                <p class="normal">
+                    Die Bedingungen für die Nutzung unseres Download-Datenservices sind in der aktuellen Benutzungsordnung des GESIS - Datenarchivs festgelegt. Auf der GESIS - Homepage können Sie sich unter "Dienstleistungen / Recherche & Datenzugang / Datenarchiv Service / Benutzungsordnung" über die aktuell geltenden Bedingungen zur Nutzung von Studien und Daten informieren. Für gewerbliche Zwecke sind die Vervielfältigungen und Verbreitung exportierter Daten aus Studien des GESIS - Datenarchivs grundsätzlich nicht gestattet.
+                </p>
+                <p class="normal">
+                    Die zugangsklasse A dieser Studie erfordert die Angabe eines Verwendungszweckes. Mit der Angabe des Verwendungszwekcs und dem anschließenden Download stimmen Sie den Nutzungsbediungen zu.
+                </p>
+
+                <?= Form::select('uses', $options) ?>
+                <?= Form::input('custom') ?>
+                <?= Form::submit('download', __('Start Download'), array('class' => 'button')) ?>
+
             </div>
             <?= Form::hidden('format', null) ?>
             <?= Form::close() ?>

@@ -44,8 +44,27 @@ $(function(){
     });
     
     $('#cart .download .button').on('click',function(){
+        if($('input:checked').length > 0){
+            
+       
         $(this).parents('form').find('input[name="format"]').val($(this).attr('id'));
-        $('form#download').submit();
+        $('.overlay').fadeIn('slow');
+        $('.dialog').fadeIn('slow');
+         }else{
+             alert("Keine Tabellen wurden zum Download ausgewählt")
+         }
+    });
+    $('#download').submit(function(){
+        $('.overlay').fadeOut('slow');
+        $('.dialog').fadeOut('slow');
+    });
+    $('#download select').change(function(){
+        if($(this).val() === '-1'){
+            $('#download input[name="custom"]').slideDown(500);
+        }else{
+            $('#download input[name="custom"]').slideUp(500).val("");
+        }
+     
     });
     var id = 0;
     function search(elem,id){
