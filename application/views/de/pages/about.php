@@ -30,19 +30,27 @@
             <br><br>
 
             <br><br>
-            <h3>Kontakt, Fragen etc.: 
-                <br>
-                <br>Dr. Thomas Rahlf
-                <br>Teamleiter DHS
-                <br>
-                <br>gesis
-                <br>Leibniz-Institut für Sozialwissenschaften
-                <br>Unter Sachsenhausen 6-8
-                <br>50667 Köln
-                <br>
-                <br>Tel.: +49-221-476 94 478
-                <br>
-                <br><a href="mailto:histat@gesis.org">histat@gesis.org</a></h3>
+            <h3>Kontakt<br/>
+                <br/>
+                <br/>
+                Sollten Sie weitere Fragen oder Anregungen haben, zögern Sie bitte
+                nicht, sich mit uns in Kontakt zu setzen:<br/><br/>
+
+                <?= HTML::mailto('histat@gesis.org') ?>
+
+                <br/>
+                <br/>
+                Dr. Thomas Rahlf<br/>
+                <?= HTML::mailto('thomas.rahlf@gesis.org') ?><br/>
+                0221 – 47694 478<br/>
+                <br/>
+
+                Gabriele Franzmann, M.A.<br/>
+                <?= HTML::mailto('gabriele.franzmann@gesis.org') ?><br/>
+                0221 – 47694 476<br/><br/>
+                Dipl.-Soz. Jürgen Sensch<br/>
+                <?= HTML::mailto('juergen.sensch@gesis.org') ?><br/>
+                0221 – 47694 477</h3>
             <br><br>
             <br><br>
 
@@ -62,6 +70,6 @@
 </div>
 <script type="text/javascript">
     $(function(){
-       $('#gotop').remove(); 
+        $('#gotop').remove(); 
     })
-    </script>
+</script>
