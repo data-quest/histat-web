@@ -106,8 +106,60 @@ $(function(){
     $('#download form').submit(function(){
         $('#download').fadeOut(500, function(){
             
-        });
+            });
     });
+    $('#tdata td').hover(function(){
+        if($(this).find('input[name="new_data"]').is(':hidden')){
+            $(this).find('.edit').show();
+        }
+        
+    },function(){
+        $(this).find('.edit').hide();
+    })
+    $('#tdata td .edit').live('click',function(){
+        var parent = $(this).parent('td');
+        $(this).hide();
+        parent.find('.text').hide();
+        parent.find('input[name="new_data"]').show().focus();
+    });
+    $('input[name="new_data"]').focusout(function(){
+        var t = $(this),year,id_hs,key,value;
+        var parent = t.parent('td');
+        key = parent.find('input[name="hidden_key"]').val();
+        id_hs = parent.find('input[name="hidden_id_hs"]').val();
+        year = parent.find('input[name="hidden_year"]').val();
+        value = t.val();
+        $.ajax({
+            url: base_url+'table/edit',
+            data:{
+                xsfr:xsrf,
+                year:year,
+                id_hs:id_hs,
+                key:key,
+                value:value
+            },
+            type:'POST',
+            dataType:'json',
+            success: function(data) {
+            
+              
+                if(data.result){
+                    t.hide();
+                    var val = ' ';
+                    if(t.val().length > 0)
+                        val = t.val();
+                    
+                    t.parent('td').find('.text').text(val).show();
+                }else{
+                      t.hide();
+                    t.parent('td').find('.text').show(); 
+                    
+                }
+             
+            }
+        });
+       
+    })
 });
 function scrollbar() {
     var div = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:0xp;left:0xp;"><div style="height:100px"></div></div>');

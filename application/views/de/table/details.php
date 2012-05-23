@@ -14,13 +14,13 @@
                     <?= HTML::anchor($data ? 'download/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.XLS', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.XLSX', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.CSV', array('class' => $class)) ?>
-                    <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter . '#tabelle',HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
+                    <?= HTML::anchor('table/details/' . $keymask->ID_HS . '/' . $filter . '#tabelle', HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
                 </div> 
-               
+
             </div>
             <div class="clear"></div>
         </div>
-        
+
         <?= Form::open('table/details/' . $keymask->ID_HS . '#tabelle') ?>
 
 
@@ -114,14 +114,19 @@
                                     <?php $d = Arr::get($data, $key, array('data' => '&nbsp;', 'note' => NULL)); ?>
                                     <td >
                                         <?php if ($d['note']) : ?>
-                                            <div class="text" style="height:auto;text-align:center;margin:auto;text-decoration: underline;cursor: pointer;font-weight: bold"> <?= $d['data'] ?> 
+                                            <div class="text" style="height:17px;text-align:center;margin:auto;text-decoration: underline;cursor: pointer;font-weight: bold"> <?= $d['data'] ?> 
                                                 <div class="tooltip" style="display:none;margin-left:20px"><span></span><?= $d['note'] ?></div>
                                             </div>
                                         <?php else: ?>
-                                            <div class="text" style="height:auto;text-align:center;margin:auto"> <?= $d['data'] ?> </div>
+                                            <div class="text" style="height:17px;text-align:center;margin:auto"> <?= $d['data'] ?> </div>
                                         <?php endif; ?>
-
-
+                                            <?php if($is_admin): ?>
+                                            <div class="button edit"></div>
+                                        <?= Form::input('new_data',is_numeric($d['data']) ?$d['data']:NULL) ?>
+                                        <?= Form::hidden('hidden_key', $key) ?>
+                                        <?= Form::hidden('hidden_year', $y) ?>
+                                        <?= Form::hidden('hidden_id_hs', $keymask->ID_HS) ?>
+                                            <?php endif; ?>
                                     </td>
 
                                 <?php endforeach; ?>

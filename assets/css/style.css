@@ -957,6 +957,28 @@ table tr td.even {
 #table_details div.details table#tdata  tr:hover{
     background:#FE8F00;
 }
+#table_details #tdata input[name="new_data"]{
+    
+    display:none;
+}
+#table_details #tdata,#table_details #tdata td{
+    position: relative;
+}
+
+#table_details #tdata .button{
+    position: absolute;
+    background: url(../img/layout/edit.png) no-repeat center center #ffffff;
+    margin-top:-17px;
+    display: none;
+    width:19px;
+    height:19px;
+    padding:0px;
+        -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    cursor:pointer;
+}
+
 #table_details div.details table .tooltip{
     display:none;
 }

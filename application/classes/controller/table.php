@@ -99,7 +99,7 @@ class Controller_Table extends Controller_Data {
             $data = $keymask->getData($this->filter);
         }
 
-       
+
         $view->details = $details['details'];
         $view->keys = $details['keys'];
         $view->data = $data;
@@ -111,6 +111,7 @@ class Controller_Table extends Controller_Data {
         $view->sources = $details['sources'];
         $view->notes = $details['notes'];
         $view->filter = $this->filter;
+        $view->is_admin = $this->user->has_roles(array('admin'));
         $view->post = $post;
 
         $view->project = $list->render();
@@ -121,20 +122,20 @@ class Controller_Table extends Controller_Data {
 
         if (HTTP_Request::POST == $this->request->method()) {
             $keymask = ORM::factory('keymask', $this->id_hs);
-            $details =  $keymask->getDetails($this->filter);
+            $details = $keymask->getDetails($this->filter);
             $name = $keymask->project->Projektname;
             $type = $this->request->param('type');
             $uses = $this->request->post('uses');
-            if($uses == '-1')
+            if ($uses == '-1')
                 $uses = $this->request->post('custom');
-            
-            
+
+
             $download = ORM::factory('download');
             $download->username = $this->user->username;
             $download->projekt_id = $keymask->project->ID_Projekt;
             $download->anzahl = count($details['keys']);
             $download->type = $type;
-            $download->intended_use =$uses;
+            $download->intended_use = $uses;
             $download->za_nummer = $keymask->project->ZA_Studiennummer;
             $download->name = $name;
             $download->mkdate = time();
@@ -261,6 +262,52 @@ class Controller_Table extends Controller_Data {
             $i++;
         }
         return $grid;
+    }
+
+    public function action_edit() {
+        $this->auto_render = false;
+        if ($this->session->get('xsrf') == $this->request->post('xsfr') && $this->user->has_roles(array('admin'))) {
+            $value = NULL;
+            $id_hs = $this->request->post('id_hs');
+            $key = $this->request->post('key');
+            $year = $this->request->post('year');
+            $value = $this->request->post('value');
+            
+            if ($value) {
+
+                $result = DB::update('Daten__Aka')
+                        ->set(array('Data' => $value))
+                        ->where('ID_HS', '=', $id_hs)
+                        ->where('Schluessel', '=', $key)
+                        ->where('Jahr_Sem', '=', $year)
+                        ->cached(0);
+
+                if ($result->execute()) {
+                    $this->response->body(json_encode(array('result' => true)));
+                } else {
+                    $result = DB::insert('Daten__Aka', array('Data', 'ID_HS', 'Schluessel', 'Jahr_Sem'))
+                            ->values(array($value, $id_hs, $key, $year));
+                    if ($result->execute()) {
+                        $this->response->body(json_encode(array('result' => true)));
+                    } else {
+                        echo "Kein insert";
+                        $this->response->body(json_encode(array('result' => false)));
+                    }
+                }
+            } else {
+                $result = DB::delete('Daten__Aka')
+                        ->where('ID_HS', '=', $id_hs)
+                        ->where('Schluessel', '=', $key)
+                        ->where('Jahr_Sem', '=', $year);
+                if ($result->execute()) {
+                        $this->response->body(json_encode(array('result' => true)));
+                    } else {
+                        $this->response->body(json_encode(array('result' => false)));
+                    }
+            }
+        } else {
+            $this->response->body(json_encode(array('result' => false)));
+        }
     }
 
 }
