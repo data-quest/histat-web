@@ -35,6 +35,7 @@ $(function(){
         var id = $(this).find('input[name="chart"]').val();
         var title = $(this).find('input[name="title"]').val();
         var tt = $('.dialog');
+     
         tt.html('<img src="'+base_url+'chart/draw/'+id+'" /></div>').dialog({
             minWidth:800,
             maxWidth:800,
@@ -48,9 +49,12 @@ $(function(){
             position:["center",100],
             closeText:closeText,
             open:function(){
+                 $('.ui-dialog-titlebar').addClass('titlebar').show();
                 var span = $('.ui-dialog-titlebar-close > span');
-                var h = $('span.ui-dialog-title').innerHeight();
-         
+              
+                
+                  
+                     var h = $('span.ui-dialog-title').height();
                 span.attr('style','height:'+h+'px;line-height:'+h+'px');
             },
             close:function(){

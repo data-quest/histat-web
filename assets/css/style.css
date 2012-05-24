@@ -52,14 +52,15 @@ table{
     padding:0px;
     margin:0px;
     width:100%;
-    border-collapse:collapse;
-    border-spacing: 0 0.4em;
+   
+    border-spacing: 0 0.5em;
     background: #ffffff;
 }
 table a{
     color:#000000;
     text-decoration: none;
 }
+
 table td{
 
     border:1px solid #72777a;
@@ -926,7 +927,9 @@ table tr td.even {
     min-width: 100px;
 }
 
-
+#table_details table{
+    border-collapse: collapse;
+}
 #table_details div.details table td.blue:hover{
     cursor: pointer;
 
@@ -990,6 +993,19 @@ table tr td.even {
 }
 #table_details div.details .button.disabled{
     background:  url("../img/layout/hg-navi-grau.jpg") repeat-x scroll center center transparent;
+}
+.titlebar{
+ 
+ 
+    color:#fff;
+ 
+    text-align: center;
+    font-weight: bold;
+}
+.titlebar .ui-dialog-title{
+      background: url(../img/layout/verlauf-orange_150x5.jpg) center center;
+      width: 700px;
+      line-height: 22px;
 }
 /*Style table/details/id end*/
 /* Style cart*/
@@ -1206,6 +1222,9 @@ table tr td.even {
 #search_result .result .notfound,#cart .result .notfound{
     background:url(../img/layout/details-transparent-rechts.png) #E6E6E6 no-repeat center right;
 
+}
+#cart table.result{
+    border-collapse: collapse;
 }
 #search_result .result .found.show,#cart .result .found.show{
     background:url(../img/layout/button-table-details-right.png) repeat-x center right;
