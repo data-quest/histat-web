@@ -1,5 +1,5 @@
 <div id="project_details" style="display:none" >
-    <table border="0" cellpadding="0" cellspacing="0">
+   <table border="0" cellpadding="0" cellspacing="0">
         <tr >
             <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>
             <td class="even" width="13%"><?= $project->theme->Thema ?></td>
@@ -11,13 +11,13 @@
     </table>
 
 
-  
+    <h1>Tabellen:</h1>
 
     <?php
     $keymasks = $project->keymasks->order_by('Name')->find_all();
-   
-    $max = 10;
-    $countTables = ceil(count($keymasks) / $max);
+    $maxRows = 6;
+    $maxCols = 3;
+    $countTables = ceil(count($keymasks) / ($maxRows * $maxCols));
 
     if ($page <= 1) {
         $page = 1;
@@ -27,23 +27,17 @@
     $index = 0;
     for ($table = 0; $table < $countTables; $table++):
         ?>
-        <table class="border-all" style="<?= $table + 1 != $page ? 'display:none;' : '' ?>margin:10px auto;width:98%">
+        <table border="0" style="<?= $table + 1 != $page ? 'display:none;' : '' ?>border:0px">
 
-            <?php for ($row = 0; $row < $max; $row++): ?>
-                
+            <?php for ($row = 0; $row < $maxRows; $row++): ?>
+                <?php $index = $row + $maxRows * $maxCols * $table; ?>
                 <tr >
-                    <td style="border:0px" width ="10%"></td>
-                    <td style="border:0px" valign="top" >
-                      
-                        <?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS . '#tabelle', $keymasks[$index]->Name) : ''; ?>
-                    </td>
-                    <td style="border:0px"  valign="top" width ="20%">
-                        <div class="link">
-                            <?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS . '#tabelle', __(':timelines Zeitreihen',array(':timelines'=>$keymasks[$index]->timelines->find_all()->count()))) : ''; ?>
-                        </div>
-                    </td>
+                    <?php for ($col = 0; $col < $maxCols; $col++): ?>
+                        <td valign="top" style="width:30%;border:0px"><?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS . '#tabelle', $keymasks[$index]->Name) : ''; ?></td>
+                        <?php $index +=$maxRows; ?>
+                    <?php endfor; ?>
+
                 </tr>
-                <?php $index++ ?>
             <?php endfor; ?>
         </table>
     <?php endfor; ?>

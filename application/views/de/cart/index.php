@@ -33,7 +33,7 @@
 
                 <tr class="empty tables <?= $projectID ?>" style="display: none">
 
-                    <td class="nopadding tabes" style="border:0px" colspan="4" >
+                    <td class="nopadding tabes border-all"  colspan="4" >
                         <?php foreach ($tables[$projectID] as $tableID => $tableName) : ?>
                             <div style="padding:5px">
                                 <?php foreach ($filters[$projectID][$tableID] as $filter => $values) : ?>

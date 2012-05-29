@@ -33,15 +33,15 @@
                     </tr>
                     <?php if ($hasTables): ?>
                         <tr class="empty tables <?= $id ?>" style="display:none">
-                            <td width="10%" style="border:0px"></td>
-                            <td class="nopadding tables" style="border:0px" colspan="4"></td>
+                            <td width="10%" class="border-l border-t border-b"></td>
+                            <td class="nopadding tables border-r border-t border-b"  colspan="4"></td>
 
                         </tr>
                     <?php endif; ?>
 
                     <?php if ($hasDescription): ?>
                         <tr class="empty data <?= $id ?>" style="display:none">
-                            <td class="values" colspan="5">
+                            <td class=" values border-all" colspan="5">
                                 <h1>Studienbeschreibung</h1>
 
                                 <div class="normal data">

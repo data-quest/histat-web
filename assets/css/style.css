@@ -48,21 +48,39 @@ table th{
 
 }
 table{
-    border:1px solid #72777a;
+
     padding:0px;
     margin:0px;
     width:100%;
-   
+
     border-spacing: 0 0.5em;
-    background: #ffffff;
+
 }
 table a{
     color:#000000;
     text-decoration: none;
 }
+.border-all{
+   border:1px solid #72777a;
+}
+.border-l{
+    border:0px;
+    border-left:1px solid #72777a;
+}
+.border-r{
+    border:0px;
+    border-right:1px solid #72777a;
+}
+.border-t{
 
+    border-top:1px solid #72777a;
+}
+.border-b{
+   
+    border-bottom:1px solid #72777a;
+}
 table td{
-
+    background: #ffffff;
     border:1px solid #72777a;
     padding:10px;
 }
@@ -388,7 +406,7 @@ table tr td.even {
     color:#000000;
 }
 #home h3 a{
-   font-size: 1.2em;
+    font-size: 1.2em;
     font-weight: normal;
     color: #505050; 
 }
@@ -476,10 +494,22 @@ table tr td.even {
 
 /* Style data/index end*/
 /*Style project/details/id */
-#project_details table{
+#project_details > table:first-child{
     border:0px;
+    border-collapse: collapse;
 
+}
+#project_details .link{
+     background: url("../img/layout/details.png") repeat center center transparent;
 
+    padding: 2px;
+    
+}
+#project_details .link a{
+    background: url("../img/layout/content-pfeil.png") no-repeat scroll left center transparent;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding-left: 20px;
 }
 #project_details .details.hide{
     min-width: 50px;
@@ -961,7 +991,7 @@ table tr td.even {
     background:#FE8F00;
 }
 #table_details #tdata input[name="new_data"]{
-    
+
     display:none;
 }
 #table_details #tdata,#table_details #tdata td{
@@ -976,7 +1006,7 @@ table tr td.even {
     width:19px;
     height:19px;
     padding:0px;
-        -webkit-border-radius: 2px;
+    -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     cursor:pointer;
@@ -995,17 +1025,17 @@ table tr td.even {
     background:  url("../img/layout/hg-navi-grau.jpg") repeat-x scroll center center transparent;
 }
 .titlebar{
- 
- 
+
+
     color:#fff;
- 
+
     text-align: center;
     font-weight: bold;
 }
 .titlebar .ui-dialog-title{
-      background: url(../img/layout/verlauf-orange_150x5.jpg) center center;
-      width: 700px;
-      line-height: 22px;
+    background: url(../img/layout/verlauf-orange_150x5.jpg) center center;
+    width: 700px;
+    line-height: 22px;
 }
 /*Style table/details/id end*/
 /* Style cart*/
@@ -1020,7 +1050,7 @@ table tr td.even {
     background: url("../img/layout/more-btn.jpg") no-repeat scroll left center transparent;
     float: left;
     margin-right: 10px;
-    
+
     width: 150px;
     height:25px;
     line-height: 25px;
@@ -1035,16 +1065,16 @@ table tr td.even {
     float: left;
     width:25px;
     height:25px;
-    
+
     background: url("../img/layout/more-btn.jpg") no-repeat scroll right center transparent;
 }
 #cart .right span.delete a{
-      background: url("../img/layout/trash.png") no-repeat scroll center center transparent;
-      width:25px;
-      height:25px;
-      margin: 10px 3px;
-      position: relative;
-      top:5px;
+    background: url("../img/layout/trash.png") no-repeat scroll center center transparent;
+    width:25px;
+    height:25px;
+    margin: 10px 3px;
+    position: relative;
+    top:5px;
 }
 #cart .right span a{
 
@@ -1224,7 +1254,7 @@ table tr td.even {
 
 }
 #cart table.result{
-    border-collapse: collapse;
+    
 }
 #search_result .result .found.show,#cart .result .found.show{
     background:url(../img/layout/button-table-details-right.png) repeat-x center right;
@@ -1255,7 +1285,7 @@ table tr td.even {
     display:none;
 }
 #search_result .result .values{
-    border:0px;
+   
 }
 #search_result .result .tables>div{
     padding:15px 10px;
