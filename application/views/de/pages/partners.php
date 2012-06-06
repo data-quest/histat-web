@@ -2,18 +2,18 @@
 <br/>
 <ul class="normal">
     <li>
-        <b> Prof. Dr. Volker Müller-Benedict</b><br/>
-        <b> Lehrstuhl für Methodenlehre</b><br/>
+        Prof. Dr. Volker Müller-Benedict<br/>
+        Lehrstuhl für Methodenlehre<br/>
         Universität Flensburg
     </li>
     <li>
-        <b>Prof. Dr. Carsten Burhop</b><br/>
-        <b> Seminar für Wirtschafts- und Unternehmensgeschichte</b><br/>
+        Prof. Dr. Carsten Burhop<br/>
+        Seminar für Wirtschafts- und Unternehmensgeschichte<br/>
         Universität zu Köln
     </li>
     <li>
-        <b>Prof. Dr. Claude Diebolt</b><br/>
-        <b>BETA/CNRS (UMR 7522)</b><br/>
+        Prof. Dr. Claude Diebolt<br/>
+        BETA/CNRS (UMR 7522)<br/>
         Université de Strasbourg
 
     </li>

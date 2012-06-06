@@ -5,6 +5,7 @@
 class Controller_About extends Controller_Index {
     
     public function action_index(){
+         $this->main_navi->activate(__('About'));
         $view = View::factory(I18n::$lang.'/pages/about');
         $this->content = $view->render();
     }

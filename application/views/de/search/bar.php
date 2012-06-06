@@ -5,7 +5,7 @@
     <?= Form::input('text', Arr::get($search, 'text', __('Searchtext'))) ?>
     <?= Form::hidden('theme', HTML::chars(Arr::get($search, 'theme', '-1'))) ?>
     <?= Form::hidden('min', HTML::chars(Arr::get($search, 'min', 1200))) ?>
-    <?= Form::hidden('max', HTML::chars(Arr::get($search, 'max', 2200))) ?>
+    <?= Form::hidden('max', HTML::chars(Arr::get($search, 'max', date('Y',time())))) ?>
     
     <?php if(!$search) : ?>
     <?= Form::hidden('title',  Arr::get($search, 'title','on' )) ?> 

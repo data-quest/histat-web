@@ -106,7 +106,7 @@ class Model_Project extends ORM {
         $source = Arr::get($post, 'source', NULL);
         $description = Arr::get($post, 'description', NULL);
         $min = Arr::get($post, 'min', 1200);
-        $max = Arr::get($post, 'max', 2000);
+        $max = Arr::get($post, 'max', date('Y',time()));
         $id = Arr::get($post, 'id', NULL);
         $select = 'p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema,p.Datum_der_Bearbeitung,p.Projektautor,p.Publikationsjahr';
         $result = array();
@@ -334,7 +334,7 @@ class Model_Project extends ORM {
                 $result['tables'][$id_hs]['keys'] = array_keys($value['keys']);
             }
         }
-
+        
         return $result;
     }
 

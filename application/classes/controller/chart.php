@@ -45,10 +45,14 @@ class Controller_Chart extends Controller_Data {
         $pImage->setFontProperties(array("FontName" => "modules/pchart/vendor/pChart2.1.1/fonts/verdana.ttf", "FontSize" => 8));
         $pImage->setGraphArea(60, 10, 790, 330);
         $pImage->drawFilledRectangle(60, 10, 790, 330, array("R" => 255, "G" => 255, "B" => 255, "Surrounding" => -200, "Alpha" => 10));
-        $pImage->drawScale(array("GridR" => 180, "GridG" => 180, "GridB" => 180, "LabelRotation" => 90, "LabelSkip" => floor(count($yAxis) / 40 + 1)));
+        $pImage->drawScale(array("GridR" => 180, "GridG" => 180, "GridB" => 180, "LabelRotation" => 0, "LabelSkip" => floor(count($yAxis) / 40 + 1)));
         $pImage->drawSplineChart();
         $pImage->setShadow(FALSE);
-        $this->response->headers('Content-Type', 'image/png')->body($pImage->autoOutput());
+        $headers = array(
+            'Content-Type' => 'image/png',
+            'Content-Disposition' =>'attachment; filename="grafik.png"'
+        );
+        $this->response->headers($headers)->body($pImage->autoOutput());
     }
 
 }

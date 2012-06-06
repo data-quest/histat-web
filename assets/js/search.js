@@ -7,10 +7,11 @@ $(function(){
         min:$('input[name="min"]'),
         max:$('input[name="max"]')
     }
+ 
     $( "#search #slider" ).slider({
         range: true,
-        min: 1200,
-        max: 2200,
+        min:1200,
+        max:2012,
         step:10,
         animate:true,
         values:[value.min.val(),value.max.val()],
@@ -23,14 +24,16 @@ $(function(){
         },
         create:function(event,ui){
             
-           
             range.start.text(value.min.val());
             range.end.text(value.max.val());
+          
+    
         }
-    });
+    });  
+    
     
     $('input[name="text"]').focus(function(){
-       var t = $(this);
-       if(t.val() === "Suchbegriff") t.val("");
+        var t = $(this);
+        if(t.val() === "Suchbegriff") t.val("");
     });
 })

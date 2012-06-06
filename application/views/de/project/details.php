@@ -41,8 +41,18 @@
             <div class="clear"></div>
         </div>
     <?php endif; ?>
+    <?php $notes = nl2br($project->Anmerkungsteil); ?>
+    <?php $len = strlen($notes); ?>
+    <?php if ($len > 0) : ?>
+        <h4>Anmerkungen </h4>
+        <div class="content">
+            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $notes ?></div>
+            <div class="clear"></div>
+        </div>
+    <?php endif; ?>
     <?php $publication = nl2br($project->Veroeffentlichung); ?>
-        
+
     <?php $len = strlen($publication); ?>
     <?php if ($len > 0) : ?>
         <h4>Gedruckte Publikation</h4>
@@ -52,6 +62,7 @@
             <div class="clear"></div>
         </div>
     <?php endif; ?>
+
 
 
     <?php $description = nl2br($project->Projektbeschreibung); ?>
@@ -68,7 +79,13 @@
     <?php if (!empty($project->datei_name)): ?>
         <h4>Download:</h4>
         <div class="content">
-            <div class="right"> <?= HTML::anchor('project/download/' . $project->ID_Projekt, 'Download: .pdf', array('class' => 'button')) ?></div>
+            <?php $kb = strlen($project->datei_inhalt)/1024;
+            $mb = $kb/1024;
+                    $text = round($kb,2).' KB';
+                    if($kb > 1024) $text = round($mb,2). ' MB';
+                      $text = HTML::image('assets/img/layout/pdficon_small.png',array('class'=>'pdficon')).$text;  
+            ?>
+            <div class="right"> <?= HTML::anchor('project/download/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
             <div class="normal left short">Download weiterer Texte zu dieser Studie im PDF Format (Forschungsberichte, Publikationen, Materialien zur Studie) </div>
             <div class="clear"></div>
         </div>

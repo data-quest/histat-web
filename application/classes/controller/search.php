@@ -32,7 +32,7 @@ class Controller_Search extends Controller_Data {
                 'text' => Arr::get($post, 'text', __('Searchtext')),
                 'theme' => Arr::get($post, 'theme', '-1'),
                 'min' => Arr::get($post, 'min', 1200),
-                'max' => Arr::get($post, 'max', 2200),
+                'max' => Arr::get($post, 'max', date('Y',time())),
                 'title' => Arr::get($post, 'title', $checked),
                 'source' => Arr::get($post, 'source', $checked),
                 'description' => Arr::get($post, 'description', $checked)

@@ -136,7 +136,7 @@
                     </table>
                 <?php else: ?>
                     <div class="tooltip" id="info">
-                        Die Tabelle <b><?= $keymask->Name ?></b> enthält <b><?= count($keys) ?></b> Zeitreihen. <br/>Bitte verwenden Sie die Filtermöglichkeit um die Anzahl der Zeitreihen zu beschränken
+                       Ihre Filtereinstellungen enthält <b><?= count($keys) ?></b> Zeitreihen. <br/> Bitte schränken Sie Ihre Auswahl weiter ein.
                     </div>
                 <?php endif; ?>
             </div>

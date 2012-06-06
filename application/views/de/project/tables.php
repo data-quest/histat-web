@@ -28,9 +28,9 @@
     for ($table = 0; $table < $countTables; $table++):
         ?>
         <table class="border-all" style="<?= $table + 1 != $page ? 'display:none;' : '' ?>margin:10px auto;width:98%">
-
+            
             <?php for ($row = 0; $row < $max; $row++): ?>
-                
+                <?php if(isset($keymasks[$index])): ?>
                 <tr >
                     <td style="border:0px" width ="10%"></td>
                     <td style="border:0px" valign="top" >
@@ -43,8 +43,10 @@
                         </div>
                     </td>
                 </tr>
+                <?php endif;?>
                 <?php $index++ ?>
             <?php endfor; ?>
+          
         </table>
     <?php endfor; ?>
     <div class="clear"></div>

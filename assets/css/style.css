@@ -439,8 +439,7 @@ table tr td.even {
 #home ul li{
     font-size: 1em;
     list-style: none;
-    padding-left:15px;
-    background: url(../img/layout/pfeil-orange.png) top left no-repeat;
+    margin-bottom: 20px;
 }
 /*Style index end */
 /* Style data/themes */
@@ -506,11 +505,16 @@ table tr td.even {
     
 }
 #project_details .link a{
-    background: url("../img/layout/content-pfeil.png") no-repeat scroll left center transparent;
+   
     color: #FFFFFF;
-    font-weight: bold;
-    padding-left: 20px;
+ 
+    padding-left: 5px;
 }
+#project_details .pdficon{
+   float:left;
+   margin-right: 10px;
+}
+
 #project_details .details.hide{
     min-width: 50px;
     background:url(../img/layout/button-table-details2-left.png) repeat-x center left;
@@ -552,7 +556,7 @@ table tr td.even {
     float:right;
     width:19%;
 }
-#project_details div.content div.right *{
+#project_details div.content div.right div{
     float:right;
     margin-right: 10px;
 }
@@ -656,7 +660,9 @@ table tr td.even {
 
     background: url(../img/layout/less-btn.jpg) no-repeat left center;
 }
-
+#project_details table.border-all tr:hover td{
+    background: #E6E6E6;
+}
 #project_details hr{
     margin:10px 0px;
 }
@@ -984,10 +990,16 @@ table tr td.even {
     width: auto;
     color:#ffffff;
 }
-#table_details div.details table#tdata  tr:nth-child(2n){
+#table_details div.details table#thead tr{
+     background:#cccccc;
+}
+#table_details div.details table#tdata  tr:nth-child(2n+1) td{
+    background:#cccccc;
+}
+#table_details div.details table#tdata  tr:nth-child(2n) td{
     background:#ffffff;
 }
-#table_details div.details table#tdata  tr:hover{
+#table_details div.details table#tdata  tr:hover td{
     background:#FE8F00;
 }
 #table_details #tdata input[name="new_data"]{

@@ -91,7 +91,8 @@ $(function(){
                             filter = '';
                        
                             if(t.filter) filter = '/'+t.filter;
-                            tables.append('<div><div class="name">'+t.name+'</div><div class="link"><a href="'+base_url+'table/details/'+i+filter+'">'+t.keys.length+' Zeitreihen</a></div><div style="clear:both;padding:0"></div></div>');
+                            tables.append('<div><div class="name">'+t.name+'</div><div class="link"><a href="'+base_url+'table/details/'+i+filter+'">'+t.keys.length+' Zeitreihe'+((t.keys.length > 1)?'n':'')+'</a></div><div style="clear:both;padding:0"></div></div>');
+                            
                         }  
                     }
                     if(data.Zitierpflicht){
