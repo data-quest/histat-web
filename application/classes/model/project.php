@@ -136,7 +136,7 @@ class Model_Project extends ORM {
             } else {
                 $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
             }
-            $db->where(DB::expr("MATCH(schluessel_index)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
+            $db->where(DB::expr("MATCH(schluessel_index)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)))->group_by('asx.ID_Projekt');;
             foreach ($db->as_object()->execute() as $value) {
                 if ($id) {
                     $result['tables'][$value->ID_HS]['name'] = $value->hs_name;
@@ -189,7 +189,7 @@ class Model_Project extends ORM {
             } else {
                 $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
             }
-            $db->where(DB::expr("MATCH(hs_name)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
+            $db->where(DB::expr("MATCH(hs_name)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)))->group_by('asx.ID_Projekt');;
             foreach ($db->as_object()->execute() as $value) {
                 if ($id) {
                     $result['tables'][$value->ID_HS]['name'] = $value->hs_name;
@@ -238,7 +238,7 @@ class Model_Project extends ORM {
             } else {
                 $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
             }
-            $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Untergliederung,Veroeffentlichung,Quellen)"), ' ', DB::expr('AGAINST(:text IN BOOLEAN MODE)', array(':text' => $text)));
+            $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Untergliederung,Veroeffentlichung,Quellen)"), ' ', DB::expr('AGAINST(:text IN BOOLEAN MODE)', array(':text' => $text)))->group_by('asx.ID_Projekt');
 
 
             foreach ($db->as_object()->execute() as $value) {
@@ -273,7 +273,7 @@ class Model_Project extends ORM {
                 }
             }
         }
-
+        
         if ($source) {
             if ($id) {
                 $select = 'asx.ID_HS,asx.hs_name,asx.Schluessel,asx.count_data,Quelle';
@@ -296,7 +296,7 @@ class Model_Project extends ORM {
             } else {
                 $db->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'));
             }
-            $db->where(DB::expr("MATCH(Quelle)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
+            $db->where(DB::expr("MATCH(Quelle)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)))->group_by('asx.ID_Projekt');;
             foreach ($db->as_object()->execute() as $value) {
 
                 if ($id) {
