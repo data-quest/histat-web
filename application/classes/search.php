@@ -7,13 +7,13 @@ class Search {
     private static $search_words;
     private static $search_query;
 
-    public static function set_search_query($search_query = '') {
+    public static function set_search_query($search_query = NULL) {
         self::$search_query = $search_query;
     }
 
     public static function get_search_words() {
 
-        if (!is_array(self::$search_words)) {
+        if (!is_array(self::$search_words) || !self::$search_query ) {
             $s_str = self::$search_query;
             $s_str = str_replace(array('+', '-', '(', ')', '<', '>'), ' ', $s_str);
             preg_match_all('/"[^"]*"/', $s_str, $tmp1);
@@ -47,11 +47,14 @@ class Search {
     }
 
     public static  function highlight_search($str) {
+        if(self::$search_query)
         return preg_replace(self::$search_words, '<span style="color:#FE8F00;font-weight:bold">$0</span>', $str);
+        
+        return $str;
     }
 
     public static function get_search_excerpt($str) {
-
+        if(!self::$search_query) return $str;
 
         $str_a = explode("|", wordwrap($str, 80, "|"));
 

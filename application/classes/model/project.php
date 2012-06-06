@@ -103,10 +103,13 @@ class Model_Project extends ORM {
         $text = Arr::get($post, 'text', '');
         if(empty($text) || $text == 'Suchbegriff'){
             $text = NULL;
+              Search::set_search_query();
         }else{
+            Search::set_search_query($text);
              $text = Database::instance()->quote($text);
+                
         }
-       
+     
         $title = Arr::get($post, 'title', NULL);
         $source = Arr::get($post, 'source', NULL);
         $description = Arr::get($post, 'description', NULL);
@@ -116,7 +119,7 @@ class Model_Project extends ORM {
         $select = 'p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema,p.Datum_der_Bearbeitung,p.Projektautor,p.Publikationsjahr';
         $result = array();
 
-        Search::set_search_query(Arr::get($post, 'text', ''));
+        
 
         if ($title) {
 
@@ -144,6 +147,7 @@ class Model_Project extends ORM {
             if($text)
             $db->where(DB::expr("MATCH(schluessel_index)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
             
+            if(!$id)
             $db->group_by('asx.ID_Projekt');;
            
             foreach ($db->as_object()->execute() as $value) {
@@ -201,6 +205,7 @@ class Model_Project extends ORM {
              if($text)
             $db->where(DB::expr("MATCH(hs_name)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
              
+              if(!$id)
              $db->group_by('asx.ID_Projekt');;
            
             foreach ($db->as_object()->execute() as $value) {
@@ -254,6 +259,7 @@ class Model_Project extends ORM {
              if($text)
             $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Untergliederung,Veroeffentlichung,Quellen)"), ' ', DB::expr('AGAINST(:text IN BOOLEAN MODE)', array(':text' => $text)));
              
+              if(!$id)
              $db->group_by('asx.ID_Projekt');
 
 
@@ -314,7 +320,8 @@ class Model_Project extends ORM {
             } 
             if($text)
             $db->where(DB::expr("MATCH(Quelle)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
-                    
+               
+             if(!$id)
             $db->group_by('asx.ID_Projekt');
             
             foreach ($db->as_object()->execute() as $value) {
