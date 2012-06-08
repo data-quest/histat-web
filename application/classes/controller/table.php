@@ -113,7 +113,7 @@ class Controller_Table extends Controller_Data {
         $view->filter = $this->filter;
         $view->is_admin = $this->user->has_roles(array('admin'));
         $view->post = $post;
-
+        $view->search = strstr($this->request->referrer(), 'search');
         $view->project = $list->render();
         $this->content = $view->render();
     }

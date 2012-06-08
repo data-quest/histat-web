@@ -106,7 +106,7 @@ Kohana::modules(array(
     'image' => MODPATH . 'image', // Image manipulation
     'orm' => MODPATH . 'orm', // Object Relationship Mapping
     // 'unittest'   => MODPATH.'unittest',   // Unit testing
-    // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+     'userguide'  => MODPATH.'userguide',  // User guide and API documentation
     'swiftmailer' => MODPATH . 'swift', //Swiftmailer Module
     'pchart' => MODPATH . 'pchart', //pChart Module
     'phpexcel' => MODPATH . 'phpexcel' //PHPExcel Module
@@ -160,9 +160,15 @@ Route::set('delete_cart', '(<lang>/)cart/delete/<id>/(<filter>)', array('lang' =
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-Route::set('default', '(<lang>/)(<controller>(/<action>(/<id>)))', array('lang' => '(' . $langs . ')', 'id' => '.+'))
+Route::set('default_lang', '(<lang>/)(<controller>(/<action>(/<id>)))', array('lang' => '(' . $langs . ')', 'id' => '.+'))
         ->defaults(array(
             'controller' => 'index',
             'action' => 'index'));
+
+Route::set('default', '(<controller>(/<action>(/<id>)))', array('id' => '.+'))
+        ->defaults(array(
+            'controller' => 'index',
+            'action' => 'index'));
+
 
 

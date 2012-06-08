@@ -1,6 +1,10 @@
 <div id="table_details" >
+    <?php if($search) : ?>
+    <h1><?= HTML::anchor('search/extended',__('Zurück zur Suche...')) ?></h1>
+    <?php endif;?>
     <h1>Tabellenansicht der Studie</h1>
     <?= $project ?>
+    
     <?php $data ? $download = 'download enabled' : $download = 'download disabled' ?>
 
     <div class="details">
@@ -136,7 +140,12 @@
                     </table>
                 <?php else: ?>
                     <div class="tooltip" id="info">
+                        <?php 
+                        $f = strlen(str_replace("_","",$filter));
+                        if($f > 0) : ?>
                        Ihre Filtereinstellungen enthält <b><?= count($keys) ?></b> Zeitreihen. <br/> Bitte schränken Sie Ihre Auswahl weiter ein.
+                       <?php else :?>
+                       Die Tabelle <b><?= $keymask->Name ?></b>  enthält <b><?= count($keys) ?></b> Zeitreihen. <br/>Bitte verwenden Sie die Filtermöglichkeit um die Anzahl der Zeitreihen zu beschränken.  <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>

@@ -135,6 +135,7 @@ table tr td.even {
 }
 .ui-dialog {
     border:1px solid #72777a;
+    background: #ffffff;
 }
 .ui-dialog .ui-dialog-titlebar{
 
@@ -326,7 +327,9 @@ table tr td.even {
     padding-left:170px;
     background: url(../img/layout/hg-navi-grau.jpg) repeat-x center center;
 }
-
+#sub_navi ul{
+    float:left;
+}
 #sub_navi ul li{
     list-style: none;
     float:left;
@@ -893,6 +896,14 @@ table tr td.even {
 /*Style table/details/id*/
 #table_details h1{
     padding: 1em;
+}
+#table_details h1 a{
+    width: 100%;
+    display: block;
+    color: #2B405E;
+    font-size: 0.9em;
+    font-weight: normal;
+    text-align: right;
 }
 #table_details div.details{
     min-height: 400px;

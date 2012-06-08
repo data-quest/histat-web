@@ -36,6 +36,7 @@ class Controller_Chart extends Controller_Data {
             }
             $yAxis[$y] = $y;
         }
+        $skip = floor(count($yAxis) / 10 + 1) ;
         $pData->addPoints($points);
         $pData->addPoints($yAxis, "Labels");
         $pData->setPalette("Serie1", array("R" => 255, "G" => 122, "B" => 0));
@@ -45,7 +46,7 @@ class Controller_Chart extends Controller_Data {
         $pImage->setFontProperties(array("FontName" => "modules/pchart/vendor/pChart2.1.1/fonts/verdana.ttf", "FontSize" => 8));
         $pImage->setGraphArea(60, 10, 790, 330);
         $pImage->drawFilledRectangle(60, 10, 790, 330, array("R" => 255, "G" => 255, "B" => 255, "Surrounding" => -200, "Alpha" => 10));
-        $pImage->drawScale(array("GridR" => 180, "GridG" => 180, "GridB" => 180, "LabelRotation" => 0, "LabelSkip" => floor(count($yAxis) / 40 + 1)));
+        $pImage->drawScale(array("GridR" => 180, "GridG" => 180, "GridB" => 180, "LabelRotation" => 0, "LabelSkip" =>$skip));
         $pImage->drawSplineChart();
         $pImage->setShadow(FALSE);
         $headers = array(

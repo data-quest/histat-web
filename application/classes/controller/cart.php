@@ -67,15 +67,18 @@ class Controller_Cart extends Controller_Table {
     }
 
     public function action_delete_selected() {
+        $selected =  $this->request->post('selected');
+        if($selected){
         $result = DB::delete('warenkorb')
                 ->where('user_id', '=', $this->user->id)
-                ->where(DB::expr('CONCAT_WS("/",ID_HS,filter)'), 'IN', DB::expr("('" . implode("','", $this->request->post('selected')) . "')"))
+                ->where(DB::expr('CONCAT_WS("/",ID_HS,filter)'), 'IN', DB::expr("('" . implode("','", $selected) . "')"))
                 ->execute();
 
 
         if ($result) {
 
             $this->request->redirect(I18n::$lang . '/cart/index/success');
+        }
         }
         $this->request->redirect(I18n::$lang . '/cart/index/error');
     }
