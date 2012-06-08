@@ -356,6 +356,9 @@ table tr td.even {
     float:right;
     color:#ffffff;
 }
+#sub_navi .userinfo > a{
+    float:left;
+}
 #sub_navi .userinfo ul{
     margin-left: 15px;
     float:right;
