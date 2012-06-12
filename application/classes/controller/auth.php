@@ -36,6 +36,7 @@ class Controller_Auth extends Controller_Index {
             Auth::instance()->logout(); //Logout guest
             // Attempt to login user
             $remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
+          
             $user = Auth::instance()->login($this->request->post('username'), $this->request->post('password'), $remember);
             // If successful...
             if ($user) {
