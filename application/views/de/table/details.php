@@ -1,8 +1,11 @@
 <div id="table_details" >
-    <?php if($search) : ?>
-    <h1><?= HTML::anchor('search/extended',__('Zurück zur Suche...')) ?></h1>
+  
+    <h1 class="left">Tabellenansicht der Studie</h1>
+      <?php if($search) : ?>
+    <span class="back right"><?= HTML::anchor('search/extended',__('Zurück zur Suche...')) ?></span>
+    
     <?php endif;?>
-    <h1>Tabellenansicht der Studie</h1>
+    <div class="clear"></div>
     <?= $project ?>
     
     <?php $data ? $download = 'download enabled' : $download = 'download disabled' ?>

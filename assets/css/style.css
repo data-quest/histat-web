@@ -90,17 +90,47 @@ td.details{
     background:url(../img/layout/button-table-details2-right.png) repeat-x center right;
     min-width: 130px;
     text-align: center;
-    padding-right: 20px;
+   
+}
+h1.left{
+    float:left;
+    
+}
+.back.right{
+    float:right;
+    padding:15px 0px;
+    margin:5px 0px;
+       background:url(../img/layout/button-table-details-left.png) no-repeat center left;
+}
+.back.right a{
+    text-decoration: none;
+    color:#fff;
+    text-align: right;
+   font-size: 1.1em;
+    font-weight: normal;
+     display:block;
+     margin-left: 25px;
+     margin-right: 10px;
+}
+.back.right a:hover{text-decoration: underline}
+td.details:hover{
+     background:url(../img/layout/button-table-details2-left.png) repeat-x center left;
 }
 td.timelines a{
     color:#fff;
 }
-td.timelines{
 
+td.timelines{
+    padding-left:30px;
+    max-width: 300px;
     background:url(../img/layout/button-table-details-right.png) no-repeat right center; 
+}
+td.timelines:hover{
+     background:url(../img/layout/button-table-details-left.png) no-repeat center left;  
 }
 td.details span a{
     display:block;
+    margin: auto;
     width:120px;
     color: #ffffff;
     font-size: 1.1em;
@@ -653,6 +683,7 @@ table tr td.even {
     width: 100px;
     display:block;
     padding-left: 20px;
+
     background: url(../img/layout/more-btn.jpg) no-repeat left center;
 }
 #project_details span.less{
@@ -665,6 +696,9 @@ table tr td.even {
     padding-left: 23px;
 
     background: url(../img/layout/less-btn.jpg) no-repeat left center;
+}
+#project_details span.less:hover,#project_details span.more:hover{
+      text-decoration: underline;
 }
 #project_details table.border-all tr:hover td{
     background: #E6E6E6;
@@ -920,7 +954,7 @@ table tr td.even {
 }
 
 #table_details td.timelines{
-    width: 200px;
+    width: 180px;
 }
 #table_details .name .download_icons{
     margin-top: -40px;
@@ -1332,10 +1366,13 @@ table tr td.even {
     font-weight: bold;
     padding-left: 20px;
 }
+#search_result .values .more:hover{
+    text-decoration: underline;
+}
 #search_result .values .more{
     background:url(../img/layout/more-btn.jpg) no-repeat center left;
     color:#FFFFFF;
-    font-weight: bold;
+
     padding:4px 20px;
     height:20px;
     line-height: 20px;
