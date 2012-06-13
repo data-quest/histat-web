@@ -149,8 +149,8 @@ class Controller_Table extends Controller_Data {
     public function action_xls() {
         $keymask = ORM::factory('keymask', $this->id_hs);
 
-     
-	$table_name = substr(str_replace(array('"',':',' ','/','\\','.') , '_',  $keymask->Name),0,100);
+
+        $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.'), '_', $keymask->Name), 0, 100);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
 
@@ -169,7 +169,7 @@ class Controller_Table extends Controller_Data {
 
     public function action_xlsx() {
         $keymask = ORM::factory('keymask', $this->id_hs);
-        $table_name = substr(str_replace(array('"',':',' ','/','\\','.') , '_',  $keymask->Name),0,100);
+        $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.'), '_', $keymask->Name), 0, 100);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
 
@@ -188,7 +188,7 @@ class Controller_Table extends Controller_Data {
 
     public function action_csv() {
         $keymask = ORM::factory('keymask', $this->id_hs);
-         $table_name = substr(str_replace(array('"',':',' ','/','\\','.') , '_',  $keymask->Name),0,100);
+        $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.'), '_', $keymask->Name), 0, 100);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
 
@@ -201,7 +201,7 @@ class Controller_Table extends Controller_Data {
             $ws = new Spreadsheet();
             $ws->set_active_sheet(0);
             $ws->set_data($grid);
-            $ws->send(array('name' =>$table_name, 'format' => 'CSV'));
+            $ws->send(array('name' => $table_name, 'format' => 'CSV'));
         }
     }
 
@@ -273,43 +273,27 @@ class Controller_Table extends Controller_Data {
         $this->auto_render = false;
         if ($this->session->get('xsrf') == $this->request->post('xsfr') && $this->user->has_roles(array('admin'))) {
             $value = NULL;
+            $result = false;
             $id_hs = $this->request->post('id_hs');
             $key = $this->request->post('key');
             $year = $this->request->post('year');
             $value = $this->request->post('value');
-            
+
+            $db = DB::delete('Daten__Aka')
+                    ->where('ID_HS', '=', $id_hs)
+                    ->where('Schluessel', '=', $key)
+                    ->where('Jahr_Sem', '=', $year);
+            if ($db->execute())
+                $result = true;
+
             if ($value) {
-
-                $result = DB::update('Daten__Aka')
-                        ->set(array('Data' => $value))
-                        ->where('ID_HS', '=', $id_hs)
-                        ->where('Schluessel', '=', $key)
-                        ->where('Jahr_Sem', '=', $year)
-                        ->cached(0);
-
-                if ($result->execute()) {
-                    $this->response->body(json_encode(array('result' => true)));
-                } else {
-                    $result = DB::insert('Daten__Aka', array('Data', 'ID_HS', 'Schluessel', 'Jahr_Sem'))
-                            ->values(array($value, $id_hs, $key, $year));
-                    if ($result->execute()) {
-                        $this->response->body(json_encode(array('result' => true)));
-                    } else {
-                        echo "Kein insert";
-                        $this->response->body(json_encode(array('result' => false)));
-                    }
-                }
-            } else {
-                $result = DB::delete('Daten__Aka')
-                        ->where('ID_HS', '=', $id_hs)
-                        ->where('Schluessel', '=', $key)
-                        ->where('Jahr_Sem', '=', $year);
-                if ($result->execute()) {
-                        $this->response->body(json_encode(array('result' => true)));
-                    } else {
-                        $this->response->body(json_encode(array('result' => false)));
-                    }
+                $result = false;
+                $db = DB::insert('Daten__Aka', array('Data', 'ID_HS', 'Schluessel', 'Jahr_Sem'))
+                        ->values(array($value, $id_hs, $key, $year));
+                if ($db->execute())
+                    $result = true;
             }
+            $this->response->body(json_encode(array('result' => $result)));
         } else {
             $this->response->body(json_encode(array('result' => false)));
         }
