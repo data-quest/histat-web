@@ -23,7 +23,14 @@
     line-height: 1.5em;
 }
 body {
-    background: url(../img/layout/hg-verlauf.jpg) repeat-x top center #1F2B39;
+    background-image: url("../img/layout/hg-verlauf.jpg");
+    background-repeat: repeat-x;
+    background-position-y: top;
+    background-position-x: center; 
+    background-color:#1F2B39;
+}
+img{
+    border:0px;
 }
 h1{
     font-size: 1.4em;
@@ -61,7 +68,7 @@ table a{
     text-decoration: none;
 }
 .border-all{
-   border:1px solid #72777a;
+    border:1px solid #72777a;
 }
 .border-l{
     border:0px;
@@ -76,7 +83,7 @@ table a{
     border-top:1px solid #72777a;
 }
 .border-b{
-   
+
     border-bottom:1px solid #72777a;
 }
 table td{
@@ -90,31 +97,31 @@ td.details{
     background:url(../img/layout/button-table-details2-right.png) repeat-x center right;
     min-width: 130px;
     text-align: center;
-   
+
 }
 h1.left{
     float:left;
-    
+
 }
 .back.right{
     float:right;
     padding:15px 0px;
     margin:5px 0px;
-       background:url(../img/layout/button-table-details-left.png) no-repeat center left;
+    background:url(../img/layout/button-table-details-left.png) no-repeat center left;
 }
 .back.right a{
     text-decoration: none;
     color:#fff;
     text-align: right;
-   font-size: 1.1em;
+    font-size: 1.1em;
     font-weight: normal;
-     display:block;
-     margin-left: 25px;
-     margin-right: 10px;
+    display:block;
+    margin-left: 25px;
+    margin-right: 10px;
 }
 .back.right a:hover{text-decoration: underline}
 td.details:hover{
-     background:url(../img/layout/button-table-details2-left.png) repeat-x center left;
+    background:url(../img/layout/button-table-details2-left.png) repeat-x center left;
 }
 td.timelines a{
     color:#fff;
@@ -126,7 +133,7 @@ td.timelines{
     background:url(../img/layout/button-table-details-right.png) no-repeat right center; 
 }
 td.timelines:hover{
-     background:url(../img/layout/button-table-details-left.png) no-repeat center left;  
+    background:url(../img/layout/button-table-details-left.png) no-repeat center left;  
 }
 td.details span a{
     display:block;
@@ -269,7 +276,7 @@ table tr td.even {
 }
 
 #header{
-    background:url(../img/layout/hg-header.jpg)no-repeat top right #ffffff;
+    background:url("../img/layout/hg-header.jpg") no-repeat top right #ffffff;
     height:80px;
     width: 100%;
     position: relative;
@@ -535,20 +542,20 @@ table tr td.even {
 
 }
 #project_details .link{
-     background: url("../img/layout/details.png") repeat center center transparent;
+    background: url("../img/layout/details.png") repeat center center transparent;
 
     padding: 2px;
-    
+
 }
 #project_details .link a{
-   
+
     color: #FFFFFF;
- 
+
     padding-left: 5px;
 }
 #project_details .pdficon{
-   float:left;
-   margin-right: 10px;
+    float:left;
+    margin-right: 10px;
 }
 
 #project_details .details.hide{
@@ -698,7 +705,7 @@ table tr td.even {
     background: url(../img/layout/less-btn.jpg) no-repeat left center;
 }
 #project_details span.less:hover,#project_details span.more:hover{
-      text-decoration: underline;
+    text-decoration: underline;
 }
 #project_details table.border-all tr:hover td{
     background: #E6E6E6;
@@ -1039,7 +1046,7 @@ table tr td.even {
     color:#ffffff;
 }
 #table_details div.details table#thead tr{
-     background:#cccccc;
+    background:#cccccc;
 }
 #table_details div.details table#tdata  tr:nth-child(2n+1) td{
     background:#cccccc;
@@ -1227,7 +1234,9 @@ table tr td.even {
     margin: 0px 0px;
     margin-right: 30px;
 }
-
+#searchbar form{
+    position: relative;
+}
 #searchbar a{
     width:30px;
     height:30px;
@@ -1255,11 +1264,11 @@ table tr td.even {
     width: 120px;
 }
 #searchbar input[type="submit"]{
-    position: relative;
+    position: absolute;
+    top:0px;
     right: 5px;
-    top:1px;
     width:30px;
-    height:30px;
+    height:27px;
     background: url(../img/layout/icon-lupe.png) no-repeat center center;
     border:0px;
     cursor: pointer;
@@ -1314,7 +1323,7 @@ table tr td.even {
 
 }
 #cart table.result{
-    
+
 }
 #search_result .result .found.show,#cart .result .found.show{
     background:url(../img/layout/button-table-details-right.png) repeat-x center right;
@@ -1345,7 +1354,7 @@ table tr td.even {
     display:none;
 }
 #search_result .result .values{
-   
+
 }
 #search_result .result .tables>div{
     padding:15px 10px;

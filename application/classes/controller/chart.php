@@ -36,7 +36,7 @@ class Controller_Chart extends Controller_Data {
             }
             $yAxis[$y] = $y;
         }
-        $skip = floor(count($yAxis) / 10 + 1) ;
+        $skip = (count($yAxis) <= 20 ) ? 0 : round(count($yAxis) / 20) ;
         $pData->addPoints($points);
         $pData->addPoints($yAxis, "Labels");
         $pData->setPalette("Serie1", array("R" => 255, "G" => 122, "B" => 0));
