@@ -148,6 +148,9 @@ class Controller_Table extends Controller_Data {
 
     public function action_xls() {
         $keymask = ORM::factory('keymask', $this->id_hs);
+
+     
+	$table_name = substr(str_replace(array('"',':',' ','/','\\','.') , '_',  $keymask->Name),0,100);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
 
@@ -156,16 +159,17 @@ class Controller_Table extends Controller_Data {
         }
         if ($details['data']) {
             $grid = $this->create_grid($details);
-            $grid[1] = array($keymask->Name);
+            $grid[1] = array($table_name);
             $ws = new Spreadsheet();
             $ws->set_active_sheet(0);
             $ws->set_data($grid);
-            $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel5'));
+            $ws->send(array('name' => ($table_name), 'format' => 'Excel5'));
         }
     }
 
     public function action_xlsx() {
         $keymask = ORM::factory('keymask', $this->id_hs);
+        $table_name = substr(str_replace(array('"',':',' ','/','\\','.') , '_',  $keymask->Name),0,100);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
 
@@ -174,16 +178,17 @@ class Controller_Table extends Controller_Data {
         }
         if ($details['data']) {
             $grid = $this->create_grid($details);
-            $grid[1] = array($keymask->Name);
+            $grid[1] = array($table_name);
             $ws = new Spreadsheet();
             $ws->set_active_sheet(0);
             $ws->set_data($grid);
-            $ws->send(array('name' => ($keymask->Name), 'format' => 'Excel2007'));
+            $ws->send(array('name' => ($table_name), 'format' => 'Excel2007'));
         }
     }
 
     public function action_csv() {
         $keymask = ORM::factory('keymask', $this->id_hs);
+         $table_name = substr(str_replace(array('"',':',' ','/','\\','.') , '_',  $keymask->Name),0,100);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
 
@@ -192,11 +197,11 @@ class Controller_Table extends Controller_Data {
         }
         if ($details['data']) {
             $grid = $this->create_grid($details);
-            $grid[1] = array($keymask->Name);
+            $grid[1] = array($table_name);
             $ws = new Spreadsheet();
             $ws->set_active_sheet(0);
             $ws->set_data($grid);
-            $ws->send(array('name' => $keymask->Name, 'format' => 'CSV'));
+            $ws->send(array('name' =>$table_name, 'format' => 'CSV'));
         }
     }
 

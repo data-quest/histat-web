@@ -144,6 +144,7 @@ class Controller_Cart extends Controller_Table {
         foreach ($cart as $nr => $item) {
 
             $keymask = ORM::factory('keymask', $item->ID_HS);
+                   $table_name = substr(str_replace(array('"',':',' ','/','\\','.') , '_',  $keymask->Name),0,100);
             $details = $keymask->getDetails($item->filter);
             $details['data'] = null;
             $names = array();
@@ -162,12 +163,13 @@ class Controller_Cart extends Controller_Table {
             $download->create();
 
             if ($details['data']) {
+                
                 $grid = $this->create_grid($details);
-                $grid[1] = array($keymask->Name);
+                $grid[1] = array($table_name);
                 $ws = new Spreadsheet();
                 $ws->set_active_sheet(0);
                 $ws->set_data($grid);
-                $name = $ws->save(array('name' => addslashes($keymask->Name . '-' . $nr), 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/download_' . $this->user->id . '/'));
+                $name = $ws->save(array('name' => ($table_name . '-' . $nr), 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/download_' . $this->user->id . '/'));
             }
         }
         $path = '/tmp/histat/';
