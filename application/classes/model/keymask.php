@@ -64,6 +64,7 @@ class Model_Keymask extends ORM {
                 ->order_by("Jahr_Sem")
                 ->execute();
         $result = array();
+        
         foreach ($rows as $row) {
             $result[$row['Jahr_Sem']][$row['Schluessel']] = array('data'=>$row['Data'],'note'=>Arr::get($row,'Anmerkung'));
         }

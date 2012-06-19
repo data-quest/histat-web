@@ -127,12 +127,13 @@ $(function(){
         parent.find('input[name="new_data"]').show().focus();
     });
     $('input[name="new_data"]').focusout(function(){
-        var t = $(this),year,id_hs,key,value;
+        var t = $(this),year,id_hs,key,value,id_projekt;
         var parent = t.parent('td');
         key = parent.find('input[name="hidden_key"]').val();
         id_hs = parent.find('input[name="hidden_id_hs"]').val();
         year = parent.find('input[name="hidden_year"]').val();
         value = t.val();
+        id_projekt = parent.find('input[name="hidden_id_projekt"]').val();
         $.ajax({
             url: base_url+'table/edit',
             data:{
@@ -140,6 +141,7 @@ $(function(){
                 year:year,
                 id_hs:id_hs,
                 key:key,
+                id_projekt:id_projekt,
                 value:value
             },
             type:'POST',

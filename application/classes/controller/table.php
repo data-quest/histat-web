@@ -73,7 +73,7 @@ class Controller_Table extends Controller_Data {
         $this->set_filter($post);
 
         $details = $keymask->getDetails($this->filter);
-
+        
         $data = null;
 
         if (!$post) {
@@ -94,12 +94,12 @@ class Controller_Table extends Controller_Data {
                 $i++;
             }
         }
-
+        
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $data = $keymask->getData($this->filter);
         }
 
-
+        
         $view->details = $details['details'];
         $view->keys = $details['keys'];
         $view->data = $data;
@@ -278,6 +278,84 @@ class Controller_Table extends Controller_Data {
             $key = $this->request->post('key');
             $year = $this->request->post('year');
             $value = $this->request->post('value');
+            $id_projekt = $this->request->post('id_projekt');
+            
+            $select = DB::select('Data')
+                    ->from('Daten__Aka')
+                    ->where('ID_HS', '=', $id_hs)
+                    ->where('Schluessel', '=', $key)
+                    ->where('Jahr_Sem', '=', $year)->execute();
+           
+            $db = DB::delete('Daten__Aka')
+                    ->where('ID_HS', '=', $id_hs)
+                    ->where('Schluessel', '=', $key)
+                    ->where('Jahr_Sem', '=', $year);
+
+
+            if ($db->execute())
+                $result = true;
+
+            if ($value) {
+                $result = false;
+                $db = DB::insert('Daten__Aka', array('Data', 'ID_HS', 'Schluessel', 'Jahr_Sem'))
+                        ->values(array($value, $id_hs, $key, $year));
+                if ($db->execute())
+                    $result = true;
+            }
+            
+            if($result){
+               
+                $logs = ORM::factory('tablelog');
+                $logs->ID_Projekt = $id_projekt;
+                $logs->ID_HS = $id_hs;
+                $logs->Schluessel = $key;
+                $logs->Jahr_Sem =$year;
+                $logs->username = $this->user->username;
+                $logs->old_value =Arr::get($select[0], 'Data');
+                $logs->new_value = $value;
+   
+                $logs->save();
+                 $keymask = ORM::factory('keymask', $id_hs);
+                 $details = $keymask->getDetails($key);
+                $filter_text = implode(',',Arr::get($details['titles'],$key,array()));
+            
+       
+                $view = View::factory('de/mails/datachange');
+                $view->projectname = $keymask->project->Projektname;
+                $view->tablename = $keymask->Name;
+                $view->filter = $filter_text;
+                $view->year = $year;
+                $view->old_value = Arr::get($select[0], 'Data','leer');
+                $view->new_value = $value == NULL ? 'leer':$value;
+                $view->username = $this->user->surname.' '.$this->user->name;
+                $view->chdate = date('Y-m-d H:i:s');
+                $view->id_hs = $id_hs;
+                $view->filter_key = $key;
+                $to = $this->config->get('log_to');
+             
+                  $email = Email::factory(__('Änderungen an Daten'))
+                        ->to($to)
+                        ->from($this->config->get('from'))
+                        ->message($view->render(), 'text/html')
+                        ->send();
+            }
+            $this->response->body(json_encode(array('result' => $result)));
+        } else {
+            $this->response->body(json_encode(array('result' => false)));
+        }
+    }
+
+    public function action_edit_header() {
+        $this->auto_render = false;
+        if ($this->session->get('xsrf') == $this->request->post('xsfr') && $this->user->has_roles(array('admin'))) {
+            $value = NULL;
+            $result = false;
+            $id_hs = $this->request->post('id_hs');
+            $key = $this->request->post('key');
+            $source = $this->request->post('source');
+            $table = $this->request->post('table');
+            $note = $this->request->post('note');
+
 
             $db = DB::delete('Daten__Aka')
                     ->where('ID_HS', '=', $id_hs)

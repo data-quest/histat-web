@@ -111,11 +111,13 @@
                 <?php endif; ?>
             </table>
             <div class="scrollY">
+              
                 <?php if ($data): ?>
+                
                     <table id="tdata">
 
                         <?php foreach ($data as $y => $data): ?>
-                            <tr >
+                            <tr id="<?= $y?>">
                                 <td><div class="text" style="height:auto"><?= $y ?></div></td>
                                 <?php foreach ($keys as $key): ?>
                                     <?php $d = Arr::get($data, $key, array('data' => '&nbsp;', 'note' => NULL)); ?>
@@ -133,6 +135,7 @@
                                         <?= Form::hidden('hidden_key', $key) ?>
                                         <?= Form::hidden('hidden_year', $y) ?>
                                         <?= Form::hidden('hidden_id_hs', $keymask->ID_HS) ?>
+                                             <?= Form::hidden('hidden_id_projekt', $keymask->project->ID_Projekt) ?>
                                             <?php endif; ?>
                                     </td>
 
@@ -141,6 +144,10 @@
                         <?php endforeach; ?> 
 
                     </table>
+                <?php elseif(count($data) == 0): ?>
+                 <div class="tooltip" id="info">
+                     Ihr Filter enhält keine Daten
+                  </div>
                 <?php else: ?>
                     <div class="tooltip" id="info">
                         <?php 
