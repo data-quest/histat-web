@@ -30,6 +30,7 @@ class Model_User extends Model_Auth_User {
         'last_login' => array(),
         'ip' => array(),
         'last_action' => array(),
+        'locked'=>array(),
         'chdate' => array(),
         'mkdate' => array()
     );
@@ -75,6 +76,9 @@ class Model_User extends Model_Auth_User {
                 array('not_empty'),
                 array('alpha', array(':value', TRUE))
             ),
+            'locked'=>array(
+                array('range',array(':value',0,1))
+            ),
             'phone' => array(
             // array('phone')
             ),
@@ -87,6 +91,7 @@ class Model_User extends Model_Auth_User {
             'department' => array(
               //  array('alpha', array(':value', TRUE))
                 ));
+       
     }
 
     public function extra_rules() {
@@ -111,7 +116,13 @@ class Model_User extends Model_Auth_User {
                 ->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
         return $this->values($values, $expected)->update($validation);
     }
+       public function change_password($values, $expected = NULL) {
 
+        $validation = Validation::factory($values)
+                ->rule('password', 'not_empty')
+                ->rule('password', 'min_length', array(':value', 6));
+        return $this->values($values, $expected)->update($validation);
+    }
     public function update_user($values, $expected = NULL) {
         if (empty($values['password'])) {
             unset($values['password'], $values['password_confirm']);

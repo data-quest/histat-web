@@ -1,4 +1,6 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
+
+defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Auth extends Controller_Index {
 
@@ -16,7 +18,7 @@ class Controller_Auth extends Controller_Index {
 
     public function action_index() {
         //if user is logged in display Error page
-        if ($this->user->has_roles(array('admin','login'))) {
+        if ($this->user->has_roles(array('admin', 'login'))) {
             throw new HTTP_Exception_404();
         }
 
@@ -25,22 +27,32 @@ class Controller_Auth extends Controller_Index {
 
     public function action_login() {
         //if user is logged in display Error page
-        if ($this->user->has_roles(array('admin','login'))) {
+        if ($this->user->has_roles(array('admin', 'login'))) {
             throw new HTTP_Exception_404();
         }
         $this->sub_navi->activate(__('Login'));
         $view = View::factory(I18n::$lang . '/auth/login');
-        
-       
+
+
         if (HTTP_Request::POST == $this->request->method()) {
             Auth::instance()->logout(); //Logout guest
             // Attempt to login user
             $remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
-          
+
             $user = Auth::instance()->login($this->request->post('username'), $this->request->post('password'), $remember);
+
+
             // If successful...
             if ($user) {
-                $this->request->redirect($this->session->get('referrer',I18n::$lang.'/index'));
+                $user = Auth::instance()->get_user();
+                if (!(bool) $user->locked) {
+                    $this->request->redirect($this->session->get('referrer', I18n::$lang . '/index'));
+                } else {
+                    $view->incorrect = TRUE;
+                    Auth::instance()->force_login('guest');
+                }
+
+              
             } else {
                 $view->incorrect = TRUE;
                 Auth::instance()->force_login('guest');
@@ -56,12 +68,12 @@ class Controller_Auth extends Controller_Index {
         }
         Auth::instance()->logout();
         Auth::instance()->force_login('guest');
-        $this->request->redirect(I18n::$lang.'/index');
+        $this->request->redirect(I18n::$lang . '/index');
     }
 
     public function action_create() {
         //if user is logged in display Error page
-        if ($this->user->has_roles(array('admin','user'))) {
+        if ($this->user->has_roles(array('admin', 'user'))) {
             throw new HTTP_Exception_404();
         }
 
@@ -74,7 +86,7 @@ class Controller_Auth extends Controller_Index {
                 //Add additional values which dont comes from Form
                 $additional = array(
                     'ip' => $_SERVER['REMOTE_ADDR'],
-                    'chdate'=>time(),
+                    'chdate' => time(),
                     'mkdate' => time(),
                     'password' => $password
                 );
@@ -102,7 +114,7 @@ class Controller_Auth extends Controller_Index {
                 ));
 
                 // Grant user login role
-                $user->add('roles', ORM::factory('role',array('name'=>'login')));
+                $user->add('roles', ORM::factory('role', array('name' => 'login')));
 
                 // Reset values so form is not sticky
                 $_POST = array();

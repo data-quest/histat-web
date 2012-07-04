@@ -118,7 +118,7 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('data', __('Data'));
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
-
+        
         //If user is not loged in
         if (!$this->user) {
             Auth::instance()->force_login('guest');
@@ -128,6 +128,9 @@ class Controller_Index extends Controller_Template {
         //If user has roles login OR admin, display logout button
         if (!$this->user->has_roles(array('login', 'admin'))) {
             $this->main_navi->add('auth', __('Login'));
+        }
+        if($this->user->has_roles(array('admin'))){
+             $this->main_navi->add('admin', __('Admin'));
         }
         //Bind Assets Directories global to all Views
         View::bind_global('assets', $this->assets);

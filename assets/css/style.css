@@ -96,7 +96,7 @@ td.details{
     padding:0px;
     background:url(../img/layout/button-table-details2-right.png) repeat-x center right;
     min-width: 130px;
-    text-align: center;
+    text-align: left;
 
 }
 h1.left{
@@ -108,6 +108,28 @@ h1.left{
     padding:15px 0px;
     margin:5px 0px;
     background:url(../img/layout/button-search-back.png) no-repeat center left;
+}
+a.icon{
+    display:block;
+}
+a.icon.left{
+    float:left;
+    margin-right: 5px;
+}
+.icon-locked {
+    width:16px;
+    height:16px;
+    background:url(../img/layout/lock-locked.png) no-repeat top left;
+}
+.icon-unlocked {
+    width:16px;
+    height:16px;
+    background:url(../img/layout/lock-unlocked.png) no-repeat top left;
+}
+.icon-mail {
+    width:16px;
+    height:16px;
+    background:url(../img/layout/mail.png) no-repeat top left;
 }
 .back.right a{
     text-decoration: none;
@@ -121,19 +143,21 @@ h1.left{
 }
 .back.right a:hover{text-decoration: underline}
 td.details:hover{
-    background:url(../img/layout/button-table-details2-left.png) repeat-x center left;
+    background:url(../img/layout/button-table-details2-left.png) repeat-x center right;
+    cursor: pointer;
 }
 td.timelines a{
     color:#fff;
 }
 
 td.timelines{
-    padding-left:30px;
+    padding-left:10px;
     max-width: 300px;
     background:url(../img/layout/button-table-details-right.png) no-repeat right center; 
 }
 td.timelines:hover{
-    background:url(../img/layout/button-table-details-left.png) no-repeat center left;  
+    cursor: pointer;
+    background:url(../img/layout/button-table-details-left.png) no-repeat center right;  
 }
 td.details span a{
     display:block;
@@ -1419,3 +1443,7 @@ table tr td.even {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset, 0 1px 0 rgba(0, 0, 0, 0.3) inset;
 }
 /*Extended Search end*/
+/*Admin users overview*/
+#admin_users{
+    padding:20px;
+}

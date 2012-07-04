@@ -56,9 +56,7 @@
                         <?= HTML::anchor('profile', __('Logged in: :name :surname', array(':name' => $user->name, ':surname' => $user->surname))) ?>
                         <ul>
                             <li><?= HTML::anchor('auth/logout', __('Logout')) ?></li>
-                            <?php if (Arr::get($user->has_roles(), 'admin')): ?>
-                                <li><?= HTML::anchor('admin', __('Admin')) ?></li>
-                            <?php endif; ?>
+                           
 
                             <li><?= HTML::anchor('cart', __('Cart [:value]', array(':value' => '<span id="cart_items">' . $user->cart_items->find_all()->count() . '</span>'))) ?></li>
 

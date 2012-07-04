@@ -17,4 +17,7 @@ class Model_Tablelog extends ORM {
         'chdate' => array()
     );
     protected $_has_many = array();
+    protected $_belongs_to = array(
+        'project'=>array('model'=>'project','foreign_key'=>'ID_Projekt')
+    );
 }
