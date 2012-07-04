@@ -1447,3 +1447,7 @@ table tr td.even {
 #admin_users{
     padding:20px;
 }
+#users tr:hover td{
+    background: #FF8F00;
+    color:#fff;
+}

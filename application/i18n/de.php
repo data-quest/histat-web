@@ -34,5 +34,12 @@ return array(
     'Start Download' =>'Download starten',
     'Searchtext' =>'Suchbegriff',
     'search' =>'suchen',
-    'reset' =>'zurücksetzen'
+    'reset' =>'zurücksetzen',
+    ':username your account informations' =>':username Ihre zugangsdaten',
+    'unlocked' =>'Benutzer wurde entsperrt',
+    'locked'=>'Benutzer wurde gesperrt',
+    'pwsend'=>'Neues Passwort wurde versendet',
+    'unlockedfail'=>'Benutzer konnte nicht entsperrt werden',
+    'lockedfail' =>'Benutzer konnte nicht gesperrt werden',
+    'pwsendfail' =>'Neues Passwort konnte nicht versendet werden'
 );

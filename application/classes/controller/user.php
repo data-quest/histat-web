@@ -78,8 +78,8 @@ class Controller_User extends Controller_Admin {
                         ->send();
                 $this->request->redirect('admin/users/pwsend#' . $id);
             } catch (ORM_Validation_Exception $e) {
-                echo Debug::vars($e->errors());
-             //   $this->request->redirect('admin/users/pwsendfail#' . $id);
+               
+               $this->request->redirect('admin/users/pwsendfail#' . $id);
             }
         }
     }

@@ -191,4 +191,7 @@ $(function(){
         
         $('tr.tables.'+id).fadeOut('slow');
     });
+    $('#admin_info').bind('click',function(){
+        $(this).fadeOut('slow');
+    })
 });
