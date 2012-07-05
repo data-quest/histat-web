@@ -126,7 +126,7 @@ $(function(){
         parent.find('.text').hide();
         parent.find('input[name="new_data"]').show().focus();
     });
-    $('input[name="new_data"]').focusout(function(){
+    $('#tdata input[name="new_data"]').focusout(function(){
         var t = $(this),year,id_hs,key,value,id_projekt;
         var parent = t.parent('td');
         key = parent.find('input[name="hidden_key"]').val();
@@ -139,6 +139,61 @@ $(function(){
             data:{
                 xsfr:xsrf,
                 year:year,
+                id_hs:id_hs,
+                key:key,
+                id_projekt:id_projekt,
+                value:value
+            },
+            type:'POST',
+            dataType:'json',
+            success: function(data) {
+            
+              
+                if(data.result){
+                    t.hide();
+                    var val = ' ';
+                    if(t.val().length > 0)
+                        val = t.val();
+                    
+                    t.parent('td').find('.text').text(val).show();
+                }else{
+                      t.hide();
+                    t.parent('td').find('.text').show(); 
+                    
+                }
+             
+            }
+        });
+       
+    })
+    $('#thead td.grey').hover(function(){
+        if($(this).find('textarea[name="new_data"]').is(':hidden')){
+            $(this).find('.edit').show();
+        }
+        
+    },function(){
+        $(this).find('.edit').hide();
+    })
+    $('#thead td.grey .edit').live('click',function(){
+        var parent = $(this).parent('td');
+        $(this).hide();
+        parent.find('.text').hide();
+        parent.find('textarea[name="new_data"]').show().focus();
+    });
+    $('#thead textarea[name="new_data"]').focusout(function(){
+       
+        var t = $(this),type,id_hs,key,value,id_projekt;
+        var parent = t.parent('td');
+        key = parent.find('input[name="hidden_key"]').val();
+        id_hs = parent.find('input[name="hidden_id_hs"]').val();
+        type = parent.find('input[name="hidden_type"]').val();
+        value = t.val();
+        id_projekt = parent.find('input[name="hidden_id_projekt"]').val();
+        $.ajax({
+            url: base_url+'table/edit_header',
+            data:{
+                xsfr:xsrf,
+                type:type,
                 id_hs:id_hs,
                 key:key,
                 id_projekt:id_projekt,

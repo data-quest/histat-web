@@ -11,6 +11,7 @@ class Controller_Admin extends Controller_Index {
         $this->main_navi->activate(__('Admin'));
         $this->sub_navi->add('admin/users', __('Users'));
         $this->sub_navi->add('admin/logs', __('Logs'));
+        $this->sub_navi->add('admin/stats', __('Stats'));
     }
 
     public function action_index() {
@@ -35,6 +36,17 @@ class Controller_Admin extends Controller_Index {
    
         
         $logs = ORM::factory('tablelog');
+ 
+        $view->logs = $logs->find_all();
+      
+        $this->content = $view->render();
+    }
+      public function action_stats() {
+         $this->sub_navi->activate(__('Stats'));
+        $view = View::factory(I18n::$lang.'/admin/stats/list');
+   
+        
+        $logs = ORM::factory('download');
  
         $view->logs = $logs->find_all();
       

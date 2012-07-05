@@ -41,5 +41,8 @@ return array(
     'pwsend'=>'Neues Passwort wurde versendet',
     'unlockedfail'=>'Benutzer konnte nicht entsperrt werden',
     'lockedfail' =>'Benutzer konnte nicht gesperrt werden',
-    'pwsendfail' =>'Neues Passwort konnte nicht versendet werden'
+    'pwsendfail' =>'Neues Passwort konnte nicht versendet werden',
+    'Users' =>'Benutzer Verwaltung',
+    'Logs' =>'Datenänderungen',
+    'Stats'=>'Downloadstatistik'
 );

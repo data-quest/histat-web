@@ -352,22 +352,21 @@ class Controller_Table extends Controller_Data {
             $result = false;
             $id_hs = $this->request->post('id_hs');
             $key = $this->request->post('key');
-            $source = $this->request->post('source');
-            $table = $this->request->post('table');
-            $note = $this->request->post('note');
+            $type = $this->request->post('type');
+             $value = $this->request->post('value');
+            $id_projekt = $this->request->post('id_projekt');
+            $types = array(
+                'source'=>'Quelle',
+                'note'=>'Anmerkung',
+                'table'=>'Tabelle'
+            );
 
 
-            $db = DB::delete('Daten__Aka')
-                    ->where('ID_HS', '=', $id_hs)
-                    ->where('Schluessel', '=', $key)
-                    ->where('Jahr_Sem', '=', $year);
-            if ($db->execute())
-                $result = true;
-
-            if ($value) {
-                $result = false;
-                $db = DB::insert('Daten__Aka', array('Data', 'ID_HS', 'Schluessel', 'Jahr_Sem'))
-                        ->values(array($value, $id_hs, $key, $year));
+            if ($value && $type) {
+                
+                $db = DB::update('Lit_ZR')->set(array($types[$type] => $value))
+                        ->where('ID_HS','=',$id_hs)
+                        ->where('Schluessel','=',$key);
                 if ($db->execute())
                     $result = true;
             }

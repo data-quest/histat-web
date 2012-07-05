@@ -1083,7 +1083,7 @@ table tr td.even {
 #table_details div.details table#tdata  tr:hover td{
     background:#FE8F00;
 }
-#table_details #tdata input[name="new_data"]{
+#table_details #tdata input[name="new_data"],#table_details #thead textarea[name="new_data"]{
 
     display:none;
 }
@@ -1104,7 +1104,19 @@ table tr td.even {
     border-radius: 2px;
     cursor:pointer;
 }
-
+#table_details #thead .grey .button{
+    position: absolute;
+    background: url(../img/layout/edit.png) no-repeat center center #ffffff;
+    margin-top:0px;
+    display: none;
+    width:19px;
+    height:19px;
+    padding:0px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    cursor:pointer;
+}
 #table_details div.details table .tooltip{
     display:none;
 }
