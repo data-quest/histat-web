@@ -304,7 +304,7 @@ class Controller_Table extends Controller_Data {
             }
             
             if($result){
-               
+                
                 $logs = ORM::factory('tablelog');
                 $logs->ID_Projekt = $id_projekt;
                 $logs->ID_HS = $id_hs;
@@ -363,12 +363,54 @@ class Controller_Table extends Controller_Data {
 
 
             if ($value && $type) {
-                
+                   $select = DB::select('Quelle','Anmerkung','Tabelle')
+                    ->from('Lit_ZR')
+                    ->where('ID_HS', '=', $id_hs)
+                    ->where('Schluessel', '=', $key)->execute();
                 $db = DB::update('Lit_ZR')->set(array($types[$type] => $value))
                         ->where('ID_HS','=',$id_hs)
                         ->where('Schluessel','=',$key);
-                if ($db->execute())
-                    $result = true;
+                if ($db->execute()){
+                   
+                      
+                         $logs = ORM::factory('tableheadlog');
+                $logs->ID_Projekt = $id_projekt;
+                $logs->ID_HS = $id_hs;
+                $logs->Schluessel = $key;
+                $logs->head =$types[$type];
+                $logs->username = $this->user->username;
+                $logs->old_value =Arr::get($select[0],$types[$type]);
+                $logs->new_value = $value;
+   
+                $logs->save();
+                
+                
+                 $keymask = ORM::factory('keymask', $id_hs);
+                 $details = $keymask->getDetails($key);
+                $filter_text = implode(',',Arr::get($details['titles'],$key,array()));
+            
+       
+                $view = View::factory('de/mails/dataheadchange');
+                $view->projectname = $keymask->project->Projektname;
+                $view->tablename = $keymask->Name;
+                $view->filter = $filter_text;
+                $view->head = $types[$type];
+                $view->old_value = Arr::get($select[0], $types[$type],'leer');
+                $view->new_value = $value == NULL ? 'leer':$value;
+                $view->username = $this->user->surname.' '.$this->user->name;
+                $view->chdate = date('Y-m-d H:i:s');
+                $view->id_hs = $id_hs;
+                $view->filter_key = $key;
+                $to = $this->config->get('log_to');
+             
+                  $email = Email::factory(__('Änderungen an Kopfbereich der Tabelle'))
+                        ->to($to)
+                        ->from($this->config->get('from'))
+                        ->message($view->render(), 'text/html')
+                        ->send();
+                      $result = true;
+                }
+                
             }
             $this->response->body(json_encode(array('result' => $result)));
         } else {

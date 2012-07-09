@@ -10,11 +10,11 @@
             
                 <td class="even">
                     <?php if($user->locked == 1):?>
-                   <?= HTML::anchor('user/unlock/'.$user->id,HTML::image('assets/img/layout/lock-locked.png', array('alt'=>'Benutzer entsperren')),array('class'=>'icon left'))?>
+                   <?= HTML::anchor('user/unlock/'.$user->id,HTML::image('assets/img/layout/lock-locked.png', array('title'=>'Benutzer entsperren')),array('class'=>'icon left'))?>
                     <?php else:?>
-     <?= HTML::anchor('user/lock/'.$user->id,HTML::image('assets/img/layout/lock-unlocked.png', array('alt'=>'Benutzer sperren')),array('class'=>'icon left'))?>
+     <?= HTML::anchor('user/lock/'.$user->id,HTML::image('assets/img/layout/lock-unlocked.png', array('title'=>'Benutzer sperren')),array('class'=>'icon left'))?>
                     <?php endif;?>
-     <?= HTML::anchor('user/resend_password/'.$user->id,HTML::image('assets/img/layout/mail.png', array('alt'=>'Neues Passwort versenden')),array('class'=>'icon left'))?>
+     <?= HTML::anchor('user/resend_password/'.$user->id,HTML::image('assets/img/layout/mail.png', array('title'=>'Neues Passwort versenden')),array('class'=>'icon left'))?>
                 </td>
             </tr>
         <?php endforeach; ?>

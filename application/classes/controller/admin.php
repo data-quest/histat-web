@@ -41,6 +41,17 @@ class Controller_Admin extends Controller_Index {
       
         $this->content = $view->render();
     }
+        public function action_headlogs() {
+         $this->sub_navi->activate(__('Head logs'));
+        $view = View::factory(I18n::$lang.'/admin/logs/list');
+   
+        
+        $logs = ORM::factory('tableheadlog');
+ 
+        $view->logs = $logs->find_all();
+      
+        $this->content = $view->render();
+    }
       public function action_stats() {
          $this->sub_navi->activate(__('Stats'));
         $view = View::factory(I18n::$lang.'/admin/stats/list');
