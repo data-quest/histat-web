@@ -11,6 +11,7 @@ class Controller_Admin extends Controller_Index {
         $this->main_navi->activate(__('Admin'));
         $this->sub_navi->add('admin/users', __('Users'));
         $this->sub_navi->add('admin/logs', __('Logs'));
+           $this->sub_navi->add('admin/headlogs', __('Head logs'));
         $this->sub_navi->add('admin/stats', __('Stats'));
     }
 
@@ -43,7 +44,7 @@ class Controller_Admin extends Controller_Index {
     }
         public function action_headlogs() {
          $this->sub_navi->activate(__('Head logs'));
-        $view = View::factory(I18n::$lang.'/admin/logs/list');
+        $view = View::factory(I18n::$lang.'/admin/logs/headlist');
    
         
         $logs = ORM::factory('tableheadlog');
