@@ -91,6 +91,8 @@ class Model_Project extends ORM {
                         ->from(array('Aka_Projekte', 'p'))
                         ->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
                         ->where('p.Projektautor', 'IS NOT', NULL)
+                        ->order_by('Projektautor')
+                
                         ->as_object()
                         ->execute();
     }

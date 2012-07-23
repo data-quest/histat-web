@@ -6,8 +6,17 @@
             <tr id="<?= $user->id ?>">
                 <td><?= $user->id ?></td>
                 <td class="even"><?= $user->username ?></td>
-                <td><?= $user->surname ?>, <?= $user->name ?></td>
-            
+                <td><?= $user->title?><?= $user->surname ?>, <?= $user->name ?></td>
+                <td class="even"><?= $user->street ?><br/>
+                <?= $user->zip ?><?= $user->location ?><br/>
+                <?= $user->country ?><br/>
+                </td>
+                 <td>
+                     <?= $user->institution?><br/>
+                     <?= $user->department?><br/>
+                     <?= $user->phone ?><br/>
+            <?= $user->email ?></td>
+           
                 <td class="even">
                     <?php if($user->locked == 1):?>
                    <?= HTML::anchor('user/unlock/'.$user->id,HTML::image('assets/img/layout/lock-locked.png', array('title'=>'Benutzer entsperren')),array('class'=>'icon left'))?>
