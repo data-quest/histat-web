@@ -5,7 +5,7 @@
             <td class="even" width="13%"><?= $project->theme->Thema ?></td>
             <td  width="50%"><?= $project->Projektautor ?>, <?= $project->Projektname ?></td>
             <td class="timelines hide" width="22%">Tabellenverzeichnis schließen</td>
-            <td class="details"><span style="width:100%;display:block;text-align: right;"><?= HTML::anchor('project/details/' . $project->ID_Projekt, 'Beschreibung...') ?></span></div></td>
+            <td class="details"><span style="width:100%;display:block;"><?= HTML::anchor('project/details/' . $project->ID_Projekt, 'Beschreibung...') ?></span></div></td>
 
         </tr>
     </table>

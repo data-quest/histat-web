@@ -10,7 +10,7 @@
                 <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen = '' ?> 
                 <?= HTML::anchor('project/tables/' . $project->ID_Projekt, $project->Anzahl_Zeitreihen . ' Zeitreihen<br/>(' . $project->Zeitraum . ')' . $tabellen) ?>
             </td>
-            <td class="details hide"><span style="width:100%;display:block;text-align: right;">Beschreibungsansicht schließen</span></div></td>
+            <td class="details hide"><span style="width:100%;display:block;">Beschreibungsansicht schließen</span></div></td>
 
         </tr>
     </table>

@@ -44,5 +44,6 @@ return array(
     'pwsendfail' =>'Neues Passwort konnte nicht versendet werden',
     'Users' =>'Benutzer Verwaltung',
     'Logs' =>'Datenänderungen',
-    'Stats'=>'Downloadstatistik'
+    'Stats'=>'Statistiken',
+    'Head logs' =>'Datenänderung(Tabellenkopf)'
 );

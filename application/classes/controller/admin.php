@@ -12,7 +12,7 @@ class Controller_Admin extends Controller_Index {
         $this->sub_navi->add('admin/users', __('Users'));
         $this->sub_navi->add('admin/logs', __('Logs'));
            $this->sub_navi->add('admin/headlogs', __('Head logs'));
-        $this->sub_navi->add('admin/stats', __('Stats'));
+        $this->sub_navi->add('stats', __('Stats'));
     }
 
     public function action_index() {
@@ -58,7 +58,7 @@ class Controller_Admin extends Controller_Index {
         $view = View::factory(I18n::$lang.'/admin/stats/list');
    
         
-        $logs = ORM::factory('download');
+        $logs = ORM::factory('download')->where('mkdate','>=',strtotime("-1 year"));
  
         $view->logs = $logs->find_all();
       
