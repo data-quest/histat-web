@@ -180,7 +180,7 @@ td.details span a{
     margin-left:5px;
     text-align: left;
     z-index:10;
-   
+
     color:#000000;
 }
 .tooltip span{
@@ -586,16 +586,22 @@ table tr td.even {
 
 #project_details .details.hide{
     min-width: 50px;
-    background:url(../img/layout/button-table-details2-left.png) repeat-x center left;
+    background:url(../img/layout/button-table-details2-right.png) repeat-x center right;
     color:#FFFFFF;
     cursor:pointer;
 }
+#project_details .details.hide:hover{
+     background:url(../img/layout/button-table-details2-left.png) repeat-x center right;
+}
 #project_details  .timelines.hide{
-    background:url(../img/layout/button-table-details-left.png) repeat-x center left;
+    background:url(../img/layout/button-table-details-right.png) repeat-x center right;
     color:white;
     cursor: pointer;
-    text-align: right;
+
     min-width: 80px;
+}
+#project_details  .timelines.hide:hover{
+         background:url(../img/layout/button-table-details-left.png) repeat-x center right;
 }
 #project_details h1{
     padding: 10px; 
@@ -719,6 +725,9 @@ table tr td.even {
 
     background: url(../img/layout/more-btn.jpg) no-repeat left center;
 }
+#project_details span.more:hover{
+    background: url(../img/layout/more-btn-hover.jpg) no-repeat left center; 
+}
 #project_details span.less{
     color:#fff;
     cursor: pointer;
@@ -730,9 +739,11 @@ table tr td.even {
 
     background: url(../img/layout/less-btn.jpg) no-repeat left center;
 }
-#project_details span.less:hover,#project_details span.more:hover{
-    text-decoration: underline;
+#project_details span.less:hover{
+   
+    background: url(../img/layout/less-btn-hover.jpg) no-repeat left center; 
 }
+
 #project_details table.border-all tr:hover td{
     background: #E6E6E6;
 }
@@ -761,6 +772,9 @@ table tr td.even {
     padding:0px 3px;
     margin:5px;
     display:block;
+}
+#authors div.keys ul li a:hover{
+      background: #ffb552;
 }
 #authors .list{
     padding:15px;
@@ -1459,7 +1473,77 @@ table tr td.even {
 #admin_users{
     padding:20px;
 }
-#users tr:hover td{
+#users tbody tr:hover td{
     background: #FF8F00;
     color:#fff;
+}
+#sitemap{
+    padding:20px;
+}
+.sitemap {
+    list-style: inside;
+}
+.sitemap ul{
+   margin-left: 20px;
+}
+.sitemap a{
+    text-decoration: none;
+    color:black;
+}
+.ui-datepicker-calendar{
+ border-spacing: 0px;
+}
+.ui-datepicker-calendar td{
+    padding:2px;
+}
+.ui-datepicker-today{
+     background: #999;
+}
+.ui-datepicker-today a{
+    color:#fff;
+}
+.ui-datepicker-calendar tbody td:hover {
+    background: #FF8F00;
+    cursor: pointer;
+}
+.ui-datepicker-calendar tbody td:hover a{
+        color:#fff;
+}
+.ui-datepicker-header{
+    background: #748EA5;
+    line-height: 24px;
+}
+.ui-datepicker-prev{
+    float:left;
+
+    width: 25px;
+      cursor: pointer;
+    background: url(../img/layout/content-pfeil-left.png) no-repeat center center;
+}
+.ui-datepicker-next{
+    float:right;
+  
+       width: 25px;
+       cursor: pointer;
+     background: url(../img/layout/content-pfeil-right.png) no-repeat center center;
+}
+.ui-datepicker-title{
+    text-align: center;
+    font-weight: bold;
+    color:#FFF;
+}
+.ui-datepicker-other-month{
+    color:#999;
+}
+
+ .ui-datepicker-current-day{
+        background: #FF8F00;
+}
+.ui-datepicker-current-day a{
+    color:#fff;
+}
+.hasDatepicker{
+    margin: 5px;
+    width: 200px;
+    border: 1px solid #72777A;
 }

@@ -193,5 +193,6 @@ $(function(){
     });
     $('#admin_info').bind('click',function(){
         $(this).fadeOut('slow');
-    })
+    });
+     $('#admin_users').parents('#layout').width("98%");
 });
