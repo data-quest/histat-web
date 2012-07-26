@@ -25,32 +25,22 @@ class Controller_Stats extends Controller_Admin {
         $view->content = $content;
         $this->content = $view->render();
     }
-      private function option_0($from, $to) {
-       /*   "SELECT ID as `Nutzer ID` ,username as Nutzername, CONCAT_WS( ' ', titel, vorname, nachname ) AS Name,
-									institution as Institution, abteilung as Abteilung , strasse as Strasse, plz as PLZ , ort as Ort , land as Land,
-									telefon as Telefon, email as Email, 
-									DATE_FORMAT( FROM_UNIXTIME( mkdate ) , '%e.%c.%Y' ) AS `Registriert am`
-									FROM auth_user a ",
-									'group' => ' ORDER BY mkdate ASC',*/
 
-          $users = ORM::factory('user')
-                  ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
-                  ->order_by('mkdate', 'ASC');
-              
-     
+    private function option_0($from, $to) {
+
+        $users = ORM::factory('user')
+                ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->order_by('mkdate', 'ASC');
+
+
         $view = View::factory(I18n::$lang . '/admin/stats/option_0');
         $view->result = $users->find_all();
         $this->result = $view->render();
     }
+
     private function option_1($from, $to) {
-      $result = DB::select(
-                    array('a.ID', 'dl'), 
-                    array(DB::expr('IFNULL(b.Projektname,a.name)'), 'Studientitel'), 
-                    array(DB::expr('IFNULL(b.ZA_Studiennummer,a.za_nummer)'),'za'),
-                    array('b.Zugangsklasse','klasse'),
-                    array('a.intended_use','Verwendungszweck'),
-                    array('a.mkdate','Zeitpunkt'),
-                    array(DB::expr("CONCAT_WS(' ', title, c.name, c.surname)"),'Name')
+        $result = DB::select(
+                        array('a.ID', 'dl'), array(DB::expr('IFNULL(b.Projektname,a.name)'), 'Studientitel'), array(DB::expr('IFNULL(b.ZA_Studiennummer,a.za_nummer)'), 'za'), array('b.Zugangsklasse', 'klasse'), array('a.intended_use', 'Verwendungszweck'), array('a.mkdate', 'Zeitpunkt'), array(DB::expr("CONCAT_WS(' ', title,  c.surname,c.name)"), 'Name')
                 )
                 ->from(array('user_downloads', 'a'))
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
@@ -61,13 +51,136 @@ class Controller_Stats extends Controller_Admin {
                 ->order_by('a.mkdate')
                 ->as_object()
                 ->execute();
-        
-     
+
+
         $view = View::factory(I18n::$lang . '/admin/stats/option_1');
         $view->result = $result;
         $this->result = $view->render();
     }
 
+    private function option_2($from, $to) {
+
+        $result = DB::select(
+                        array(DB::expr('IFNULL(b.Projektname,a.name)'), 'Studientitel'), array(DB::expr('IFNULL(b.ZA_Studiennummer,a.za_nummer)'), 'za'), array(DB::expr('COUNT(a.id)'), 'downloads'), array(DB::expr('SUM(anzahl)'), 'timelines'), array(DB::expr('COUNT(DISTINCT username, TO_DAYS(FROM_UNIXTIME(a.mkdate)))'), 'call_downloads')
+                )
+                ->from(array('user_downloads', 'a'))
+                ->join(array('Aka_Projekte', 'b'), 'LEFT')
+                ->on('a.projekt_id', '=', 'b.ID_Projekt ')
+                ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->group_by('za')
+                ->order_by('downloads', 'DESC')
+                ->as_object()
+                ->execute();
+
+
+        $view = View::factory(I18n::$lang . '/admin/stats/option_2');
+        $view->result = $result;
+        $this->result = $view->render();
+    }
+
+    private function option_3($from, $to) {
+
+        $result = DB::select(
+                        array('a.mkdate', 'download_date'), array(DB::expr('IFNULL(b.Projektname,a.name)'), 'Studientitel'), array(DB::expr('IFNULL(b.ZA_Studiennummer,a.za_nummer)'), 'za'), array('b.Zugangsklasse', 'klasse'), array('c.ID', 'user_id'), 'country', 'zip', 'location', 'street', 'email', 'institution', 'department', 'email', array(DB::expr('COUNT(a.id)'), 'downloads'), array(DB::expr("CONCAT_WS(' ', c.surname,c.name)"), 'Name')
+                )
+                ->from(array('user_downloads', 'a'))
+                ->join(array('Aka_Projekte', 'b'), 'LEFT')
+                ->on('a.projekt_id', '=', 'b.ID_Projekt ')
+                ->join(array('users', 'c'), 'LEFT')
+                ->on('a.username', '=', 'c.username')
+                ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->group_by('download_date', 'user_id', 'za')
+                ->order_by('a.mkdate')
+                ->as_object()
+                ->execute();
+
+
+        $view = View::factory(I18n::$lang . '/admin/stats/option_3');
+        $view->result = $result;
+        $this->result = $view->render();
+    }
+
+    private function option_4($from, $to) {
+        $result = DB::select(
+                        'intended_use', array(DB::expr('COUNT(anzahl)'), 'downloads'), array(DB::expr('count(distinct(IFNULL(b.ZA_Studiennummer,a.za_nummer)))'), 'projects')
+                )
+                ->from(array('user_downloads', 'a'))
+                ->join(array('Aka_Projekte', 'b'), 'LEFT')
+                ->on('a.projekt_id', '=', 'b.ID_Projekt ')
+                ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->group_by('intended_use')
+                ->order_by('downloads', 'DESC')
+                ->as_object()
+                ->execute();
+
+
+        $view = View::factory(I18n::$lang . '/admin/stats/option_4');
+        $view->result = $result;
+        $this->result = $view->render();
+    }
+      private function option_5($from, $to) {
+  
+        $result = DB::select(
+                array('b.Projektname','title'),
+      
+                array('b.ZA_Studiennummer','za')
+                )
+                ->from(array('user_downloads', 'a'))
+                ->join(array('Aka_Projekte', 'b'), 'LEFT')
+                ->on('a.projekt_id', '=', DB::expr('b.ID_Projekt AND a.mkdate BETWEEN :from AND :to', array(':from' => $from, ':to' => $to)))
+                ->where(DB::expr('1'),DB::expr(''),DB::expr(''))
+                ->where('b.ID_Thema','<>',$this->config->get('example_theme_id'))
+                ->where('a.projekt_id','IS',DB::expr('NULL'))
+                ->group_by('b.ID_Projekt')
+                ->order_by('za')
+                ->as_object()
+                ->execute();
+
+      
+        $view = View::factory(I18n::$lang . '/admin/stats/option_5');
+        $view->result = $result;
+        $this->result = $view->render();
+    }
+        private function option_6($from, $to) {
+
+        $result = DB::select(
+                array('c.Thema','theme'),
+                array(DB::expr('COUNT(a.id)'),'downloads'),
+                 array(DB::expr('COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer),TO_DAYS(FROM_UNIXTIME(a.mkdate))) '),'download_projects'),
+                 array(DB::expr('COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer) )'),'download_different_projects')
+                )
+                ->from(array('user_downloads', 'a'))
+                ->join(array('Aka_Projekte', 'b'), 'LEFT')
+                ->on('a.projekt_id', '=', 'b.ID_Projekt ')
+                ->join(array('Aka_Themen', 'c'), 'LEFT')
+                ->on('b.ID_Thema', '=', 'c.ID_Thema')
+                ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+               ->group_by('c.ID_Thema')
+                ->order_by('downloads','DESC')
+                ->as_object()
+                ->execute();
+
+      
+        $view = View::factory(I18n::$lang . '/admin/stats/option_6');
+        $view->result = $result;
+        $this->result = $view->render();
+    }
+      private function option_7($from, $to) {
+
+        $result = DB::select(
+                array('ZA_Studiennummer','za'),
+                array('Projektname','title'),
+                array('Projektautor','author')
+                  )
+                ->from('Aka_Projekte')
+                 ->where('ID_Thema','<>',$this->config->get('example_theme_id'))
+                ->order_by('ZA_Studiennummer','DESC')
+                ->as_object()
+                ->execute();
+        $view = View::factory(I18n::$lang . '/admin/stats/option_7');
+        $view->result = $result;
+        $this->result = $view->render();
+    }
     public function after() {
         $this->sub_navi->activate(__('Stats'));
         $this->scripts[] = 'stats.js';

@@ -45,5 +45,6 @@ return array(
     'Users' =>'Benutzer Verwaltung',
     'Logs' =>'Datenänderungen',
     'Stats'=>'Statistiken',
-    'Head logs' =>'Datenänderung(Tabellenkopf)'
+    'Head logs' =>'Datenänderung(Tabellenkopf)',
+    'Display'=>'Anzeigen'
 );

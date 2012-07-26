@@ -5,13 +5,28 @@
     </h3>
     <?= Form::open('stats/display') ?>
     <div style="float:left">
-        <span style="float:left"> Von </span><div id="from" style="float:left" ></div><span style="float:left"> bis</span> <div  style="float:left"  id="to" ></div>
+        <div style="float:left">
+            <span style="text-align: center;width:100%;display:block">Von:</span>
+        <div id="from"></div>
+        </div>
+              <div style="float:left">
+            <span style="text-align: center;width:100%;display:block">Bis:</span>
+        <div id="to"></div>
+        </div>
+
     </div>
     <div class="clear"></div>
     <br/>
-    <?= Form::hidden('from', Arr::get($_POST, 'from', date("d.m.Y", strtotime("-3 weeks")))); ?>
-    <?= Form::hidden('to', Arr::get($_POST, 'to', date("d.m.Y"))); ?>
-
+    <?php 
+    $from = Arr::get($_POST, 'from', date("d.m.Y", strtotime("-3 weeks")));
+    $to = Arr::get($_POST, 'to', date("d.m.Y"));
+    ?>
+    <?= Form::hidden('from',$from ); ?>
+    <?= Form::hidden('to',$to ); ?>
+    <script>
+    var from = "<?= $from?>";
+    var to = "<?= $to?>";
+    </script>
     <?php
     $options = array('Übersicht der registrierten Nutzer',
         'Übersicht der einzelnen Downloads (Datentabellen)',
