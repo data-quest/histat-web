@@ -128,9 +128,16 @@ class Controller_Auth extends Controller_Index {
                 $mailBody->password = $password;
                 $mailBody->name = $post['name'];
                 $mailBody->surname = $post['surname'];
+                
+                $textBody = View::factory(I18n::$lang . '/mails/text_registration');
+                $textBody->username = $post['username'];
+                $textBody->password = $password;
+                $textBody->name = $post['name'];
+                $textBody->surname = $post['surname'];
                 $email = Email::factory('Ihre Registrierung bei histat.gesis.org')
                         ->to($post['email'])
                         ->from($this->config->get('from'))
+                        ->message($textBody->render())
                         ->message($mailBody->render(), 'text/html')
                         ->send();
             } catch (ORM_Validation_Exception $e) {
