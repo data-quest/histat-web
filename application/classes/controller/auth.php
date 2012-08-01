@@ -128,7 +128,7 @@ class Controller_Auth extends Controller_Index {
                 $mailBody->password = $password;
                 $mailBody->name = $post['name'];
                 $mailBody->surname = $post['surname'];
-                $email = Email::factory(__(':username your account informations', array(':username' => $post['username'])))
+                $email = Email::factory('Ihre Registrierung bei histat.gesis.org')
                         ->to($post['email'])
                         ->from($this->config->get('from'))
                         ->message($mailBody->render(), 'text/html')
