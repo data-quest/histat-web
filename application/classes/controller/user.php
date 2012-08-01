@@ -78,7 +78,7 @@ class Controller_User extends Controller_Admin {
                 $textBody->password = $password;
                 $textBody->name = $user->name;
                 $textBody->surname = $user->surname;
-                $email = Email::factory(__(':username your account informations', array(':username' => $user->username)))
+                $email = Email::factory('Ihre Registrierung bei histat.gesis.org')
                         ->to($user->email)
                         ->from($this->config->get('from'))
                         ->message($textBody->render())
