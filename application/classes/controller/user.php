@@ -71,9 +71,17 @@ class Controller_User extends Controller_Admin {
                 $mailBody->password = $password;
                 $mailBody->name = $user->name;
                 $mailBody->surname = $user->surname;
+                
+                
+                  $textBody = View::factory(I18n::$lang . '/mails/text_passwordchanged');
+                $textBody->username = $user->username;
+                $textBody->password = $password;
+                $textBody->name = $user->name;
+                $textBody->surname = $user->surname;
                 $email = Email::factory(__(':username your account informations', array(':username' => $user->username)))
                         ->to($user->email)
                         ->from($this->config->get('from'))
+                        ->message($textBody->render())
                         ->message($mailBody->render(), 'text/html')
                         ->send();
                 $this->request->redirect('admin/users/pwsend#' . $id);
