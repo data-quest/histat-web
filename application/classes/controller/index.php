@@ -97,7 +97,7 @@ class Controller_Index extends Controller_Template {
         $this->scripts [] = 'jquery-ui.min.js';
         $this->scripts [] = 'search.js';
         $this->scripts [] = 'main.js';
-
+          I18n::lang($this->request->param('lang','de'));
         //Setup Cookie
         Cookie::$salt = $this->config->get('cookie_salt');
         //Setup Session
@@ -119,6 +119,7 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
         
+        
         //If user is not loged in
         if (!$this->user) {
             Auth::instance()->force_login('guest');
@@ -139,6 +140,8 @@ class Controller_Index extends Controller_Template {
         $this->xsrf = $this->session->get('xsrf', md5(Text::random('alnum')));
         //Save xsrf Token
         $this->session->set('xsrf', $this->xsrf);
+      
+      
     }
 
     public function action_index() {
