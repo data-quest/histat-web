@@ -40,6 +40,11 @@
                 foreach ($main_navi as $item)
                     echo HTML::anchor($item['uri'], $item['active'] == 1 ? $item['title'] . '<span></span>' : $item['title'], $item['active'] == 1 ? array('class' => 'active') : null);
                 ?>
+                <?php
+                  $lang_img = I18n::$lang === 'de'?'en':'de';
+                ?>
+                <a href="<?= URL::site('/'.$lang_img.'/index') ?>"><?= HTML::image('assets/img/layout/lang_'.$lang_img.'.gif') ?></a>
+             
                 <?= $searchbar ?>
             </div>
             <div id="sub_navi">

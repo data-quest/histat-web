@@ -113,12 +113,13 @@ class Controller_Index extends Controller_Template {
         //Get user Instance
         $this->user = Auth::instance()->get_user();
 
+      
         //Add main Navigation Items
         $this->main_navi->add('index', __('Home'));
         $this->main_navi->add('data', __('Data'));
         $this->main_navi->add('about', __('About'));
         $this->main_navi->add('galery', __('Galery'));
-        
+  
         
         //If user is not loged in
         if (!$this->user) {
