@@ -14,14 +14,17 @@ class Controller_Data extends Controller_Index {
         //Activate Data navigation point
         $this->main_navi->activate(__('Data'));
         //Add sub navigation items
-        $this->sub_navi->add('data/index', __('New'));
-        $this->sub_navi->add('data/top', __('Top'));
+     
         $this->sub_navi->add('data/times', __('Times'));
         $this->sub_navi->add('data/themes', __('Themes'));
         $this->sub_navi->add('data/names', __('Names'));
+           $this->sub_navi->add('data/new', __('New'));
+        $this->sub_navi->add('data/top', __('Top'));
     }
-
     public function action_index() {
+       $this->action_themes();
+    }
+    public function action_new() {
         //Activate sub navigation point "New"
         $this->sub_navi->activate(__('New'));
         //Load model/project.php
