@@ -1,6 +1,6 @@
 <div id="data_new">
-    <h1>Liste der neuen Studien</h1><br/>
-    <p class="normal">Die 20 zuletzt von uns bearbeiteten Studien, in absteigender Reihenfolge ihrer Bearbeitung.</p>
+    <h1>List of new studies</h1><br/>
+    <p class="normal">The last 20 edited studies, in descending order of their processing.</p>
     <?= $list?>
 </div>
 <?= $dialog ?>

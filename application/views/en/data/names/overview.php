@@ -11,9 +11,9 @@
     </div>
     <hr/>
     <div class="list">
-        <h1>Liste aller Autorinnen und Autoren</h1>
+        <h1>$Liste aller Autorinnen und Autoren$</h1>
            <p  class="normal" >
-Auswahl von Studien über die Autorinnen und Autoren.</p>
+$Auswahl von Studien über die Autorinnen und Autoren.$</p>
 <br/>
         <?php foreach ($author_list as $key => $authors): ?>
         <div class="key"><span  id="<?= $key ?>"><?= $key ?></span>

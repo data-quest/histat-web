@@ -18,11 +18,11 @@
                 <td class="timelines" width="22%">
     
                     <?php $tabellen = ORM::factory('Project',$project->ID_Projekt)->getUsedTables(); ?>
-                    <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen ='' ?> 
-                         <?= HTML::anchor('project/tables/' . $project->ID_Projekt, $project->Anzahl_Zeitreihen . ' Zeitreihen<br/>(' . $project->Zeitraum . ')' . $tabellen) ?>
+                    <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) .' '. __('Tables'): $tabellen ='' ?> 
+                         <?= HTML::anchor('project/tables/' . $project->ID_Projekt, $project->Anzahl_Zeitreihen . ' '.__('Time series').'<br/>(' . $project->Zeitraum . ')' . $tabellen) ?>
           
                 </td>
-                <td width="150" class="details"><span><?= HTML::anchor('project/details/' . $project->ID_Projekt, 'Beschreibung...') ?></span></div></td>
+                <td width="150" class="details"><span><?= HTML::anchor('project/details/' . $project->ID_Projekt, __('Details...')) ?></span></div></td>
 
             </tr>
 

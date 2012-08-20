@@ -16,11 +16,11 @@
                 <td class="timelines" width="22%">
     
                     <?php $tabellen = $project->getUsedTables(); ?>
-                    <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen ='' ?> 
-                         <?= HTML::anchor('project/tables/' . $project->ID_Projekt, $project->Anzahl_Zeitreihen . ' Zeitreihen<br/>(' . $project->Zeitraum . ')' . $tabellen) ?>
+                    <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) .' '. __('Tables') : $tabellen ='' ?> 
+                         <?= HTML::anchor('project/tables/' . $project->ID_Projekt, $project->Anzahl_Zeitreihen . ' '.__('Time series').'<br/>(' . $project->Zeitraum . ')' . $tabellen) ?>
           
                 </td>
-                <td width="150" class="details"><span><?= HTML::anchor('project/details/' . $project->ID_Projekt, 'Beschreibung...') ?></span></div></td>
+                <td width="150" class="details"><span><?= HTML::anchor('project/details/' . $project->ID_Projekt, __('Details...')) ?></span></div></td>
 
             </tr>
 
@@ -39,10 +39,10 @@
             <td  width="50%"><?= $projects->Projektautor ?> (<?= $projects->Publikationsjahr ?> <?= $bearbeitung ?>), <?= $projects->Projektname ?></td>
             <td class="timelines" width="22%">
                 <?php $tabellen = $projects->getUsedTables(); ?>
-                <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen = '' ?> 
-                <?= HTML::anchor('project/tables/' . $projects->ID_Projekt, $projects->Anzahl_Zeitreihen . ' Zeitreihen<br/>(' . $projects->Zeitraum . ')' . $tabellen) ?>
+                <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) .' '. __('Tables') : $tabellen = '' ?> 
+                <?= HTML::anchor('project/tables/' . $projects->ID_Projekt, $projects->Anzahl_Zeitreihen . ' '.__('Time series').'<br/>(' . $projects->Zeitraum . ')' . $tabellen) ?>
             </td>
-            <td width="150" class="details"><span><?= HTML::anchor('project/details/' . $projects->ID_Projekt, 'Beschreibung...') ?></span></div></td>
+            <td width="150" class="details"><span><?= HTML::anchor('project/details/' . $projects->ID_Projekt,__('Details...')) ?></span></div></td>
 
         </tr>
     <?php endif; ?>

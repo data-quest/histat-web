@@ -24,13 +24,13 @@
                 <a href=""><?= HTML::image($assets['img'] . '/layout/logo.png', array('class' => 'logo')) ?></a>
                 <div class="infos">
                     <div class="histat">
-                        <span class="orange">histat:</span> <br/> <span class="description">Historische Statistik</span>
+                        <span class="orange">histat:</span> <br/> <span class="description"><?= __('Historical statistics')?></span>
                     </div>
                     <div class="values">
-                        <span class="orange"><?= $values ?></span> Werte
+                        <span class="orange"><?= $values ?></span> <?= __('Values'); ?>
                     </div>
                     <div class="timelines">
-                        <span class="orange"><?= $times ?></span> Zeitreihen
+                        <span class="orange"><?= $times ?></span> <?= __('Time series');?>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 <div class="clear"></div>
             </div>
             <div id="footer">
-                © GESIS <?= HTML::anchor('http://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last Updates from :date', array(':date' => $date)) ?>
+                © GESIS <?= HTML::anchor('http://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last update at :date', array(':date' => $date)) ?>
             </div>
             <!-- etracker PARAMETER 3.0 -->
             <script type="text/javascript">

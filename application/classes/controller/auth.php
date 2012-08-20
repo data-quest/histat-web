@@ -11,7 +11,7 @@ class Controller_Auth extends Controller_Index {
         $this->main_navi->activate(__('Login'));
         $this->sub_navi->add('auth/login', __('Login'));
         $this->sub_navi->add('auth/create', __('Create'));
-        $this->sub_navi->add('auth/send', __('Send new password'));
+  
         $this->layout = View::factory('auth/layout');
         $this->layout->content = '';
     }

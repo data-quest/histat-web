@@ -1,4 +1,4 @@
-<h3>Kooperationspartner</h3>
+<h3>Cooperating Partners</h3>
 <br/>
 <ul class="normal">
     <li>
@@ -23,5 +23,5 @@
 <?= HTML::anchor("http://metavor.de/", HTML::image("http://metavor.de/images/logo-trans.png", array("alt" => "http://metavor.de/")), array(), "http") ?>
 
 <br/>
-<h3>Technische Realisation:</h3>
+<h3>Technical Realization:</h3>
 <?= HTML::anchor("http://data-quest.de/", HTML::image("http://www.data-quest.de/fileadmin/dq_homepage/assets/bilder/logo.png", array("alt" => "http://data-quest.de")), array(), "http") ?>

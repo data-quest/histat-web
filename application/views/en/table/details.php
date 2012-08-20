@@ -1,6 +1,6 @@
 <div id="table_details" >
 
-    <h1 class="left">Tabellenansicht der Studie</h1>
+    <h1 class="left">$Tabellenansicht der Studie$</h1>
     <?php if (Session::instance()->get('search', false)) : ?>
         <span class="back right"><?= HTML::anchor('search/extended', __('Zurück zur Suche...')) ?></span>
 

@@ -1,6 +1,6 @@
 <div id="themes_overview">
     <p class="normal" style="padding: 15px;">
-        Hier können Sie Studien über eine thematische Zuordnung auswählen. Alle Studien wurden (genau) einem Thema zugeordnet.
+       $ Hier können Sie Studien über eine thematische Zuordnung auswählen. Alle Studien wurden (genau) einem Thema zugeordnet.$
     </p>
     <hr/>
     <ul>
