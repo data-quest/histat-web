@@ -42,8 +42,14 @@
                 ?>
                 <?php
                   $lang_img = I18n::$lang === 'de'?'en':'de';
+                  $url = Request::current()->uri();
+                  
+                  if($url === '/'){
+                      $url = I18n::$lang.'/index';
+                  }
+                  
                 ?>
-                <a href="<?= str_replace(I18n::$lang, $lang_img, URL::site(Request::current()->uri()));?>"><?= HTML::image('assets/img/layout/lang_'.$lang_img.'.gif') ?></a>
+                <a href="<?= str_replace('/'.I18n::$lang.'/', '/'.$lang_img.'/',URL::site($url));?>"><?= HTML::image('assets/img/layout/lang_'.$lang_img.'.gif') ?></a>
              
                 <?= $searchbar ?>
             </div>

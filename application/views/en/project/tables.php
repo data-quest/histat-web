@@ -4,8 +4,8 @@
             <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>
             <td class="even" width="13%"><?= $project->theme->Thema ?></td>
             <td  width="50%"><?= $project->Projektautor ?>, <?= $project->Projektname ?></td>
-            <td class="timelines hide" width="22%">Tabellenverzeichnis schließen</td>
-            <td class="details"><span style="width:100%;display:block;"><?= HTML::anchor('project/details/' . $project->ID_Projekt, 'Beschreibung...') ?></span></div></td>
+            <td class="timelines hide" width="22%"><?=__('close table view') ?></td>
+            <td class="details"><span style="width:100%;display:block;"><?= HTML::anchor('project/details/' . $project->ID_Projekt, __('details...')) ?></span></div></td>
 
         </tr>
     </table>
@@ -55,7 +55,7 @@
         <div class="pages">
 
 
-            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page - 1), "zurück", array('class' => 'prev')) ?>
+            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page - 1), __('previous'), array('class' => 'prev')) ?>
 
             <div class="list">
                 <?php for ($i = 0; $i < $countTables; $i++): ?>
@@ -68,7 +68,7 @@
                     <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($i + 1), ($i + 1), $attr) ?>
                 <?php endfor; ?>
             </div>
-            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page + 1), "vor", array('class' => 'next')) ?>
+            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page + 1), __('next'), array('class' => 'next')) ?>
 
             <div class="clear"></div>
         </div>
@@ -78,9 +78,9 @@
 
 </div>
 <script type="text/javascript">
-    var more = "Mehr...";
-    var less = "Weniger...";
+    var more = "more...";
+    var less = "less...";
     var title = "<?= $project->Projektname ?>"
-    var closeText = "Schließen";
+    var closeText = "close";
 
 </script>

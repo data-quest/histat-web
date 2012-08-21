@@ -3,7 +3,7 @@
 return array(
    
 
-
+    ':timelines Zeitreihen' => ':timelines time series',
     'Times' =>'Periods',
     'Themes'=>'Categories',
 

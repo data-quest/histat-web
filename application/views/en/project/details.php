@@ -7,10 +7,10 @@
             <td  width="50%"><?= $project->Projektautor ?>, <?= $project->Projektname ?></td>
             <td class="timelines" width="22%">
                 <?php $tabellen = $project->getUsedTables(); ?>
-                <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) . ' Tabellen' : $tabellen = '' ?> 
-                <?= HTML::anchor('project/tables/' . $project->ID_Projekt, $project->Anzahl_Zeitreihen . ' Zeitreihen<br/>(' . $project->Zeitraum . ')' . $tabellen) ?>
+                <?php count($tabellen) > 0 ? $tabellen = '<br/>' . count($tabellen) .' '.__('tables') : $tabellen = '' ?> 
+                <?= HTML::anchor('project/tables/' . $project->ID_Projekt, $project->Anzahl_Zeitreihen .' '.__('time series'). '<br/>(' . $project->Zeitraum . ')' . $tabellen) ?>
             </td>
-            <td class="details hide"><span style="width:100%;display:block;">Beschreibungsansicht schließen</span></div></td>
+            <td class="details hide"><span style="width:100%;min-width: 100px;display:block;"><?= __('close details') ?></span></div></td>
 
         </tr>
     </table>
@@ -36,7 +36,7 @@
     <?php if ($len > 0) : ?>
         <h4>Datensatz (in empfohlener Zitierweise)</h4>
         <div class="content">
-            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="right"><?= $len > 300 ? '<span class="more">'.__('more').'</span>' : '' ?></div>
             <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $quote ?></div>
             <div class="clear"></div>
         </div>
@@ -46,7 +46,7 @@
     <?php if ($len > 0) : ?>
         <h4>Anmerkungen </h4>
         <div class="content">
-            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="right"><?= $len > 300 ? '<span class="more">'.__('more').'</span>' : '' ?></div>
             <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $notes ?></div>
             <div class="clear"></div>
         </div>
@@ -57,7 +57,7 @@
     <?php if ($len > 0) : ?>
         <h4>Gedruckte Publikation</h4>
         <div class="content">
-            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="right"><?= $len > 300 ? '<span class="more">'.__('more').'</span>' : '' ?></div>
             <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $publication ?></div>
             <div class="clear"></div>
         </div>
@@ -70,7 +70,7 @@
     <?php if ($len > 0) : ?>
         <h4>Studienbeschreibung </h4>
         <div class="content">
-            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="right"><?= $len > 300 ? '<span class="more">'.__('more').'</span>' : '' ?></div>
             <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $description ?></div>
             <div class="clear"></div>
         </div>
@@ -95,7 +95,7 @@
     <?php if ($len > 0) : ?>
         <h4>Verwendete Quellen:</h4>
         <div class="content">
-            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="right"><?= $len > 300 ? '<span class="more">'.__('more').'</span>' : '' ?></div>
             <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $sources ?></div>
             <div class="clear"></div>
         </div>
@@ -105,7 +105,7 @@
     <?php if ($len > 0) : ?>
         <h4>Untersuchungsgebiet:</h4>
         <div class="content">
-            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="right"><?= $len > 300 ? '<span class="more">'.__('more').'</span>' : '' ?></div>
             <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $fundort ?></div>
             <div class="clear"></div>
         </div>
@@ -115,15 +115,15 @@
     <?php if ($len > 0) : ?>
         <h4>Quellenverzeichnis:</h4>
         <div class="content">
-            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="right"><?= $len > 300 ? '<span class="more">'.__('more').'</span>' : '' ?></div>
             <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $quellenverzeichnis ?></div>
             <div class="clear"></div>
         </div>
     <?php endif; ?>
 </div>
 <script type="text/javascript">
-    var more = "Mehr...";
-    var less = "Weniger...";
+    var more = "more...";
+    var less = "less...";
     var title = "<?= $project->Projektname ?>"
-    var closeText = "Schließen";
+    var closeText = "close";
 </script>
