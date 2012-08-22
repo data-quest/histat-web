@@ -14,9 +14,9 @@ class Controller_Data extends Controller_Index {
         //Activate Data navigation point
         $this->main_navi->activate(__('Data'));
         //Add sub navigation items
-     
+      $this->sub_navi->add('data/themes', __('Themes'));
         $this->sub_navi->add('data/times', __('Times'));
-        $this->sub_navi->add('data/themes', __('Themes'));
+       
         $this->sub_navi->add('data/names', __('Names'));
            $this->sub_navi->add('data/new', __('New'));
         $this->sub_navi->add('data/top', __('Top'));
@@ -169,6 +169,7 @@ class Controller_Data extends Controller_Index {
         $key_list = array();
         foreach ($authors as $author) {
             $names = explode(';', $author->Projektautor);
+           
             if (count($names) > 0) {
                 foreach ($names as $name) {
                     $name = trim(str_replace(array('(', ')'), array(''), $name));
@@ -187,9 +188,15 @@ class Controller_Data extends Controller_Index {
         }
 
 
-        ksort($author_list);
+        $sorted = array();
+        foreach($author_list as $key=> $author){
+             asort($author);
+            $sorted[$key] =$author;
+        }
+       ksort($sorted);
+      
         ksort($key_list);
-        $view->author_list = $author_list;
+        $view->author_list = $sorted;
         $view->key_list = $key_list;
         $view->projects = '';
         if ($id) {

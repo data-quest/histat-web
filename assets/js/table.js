@@ -21,14 +21,23 @@ $(function(){
         $(this).width(thead.find('td').eq(i).width()); 
     });
    
-
+  $('.tooltip').live('click',function(e){
+      
+      $(this).hide();
+      e.preventDefault();
+      return false;
+  
+    });
     $('#thead td').live('click',function(e){
         $('#thead td .tooltip').hide();
-        $(this).find('.tooltip').show();
+     $(this).find('.tooltip').show();
+ 
     });
+  
     $('#tdata td').live('click',function(e){
         $('#tdata td .tooltip').hide();
-        $(this).find('.tooltip').show();
+         $(this).find('.tooltip').show();
+      
     });
     
     $('#chart').live('click',function(e){
