@@ -16,6 +16,16 @@
     </table>
 
     <h1>Studienbeschreibung:</h1>
+    <h4>DDI Export</h4>
+     <div class="content">
+           <?php
+                      $text = HTML::image('assets/img/layout/download.png',array('class'=>'pdficon')).__('Download');  
+            ?>
+            <div class="right"> <?= HTML::anchor('project/export/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
+       
+            <div class="normal left"></div>
+            <div class="clear"></div>
+        </div>
     <a href="#" style="visbility:hidden"></a>
     <?php
     $bearbeitung = '';

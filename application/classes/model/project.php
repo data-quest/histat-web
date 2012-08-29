@@ -96,7 +96,7 @@ class Model_Project extends ORM {
                         ->as_object()
                         ->execute();
     }
-
+   
     public function search($post = NULL) {
 
         $theme = Arr::get($post, 'theme', '-1');

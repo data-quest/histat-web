@@ -15,8 +15,8 @@ class Controller_Project extends Controller_Data {
         parent::before();
         $this->id = $this->request->param('id', $this->request->post('id'));
         $this->token = $this->request->post('xsrf');
-       
-        $this->session->set('referrer',null);
+
+        $this->session->set('referrer', null);
     }
 
     public function action_details() {
@@ -77,6 +77,18 @@ class Controller_Project extends Controller_Data {
             $content = __('Project not found');
         }
         $this->dialog = $content;
+    }
+
+    public function action_export() {
+        if (!$this->id)
+            throw new HTTP_Exception_404(); //If ID not given throw Exception
+
+        $project = ORM::factory('project', $this->id);
+        if ($project->loaded()) {
+            $view = View::factory('ddi');
+            $view->project = $project;
+            $this->response->body('<?xml version="1.0" encoding="UTF-8" standalone="no" ?>'.$view->render())->send_file(TRUE, $project->Projektname.'.xml');
+        }
     }
 
     public function action_download() {
