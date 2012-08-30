@@ -11,7 +11,7 @@
 <!--                                         -->
 <ddi:DDIInstance id="gesis_ZA<?= $project->ZA_Studiennummer ?>" agency="de.gesis" version="1.0.0" versionDate="2012-08-20" xmlns:ddi="ddi:instance:3_1" xmlns:s="ddi:studyunit:3_1" xmlns:pd="ddi:physicaldataproduct:3_1" xmlns:pi="ddi:physicalinstance:3_1" xmlns:c="ddi:conceptualcomponent:3_1" xmlns:l="ddi:logicalproduct:3_1" xmlns:r="ddi:reusable:3_1" xmlns:dc="ddi:datacollection:3_1" xmlns:a="ddi:archive:3_1" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dce="ddi:dcelements:3_1" xmlns:dc2="http://purl.org/dc/elements/1.1/"  xmlns:n1="ddi:physicaldataproduct_ncube_tabular:3_1"  xsi:schemaLocation="ddi:instance:3_1 http://info1.gesis.org/DDI/3_1/instance.xsd">
     <r:Citation>
-        <r:Title>DDI3.1 Dokumentation für Studie &apos;<?= $project->Projektname ?>&apos;</r:Title>
+        <r:Title>DDI3.1 Dokumentation für Studie &apos;<?= HTML::chars($project->Projektname) ?>&apos;</r:Title>
     </r:Citation>
     <s:StudyUnit id="ZA<?= $project->ZA_Studiennummer ?>_SU"  isMaintainable="true" agency="de.gesis" version="1.0.0">
         <r:UserID type="DBK Study Number">ZA<?= $project->ZA_Studiennummer ?></r:UserID>
@@ -19,7 +19,7 @@
             <r:Title><?= $project->Projektname ?></r:Title>
             <?php $authors = explode(";", $project->Projektautor); ?>
             <?php foreach ($authors as $author): ?>
-                <r:Creator><?= $author ?></r:Creator>
+                <r:Creator><?=  HTML::chars($author) ?></r:Creator>
             <?php endforeach; ?>
 
 
@@ -346,7 +346,7 @@
                     <a:URL>http://www.gesis.org/</a:URL>
                 </a:Organization>
                 <a:Organization id="ZA<?= $project->ZA_Studiennummer ?>_Org_DC"  isVersionable="true" version="1.0.0">
-                    <a:OrganizationName><?= $project->Projektautor ?>
+                    <a:OrganizationName><?=  HTML::chars($project->Projektautor) ?>
 
                     </a:OrganizationName>
                 </a:Organization>
