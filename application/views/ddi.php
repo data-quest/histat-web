@@ -16,7 +16,7 @@
     <s:StudyUnit id="ZA<?= $project->ZA_Studiennummer ?>_SU"  isMaintainable="true" agency="de.gesis" version="1.0.0">
         <r:UserID type="DBK Study Number">ZA<?= $project->ZA_Studiennummer ?></r:UserID>
         <r:Citation>
-            <r:Title><?= $project->Projektname ?></r:Title>
+            <r:Title><?=HTML::chars($project->Projektname) ?></r:Title>
             <?php $authors = explode(";", $project->Projektautor); ?>
             <?php foreach ($authors as $author): ?>
                 <r:Creator><?=  HTML::chars($author) ?></r:Creator>
@@ -81,7 +81,7 @@
         </r:Coverage>
         <r:OtherMaterial type="Publication" id="ZA<?= $project->ZA_Studiennummer ?>_OthMat4816">
             <r:Citation>
-                <r:Title><?= $project->Veroeffentlichung ?></r:Title>
+                <r:Title><?= HTML::chars($project->Veroeffentlichung) ?></r:Title>
             </r:Citation>
         </r:OtherMaterial>
         <r:OtherMaterial type="Link" id="ZA<?= $project->ZA_Studiennummer ?>_OthMat_Link514">
