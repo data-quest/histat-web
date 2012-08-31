@@ -4,18 +4,18 @@ defined('SYSPATH') or die('No direct access allowed.');
 
 return array(
     'password' => array(
-        'not_empty' => '$Passwort wurde nicht angegeben',
-        'min_length' => '$Passwort muss mindestens :param2 Zeichen lang sein.',
+        'not_empty' => 'Password is not specified.',
+        'min_length' => 'the password should contain at least :param2 characters',
     ),
     'password_confirm' => array(
-        'not_empty' => '$Passwort Bestätigung wurde nicht angegeben',
-        'matches' => '$Passwörter stimmen nicht überein',
+        'not_empty' => 'password confirmation is not given',
+        'matches' => 'wrong passwords',
     ),
     'password_current' => array(
-        'not_empty' => '$Aktuelles Passwort wurde nicht angegeben',
-        'check_password' => '$Aktuelles Passwort stimmt nicht',
+        'not_empty' => 'current password is not specified.',
+        'check_password' => 'current password is wrong',
     ),
     'terms'=>array(
-        'equals'=> '$Allgemeine Geschäftsbedingungen wurden nicht akzeptiert.',
+        'equals'=> 'general terms of condition are not accepted',
     )
 );

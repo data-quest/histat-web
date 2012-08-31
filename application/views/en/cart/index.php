@@ -4,11 +4,11 @@
         <div class="tooltip" style="position: relative;margin:1em 0">
             <?php
             switch ($message) {
-                case 'error': echo 'Filter Konnte nicht gelöscht werden';
+                case 'error': echo 'filter cannot be deleted';
                     break;
-                case 'success': echo 'Filter Erfolgreich gelöscht';
+                case 'success': echo 'filter deleted successfully';
                     break;
-                default: echo 'Ubekannter Fehler';
+                default: echo 'unknown error';
                     break;
             }
             ?>

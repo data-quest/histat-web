@@ -2,7 +2,7 @@
     <h1>Login</h1>
     <p>Please insert your login informations</p>
     <?php if (isset($incorrect)): ?>
-        <span class="error">Login informations are wrong</span>
+        <span class="error">invalid user name or wrong password</span>
     <?php endif ?>
     <?= Form::open('auth/login') ?>
     <?= Form::label('username',__('Username:')) ?> <br/>

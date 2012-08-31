@@ -4,38 +4,38 @@ defined('SYSPATH') or die('No direct access allowed.');
 
 return array(
     'username' => array(
-        'not_empty' => '$Benutzername wurde nicht angegeben.',
-        'min_length' => '$Benutzername muss mindestens :param2 Zeichen lang sein.',
-        'max_length' => '$Benutzername darf maximal :param2 Zeichen lang sein.',
-        'unique' => '$Benutzername ist bereits vergeben.',
-        'alpha_dash' => '$Benutzername darf nur aus Zahlen,Buchstaben und Unterstrich bestehen.',
+        'not_empty' => 'user name was not accepted.',
+        'min_length' => 'user name should contain at least :param2 characters.',
+        'max_length' => 'user name should consist of a maximum of :param2 characters',
+        'unique' => 'this username already exists.',
+        'alpha_dash' => 'user name should contain only figures, characters, and underscore (underline).',
     ),
     'name' => array(
-        'not_empty' => '$Vorname wurde nicht angegeben.',
-        'alpha' => '$Vorname ist nicht gültig.'
+        'not_empty' => 'First name is not specified.',
+        'alpha' => 'specified first name is not valid'
     ),
     'surname' => array(
-        'not_empty' => '$Nachname wurde nicht angegeben.',
-        'alpha' => '$Nachname ist nicht gültig.'
+        'not_empty' => 'Second name / Family name is not specified.',
+        'alpha' => 'specified second name / family name is not valid.'
     ),
     'street' => array(
-        'not_empty' => '$Straße, Nr. /Postfach wurde nicht angegeben.',
+        'not_empty' => 'Street, House Nr., or Post Box are not specified.',
     ),
     'zip' => array(
-        'not_empty' => '$Postleitzahl wurde nicht angegeben.',
-        'numeric' => '$Postleitzahl ist nicht gültig.'
+        'not_empty' => 'Postal code is not specified.',
+        'numeric' => 'specified postal code is not valid'
     ),
     'location' => array(
-        'not_empty' => '$Ort wurde nicht angegeben.',
-        'alpha' => '$Ort ist nicht gültig.'
+        'not_empty' => 'City is not specified',
+        'alpha' => 'Specified city is not valid'
     ),
     'country' => array(
-        'not_empty' => '$Land wurde nicht angegeben.',
-        'alpha' => '$Land ist nicht gültig.'
+        'not_empty' => 'Country is not specified',
+        'alpha' => 'Specified country is not valid'
     ),
     'email' => array(
-        'not_empty' => '$E-Mail Adresse wurde nicht angegeben.',
-        'email' => '$E-Mail Adresse ist nicht gültig.',
-        'unique' => '$E-Mail Adresse ist bereits vergeben.',
+        'not_empty' => 'e-mail address is not specified',
+        'email' => 'specified e-mail address is not valid',
+        'unique' => 'e-mail address already exists',
     ),
 );
