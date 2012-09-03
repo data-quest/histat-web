@@ -1,13 +1,11 @@
 
 <!--                                            -->
-<!-- Selection of DDI 3.1 Elements and Attributes used by DBKEdit for DDI3.1 Export -->
 <!-- The original DDI 3.1 Schema can be found at http://www.ddialliance.org/DDI/schema/ddi3.1/ -->
 <!--                                         -->
-<!-- created by W. Zenk-Möltgen, 2012-01-05  -->
-<!-- from DBKEdit on 2012-08-20              -->
+<!-- from Histat 2.0 on <?= date("Y-m-d")?> -->
 <!-- DDI3.1 export format                    -->
 <!--                                         -->
-<!-- DBKEdit 1.9 to DDI 3.1 Export - 2.2.2   -->
+<!-- Histat 2.0 to DDI 3.1 Export   -->
 <!--                                         -->
 <ddi:DDIInstance id="gesis_ZA<?= $project->ZA_Studiennummer ?>" agency="de.gesis" version="1.0.0" versionDate="2012-08-20" xmlns:ddi="ddi:instance:3_1" xmlns:s="ddi:studyunit:3_1" xmlns:pd="ddi:physicaldataproduct:3_1" xmlns:pi="ddi:physicalinstance:3_1" xmlns:c="ddi:conceptualcomponent:3_1" xmlns:l="ddi:logicalproduct:3_1" xmlns:r="ddi:reusable:3_1" xmlns:dc="ddi:datacollection:3_1" xmlns:a="ddi:archive:3_1" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dce="ddi:dcelements:3_1" xmlns:dc2="http://purl.org/dc/elements/1.1/"  xmlns:n1="ddi:physicaldataproduct_ncube_tabular:3_1"  xsi:schemaLocation="ddi:instance:3_1 http://info1.gesis.org/DDI/3_1/instance.xsd">
     <r:Citation>
@@ -136,8 +134,7 @@
                     <r:EndDate><?= trim($years[1]) ?></r:EndDate>
                 </dc:DataCollectionDate>
                 <dc:ModeOfCollection id="ZA<?= $project->ZA_Studiennummer ?>_ModOfC">
-                    <r:Content>Quantitative Analyse des deutschen Bruttosozialprodukts im 20.
-                        Jahrhundert
+                    <r:Content>Quantitative Daten zur historischen Statistik
                     </r:Content>
                 </dc:ModeOfCollection>
             </dc:CollectionEvent>
@@ -371,7 +368,7 @@
                         <r:IdentifyingAgency>de.gesis</r:IdentifyingAgency>
                         <r:Version>1.0.0</r:Version>
                     </r:AgencyOrganizationReference>
-                    <r:Description>DBKEdit 1.9 nach DDI 3.1 Export (2.2.2)</r:Description>
+                    <r:Description>Histat 2.0 nach DDI 3.1 Export</r:Description>
                 </r:LifecycleEvent>
             </r:LifecycleInformation>
         </a:Archive>
