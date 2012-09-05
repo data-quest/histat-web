@@ -110,7 +110,7 @@
             <div class="clear"></div>
         </div>
     <?php endif; ?>
-    <?php $fundort = nl2br($project->Fundort) ?>
+    <?php $fundort = nl2br($project->Untersuchungsgebiet); ?>
     <?php $len = strlen($fundort); ?>
     <?php if ($len > 0) : ?>
         <h4>Untersuchungsgebiet:</h4>

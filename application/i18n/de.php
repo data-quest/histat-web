@@ -46,5 +46,8 @@ return array(
     'Logs' =>'Datenänderungen',
     'Stats'=>'Statistiken',
     'Head logs' =>'Datenänderung(Tabellenkopf)',
-    'Display'=>'Anzeigen'
+    'Display'=>'Anzeigen',
+    'Historical statistics'=>'Historische Statistik',
+    'Time series' =>'Zeitriehen',
+    'Values'=>'Werte'
 );
