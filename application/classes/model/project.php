@@ -96,7 +96,23 @@ class Model_Project extends ORM {
                         ->as_object()
                         ->execute();
     }
-   
+    public function getKeymasks(){
+        return DB::select('Name','ID_HS')
+                ->from(array('Aka_Schluesselmaske','sm'))
+                ->where('ID_Projekt','=',$this->ID_Projekt)
+                ->order_by('Name')->as_object()->execute();
+                
+                
+    }
+    public function getTimelines($id){
+             return DB::select(array(DB::expr('COUNT(lz.ID_HS)'),'timelines'))
+                ->from(array('Aka_Schluesselmaske','sm'))
+                ->join(array('Lit_ZR','lz'))
+                ->on('lz.ID_HS','=','sm.ID_HS')
+                ->where('sm.ID_Projekt','=',$this->ID_Projekt)
+                     ->where('sm.ID_HS','=',$id)
+                ->as_object()->execute();
+    }
     public function search($post = NULL) {
 
         $theme = Arr::get($post, 'theme', '-1');

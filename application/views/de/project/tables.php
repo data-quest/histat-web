@@ -14,8 +14,9 @@
   
 
     <?php
-    $keymasks = $project->keymasks->order_by('Name')->find_all();
-   
+
+   $keymasks = $project->getKeymasks();
+
     $max = 10;
     $countTables = ceil(count($keymasks) / $max);
 
@@ -39,7 +40,11 @@
                     </td>
                     <td style="border:0px"  valign="top" width ="20%">
                         <div class="link">
-                            <?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS . '#tabelle', __(':timelines Zeitreihen',array(':timelines'=>$keymasks[$index]->timelines->find_all()->count()))) : ''; ?>
+                            <?php 
+                            $count =$project->getTimelines($keymasks[$index]->ID_HS);
+                       
+                            ?>
+                            <?= isset($keymasks[$index]->Name) ? HTML::anchor('table/details/' . $keymasks[$index]->ID_HS . '#tabelle', __(':timelines Zeitreihen',array(':timelines'=>$count[0]->timelines))) : ''; ?>
                         </div>
                     </td>
                 </tr>
