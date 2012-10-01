@@ -8,12 +8,82 @@
         foreach ($scripts as $file)
             echo HTML::script($assets['js'] . $file) . "\n";
         ?>
+          <script language="JavaScript1.3">et_js=1.3</script><script language="JavaScript1.9">et_pd_v=1.9;</script><script language="JavaScript1.8">et_pd_v=1.8;</script><script language="JavaScript1.7">et_pd_v=1.7;</script><script language="JavaScript1.6">et_pd_v=1.6;</script><script language="JavaScript1.5">et_pd_v=1.5;</script><script language="JavaScript1.4">et_pd_v=1.4;</script><script language="JavaScript1.3">et_pd_v=1.3;</script><script language="JavaScript1.2">et_pd_v=1.2;</script><script language="JavaScript1.1">et_pd_v=1.1;</script><script language="JavaScript1">et_pd_v=1;</script>
+  
         <!-- Copyright (c) 2000-2009 etracker GmbH. All rights reserved. -->
         <!-- This material may not be reproduced, displayed, modified or distributed -->
         <!-- without the express prior written permission of the copyright holder. -->
         <!-- BEGIN etracker code ETRC 3.0 -->
         <script type="text/javascript">document.write(String.fromCharCode(60)+"script type=\"text/javascript\" src=\"http"+("https:"==document.location.protocol?"s":"")+"://web.gesis.org/t.js?et=qPKGYV\">"+String.fromCharCode(60)+"/script>");</script>
+             <!-- HR@GESIS Microsite styles -->
+    <style type="text/css">
+/* HR@GESIS zusätzlich zu styles.css hinzufügen */
+#microsite {
+	background-color: #EEE9D2;
+	background-image: url("http://www.gesis.org/fileadmin/img/header/microsite/gs_ms_neutral_header.png");
+	background-repeat: no-repeat;
+	border-bottom: 1px solid #FFFFFF;
+	height: 50px;
+}
+#microsite #micrositeClaim {
+	color: #66645A;
+	font-size: 18px;
+	font-weight: bold;
+	left: 20px;
+	position: relative;
+	top: 22px;
+}
 
+/* HR@GESIS folgende Zeilen ersetzen: 330 - 375 (#header .infos bis #header .infos .timelines) */
+/* HR@GESIS Die Andordnung den Info-Elemnte innerhalb des microsite divs kann beliebig gändert werden, dient hier nur als Besispiel */
+
+#microsite .infos{
+	position: relative;
+    width:100%;
+    top:0px;
+    left:0px;
+	display:block;
+}
+#microsite .infos .histat{
+    float:left;
+	padding: 0 0 0 20px;
+    color: #58748f;
+    font-size: 1.4em;
+}
+#microsite .infos .histat .description{
+    margin-left: 15px;
+    color: #58748f;
+    font-size: 1em;
+}
+#microsite .infos .orange{
+    font-size:1.6em;
+    color: #ff6100;
+    padding: 0px;
+}
+#microsite .infos .values{
+    float:left;
+	padding: 5px 0 0 20px;
+    color:#000;
+    font-size: 1.3em;
+}
+#microsite .infos .timelines{
+    float:left;
+	padding: 20px 0 0 20px;
+    font-size: 1.3em;
+    color:#000;
+}
+
+/* HR@GESIS Zeile ersetzen in Zeile 319 */
+#header{
+	height: 50px;
+}
+
+/* HR@GESIS Zeile ersetzen in Zeile 331 */
+#header .logo {
+    margin: 0;
+}
+</style>
+<!-- HR@GESIS Microsite header -->
         <title><?= $title ?></title>
     </head>
     <body>
@@ -21,8 +91,11 @@
         <div id="top"></div>
         <div id="layout">
             <div id="header">
-                <a href=""><?= HTML::image($assets['img'] . '/layout/logo.png', array('class' => 'logo')) ?></a>
-                <div class="infos">
+                <a href=""><?= HTML::image($assets['img'] . '/layout/gs_logo_microsite.jpg', array('class' => 'logo')) ?></a>
+            
+            </div>
+            <div id="microsite">
+                    <div class="infos">
                     <div class="histat">
                         <span class="orange">histat:</span> <br/> <span class="description"><?= __('Historical statistics')?></span>
                     </div>
@@ -34,7 +107,6 @@
                     </div>
                 </div>
             </div>
-
             <div id="main_navi">
                 <?php
                 foreach ($main_navi as $item)

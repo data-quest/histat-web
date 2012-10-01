@@ -1,4 +1,4 @@
-/*General Styles changed with FTP*/
+/*General Styles*/
 *{
     margin: 0px;
     padding:0px;
@@ -23,18 +23,11 @@
     line-height: 1.5em;
 }
 body {
-    /* changed by HR@GESIS */
-    /*
     background-image: url("../img/layout/hg-verlauf.jpg");
     background-repeat: repeat-x;
     background-position-y: top;
     background-position-x: center; 
     background-color:#1F2B39;
-	*/
-	/* new css */
-	background-color: #72777A;
-    background-image: url("http://www.gesis.org/fileadmin/img/content/gs_fond.png");
-    background-repeat: repeat-x;
 }
 img{
     border:0px;
@@ -240,15 +233,12 @@ table tr td.even {
 }
 
 .ui-corner-bottom{
-    /* changed by HR@GESIS */
-    /*	
     -webkit-border-bottom-right-radius: 6px;
     -webkit-border-bottom-left-radius: 6px;
     -moz-border-radius-bottomright: 6px;
     -moz-border-radius-bottomleft: 6px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
-	*/
 }
 .ui-dialog-titlebar-close{
     text-decoration: none;
@@ -312,35 +302,21 @@ table tr td.even {
 }
 
 #header{
-	/* changed by HR@GESIS */
-    /*
-	background:url("../img/layout/hg-header.jpg") no-repeat top right #ffffff;
-	*/
+    background:url("../img/layout/hg-header.jpg") no-repeat top right #ffffff;
     height:80px;
-	width: 100%;
-	position: relative;
-	/* new css */
-	/* external link! */
-	background-color: #58748F;
-	background-image: url(http://www.gesis.org/fileadmin/img/header/gs_dachbalken.jpg);
-	background-position: left top;
-	background-repeat: repeat-y;
-	color: #000000;
+    width: 100%;
+    position: relative;
 }
 #header .logo{
     margin:15px 10px;
 }
 #header .infos{
-	/* changed by HR@GESIS */
-    /*
-	position: absolute;
+    position: absolute;
     width:100%;
     top:0px;
     left:0px;
-	*/
-	/* new css */
-	display:none;
 }
+
 #header .infos .histat{
     position: absolute;
     right: 350px;
@@ -374,24 +350,15 @@ table tr td.even {
 
 }
 #main_navi{
-	/* changed by HR@GESIS */
     color:#ffffff;
-    /* background: url(../img/layout/hg-navi-blau.jpg) repeat-x center center; */
+    background: url(../img/layout/hg-navi-blau.jpg) repeat-x center center;
     height: 30px;
     line-height: 30px;
     border-bottom:2px solid #ffffff;
     padding-left:50px;
-	/* new css */
-	background: #EAE5CE; /* old browsers */
-	background: -moz-linear-gradient(top, #EAE5CE 0%, #B0AA94 100%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EAE5CE), color-stop(100%,#B0AA94)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EAE5CE', endColorstr='#B0AA94',GradientType=0 ); /* ie */
 }
 #main_navi a{
-    /* changed by HR@GESIS */
-    /*
-    color:#ffffff;	
-	*/
+    color:#ffffff;
     text-decoration: none;
     padding-left:15px;
     padding-right:15px;
@@ -401,34 +368,10 @@ table tr td.even {
     float:left;
     display:block;
     width: auto;
-	/* new css */	
-    text-shadow: 0px 1px 1px #fff;
-	color: #66645a;
-	font-size: 1em;
-	font-weight: bold;
-	text-align: center;
-    border-right: 2px groove #D7D2C3;
-}
-#main_navi a:hover{
-    /* changed by HR@GESIS */
-	/* new css */	
-	text-shadow: none;
-	color:#FFF;
-	text-decoration: none;
-	/* gradien blue */
-	background: #8C99A6; /* old browsers */
-	background: -moz-linear-gradient(top, #8C99A6 0%, #475C71 100%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8C99A6), color-stop(100%,#475C71)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8C99A6', endColorstr='#ff0000',GradientType=0 ); /* ie */
 }
 #main_navi a.active{
-    /* changed by HR@GESIS */
     background: url(../img/layout/hg-navi-orange.jpg) repeat-x center center;
     width: auto;
-    /* new css */	
-	color: #FFFFFF;
-    text-decoration: none;
-    text-shadow: none;
 }
 #main_navi a.active span{
     display:block;
@@ -484,11 +427,8 @@ table tr td.even {
     float:right;
 }
 #content{
-    /* changed by HR@GESIS */
-    /* background: #f9f7ee; */
+    background: #f9f7ee;
     height: 100%;
-	/* new css */
-	background:#FFF;
 }
 #content #gotop{
     width:90px;
@@ -1351,7 +1291,7 @@ table tr td.even {
     position: relative;
     display: block;
 }
-#searchbar a,#searchbar a:hover{
+#searchbar a{
     width:30px;
     height:30px;
     display:block;
@@ -1388,7 +1328,6 @@ table tr td.even {
     cursor: pointer;
     margin-left: -30px;
 }
-
 #searchbar a:first-child{border:0px;padding:0px}
 /*Style end*/
 /*Extended Search*/
