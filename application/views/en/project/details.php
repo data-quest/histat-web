@@ -16,16 +16,8 @@
     </table>
 
     <h1>Studienbeschreibung:</h1>
-        <h4>DDI Export</h4>
-     <div class="content">
-           <?php
-                      $text = HTML::image('assets/img/layout/download.png',array('class'=>'pdficon')).__('Download');  
-            ?>
-            <div class="right"> <?= HTML::anchor('project/export/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
-       
-            <div class="normal left"></div>
-            <div class="clear"></div>
-        </div>
+    
+    
     <a href="#" style="visbility:hidden"></a>
     <?php
     $bearbeitung = '';
@@ -85,9 +77,18 @@
             <div class="clear"></div>
         </div>
     <?php endif; ?>
-
+ <h4>Download:</h4>
+      <div class="content">
+           <?php
+                      $text = HTML::image('assets/img/layout/download.png',array('class'=>'pdficon')).__('DDI-XML');  
+            ?>
+            <div class="right"> <?= HTML::anchor('project/export/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
+       
+            <div class="normal left">Diese Studienbeschreibung als DDI-XML.</div>
+            <div class="clear"></div>
+        </div>
     <?php if (!empty($project->datei_name)): ?>
-        <h4>Download:</h4>
+       
         <div class="content">
             <?php $kb = strlen($project->datei_inhalt)/1024;
             $mb = $kb/1024;

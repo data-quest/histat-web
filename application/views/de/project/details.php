@@ -16,16 +16,8 @@
     </table>
 
     <h1>Studienbeschreibung:</h1>
-    <h4>DDI Export</h4>
-     <div class="content">
-           <?php
-                      $text = HTML::image('assets/img/layout/download.png',array('class'=>'pdficon')).__('Download');  
-            ?>
-            <div class="right"> <?= HTML::anchor('project/export/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
-       
-            <div class="normal left"></div>
-            <div class="clear"></div>
-        </div>
+   
+  
     <a href="#" style="visbility:hidden"></a>
     <?php
     $bearbeitung = '';
@@ -85,10 +77,19 @@
             <div class="clear"></div>
         </div>
     <?php endif; ?>
-
+  <h4>Download:</h4>
+     <div class="content">
+           <?php
+                      $text = HTML::image('assets/img/layout/download.png',array('class'=>'pdficon')).__('DDI-XML');  
+            ?>
+            <div class="right"> <?= HTML::anchor('project/export/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
+       
+            <div class="normal left">Diese Studienbeschreibung als DDI-XML.</div>
+            <div class="clear"></div>
+        </div>
+        
     <?php if (!empty($project->datei_name)): ?>
-        <h4>Download:</h4>
-        <div class="content">
+      <div class="content">
             <?php $kb = strlen($project->datei_inhalt)/1024;
             $mb = $kb/1024;
                     $text = round($kb,2).' KB';
@@ -98,8 +99,9 @@
             <div class="right"> <?= HTML::anchor('project/download/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
             <div class="normal left short">Download weiterer Texte zu dieser Studie im PDF Format (Forschungsberichte, Publikationen, Materialien zur Studie) </div>
             <div class="clear"></div>
-        </div>
+         </div>
     <?php endif ?>
+           
     <?php $sources = nl2br($project->Quellen) ?>
     <?php $len = strlen($sources); ?>
     <?php if ($len > 0) : ?>
