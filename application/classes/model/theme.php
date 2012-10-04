@@ -22,6 +22,7 @@
                 ->join('Aka_Projekte','LEFT')
                 ->on('Aka_Themen.ID_Thema','=','Aka_Projekte.ID_Thema')
                 ->where('Aka_Projekte.ID_Projekt', 'IS NOT ', NULL)
+                ->where('Aka_Themen.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
                 ->group_by('Thema');        
     }
    

@@ -91,7 +91,7 @@ class Controller_Data extends Controller_Index {
             }
 
             $view = View::factory(I18n::$lang . '/data/themes/cloud');
-            $view->themes = $this->shuffle_assoc($themes);
+            $view->themes = $themes;//$this->shuffle_assoc($themes);
         } else {
             $orm = ORM::factory('theme', $id);
             $view = View::factory(I18n::$lang . '/data/themes/overview');
@@ -134,7 +134,7 @@ class Controller_Data extends Controller_Index {
             }
 
             $view = View::factory(I18n::$lang . '/data/times/cloud');
-            $view->times = $this->shuffle_assoc($times);
+            $view->times =$times;// $this->shuffle_assoc($times);
         } else {
             $orm = ORM::factory('time', $id);
             $view = View::factory(I18n::$lang . '/data/times/overview');
