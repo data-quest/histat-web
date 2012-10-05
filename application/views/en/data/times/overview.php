@@ -1,8 +1,8 @@
 
 <div id="themes_overview">
          <p  class="normal" style="padding: 15px;">
-   $ Hier können Sie Studien über eine Zeitspanne auswählen. Alle Studien wurden (genau) einer Zeitspanne zugeordnet. Das ist keine leichte Aufgabe. Wir wollten die mittlerweile mehrere hundert Studien umfassende Sammlung nicht mehr als 20 Epochen/Zeitspannen zuordnen, die jeweils nicht mehr als 20-30 Studien umfassen sollten. Nur so können wir Ihnen handhabbare Auswahlen präsentieren. Als pragmatisch beste Lösung ergab sich eine Zuordnung der meisten Studien zum Anfangsjahrzehnt ihres Untersuchungszeitraums. Eine weitaus genauere Auswahl ist über die erweiterte Suche möglich, bei der Sie die Studien mit einem Zeitfilter auf Zeitreihenebene auswählen können.$
-</p>
+This menu offers you the selection on the basis of time periods. All studies were assigned to a time period. This was certainly not always an easy task. The aim was the offer of not more than 20 time periods, to which each study of the in the meanwhile several hundred studies comprising study stock should be assigned to. Only in this way we could presenting you a manageable selection menu. In pragmatic respect the best solution of this task was the classification of the most studies according to the opening decade of their investigation period. A much more precise selection can be made by using the advanced selection menu. The advanced selection menu offers you the possibility to choose the time series of the studies by using a time-filter. 
+         </p>
 <hr/>
     <ul>
         <?php

@@ -1,6 +1,6 @@
 <div id="themes_overview">
     <p class="normal" style="padding: 15px;">
-       $ Hier können Sie Studien über eine thematische Zuordnung auswählen. Alle Studien wurden (genau) einem Thema zugeordnet.$
+  On this page you get the opportunity to select studies via their thematic allocation. All studies have been assigned exactly on this subject, which is the focus of the study. 
     </p>
     <hr/>
     <ul>
