@@ -48,6 +48,6 @@ return array(
     'Head logs' =>'Datenänderung(Tabellenkopf)',
     'Display'=>'Anzeigen',
     'Historical statistics'=>'Historische Statistik',
-    'Time series' =>'Zeitriehen',
+    'Time series' =>'Zeitreihen',
     'Values'=>'Werte'
 );
