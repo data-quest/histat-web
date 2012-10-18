@@ -30,6 +30,7 @@ class Controller_Table extends Controller_Data {
             $this->request->redirect(I18n::$lang . '/auth/login');
         
         echo Debug::vars($this->request->param());
+        echo Debug::vars($this->request->route());
     }
 
     public function set_filter($filters) {
@@ -121,7 +122,11 @@ class Controller_Table extends Controller_Data {
     }
 
     public function action_download() {
-
+                 $keymask = ORM::factory('keymask', $this->id_hs);
+            $details = $keymask->getDetails($this->filter);
+            $name = $keymask->project->Projektname;
+            $type = $this->request->param('type');
+            $uses = $this->request->post('uses');
         if (HTTP_Request::POST == $this->request->method()) {
             $keymask = ORM::factory('keymask', $this->id_hs);
             $details = $keymask->getDetails($this->filter);
@@ -142,11 +147,13 @@ class Controller_Table extends Controller_Data {
             $download->name = $name;
             $download->mkdate = time();
             $download->create();
-            echo $type;
+      
             $url = URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
             echo $url;
         // $this->request->redirect('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
         }
+          echo  URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
+       
     }
 
     public function action_xls() {
