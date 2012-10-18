@@ -79,8 +79,9 @@ $(function(){
       
         $('.details form').submit();
     });
-    $('#cart').live('click',function(){
+    $('#table_details .buttons #cart img').live('click',function(e){
         var filter_text = [];
+        e.preventDefault();
         $('input[name="filter_text[]"]').each(function(){
             filter_text.push($(this).val())
         });

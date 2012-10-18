@@ -22,7 +22,7 @@ $(function(){
     $('#cart .less').live('click',function(e){
         $(this).removeClass('less').addClass('more').parent('li').next('li').slideToggle('slow');
     });
-    
+
     $('#cart .result input[name="selected[]"]').change(function(){
         var val = $(this).val();
         var form = $('form.selected');
@@ -43,7 +43,7 @@ $(function(){
         
     });
     
-    $('#cart .download .button').on('click',function(){
+    $('#cart form#download .download .button').on('click',function(){
         if($('input:checked').length > 0){
             
        
@@ -54,7 +54,7 @@ $(function(){
              alert("Keine Tabellen wurden zum Download ausgewählt")
          }
     });
-    $('#download').submit(function(){
+    $('#download form').submit(function(){
         $('.overlay').fadeOut('slow');
         $('.dialog').fadeOut('slow');
     });
