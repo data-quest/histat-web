@@ -29,8 +29,7 @@ class Controller_Table extends Controller_Data {
         if ($this->user->has_roles(array('guest')))
             $this->request->redirect(I18n::$lang . '/auth/login');
         
-        echo Debug::vars($this->request->param());
-        echo Debug::vars($this->request->route());
+
     }
 
     public function set_filter($filters) {
@@ -152,7 +151,9 @@ class Controller_Table extends Controller_Data {
             echo $url;
         // $this->request->redirect('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
         }
-          echo  URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
+        $url =   URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
+          echo $url;
+          echo urlencode($url);
        
     }
 
