@@ -21,7 +21,7 @@ $(function(){
         $(this).width(thead.find('td').eq(i).width()); 
     });
    
-  $('.tooltip').live('click',function(e){
+  $('#table_details .tooltip').live('click',function(e){
       
       $(this).hide();
       e.preventDefault();
@@ -116,11 +116,7 @@ $(function(){
         }
      
     });
-    $('#download form').submit(function(){
-        $('#download').fadeOut(500, function(){
-            
-            });
-    });
+
     $('#tdata td').hover(function(){
         if($(this).find('input[name="new_data"]').is(':hidden')){
             $(this).find('.edit').show();
