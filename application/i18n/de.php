@@ -49,5 +49,7 @@ return array(
     'Display'=>'Anzeigen',
     'Historical statistics'=>'Historische Statistik',
     'Time series' =>'Zeitreihen',
-    'Values'=>'Werte'
+    'Values'=>'Werte',
+    'Tables'=>'Tabellen',
+    'Details...'=>'Beschreibung...'
 );

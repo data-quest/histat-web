@@ -32,7 +32,7 @@ class Controller_Data extends Controller_Index {
         //Load view/<lang>/data/index.php
         $view = View::factory(I18n::$lang . '/data/index');
         //Load view/<lang>/project/list.php prepare the subview
-        $list = View::factory(I18n::$lang . '/project/list');
+        $list = View::factory(I18n::$lang . '/project/new');
         //assign new projects to subview
         $list->projects = $project->new_projects();
         //assign the referrer uri

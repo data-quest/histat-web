@@ -31,7 +31,7 @@ class Model_Project extends ORM {
         'ZA_Studiennummer' => array(),
         'Publikationsjahr' => array(),
         'Datum_der_Archivierung' => array(),
-        'Datum_de_Bearbeitung' => array(),
+        'Datum_der_Bearbeitung' => array(),
         'Bearbeiter_im_ZA' => array(),
         'Bemerkungen' => array(),
         'Zugangsklasse' => array(),
@@ -47,12 +47,17 @@ class Model_Project extends ORM {
 
     public function new_projects() {
 
-        return $this->select(
-                                array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Anzahl_Zeitreihen'
+        return DB::select(
+                                 'Zeitraum', 'Anzahl_Zeitreihen', array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Anzahl_Zeitreihen','Thema','Datum_der_Bearbeitung','Publikationsjahr'
                         )
+                        ->from('Aka_Projekte')
+                 ->join('Aka_Themen', 'INNER')
+                ->using('ID_Thema')
                         ->where('ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
-                        ->order_by('chdate', 'DESC')
-                        ->limit('20');
+                        ->order_by('Aka_Projekte.chdate', 'DESC')
+                        ->limit('20')
+                        ->as_object($this)
+                        ->execute();
     }
 
     public function top_projects() {
