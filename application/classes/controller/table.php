@@ -28,6 +28,8 @@ class Controller_Table extends Controller_Data {
         $this->session->set('referrer', $this->request->uri());
         if ($this->user->has_roles(array('guest')))
             $this->request->redirect(I18n::$lang . '/auth/login');
+        
+        echo Debug::vars($this->request->param());
     }
 
     public function set_filter($filters) {
@@ -140,7 +142,7 @@ class Controller_Table extends Controller_Data {
             $download->name = $name;
             $download->mkdate = time();
             $download->create();
-
+            echo $type;
             $url = URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
             echo $url;
         // $this->request->redirect('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
