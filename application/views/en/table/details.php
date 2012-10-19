@@ -17,7 +17,7 @@
                 <div class="<?= $download ?>"><?= __('Download') ?></div>
                 <div class="buttons" style="position: absolute" >
                     <?php $data ? $class = 'button' : $class = 'button disabled' ?>
-                    <?php $data ? $id = array('class' => $class, 'id' => 'cart') : $id = array('class' => $class) ?>
+                    <?php $data ? $id = array('class' => $class, 'id' => 'cart','onclick'=>'return false;') : $id = array('class' => $class,'onclick'=>'return false;') ?>
                     <?= HTML::anchor($data ? 'download/xls/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.XLS', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/xlsx/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.XLSX', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/csv/' . $keymask->ID_HS . '/' . $filter : 'table/details/' . $keymask->ID_HS, '.CSV', array('class' => $class)) ?>
