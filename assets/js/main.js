@@ -54,7 +54,7 @@ $(function(){
              alert("Keine Tabellen wurden zum Download ausgewählt")
          }
     });
-    $('#download form').submit(function(){
+    $('#download').submit(function(){
         $('.overlay').fadeOut('slow');
         $('.dialog').fadeOut('slow');
     });

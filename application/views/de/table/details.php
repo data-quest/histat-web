@@ -172,10 +172,7 @@
                         <?php endforeach; ?> 
 
                     </table>
-                <?php elseif (count($data) == 0): ?>
-                    <div class="tooltip" id="info">
-                        Ihr Filter enhält keine Daten
-                    </div>
+           
                 <?php else: ?>
                     <div class="tooltip" id="info">
                         <?php
@@ -184,7 +181,8 @@
                             ?>
                             Ihre Filtereinstellungen enthält <b><?= count($keys) ?></b> Zeitreihen. <br/> Bitte schränken Sie Ihre Auswahl weiter ein.
     <?php else : ?>
-                            Die Tabelle <b><?= $keymask->Name ?></b>  enthält <b><?= count($keys) ?></b> Zeitreihen. <br/>Bitte verwenden Sie die Filtermöglichkeit um die Anzahl der Zeitreihen zu beschränken.  <?php endif; ?>
+                            Die Tabelle <b><?= $keymask->Name ?></b>  enthält <b><?= count($keys) ?></b> Zeitreihen. <br/>Bitte verwenden Sie die Filtermöglichkeit um die Anzahl der Zeitreihen zu beschränken. 
+ <?php endif; ?>
                     </div>
 <?php endif; ?>
             </div>

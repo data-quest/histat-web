@@ -172,10 +172,7 @@
                         <?php endforeach; ?> 
 
                     </table>
-                <?php elseif (count($data) == 0): ?>
-                    <div class="tooltip" id="info">
-                        Ihr Filter enhält keine Daten
-                    </div>
+      
                 <?php else: ?>
                     <div class="tooltip" id="info">
                         <?php
