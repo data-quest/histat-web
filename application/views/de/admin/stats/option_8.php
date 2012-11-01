@@ -85,6 +85,10 @@
             <td class="even">Verschiedene Studien, aus denen Downloads erfolgten.</td>
             <td> <?= $result10[0]->count ?></td>
         </tr>
-
+  <tr>
+            <td>Nachgefragte Studien</td>
+            <td class="even">Studien, aus denen Downloads erfolgten.</td>
+            <td> <?= $result11[0]->count ?></td>
+        </tr>
     </tbody>
 </table>

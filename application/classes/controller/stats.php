@@ -12,7 +12,7 @@ class Controller_Stats extends Controller_Admin {
 
     public function action_display() {
         $this->sub_navi->activate(__('Stats'));
-        
+
         $view = View::factory(I18n::$lang . '/admin/stats/index');
         $content = '';
 
@@ -203,49 +203,57 @@ class Controller_Stats extends Controller_Admin {
                 ->as_object()
                 ->execute();
 
-
-        $view->result4 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+          $select1=  "SELECT 'Aufrufe ohne Anmeldung (Login)','Aufrufe der Datenbank ohne Anmeldung.', COUNT(*) FROM user_logins a";
+          $select1=  "SELECT 'Anmeldung (Login) mit Download','Aufrufe der Datenbank mit Download (gezählt werden\ndie Anmeldungen, die mindestens zu einem Download\n geführt haben).', COUNT(DISTINCT login_id) FROM user_logins a INNER JOIN user_downloads b ON (a.id = b.login_id)";
+        $select1= "SELECT 'Anmeldung (Login) mit Download','Aufrufe der Datenbank mit Download von\nDatentabellen (gezählt werden\ndie Datentabellen, die\ndowngeloadet wurden).', COUNT(*) FROM user_logins a INNER JOIN user_downloads b ON (a.id = b.login_id)";
+         $view->result4 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+                ->from('user_logins')
+    
+                ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+        $view->result5 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
                 ->from('user_logins')
                 ->where('user_id', '=', $quest_id)
                 ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
-        $view->result5 = DB::select(array(DB::expr("COUNT(DISTINCT a.id)"), 'count'))
+        $view->result6 = DB::select(array(DB::expr("COUNT(DISTINCT b.username)"), 'count'))
                 ->from(array('user_logins', 'a'))
-                ->join(array('users', 'u'), 'INNER')
-                ->on('a.user_id', '=', 'u.id')
+                ->join(array('users','u'),'INNER')
+                ->on('a.user_id','=','u.id')
                 ->join(array('user_downloads', 'b'), 'INNER')
                 ->on('u.username', '=', 'b.username')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
-        $view->result6 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+        $view->result7 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
                 ->from(array('user_logins', 'a'))
-                ->join(array('users', 'u'), 'INNER')
-                ->on('a.user_id', '=', 'u.id')
+                ->join(array('users','u'),'INNER')
+                ->on('a.user_id','=','u.id')
                 ->join(array('user_downloads', 'b'), 'INNER')
                 ->on('u.username', '=', 'b.username')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
-        $view->result7 = DB::select(array(DB::expr("SUM(anzahl)"), 'count'))
+        $view->result8 = DB::select(array(DB::expr("SUM(anzahl)"), 'count'))
                 ->from('user_downloads')
                 ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
-        $view->result8 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+        $view->result9 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
                 ->from('user_downloads')
                 ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
-        $view->result9 = DB::select(array(DB::expr("COUNT(DISTINCT(IFNULL(b.ZA_Studiennummer,a.za_nummer)))"), 'count'))
+        $view->result10 = DB::select(array(DB::expr("COUNT(DISTINCT(IFNULL(b.ZA_Studiennummer,a.za_nummer)))"), 'count'))
                 ->from(array('user_downloads', 'a'))
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
                 ->on('a.projekt_id', '=', 'b.ID_Projekt')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
-        $view->result10 = DB::select(array(DB::expr("COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer),TO_DAYS(FROM_UNIXTIME(a.mkdate)))"), 'count'))
+        $view->result11 = DB::select(array(DB::expr("COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer),TO_DAYS(FROM_UNIXTIME(a.mkdate)))"), 'count'))
                 ->from(array('user_downloads', 'a'))
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
                 ->on('a.projekt_id', '=', 'b.ID_Projekt')
