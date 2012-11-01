@@ -150,7 +150,53 @@ class Controller_Table extends Controller_Data {
      
        
     }
-
+    protected function studip_utf8decode($string)
+{
+    if(!preg_match('/[\200-\377]/', $string)){
+        return $string;
+    } else {
+        $windows1252 = array(
+            "\x80" => '&#8364;',
+            "\x81" => '&#65533;',
+            "\x82" => '&#8218;',
+            "\x83" => '&#402;',
+            "\x84" => '&#8222;',
+            "\x85" => '&#8230;',
+            "\x86" => '&#8224;',
+            "\x87" => '&#8225;',
+            "\x88" => '&#710;',
+            "\x89" => '&#8240;',
+            "\x8A" => '&#352;',
+            "\x8B" => '&#8249;',
+            "\x8C" => '&#338;',
+            "\x8D" => '&#65533;',
+            "\x8E" => '&#381;',
+            "\x8F" => '&#65533;',
+            "\x90" => '&#65533;',
+            "\x91" => '&#8216;',
+            "\x92" => '&#8217;',
+            "\x93" => '&#8220;',
+            "\x94" => '&#8221;',
+            "\x95" => '&#8226;',
+            "\x96" => '&#8211;',
+            "\x97" => '&#8212;',
+            "\x98" => '&#732;',
+            "\x99" => '&#8482;',
+            "\x9A" => '&#353;',
+            "\x9B" => '&#8250;',
+            "\x9C" => '&#339;',
+            "\x9D" => '&#65533;',
+            "\x9E" => '&#382;',
+            "\x9F" => '&#376;');
+        return str_replace( array_values($windows1252),
+                            array_keys($windows1252),
+                            utf8_decode(mb_encode_numericentity($string,
+                                                                array(0x100, 0xffff, 0, 0xffff),
+                                                                'UTF-8')
+                                        )
+                            );
+    }
+}
     public function action_xls() {
         $keymask = ORM::factory('keymask', $this->id_hs);
 

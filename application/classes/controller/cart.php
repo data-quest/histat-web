@@ -169,7 +169,7 @@ class Controller_Cart extends Controller_Table {
                 $ws = new Spreadsheet();
                 $ws->set_active_sheet(0);
                 $ws->set_data($grid);
-                $name = utf8_decode($table_name . '-' . $nr);
+                $name = $this->studip_utf8decode($table_name . '-' . $nr);
                 $name = $ws->save(array('name' => $name, 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/download_' . $this->user->id . '/'));
             }
         }
@@ -183,7 +183,7 @@ class Controller_Cart extends Controller_Table {
         $this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
 
 
-        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', sprintf("Warenkorb_%s.zip", date("m-d-y-h-i", time())), array('delete' => TRUE));
+        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', sprintf("histat.gesis.org_Warenkorb_%s.zip", date("m-d-y-h-i", time())), array('delete' => TRUE));
     }
 
     private function rrmdir($dir) {

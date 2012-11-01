@@ -118,36 +118,33 @@ class Controller_Stats extends Controller_Admin {
         $view->result = $result;
         $this->result = $view->render();
     }
-      private function option_5($from, $to) {
-  
+
+    private function option_5($from, $to) {
+
         $result = DB::select(
-                array('b.Projektname','title'),
-      
-                array('b.ZA_Studiennummer','za')
+                        array('b.Projektname', 'title'), array('b.ZA_Studiennummer', 'za')
                 )
                 ->from(array('user_downloads', 'a'))
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
                 ->on('a.projekt_id', '=', DB::expr('b.ID_Projekt AND a.mkdate BETWEEN :from AND :to', array(':from' => $from, ':to' => $to)))
-                ->where(DB::expr('1'),DB::expr(''),DB::expr(''))
-                ->where('b.ID_Thema','<>',$this->config->get('example_theme_id'))
-                ->where('a.projekt_id','IS',DB::expr('NULL'))
+                ->where(DB::expr('1'), DB::expr(''), DB::expr(''))
+                ->where('b.ID_Thema', '<>', $this->config->get('example_theme_id'))
+                ->where('a.projekt_id', 'IS', DB::expr('NULL'))
                 ->group_by('b.ID_Projekt')
                 ->order_by('za')
                 ->as_object()
                 ->execute();
 
-      
+
         $view = View::factory(I18n::$lang . '/admin/stats/option_5');
         $view->result = $result;
         $this->result = $view->render();
     }
-        private function option_6($from, $to) {
+
+    private function option_6($from, $to) {
 
         $result = DB::select(
-                array('c.Thema','theme'),
-                array(DB::expr('COUNT(a.id)'),'downloads'),
-                 array(DB::expr('COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer),TO_DAYS(FROM_UNIXTIME(a.mkdate))) '),'download_projects'),
-                 array(DB::expr('COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer) )'),'download_different_projects')
+                        array('c.Thema', 'theme'), array(DB::expr('COUNT(a.id)'), 'downloads'), array(DB::expr('COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer),TO_DAYS(FROM_UNIXTIME(a.mkdate))) '), 'download_projects'), array(DB::expr('COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer) )'), 'download_different_projects')
                 )
                 ->from(array('user_downloads', 'a'))
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
@@ -155,32 +152,47 @@ class Controller_Stats extends Controller_Admin {
                 ->join(array('Aka_Themen', 'c'), 'LEFT')
                 ->on('b.ID_Thema', '=', 'c.ID_Thema')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
-               ->group_by('c.ID_Thema')
-                ->order_by('downloads','DESC')
+                ->group_by('c.ID_Thema')
+                ->order_by('downloads', 'DESC')
                 ->as_object()
                 ->execute();
 
-      
+
         $view = View::factory(I18n::$lang . '/admin/stats/option_6');
         $view->result = $result;
         $this->result = $view->render();
     }
-      private function option_7($from, $to) {
+
+    private function option_7($from, $to) {
 
         $result = DB::select(
-                array('ZA_Studiennummer','za'),
-                array('Projektname','title'),
-                array('Projektautor','author')
-                  )
+                        array('ZA_Studiennummer', 'za'), array('Projektname', 'title'), array('Projektautor', 'author')
+                )
                 ->from('Aka_Projekte')
-                 ->where('ID_Thema','<>',$this->config->get('example_theme_id'))
-                ->order_by('ZA_Studiennummer','DESC')
+                ->where('ID_Thema', '<>', $this->config->get('example_theme_id'))
+                ->order_by('ZA_Studiennummer', 'DESC')
                 ->as_object()
                 ->execute();
         $view = View::factory(I18n::$lang . '/admin/stats/option_7');
         $view->result = $result;
         $this->result = $view->render();
     }
+
+    private function option_8($from, $to) {
+
+        $result = DB::select(
+                        array('ZA_Studiennummer', 'za'), array('Projektname', 'title'), array('Projektautor', 'author')
+                )
+                ->from('Aka_Projekte')
+                ->where('ID_Thema', '<>', $this->config->get('example_theme_id'))
+                ->order_by('ZA_Studiennummer', 'DESC')
+                ->as_object()
+                ->execute();
+        $view = View::factory(I18n::$lang . '/admin/stats/option_8');
+        $view->result = $result;
+        $this->result = $view->render();
+    }
+
     public function after() {
         $this->sub_navi->activate(__('Stats'));
         $this->scripts[] = 'stats.js';
