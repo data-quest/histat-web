@@ -422,7 +422,7 @@ table tr td.even {
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8C99A6), color-stop(100%,#475C71)); /* webkit */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8C99A6', endColorstr='#475C71',GradientType=0 ); /* ie */
 }
-#main_navi a.active{
+#main_navi a.active,#main_navi a.active:hover{
     /* changed by HR@GESIS */
     background: url(../img/layout/hg-navi-orange.jpg) repeat-x center center;
     width: auto;
