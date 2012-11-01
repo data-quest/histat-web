@@ -55,7 +55,7 @@
         </tr>
           <tr>
             <td>Anmeldung (Login) mit Download</td>
-            <td class="even">Aufrufe der Datenbank mit Download von\nDatentabellen (gezählt werden die Datentabellen, die downgeloadet wurden).</td>
+            <td class="even">Aufrufe der Datenbank mit Download von Datentabellen (gezählt werden die Datentabellen, die downgeloadet wurden).</td>
             <td> <?= $result7[0]->count ?></td>
         </tr>
     </tbody>

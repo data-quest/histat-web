@@ -195,8 +195,10 @@ class Controller_Stats extends Controller_Admin {
                 ->execute();
         $view->result3 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
                 ->from('users')
+                ->or_where_open()
                 ->where('institution', '=', "")
-                ->where('institution', '=', DB::expr("NULL"))
+                ->or_where('institution', '=', DB::expr("NULL"))
+                ->or_where_close()
                 ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
@@ -250,7 +252,7 @@ class Controller_Stats extends Controller_Admin {
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
-      
+
         $this->result = $view->render();
     }
 
