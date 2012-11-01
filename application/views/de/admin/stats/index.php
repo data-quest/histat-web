@@ -35,7 +35,8 @@
         'Verwendungszweck der Downloads',
         'Studien ohne Downloads',
         'Übersicht der Downloads nach Themen',
-        'Liste der Studien'
+        'Liste der Studien',
+        'Gesamtübersicht: Registrierungen, Anmeldungen und Downloads'
             );
     ?>
     <?= Form::select('option', $options, Arr::get($_POST, 'option', 0), array('style' => 'margin:10px 0px')) ?>

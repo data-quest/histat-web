@@ -169,7 +169,7 @@ class Controller_Cart extends Controller_Table {
                 $ws = new Spreadsheet();
                 $ws->set_active_sheet(0);
                 $ws->set_data($grid);
-                $name = $this->studip_utf8decode($table_name . '-' . $nr);
+                $name = iconv('UTF-8', 'ASCII//TRANSLIT',$table_name . '-' . $nr);
                 $name = $ws->save(array('name' => $name, 'format' => Arr::get($formats, $this->request->post('format'), 'Excel2007'), 'path' => '/tmp/histat/download_' . $this->user->id . '/'));
             }
         }

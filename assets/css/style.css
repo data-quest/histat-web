@@ -418,8 +418,9 @@ table tr td.even {
 	/* gradien blue */
 	background: #8C99A6; /* old browsers */
 	background: -moz-linear-gradient(top, #8C99A6 0%, #475C71 100%); /* firefox */
+        background: linear-gradient(top, #8C99A6 0%, #475C71 100%); /* firefox */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8C99A6), color-stop(100%,#475C71)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8C99A6', endColorstr='#ff0000',GradientType=0 ); /* ie */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8C99A6', endColorstr='#475C71',GradientType=0 ); /* ie */
 }
 #main_navi a.active{
     /* changed by HR@GESIS */
@@ -435,7 +436,9 @@ table tr td.even {
     width:19px;
     height:11px;
     margin: auto;
+    position: relative;
     background: url(../img/layout/navi_main_triangle.png) no-repeat center center;
+     z-index: 1;
 }
 #main_navi a:first-child{
     border-left:2px groove #ffffff;
@@ -446,6 +449,8 @@ table tr td.even {
     line-height: 30px;
     padding-left:170px;
     background: url(../img/layout/hg-navi-grau.jpg) repeat-x center center;
+    position: relative;
+    z-index: 0;
 }
 #sub_navi ul{
     float:left;

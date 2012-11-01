@@ -180,16 +180,77 @@ class Controller_Stats extends Controller_Admin {
 
     private function option_8($from, $to) {
 
-        $result = DB::select(
-                        array('ZA_Studiennummer', 'za'), array('Projektname', 'title'), array('Projektautor', 'author')
-                )
-                ->from('Aka_Projekte')
-                ->where('ID_Thema', '<>', $this->config->get('example_theme_id'))
-                ->order_by('ZA_Studiennummer', 'DESC')
+        $view = View::factory(I18n::$lang . '/admin/stats/option_8');
+        $quest_id = ORM::factory('role', array('name' => 'guest'))->users->find()->id;
+        $view->result1 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+                ->from('users')
+                ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
                 ->execute();
-        $view = View::factory(I18n::$lang . '/admin/stats/option_8');
-        $view->result = $result;
+        $view->result2 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+                ->from('users')
+                ->where('institution', '!=', "")
+                ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+        $view->result3 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+                ->from('users')
+                ->where('institution', '=', "")
+                ->where('institution', '=', DB::expr("NULL"))
+                ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+
+
+        $view->result4 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+                ->from('user_logins')
+                ->where('user_id', '=', $quest_id)
+                ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+        $view->result5 = DB::select(array(DB::expr("COUNT(DISTINCT a.id)"), 'count'))
+                ->from(array('user_logins', 'a'))
+                ->join(array('users', 'u'), 'INNER')
+                ->on('a.user_id', '=', 'u.id')
+                ->join(array('user_downloads', 'b'), 'INNER')
+                ->on('u.username', '=', 'b.username')
+                ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+        $view->result6 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+                ->from(array('user_logins', 'a'))
+                ->join(array('users', 'u'), 'INNER')
+                ->on('a.user_id', '=', 'u.id')
+                ->join(array('user_downloads', 'b'), 'INNER')
+                ->on('u.username', '=', 'b.username')
+                ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+        $view->result7 = DB::select(array(DB::expr("SUM(anzahl)"), 'count'))
+                ->from('user_downloads')
+                ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+        $view->result8 = DB::select(array(DB::expr("COUNT(*)"), 'count'))
+                ->from('user_downloads')
+                ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+        $view->result9 = DB::select(array(DB::expr("COUNT(DISTINCT(IFNULL(b.ZA_Studiennummer,a.za_nummer)))"), 'count'))
+                ->from(array('user_downloads', 'a'))
+                ->join(array('Aka_Projekte', 'b'), 'LEFT')
+                ->on('a.projekt_id', '=', 'b.ID_Projekt')
+                ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+        $view->result10 = DB::select(array(DB::expr("COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer),TO_DAYS(FROM_UNIXTIME(a.mkdate)))"), 'count'))
+                ->from(array('user_downloads', 'a'))
+                ->join(array('Aka_Projekte', 'b'), 'LEFT')
+                ->on('a.projekt_id', '=', 'b.ID_Projekt')
+                ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->as_object()
+                ->execute();
+      
         $this->result = $view->render();
     }
 

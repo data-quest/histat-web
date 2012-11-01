@@ -160,9 +160,16 @@ class Controller_Index extends Controller_Template {
     }
 
     private function page_name() {
+        
         $c = $this->request->controller();
         $a = $this->request->action();
-        return ('HISTAT/' . urlencode(Kohana::$config->load('etracker')->get($c . '/' . $a)) . ':' . $c . '/' . $a . ($this->project ? '/' . $this->project : ''));
+        return ('HISTAT/' . urlencode(I18n::$lang.Kohana::$config->load('etracker')->get($c . '/' . $a)) . ':' . $c . '/' . $a . ($this->project ? '/' . $this->project : ''));
+    }
+    private function area(){
+             $c = $this->request->controller();
+        $a = $this->request->action();
+        return ('HISTAT/' . urlencode(I18n::$lang.'/'.$c . '/' . $a));
+   
     }
 
     public function after() {
@@ -186,6 +193,7 @@ class Controller_Index extends Controller_Template {
             $this->template->date = date("d.m.Y", time());
             $this->template->user = $this->user;
             $this->template->pagename = urlencode($this->page_name());
+             $this->template->area = urlencode($this->area());
             //Main Layout will be rendered in after method
         }
         parent::after();

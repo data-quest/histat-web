@@ -159,7 +159,7 @@ class Controller_Data extends Controller_Index {
         $this->sub_navi->activate(__('Names'));
 
         if (!$id)
-            $id = urldecode($this->request->param('id'));
+            $id = (urldecode($this->request->param('id')));
 
 
         $orm = ORM::factory('project');

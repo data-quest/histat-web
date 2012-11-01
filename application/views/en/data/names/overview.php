@@ -18,7 +18,7 @@ Selection of Studies on the basis of the author’s name.</p>
         <?php foreach ($author_list as $key => $authors): ?>
         <div class="key"><span  id="<?= $key ?>"><?= $key ?></span>
             <?php foreach ($authors as $id => $author): ?>
-            <div class="author" id="<?=$id ?>"><?= HTML::anchor('data/names/'.urlencode($author).'#'.$id,$author) ?></div><?= ($name === $author)? '<div class="project">'.$projects.'</div>':'' ?>
+            <div class="author" id="<?=$id ?>"><?= HTML::anchor('data/names/'.strtolower(urlencode($author)).'#'.$id,$author) ?></div><?= (strtolower($name) === strtolower($author))? '<div class="project">'.$projects.'</div>':'' ?>
             <?php endforeach; ?>
         </div>
         <?php endforeach; ?>

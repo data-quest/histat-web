@@ -124,7 +124,9 @@
                 <a href="<?= str_replace('/'.I18n::$lang.'/', '/'.$lang_img.'/',URL::site($url));?>"><?= HTML::image('assets/img/layout/lang_'.$lang_img.'.gif') ?></a>
              
                 <?= $searchbar ?>
+                 <div class="clear"></div>
             </div>
+           
             <div id="sub_navi">
                 <?php if (count($sub_navi) > 0): ?>
                     <ul>
@@ -162,6 +164,7 @@
                 var xsrf = "<?= $xsrf ?>";
                 var base_url = "<?= URL::base() ?>";
                 var et_pagename     = "<?= $pagename ?>";
+                var et_areas = "<?= $area ?>";
             </script>
             <!-- etracker PARAMETER END -->
             <script type="text/javascript">_etc();</script>
