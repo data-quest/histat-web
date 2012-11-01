@@ -91,7 +91,7 @@
         <div id="top"></div>
         <div id="layout">
             <div id="header">
-                <a href=""><?= HTML::image($assets['img'] . '/layout/gs_logo_microsite.jpg', array('class' => 'logo')) ?></a>
+                <a href="http://www.gesis.org"><?= HTML::image($assets['img'] . '/layout/gs_logo_microsite.jpg', array('class' => 'logo')) ?></a>
             
             </div>
             <div id="microsite">

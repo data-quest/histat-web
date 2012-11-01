@@ -12,7 +12,7 @@ class Controller_Stats extends Controller_Admin {
 
     public function action_display() {
         $this->sub_navi->activate(__('Stats'));
-        $this->scripts[] = 'stats.js';
+        
         $view = View::factory(I18n::$lang . '/admin/stats/index');
         $content = '';
 
@@ -197,7 +197,7 @@ class Controller_Stats extends Controller_Admin {
                 ->from('users')
                 ->or_where_open()
                 ->where('institution', '=', "")
-                ->or_where('institution', '=', DB::expr("NULL"))
+                ->or_where('institution', 'IS', DB::expr("NULL"))
                 ->or_where_close()
                 ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
                 ->as_object()
