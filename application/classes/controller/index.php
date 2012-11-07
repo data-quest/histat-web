@@ -178,7 +178,7 @@ class Controller_Index extends Controller_Template {
         if ($this->template instanceof View) {
             $values = DB::select(array(DB::expr('COUNT(Data)'), 'amount'))->from('Daten__Aka')->as_object()->execute();
             $times = DB::select(array(DB::expr('COUNT(ID_HS)'), 'amount'))->from('Lit_ZR')->as_object()->execute();
-
+             $project = ORM::factory('project')->get_newest();
             //Assign vars to layout
             $this->template->searchbar = View::factory(I18n::$lang . '/search/bar')->render(); //render view/<lang>/searchbar.php
             $this->template->main_navi = $this->main_navi->get_items();
@@ -190,7 +190,7 @@ class Controller_Index extends Controller_Template {
             $this->template->xsrf = $this->xsrf;
             $this->template->times = number_format($times[0]->amount, 0, ',', '.');
             $this->template->values = number_format($values[0]->amount, 0, ',', '.');
-            $this->template->date = date("d.m.Y", time());
+            $this->template->date = date("d.m.Y",strtotime($project[0]->chdate));
             $this->template->user = $this->user;
             $this->template->pagename = urlencode($this->page_name());
              $this->template->area = urlencode($this->area());

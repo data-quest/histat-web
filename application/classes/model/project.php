@@ -59,7 +59,14 @@ class Model_Project extends ORM {
                         ->as_object($this)
                         ->execute();
     }
-
+    public function get_newest(){
+        return DB::select('chdate')
+                ->from('Aka_Projekte')
+                ->order_by('chdate', 'DESC')
+                ->limit(1)
+                ->as_object()
+                ->execute();
+    }
     public function top_projects() {
 
 
