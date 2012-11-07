@@ -19,7 +19,7 @@ return array(
     'Themes'=>'Themen',
     'Names' =>'Namen',
     'Authors'=>'Autoren',
-    'Last Updates from :date'=>'Letzte Aktualisierung der Seite am :date',
+    'Last update at :date'=>'Letzte Aktualisierung der Seite am :date',
     'Historical Statistics'=>'Historische Statistik',
     'go top' =>'nach oben',
     'Edit info' => 'Informationen bearbeiten',
@@ -51,5 +51,6 @@ return array(
     'Time series' =>'Zeitreihen',
     'Values'=>'Werte',
     'Tables'=>'Tabellen',
-    'Details...'=>'Beschreibung...'
+    'Details...'=>'Beschreibung...',
+    
 );
