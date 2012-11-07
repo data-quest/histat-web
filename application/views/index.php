@@ -157,7 +157,7 @@
                 <div class="clear"></div>
             </div>
             <div id="footer">
-                © GESIS <?= HTML::anchor('http://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last update at :date', array(':date' => $date)) ?>
+                © GESIS <?= HTML::anchor('http://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> 
             </div>
             <!-- etracker PARAMETER 3.0 -->
             <script type="text/javascript">
