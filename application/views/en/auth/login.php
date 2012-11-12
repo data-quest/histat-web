@@ -12,5 +12,6 @@
     <?= Form::label('remember', __('Remember me?')) ?> 
     <?= Form::checkbox('remember') ?><br/>
     <?= Form::submit('login',__('Login')) ?>
+       <?= HTML::anchor('auth/password_lost','Password lost',array('class'=>'btn')) ?>
     <?= Form::close() ?>
 </div>

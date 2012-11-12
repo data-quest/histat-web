@@ -11,6 +11,7 @@
     <?= Form::password('password', HTML::chars(Arr::get($_POST, 'password'))) ?><br/>
     <?= Form::label('remember', 'Angemeldet bleiben?') ?> 
     <?= Form::checkbox('remember') ?><br/>
-    <?= Form::submit('login','Anmelden') ?>
+    <?= Form::submit('login','Anmelden') ?><br/>
+    <?= HTML::anchor('auth/password_lost','Passwort vergessen',array('class'=>'btn')) ?>
     <?= Form::close() ?>
 </div>

@@ -149,7 +149,67 @@ class Controller_Auth extends Controller_Index {
 
         $this->layout->content = $view->render();
     }
+    public function action_password_lost(){
+         //if user is logged in display Error page
+        if ($this->user->has_roles(array('admin', 'login'))) {
+            throw new HTTP_Exception_404();
+        }
+        $this->sub_navi->activate(__('Login'));
+        $view = View::factory(I18n::$lang . '/auth/password_lost');
 
+
+        if (HTTP_Request::POST == $this->request->method()) {
+           $email = $this->request->post('email');
+       
+            $user = ORM::factory('user', array('email'=>$email));
+           
+            if($user->loaded()){
+
+            try {
+                //Add additional values which dont comes from Form
+                $password = Text::random('alnum');
+                $post = array(
+                    'chdate' => time(),
+                    'password' => $password
+                );
+
+
+
+                // Edit the user using form values
+                $user->change_password($post, array(
+                    'password',
+                    'chdate'
+                ));
+
+                  $mailBody = View::factory(I18n::$lang . '/mails/passwordchangedcustom');
+                $mailBody->username = $user->username;
+                $mailBody->password = $password;
+                $mailBody->name = $user->name;
+                $mailBody->surname = $user->surname;
+                
+                
+                  $textBody = View::factory(I18n::$lang . '/mails/text_passwordchangedcustom');
+                $textBody->username = $user->username;
+                $textBody->password = $password;
+                $textBody->name = $user->name;
+                $textBody->surname = $user->surname;
+                $email = Email::factory(__('Your new Password for histat.gesis.org'))
+                        ->to($user->email)
+                        ->from($this->config->get('from'))
+                        ->message($textBody->render())
+                        ->message($mailBody->render(), 'text/html')
+                        ->send();
+               $view->message = __('New password was send to the E-Mail address');
+            } catch (ORM_Validation_Exception $e) {
+               
+               $view->message = __('Password could not be changed');
+            }
+            }else{
+                   $view->message = __('E-Mail not found');
+            }
+        }
+        $this->layout->content = $view->render();
+    }
     public function after() {
         $this->content = $this->layout->render();
         parent::after();

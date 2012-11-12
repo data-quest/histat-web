@@ -933,7 +933,25 @@ table tr td.even {
     color:#ffffff;
     background: url(../img/layout/verlauf-orange_150x5.jpg) repeat-x left center;
 }
-
+#auth .btn{
+    width:201px;
+    cursor: pointer;
+    color:#505050;
+    background: #ffffff;
+        border:1px solid #72777a;
+    padding:3px 0px 3px 3px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 5px;
+}
+#auth .btn:hover{
+    color:#ffffff;
+    background: url(../img/layout/verlauf-orange_150x5.jpg) repeat-x left center;
+}
 #auth span.error{
     color:#FF8F00;
     margin:10px 0px;
