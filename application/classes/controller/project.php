@@ -35,7 +35,22 @@ class Controller_Project extends Controller_Data {
 
         $this->dialog = $content;
     }
+ public function action_za_details() {
+        if ($this->id == NULL)
+            throw new HTTP_Exception_404(); //If ID not given throw Exception
+        $this->scripts[] = 'project_details_dialog.js';
+        $project = ORM::factory('project',array('ZA_Studiennummer'=>$this->id));
+        if ($project->loaded()) {
+            $view = View::factory(I18n::$lang . '/project/details');
+            $view->project = $project;
+            $this->project = $project->Projektname;
+            $content = $view->render();
+        } else {
+            $content = __('Project not found');
+        }
 
+        $this->dialog = $content;
+    }
     public function action_tables() {
         if ($this->id == NULL)
             throw new HTTP_Exception_404(); //If ID not given throw Exception

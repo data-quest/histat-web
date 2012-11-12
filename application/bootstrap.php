@@ -117,7 +117,11 @@ $langs = implode('|', Kohana::$config->load('config')->get('avaliable_languages'
 
 
 
-
+Route::set('details_byza','(<lang>/)za<id>',array('lang' => '(' . $langs . ')','id'=>'.+'))
+        ->defaults(array(
+            'controller'=>'project',
+            'action'=>'za_details'
+        ));
 /**
  * Route to show table details 
  */
