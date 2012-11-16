@@ -27,24 +27,14 @@
     var from = "<?= $from?>";
     var to = "<?= $to?>";
     </script>
-    <?php
-    $options = array('Übersicht der registrierten Nutzer',
-        'Übersicht der einzelnen Downloads (Datentabellen)',
-        'Übersicht zur Anzahl der Downloads (Datentabellen) nach Studien',
-        'Anzahl der Downloads (Datentabellen) nach Studien und Nutzern',
-        'Verwendungszweck der Downloads',
-        'Studien ohne Downloads',
-        'Übersicht der Downloads nach Themen',
-        'Liste der Studien',
-        'Gesamtübersicht: Registrierungen, Anmeldungen und Downloads'
-            );
-    ?>
+
     <?= Form::select('option', $options, Arr::get($_POST, 'option', 0), array('style' => 'margin:10px 0px')) ?>
 
 
     <br/>
     <?= Form::submit('display', __('Display'), array('class' => 'button')) ?>
-
+    <?= ''//Form::submit('download', __('Download'), array('class' => 'button')) ?>
+    <?= ''//HTML::anchor('stats/download',__('Download'),array('class'=>'button')) ?>
     <?= Form::close(); ?>
 </div>
 <hr/>
