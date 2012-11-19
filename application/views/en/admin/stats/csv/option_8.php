@@ -1,0 +1,16 @@
+"Nutzer";"Erläuterung";"Anzahl"
+"Registrierung";"Registrierungen insgesamt (Zuteilung eines Passwortes).";"<?= $result[0][0]->count ?>"
+"Nutzer aus Forschungseinrichtungen";"Registrierungen mit Angabe einer Institution im Adressfeld.";"<?= $result[1][0]->count ?>"
+"Nutzer mit Angabe einer Privatadresse";"Registrierungen ohne Angabe einer Institution im Adressfeld.";"<?= $result[2][0]->count ?>"
+
+"Aufrufe";"Erläuterung";"Anzahl"
+"Aufrufe insgesamt";"Aufrufe der Datenbank (einschl. Registrierungen) insgesamt.";"<?= $result[3][0]->count ?>"
+"Aufrufe ohne Anmeldung (Login)";"Aufrufe der Datenbank ohne Anmeldung.";"<?= $result[4][0]->count ?>"
+"Anmeldung (Login) mit Download";"Aufrufe der Datenbank mit Download (gezählt werden die Anmeldungen, die mindestens zu einem Download geführt haben).";"<?= $result[5][0]->count ?>"
+"Anmeldung (Login) mit Download";"Aufrufe der Datenbank mit Download von Datentabellen (gezählt werden die Datentabellen, die downgeloadet wurden).";"<?= $result[6][0]->count ?>"
+
+"Downloads";"Erläuterung";"Anzahl"
+"Zeitreihen aus Studien";"Zeitreihen insgesamt innerhalb der Downloads.";"<?= $result[7][0]->count ?>"
+"Datentabellen aus Studien";"Downloads insgesamt aus den verfügbaren Studien.";"<?= $result[8][0]->count ?>"
+"Nachgefragte Studien";"Verschiedene Studien, aus denen Downloads erfolgten.";"<?= $result[9][0]->count ?>"
+"Nachgefragte Studien";"Studien, aus denen Downloads erfolgten.";"<?= $result[10][0]->count ?>"

@@ -27,13 +27,18 @@
     var from = "<?= $from?>";
     var to = "<?= $to?>";
     </script>
-
-    <?= Form::select('option', $options, Arr::get($_POST, 'option', 0), array('style' => 'margin:10px 0px')) ?>
+    <?php 
+    $translated_opts = array();
+    foreach ($options as $o){
+        $translated_opts[]= __($o);
+    }
+    ?>
+    <?= Form::select('option', $translated_opts, Arr::get($_POST, 'option', 0), array('style' => 'margin:10px 0px')) ?>
 
 
     <br/>
     <?= Form::submit('display', __('Display'), array('class' => 'button')) ?>
-    <?= ''//Form::submit('download', __('Download'), array('class' => 'button')) ?>
+    <?= Form::submit('download', __('Download .CSV'), array('class' => 'button')) ?>
     <?= ''//HTML::anchor('stats/download',__('Download'),array('class'=>'button')) ?>
     <?= Form::close(); ?>
 </div>
