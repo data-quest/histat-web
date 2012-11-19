@@ -59,7 +59,7 @@ class Controller_Stats extends Controller_Admin {
         } else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_0');
             $view->result = $users;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
@@ -86,7 +86,7 @@ class Controller_Stats extends Controller_Admin {
         }else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_1');
             $view->result = $result;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
@@ -113,7 +113,7 @@ class Controller_Stats extends Controller_Admin {
         }else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_2');
             $view->result = $result;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
@@ -142,7 +142,7 @@ class Controller_Stats extends Controller_Admin {
         }else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_3');
             $view->result = $result;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
@@ -168,7 +168,7 @@ class Controller_Stats extends Controller_Admin {
         }else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_4');
             $view->result = $result;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
@@ -197,7 +197,7 @@ class Controller_Stats extends Controller_Admin {
         }else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_5');
             $view->result = $result;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
@@ -226,7 +226,7 @@ class Controller_Stats extends Controller_Admin {
         }else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_6');
             $view->result = $result;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
@@ -248,7 +248,7 @@ class Controller_Stats extends Controller_Admin {
         }else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_7');
             $view->result = $result;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
@@ -338,7 +338,7 @@ class Controller_Stats extends Controller_Admin {
         }else {
             $view = View::factory(I18n::$lang . '/admin/stats/csv/option_8');
             $view->result = $result;
-            $this->response->body($view->render())->headers(array('Content-Type' => 'text/csv', 'charset' => 'utf-8'))->send_file(TRUE, $this->name . '.csv');
+            $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
