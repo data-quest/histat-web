@@ -177,8 +177,8 @@ class Controller_Stats extends Controller_Admin {
         $result = DB::select(
                         array('b.Projektname', 'title'), array('b.ZA_Studiennummer', 'za')
                 )
-                ->from(array('user_downloads', 'a'))
-                ->join(array('Aka_Projekte', 'b'), 'LEFT')
+                ->from(array('Aka_Projekte','b')) 
+                ->join(array('user_downloads', 'a'), 'LEFT')
                 ->on('a.projekt_id', '=', DB::expr('b.ID_Projekt AND a.mkdate BETWEEN :from AND :to', array(':from' => $from, ':to' => $to)))
                 ->where(DB::expr('1'), DB::expr(''), DB::expr(''))
                 ->where('b.ID_Thema', '<>', $this->config->get('example_theme_id'))
@@ -187,7 +187,7 @@ class Controller_Stats extends Controller_Admin {
                 ->order_by('za')
                 ->as_object()
                 ->execute();
-
+        
 
 
         if (!$this->download) {
