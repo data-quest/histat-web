@@ -101,7 +101,7 @@ class Spreadsheet {
         foreach ($data as $row => $columns)
             foreach ($columns as $column => $value)
                 if (is_array($value)) {
-                    $value = array_replace(array(), array_values($value));
+                    $value = array_values($value);
                     $sheet->getCommentByColumnAndRow($column, $row)->getText()->createTextRun($value[1]);
                     $sheet->setCellValueByColumnAndRow($column, $row, $value[0]);
                 } else {
