@@ -4,6 +4,7 @@
 <?= HTML::anchor("http://www.bpb.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-bpb.png", array("alt" => "BpB")), array(), "http") ?>
 <br/>
 <br/>
+<br/>
 <ul class="normal">
     <li>
         Prof. Dr. Volker Müller-Benedict<br/>
