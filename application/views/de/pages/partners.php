@@ -1,7 +1,8 @@
 <h3>Kooperationspartner</h3>
-<?= HTML::anchor("http://www.destatis.de/", HTML::image("http://www.gesis.org/histat/assets/img/layouts/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
+<?= HTML::anchor("http://www.destatis.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
 <br/>
-<?= HTML::anchor("http://www.bpb.de/", HTML::image("http://www.gesis.org/histat/assets/img/layouts/logo-bpb.png", array("alt" => "BpB")), array(), "http") ?>
+<?= HTML::anchor("http://www.bpb.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-bpb.png", array("alt" => "BpB")), array(), "http") ?>
+<br/>
 <br/>
 <ul class="normal">
     <li>
