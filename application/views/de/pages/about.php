@@ -37,9 +37,9 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen We
         <div class="right" >
             <br><br>
             <center>
-                <a href="x"><img src="http://histat.typodelta.de/Technical-Report_histat.png"></a>
+                <a href="http://www.gesis.org/histat/docs/TechnicalReport_2012-09.pdf"><img src="http://histat.typodelta.de/Technical-Report_histat.png"></a>
             </center>
-            <h3>Vollständige Dokumentation als PDF (134 S.)</h3>
+            <h3>Vollständige Dokumentation als PDF (107 S.)</h3>
             <br><br>
 
             <br><br>
