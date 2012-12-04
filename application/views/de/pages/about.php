@@ -3,22 +3,6 @@
 
         <div class="left" style="border:0px">
             <div id="welcome" style="border:0px"><h1>Über histat</h1><br/>
-                <h3>Was andere über uns sagen</h3>
-                <p class="normal">
-                &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br>
-                Prof. Dr. Martin Schulze Wessel<br>
-                Vorsitzender des Verbandes der Historiker und Historikerinnen Deutschlands<br><br>
-
-
-                &quot;Ein unverzichtbares Daten-Repositorium für die deutsche Wirtschafts- und Sozialgeschichte.&quot;<br>
-                Prof. Dr. Jörg Baten<br>
-                General Secretary der International Economic History Association <br><br>
-
-
-                &quot;Bequemer geht es nun wirklich nicht.&quot;<br>
-                Dr. Oliver Volckart<br>
-                London School of Economics<br>
-                </p>
                 <h3>Datenbank zur historischen Statistik</h3>
                 <p class="normal">
                     Mit dem Datenbanksystem histat stellen wir hier ein Produkt zur Verfügung, das seit 2004 in der GESIS von Jürgen Sensch, Gabriele Franzmann und Rainer Metz entwickelt und vorangetrieben wurde. Die Online-Plattform hat die Funktion, Zeitreihen aus der historischen, wirtschafts- und sozialwissenschaftlichen Forschung zugänglich zu machen. Der Zugriff auf die Datenbestände sollte auf der einen Seite möglichst einfach erfolgen, auf der anderen Seite wissenschaftlichen Ansprüchen genügen und die angebotenen Zeitreihen in ihrem Entstehungskontext hinreichend dokumentieren. 
@@ -57,7 +41,20 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen We
             </center>
             <h3>Vollständige Dokumentation als PDF (107 S.)</h3>
             <br><br>
+               <h3>Was andere über uns sagen</h3>
+                &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br>
+                Prof. Dr. Martin Schulze Wessel<br>
+                Vorsitzender des Verbandes der Historiker und Historikerinnen Deutschlands<br><br>
 
+
+                &quot;Ein unverzichtbares Daten-Repositorium für die deutsche Wirtschafts- und Sozialgeschichte.&quot;<br>
+                Prof. Dr. Jörg Baten<br>
+                General Secretary der International Economic History Association <br><br>
+
+
+                &quot;Bequemer geht es nun wirklich nicht.&quot;<br>
+                Dr. Oliver Volckart<br>
+                London School of Economics<br>
             <br><br>
             <h3>Kontakt<br/>
                 <br/>
