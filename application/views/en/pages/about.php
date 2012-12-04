@@ -32,15 +32,29 @@ Since the offer of the online-database histat via the GESIS-Web a yearly growing
             <center>
                 <a href="http://www.gesis.org/histat/docs/TechnicalReport_2012-09.pdf"><?= HTML::image('assets/img/pictures/Technical-Report_histat.png',array('width'=>'200px'))?></a>
             </center>
-            <h3>Vollständige Dokumentation als PDF (107 S.)</h3>
+            <h3>Complete documentation as PDF (107 S.)</h3>
             <br><br>
+               <h2>What others say about us</h2>
+               <h3>
+               <br>
+                &quot;A really good and important project.&quot;<br><br>
+                Prof. Dr. Martin Schulze Wessel<br>
+                Chairman des Verbandes der Historiker und Historikerinnen Deutschlands<br><br><br>
 
+
+                &quot;An indispensable data-repository for German economic and social history.&quot;<br><br>
+                Prof. Dr. Jörg Baten<br>
+                General Secretary der International Economic History Association <br><br><br>
+
+
+                &quot;It is most certainly not possible to make it more comfortable.&quot;<br><br>
+                Dr. Oliver Volckart<br>
+                London School of Economics<br><br></h3>
             <br><br>
             <h3>Kontakt<br/>
                 <br/>
                 <br/>
-                Sollten Sie weitere Fragen oder Anregungen haben, zögern Sie bitte
-                nicht, sich mit uns in Kontakt zu setzen:<br/><br/>
+                If you have any questions,comments or hints please contact us:<br/><br/>
 
                 <?= HTML::mailto('histat@gesis.org') ?>
 
@@ -48,21 +62,21 @@ Since the offer of the online-database histat via the GESIS-Web a yearly growing
                 <br/>
                 Dr. Thomas Rahlf<br/>
               
-                0221 – 47694 478<br/>
+                +49 221 – 47694 478<br/>
                 <br/>
 
                 Gabriele Franzmann, M.A.<br/>
            
-                0221 – 47694 476<br/><br/>
+                +39 221 – 47694 476<br/><br/>
                 Dipl.-Soz. Jürgen Sensch<br/>
             
-                0221 – 47694 477</h3>
+                +49 221 – 47694 477</h3>
             <br><br>
             <br><br>
 
-            <h3>Wir suchen Kooperationspartner!</h3>
+            <h3>We are looking for cooperating partners!</h3>
             <br>
-            Melden Sie sich einfach.
+            Please contact us.
             <br><br><br><br>
 
             <div class="clear"></div>
