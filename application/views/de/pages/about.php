@@ -41,7 +41,7 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen We
             </center>
             <h3>Vollständige Dokumentation als PDF (107 S.)</h3>
             <br><br>
-               <h3>Was andere über uns sagen</h3>
+               <h3>Was andere über uns sagen
                <br>
                 &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br><br>
                 Prof. Dr. Martin Schulze Wessel<br>
@@ -55,7 +55,7 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen We
 
                 &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
                 Dr. Oliver Volckart<br>
-                London School of Economics<br><br>
+                London School of Economics<br><br></h3>
             <br><br>
             <h3>Kontakt<br/>
                 <br/>
