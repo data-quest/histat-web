@@ -41,7 +41,8 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen We
             </center>
             <h3>Vollständige Dokumentation als PDF (107 S.)</h3>
             <br><br>
-               <h3>Was andere über uns sagen
+               <h2>Was andere über uns sagen</h2>
+               <h3>
                <br>
                 &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br><br>
                 Prof. Dr. Martin Schulze Wessel<br>
