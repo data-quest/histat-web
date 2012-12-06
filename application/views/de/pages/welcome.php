@@ -1,4 +1,4 @@
-<h1><span class="orange">histat</span>  Zeitreihen zur Historischen Statistik online</h1><br/>
+<h1><span class="orange">histat</span><br/><font size="-2">Zeitreihen zur Historischen Statistik online</font></h1><br/>
 <div class="startimage"></div>
 <p class="normal">
 Willkommen bei der Online-Datenbank histat. Die Datenbank wurde 2004 freigeschaltet und 2012 grundlegend überarbeitet. Die Anzahl der Datenbankaufrufe hat sich innerhalb von zwei Jahren mehr als verdoppelt. Dieses Jahr werden wir über 3.000 registrierte Nutzerinnen und Nutzer verzeichnen. Die Datenbank umfasst mittlerweile eine Viertelmillion Zeitreihen aus 359 Studien mit insgesamt über fünf Millionen Werten.</p>
