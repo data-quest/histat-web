@@ -59,7 +59,7 @@ class Model_User extends Model_Auth_User {
             ),
             'surname' => array(
                 array('not_empty'),
-                array('alpha', array(':value', TRUE))
+                array('name', array(':value', TRUE))
             ),
             'street' => array(
                 array('not_empty')

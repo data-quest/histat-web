@@ -12,11 +12,11 @@ return array(
     ),
     'name' => array(
         'not_empty' => 'First name is not specified.',
-        'alpha' => 'specified first name is not valid'
+        'name' => 'specified first name is not valid'
     ),
     'surname' => array(
         'not_empty' => 'Second name / Family name is not specified.',
-        'alpha' => 'specified second name / family name is not valid.'
+        'name' => 'specified second name / family name is not valid.'
     ),
     'street' => array(
         'not_empty' => 'Street, House Nr., or Post Box are not specified.',

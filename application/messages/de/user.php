@@ -12,11 +12,11 @@ return array(
     ),
     'name' => array(
         'not_empty' => 'Vorname wurde nicht angegeben.',
-        'alpha' => 'Vorname ist nicht gültig.'
+        'name' => 'Vorname ist nicht gültig.'
     ),
     'surname' => array(
         'not_empty' => 'Nachname wurde nicht angegeben.',
-        'alpha' => 'Nachname ist nicht gültig.'
+        'name' => 'Nachname ist nicht gültig.'
     ),
     'street' => array(
         'not_empty' => 'Straße, Nr. /Postfach wurde nicht angegeben.',
