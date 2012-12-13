@@ -11,6 +11,14 @@
                     2011 stellte die GESIS Mittel für einen umfassenden Relaunch bereit. Mit diesen Mitteln wurde die Oberfläche grundlegend überarbeitet und eine einheitliche Benutzerführung über alle Funktionen geschaffen. 
                 </p>
                  <br><br>
+                <h3>Beispiele für Studien, die histat-Daten verwendet haben:</h3>
+                <p class="normal">Klemann, Hein A. M. / Kudryashov, Sergei, Occupied Economies: An Economic History of Nazi-Occupied Europe, 1939-1945, Oxford [u.a.]: Berg 2012.</p>
+                <p class="normal">Lampe, Markus / Sharp, Paul, Tariffs and Income: A Time Series Analysis for 24 Countries, Discussion Papers on Business and Economics No. 17/2012, Department of Business and Economics Faculty of Business and Social Sciences University of Southern Denmark.</p>
+                <p class="normal">Acemoglu, Daron / Cantoni, Davide / Johnson, Simon / Robinson, James A., The Consequences of Radical Reform: The French Revolution, in: American Economic Review, 101/7 (2011), S. 3286-3307. DOI: 10.1257/aer.101.7.3286.</p>
+                <p class="normal">Gehrmann, Rolf, Infant Mortality in Germany in the 19th Century, Comparative Population Studies – Zeitschrift für Bevölkerungswissenschaft 36/4 (2011), S. 839-868.</p>
+                <p class="normal">Uebele, Martin, Die Identifikation internationaler Konjunkturzyklen in disaggregierten Daten: Deutschland, Frankreich und Großbritannien, 1862–1913. Jahrbuch für Wirtschaftsgeschichte / Economic History Yearbook 52/1 (2011), S. 19-44. DOI: 10.1524/jbwg.2011.0002.</p>
+                <p class="normal">Demeulemeester, Jean-Luc / Diebolt, Claude / Jaoul-Grammare, Magali, The growth of aggregate wage earnings in Germany, 1810–1989, in: Applied Economics 43/21 (2011), S. 2657-2669. DOI:10.1080/00036840903299813.</p>
+                 <br><br>
                 <h3>Inhalt</h3>
                 <p class="normal">
                     Da histat von Beginn an als System für heterogene Datenbestände konzipiert war,  variiert sowohl die Anzahl der Zeitreihen pro Studie als auch die abgedeckte Zeitspanne beträchtlich. Rund zwanzig Prozent der Studien beinhalten bis zu 50 Zeitreihen, weitere 13 Prozent bis zu 100, 40 Prozent zwischen 101 und 500. Jeweils gut zehn Prozent beinhalten 501 bis 1000 und 1001 bis 5000 Zeitreihen. Neun Studien (3 Prozent) umfassen mehr als 5.000 Zeitreihen, die größten drei davon alleine insgesamt 61.274 Zeitreihen.
@@ -37,11 +45,26 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen We
         <div class="right" >
             <br><br>
             <center>
-                <a href="x"><img src="http://histat.typodelta.de/Technical-Report_histat.png"></a>
+                <a href="http://www.gesis.org/histat/docs/TechnicalReport_2012-09.pdf"><?= HTML::image('assets/img/pictures/Technical-Report_histat.png',array('width'=>'200px'))?></a>
             </center>
-            <h3>Vollständige Dokumentation als PDF (134 S.)</h3>
+            <h3>Vollständige Dokumentation als PDF (107 S.)</h3>
             <br><br>
+               <h2>Was andere über histat sagen</h2>
+               <h3>
+               <br>
+                &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br><br>
+                Prof. Dr. Martin Schulze Wessel<br>
+                Vorsitzender des Verbandes der Historiker und Historikerinnen Deutschlands<br><br><br>
 
+
+                &quot;Ein unverzichtbares Daten-Repositorium für die deutsche Wirtschafts- und Sozialgeschichte.&quot;<br><br>
+                Prof. Dr. Jörg Baten<br>
+                General Secretary der International Economic History Association <br><br><br>
+
+
+                &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
+                Dr. Oliver Volckart<br>
+                London School of Economics<br><br></h3>
             <br><br>
             <h3>Kontakt<br/>
                 <br/>
