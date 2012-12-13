@@ -66,7 +66,7 @@ class Controller_Auth extends Controller_Index {
         if ($this->user->has_roles(array('guest'))) {
             throw new HTTP_Exception_404();
         }
-        Auth::instance()->logout();
+        Auth::instance()->logout(TRUE);
         Auth::instance()->force_login('guest');
         $this->request->redirect(I18n::$lang . '/index');
     }
