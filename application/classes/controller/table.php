@@ -142,9 +142,12 @@ class Controller_Table extends Controller_Data {
             $download->name = $name;
             $download->mkdate = time();
             $download->create();
-      
-            $url = URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
-     
+            if(Kohana::$environment ===  Kohana::PRODUCTION){
+                $url = 'http://www.gesis.org/histat'.I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter;
+            }else{
+                 $url = URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
+            }
+         
          $this->request->redirect('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
         }
      
