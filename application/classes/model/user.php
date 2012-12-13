@@ -158,10 +158,12 @@ class Model_User extends Model_Auth_User {
 
             // Set the last login date
             $this->last_login = time();
-
+            try{
             // Save the user
             $this->update();
-
+            }catch(ORM_Validation_Exception $e){
+                echo Debug::vars($e->errors(I18n::$lang));
+            }
             $login = ORM::factory('user_login');
             $login->user_id = $this->id;
             $login->mkdate = time();

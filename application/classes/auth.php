@@ -15,10 +15,11 @@ abstract class Auth extends Kohana_Auth {
             $user->ip = $_SERVER['REMOTE_ADDR'];
             $user->last_action = time();          
             $user->update();
-            return $user;
+            
             }catch(ORM_Validation_Exception $e){
-                Debug::vars($e->errors(I18n::$lang));
+               echo  Debug::vars($e->errors(I18n::$lang));
             }
+            return $user;
         }
     }
 
