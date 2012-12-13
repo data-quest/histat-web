@@ -36,7 +36,7 @@ class Model_User extends Model_Auth_User {
     );
 
     public function rules() {
-       
+        Valid::alpha_dash($str, $utf8);
         return array(
             'username' => array(
                 array('not_empty'),
@@ -55,7 +55,7 @@ class Model_User extends Model_Auth_User {
             ),
             'name' => array(
                 array('not_empty'),
-                array('alpha', array(':value', TRUE))
+                array('name', array(':value', TRUE))
             ),
             'surname' => array(
                 array('not_empty'),
