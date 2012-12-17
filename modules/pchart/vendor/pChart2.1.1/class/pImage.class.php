@@ -135,8 +135,8 @@
    function stroke()
     {
      if ( $this->TransparentBackground ) { imagealphablending($this->Picture,false); imagesavealpha($this->Picture,true); }
-
-     header('Content-type: image/png');
+     
+   //  header('Content-Type: image/png');
      imagepng($this->Picture);
     }
 

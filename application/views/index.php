@@ -163,7 +163,7 @@
             <!-- etracker PARAMETER 3.0 -->
             <script type="text/javascript">
                 var xsrf = "<?= $xsrf ?>";
-                var base_url = "<?= URL::base() ?>";
+                var base_url = "<?= URL::base()?>";
                 var et_pagename     = "<?= $pagename ?>";
                 var et_areas = "<?= $area ?>";
             </script>
