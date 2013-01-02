@@ -2,7 +2,9 @@ $(function(){
    
 
     $('#layout').width("98%");
+    
     $('#gotop').remove();
+   
     var name = $('.name');
     var scrollX = $('.scrollX');
     var scrollY = $('.scrollY');
@@ -11,35 +13,32 @@ $(function(){
     var scrollBar = scrollbar();
 
     
-  
+    thead.show();
+    tdata.show();
     if( tdata.width() < scrollY.width()){
-        scrollBar.w = 0;
+       // scrollBar.w = 0;
     }
 
-    scrollY.height($(window).height()-name.height()-thead.height()-50).width(thead.width()+1+scrollBar.w);
-    tdata.find('tr').eq(0).find('td').each(function(i){
+    scrollY.height($(window).height()-name.height()-thead.height()-50).width(thead.width()+scrollBar.w);
+   /* tdata.find('tr').eq(0).find('td').each(function(i){
         $(this).width(thead.find('td').eq(i).width()); 
-    });
+    });*/
    
-  $('#table_details .tooltip').live('click',function(e){
+  $('#table_details .tooltip2').live('click',function(e){
       
       $(this).hide();
       e.preventDefault();
       return false;
   
     });
+    
     $('#thead td').live('click',function(e){
         $('#thead td .tooltip').hide();
      $(this).find('.tooltip').show();
  
     });
   
-    $('#tdata td').live('click',function(e){
-        $('#tdata td .tooltip').hide();
-         $(this).find('.tooltip').show();
-      
-    });
-    
+   
     $('#chart').live('click',function(e){
         var id = $(this).find('input[name="chart"]').val();
         var title = $(this).find('input[name="title"]').val();
@@ -75,6 +74,7 @@ $(function(){
       
        
     });
+  
     $('#table_details select').change(function(){
       
         $('.details form').submit();
@@ -117,8 +117,14 @@ $(function(){
         }
      
     });
-
-    $('#tdata td').hover(function(){
+    
+     $('#tdata.admin.editable td').live('click',function(e){
+        $('#tdata.admin td .tooltip').hide();
+         $(this).find('.tooltip').show();
+      
+    });
+    
+    $('#tdata.admin.editable td').hover(function(){
         if($(this).find('input[name="new_data"]').is(':hidden')){
             $(this).find('.edit').show();
         }
@@ -126,13 +132,13 @@ $(function(){
     },function(){
         $(this).find('.edit').hide();
     })
-    $('#tdata td .edit').live('click',function(){
+    $('#tdata.admin.editable td .edit').live('click',function(){
         var parent = $(this).parent('td');
         $(this).hide();
         parent.find('.text').hide();
         parent.find('input[name="new_data"]').show().focus();
     });
-    $('#tdata input[name="new_data"]').focusout(function(){
+    $('#tdata.admin.editable input[name="new_data"]').focusout(function(){
         var t = $(this),year,id_hs,key,value,id_projekt;
         var parent = t.parent('td');
         key = parent.find('input[name="hidden_key"]').val();
@@ -172,7 +178,7 @@ $(function(){
         });
        
     })
-    $('#thead td.grey').hover(function(){
+    $('#thead.admin.editable td.grey').hover(function(){
         if($(this).find('textarea[name="new_data"]').is(':hidden')){
             $(this).find('.edit').show();
         }
@@ -180,13 +186,13 @@ $(function(){
     },function(){
         $(this).find('.edit').hide();
     })
-    $('#thead td.grey .edit').live('click',function(){
+    $('#thead.admin.editable td.grey .edit').live('click',function(){
         var parent = $(this).parent('td');
         $(this).hide();
         parent.find('.text').hide();
         parent.find('textarea[name="new_data"]').show().focus();
     });
-    $('#thead textarea[name="new_data"]').focusout(function(){
+    $('#thead.admin.editable textarea[name="new_data"]').focusout(function(){
        
         var t = $(this),type,id_hs,key,value,id_projekt;
         var parent = t.parent('td');
@@ -227,6 +233,7 @@ $(function(){
         });
        
     })
+    
 });
 function scrollbar() {
     var div = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:0xp;left:0xp;"><div style="height:100px"></div></div>');

@@ -97,6 +97,7 @@ class Controller_Index extends Controller_Template {
         $this->scripts [] = 'jquery-ui.min.js';
         $this->scripts [] = 'search.js';
         $this->scripts [] = 'main.js';
+        $this->scripts [] = 't.js?et=qPKGYV';
           I18n::lang($this->request->param('lang','de'));
         //Setup Cookie
         Cookie::$salt = $this->config->get('cookie_salt');

@@ -1,6 +1,6 @@
 <div id="table_details" >
 
-    <h1 class="left">$Tabellenansicht der Studie$</h1>
+    <h1 class="left">Tableview</h1>
     <?php if (Session::instance()->get('search', false)) : ?>
         <span class="back right"><?= HTML::anchor('search/extended', __('Zurück zur Suche...')) ?></span>
 
@@ -12,7 +12,7 @@
 
     <div class="details">
 
-        <div class="name" id="tabelle"><div ><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
+        <div class="name" id="tabelle"><div ><?= $keymask->Name ?> (Found timeseries: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
             <div class="download_icons">
                 <div class="<?= $download ?>"><?= __('Download') ?></div>
                 <div class="buttons" style="position: absolute" >
@@ -145,6 +145,7 @@
                     <table id="tdata">
 
                         <?php foreach ($data as $y => $data): ?>
+                        
                             <tr id="<?= $y ?>">
                                 <td><div class="text" style="height:auto"><?= $y ?></div></td>
                                 <?php foreach ($keys as $key): ?>
@@ -194,6 +195,6 @@
 <script type="text/javascript">
 
 
-    var closeText = "Schließen";
+    var closeText = "Close";
 
 </script>

@@ -14,7 +14,7 @@
         <!-- This material may not be reproduced, displayed, modified or distributed -->
         <!-- without the express prior written permission of the copyright holder. -->
         <!-- BEGIN etracker code ETRC 3.0 -->
-        <script type="text/javascript">document.write(String.fromCharCode(60)+"script type=\"text/javascript\" src=\"http"+("https:"==document.location.protocol?"s":"")+"://web.gesis.org/t.js?et=qPKGYV\">"+String.fromCharCode(60)+"/script>");</script>
+       <!-- <script type="text/javascript" >document.write(String.fromCharCode(60)+"script type=\"text/javascript\" src=\"http"+("https:"==document.location.protocol?"s":"")+"://web.gesis.org/t.js?et=qPKGYV\">"+String.fromCharCode(60)+"/script>");</script> -->
              <!-- HR@GESIS Microsite styles -->
     <style type="text/css">
 /* HR@GESIS zusätzlich zu styles.css hinzufügen */
@@ -168,7 +168,7 @@
                 var et_areas = "<?= $area ?>";
             </script>
             <!-- etracker PARAMETER END -->
-            <script type="text/javascript">_etc();</script>
+            <script type="text/javascript">//_etc();</script>
             <!-- etracker CODE END -->
         </div>
 

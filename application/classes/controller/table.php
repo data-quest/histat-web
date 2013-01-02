@@ -59,7 +59,7 @@ class Controller_Table extends Controller_Data {
         if (!$this->id_hs)
             throw new HTTP_Exception_404();
         $keymask = ORM::factory('keymask', $this->id_hs);
-        $this->scripts[] = 'table.js';
+       $this->scripts[] = 'table.js';
 
 
         $view = View::factory(I18n::$lang . '/table/details');
