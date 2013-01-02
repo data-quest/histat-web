@@ -147,7 +147,7 @@
                         <?php foreach ($data as $y => $data): ?>
                       
                             <tr id="<?= $y ?>">
-                                <td width="150"><div class="text" style="height:auto"><?= $y ?></div></td>
+                                <td width="150"><div class="text" style="height:auto;display:inline"><?= $y ?></div></td>
                                 <?php foreach ($keys as $key): ?>
                                     <?php $d = Arr::get($data, $key, array('data' => '&nbsp;', 'note' => NULL)); ?>
                                     <td  width="150">

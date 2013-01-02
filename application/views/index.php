@@ -168,7 +168,7 @@
                 var et_areas = "<?= $area ?>";
             </script>
             <!-- etracker PARAMETER END -->
-            <script type="text/javascript">//_etc();</script>
+            <script type="text/javascript">_etc();</script>
             <!-- etracker CODE END -->
         </div>
 

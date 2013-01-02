@@ -15,8 +15,9 @@ $(function(){
     
     thead.show();
     tdata.show();
+
     if( tdata.width() < scrollY.width()){
-       // scrollBar.w = 0;
+        scrollBar.w = 0;
     }
 
     scrollY.height($(window).height()-name.height()-thead.height()-50).width(thead.width()+scrollBar.w);
