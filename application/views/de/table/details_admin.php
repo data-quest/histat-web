@@ -33,7 +33,7 @@
 
 
         <div class="scrollX">
-            <table id="thead" style="display:none" <?= $is_admin ? 'class="admin"' : '' ?> >
+            <table id="thead" <?= $is_admin ? 'class="admin"' : '' ?> >
                 <?php $i = 0; ?>
 
                 <?php foreach ($details as $codeKurz => $detail) : ?>
@@ -139,7 +139,7 @@
 
                 <?php if ($data): ?>
 
-                    <table id="tdata" <?= $is_admin ? 'class="admin"' : '' ?> style="display:none">
+                    <table id="tdata" <?= $is_admin ? 'class="admin"' : '' ?> >
                         <?php $i = 0; ?>
                         <?php foreach ($data as $y => $data): ?>
                             <tr id="<?= $y ?>">
