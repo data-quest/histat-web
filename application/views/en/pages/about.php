@@ -30,7 +30,7 @@ All together, all in the database Histat contained time series enclose about fiv
                 <h3>User Statistics</h3>
                 <p class="normal">
 Since the offer of the online-database histat via the GESIS-Web a yearly growing number of registered users can be attained. In 2010 the compulsory registration for the database call was cancelled and relocated to the histat-menue of final data-download. Users of the data-base are now allowed to research the study descriptions and study contents in histat without registration. Therefore, the data-base calls have been more than doubled within two years. This year (2012) we will attain more than 3.000 registered users. </p>
-                <img src="http://histat.typodelta.de/histat_Statistik.png" width="600px">
+                <?= HTML::image('assets/img/pictures/histat_Statistik.png',array('width'=>'600px'))?>
 
 
             </div>
