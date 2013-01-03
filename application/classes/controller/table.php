@@ -60,9 +60,11 @@ class Controller_Table extends Controller_Data {
             throw new HTTP_Exception_404();
         $keymask = ORM::factory('keymask', $this->id_hs);
        $this->scripts[] = 'table.js';
-
-
-        $view = View::factory(I18n::$lang . '/table/details');
+ $view = View::factory(I18n::$lang . '/table/details');
+        if($this->user->has_roles(array('admin'))){
+             $view = View::factory(I18n::$lang . '/table/details_admin');
+        }
+       
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects = $keymask->project;

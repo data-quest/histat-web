@@ -11,21 +11,24 @@ $(function(){
     var thead = $('#thead');
     var tdata = $('#tdata');
     var scrollBar = scrollbar();
+    var w = 0;
+    $('.loading').hide();
+    $('.details').show();
 
-    
-    thead.show();
-    tdata.show();
-
-    if( tdata.width() < scrollY.width()){
-        scrollBar.w = 0;
+    if( tdata.width() > scrollY.width()){
+       w= scrollBar.w;
     }
 
-    scrollY.height($(window).height()-name.height()-thead.height()-50).width(thead.width()+scrollBar.w);
+    scrollY.height($(window).height()-name.height()-thead.height()-50);
+    if(tdata.height()>scrollY.height()){
+        w=scrollBar.w;
+    }
+scrollY.width(thead.width()+w);
    /* tdata.find('tr').eq(0).find('td').each(function(i){
         $(this).width(thead.find('td').eq(i).width()); 
     });*/
    
-  $('#table_details .tooltip2').live('click',function(e){
+  $('#table_details .tooltip').live('click',function(e){
       
       $(this).hide();
       e.preventDefault();
@@ -33,8 +36,8 @@ $(function(){
   
     });
     
-    $('#thead td').live('click',function(e){
-        $('#thead td .tooltip').hide();
+    $('#table_details td span').live('click',function(e){
+        $('#table_details td .tooltip').hide();
      $(this).find('.tooltip').show();
  
     });
