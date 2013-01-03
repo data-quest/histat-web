@@ -7,18 +7,21 @@
     <?php endif; ?>
     <div class="clear"></div>
     <?= $project ?>
-    
+
     <?php $data ? $download = 'download enabled' : $download = 'download disabled' ?>
     <?php $id_hs = $keymask->ID_HS; ?>
-    <?php $id_projekt =  $keymask->project->ID_Projekt; ?>
-    <div class="details">
+    <?php $id_projekt = $keymask->project->ID_Projekt; ?>
+    <div class="tooltip loading">
+        <?= HTML::image('assets/img/layout/loader.gif') ?> Wird geladen...
+    </div>
+    <div class="details" style="display:none">
 
         <div class="name" id="tabelle"><div ><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
             <div class="download_icons">
                 <div class="<?= $download ?>"><?= __('Download') ?></div>
                 <div class="buttons" style="position: absolute" >
                     <?php $data ? $class = 'button' : $class = 'button disabled' ?>
-                   <?php $data ? $id = array('class' => $class, 'id' => 'cart','onclick'=>'return false;') : $id = array('class' => $class,'onclick'=>'return false;') ?>   <?= HTML::anchor($data ? 'download/xls/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.XLS', array('class' => $class)) ?>
+                    <?php $data ? $id = array('class' => $class, 'id' => 'cart', 'onclick' => 'return false;') : $id = array('class' => $class, 'onclick' => 'return false;') ?>   <?= HTML::anchor($data ? 'download/xls/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.XLS', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/xlsx/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.XLSX', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/csv/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.CSV', array('class' => $class)) ?>
                     <?= HTML::anchor('table/details/' . $id_hs . '/' . $filter . '#tabelle', HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
@@ -32,7 +35,7 @@
 
 
         <div class="scrollX">
-            <table id="thead" style="display:none" <?= $is_admin?'class="admin"':'' ?> >
+            <table id="thead" >
                 <?php $i = 0; ?>
 
                 <?php foreach ($details as $codeKurz => $detail) : ?>
@@ -50,13 +53,13 @@
 
                             $filters_reversed = array_reverse(Arr::get($filters, $codeKurz));
                             ?>
-                            <?= Form::select('filter[]', $filters_reversed, $selected, array('style' => 'width:100px')) ?>
+                            <?= Form::select('filter[]', $filters_reversed, $selected, array('style' => 'width:150px')) ?>
                         </td>
                         <?php $i++ ?>
                         <?php foreach ($detail as $key => $value) : ?>
                             <td  width="150" >
-                                <?php $str = mb_substr($detail[$key]->CodeBezeichnung, 0, 30); ?>
-                                <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer">' . $str . '... <div class="tooltip"><span></span>' . $detail[$key]->CodeBezeichnung . '</div></div>' : '<div class="text">' . $str . '</div>') ?>
+                                <?php $str = mb_substr($detail[$key]->CodeBezeichnung, 0, 20); ?>
+                                <?= (strlen($str) >= 20 ? '<span style="cursor:pointer">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $detail[$key]->CodeBezeichnung . '</div></span>' : $str) ?>
                             </td>
                         <?php endforeach; ?>
                     </tr>
@@ -64,66 +67,29 @@
                 <?php if ($data): ?>
                     <?php if (count(array_filter($tables)) > 0) : ?>
                         <tr>
-                            <td class="grey"  width="150"><div class="text" style="height:auto">Tabelle</div></td>   
+                            <td class="grey"  width="150">Tabelle</td>   
                             <?php foreach ($keys as $key): ?>
-                                <td class="grey"  width="150">
-                                    <?php if ($is_admin): ?>
-                                        <div class="button edit"></div>
-                                        <?= Form::textarea('new_data', $tables[$key]) ?>
-                                        <?= Form::hidden('hidden_key', $key) ?>
-                                        <?= Form::hidden('hidden_type', 'table') ?>
-                                        <?= Form::hidden('hidden_id_hs', $id_hs) ?>
-
-                                        <?= Form::hidden('hidden_id_projekt', $id_projekt) ?>
-                                    <?php endif; ?>
-                                    <div class="text" style="width:100%;text-align:center"><?= $tables[$key] ?></div></td>
-
+                                <td class="grey"  width="150" style="text-align:center"><?= $tables[$key] ?></td>
                             <?php endforeach; ?>
                         </tr>
                     <?php endif; ?>
                     <?php if (count(array_filter($sources)) > 0) : ?>
                         <tr>
-                            <td class="grey"  width="150"><div class="text" style="height:auto">Quellen</div></td>   
+                            <td class="grey"  width="150">Quellen</td>   
                             <?php foreach ($keys as $key): ?>
-
-                                <td class="grey"  width="150">
-                                    <?php if ($is_admin): ?>
-                                        <div class="button edit"></div>
-                                        <?= Form::textarea('new_data', $sources[$key]) ?>
-                                        <?= Form::hidden('hidden_key', $key) ?>
-                                        <?= Form::hidden('hidden_type', 'source') ?>
-                                        <?= Form::hidden('hidden_id_hs', $id_hs) ?>
-
-                                        <?= Form::hidden('hidden_id_projekt', $id_projekt) ?>
-                                    <?php endif; ?>
-
-                                    <?php $str = mb_substr($sources[$key], 0, 30); ?>
-                                    <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $sources[$key] . '</div></div>' : '<div class="text" style="width:100%">' . $str . '</div>') ?>
-
+                                <td class="grey"  width="150"><?php $str = mb_substr($sources[$key], 0, 20); ?>
+                                    <?= (strlen($str) >= 20 ? '<span style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $sources[$key] . '</div></span>' : $str) ?>
                                 </td>
-
                             <?php endforeach; ?>
                         </tr>
                     <?php endif; ?>
                     <?php if (count(array_filter($notes)) > 0) : ?>
                         <tr>
-                            <td class="grey" width="150"><div class="text" style="height:auto">Anmerkungen</div></td>   
+                            <td class="grey" width="150">Anmerkungen</td>   
                             <?php foreach ($keys as $key): ?>
-
                                 <td class="grey" width="150">
-                                    <?php if ($is_admin): ?>
-                                        <div class="button edit"></div>
-                                        <?= Form::textarea('new_data', $notes[$key]) ?>
-                                        <?= Form::hidden('hidden_key', $key) ?>
-                                        <?= Form::hidden('hidden_type', 'note') ?>
-                                        <?= Form::hidden('hidden_id_hs', $id_hs) ?>
-
-                                        <?= Form::hidden('hidden_id_projekt', $id_projekt) ?>
-                                    <?php endif; ?>
-                                    <?php $str = mb_substr($notes[$key], 0, 30); ?>
-                                    <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $notes[$key] . '</div></div>' : '<div class="text" style="width:100%">' . $str . '</div>') ?>
-
-
+                                    <?php $str = mb_substr($notes[$key], 0, 20); ?>
+                                    <?= (strlen($str) >= 20 ? '<span style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $notes[$key] . '</div></span>' : $str ) ?>
                                 </td>
 
                             <?php endforeach; ?>
@@ -142,39 +108,24 @@
 
                 <?php if ($data): ?>
 
-                    <table id="tdata" <?= $is_admin?'class="admin"':'' ?> style="display:none">
-                        <?php $i = 0;?>
+                    <table id="tdata">
+                        <?php $i = 0; ?>
                         <?php foreach ($data as $y => $data): ?>
-                      
                             <tr id="<?= $y ?>">
-                                <td width="150"><div class="text" style="height:auto;display:inline"><?= $y ?></div></td>
+                                <td width="150"><?= $y ?></td>
                                 <?php foreach ($keys as $key): ?>
                                     <?php $d = Arr::get($data, $key, array('data' => '&nbsp;', 'note' => NULL)); ?>
                                     <td  width="150">
                                         <?php if ($d['note']) : ?>
-                                            <div class="text" style="height:17px;text-align:center;width:100%;text-decoration: underline;cursor: pointer;font-weight: bold"> <?= $d['data'] ?> 
-                                                <div class="tooltip" style="display:none;margin-left:20px"><span></span><?= $d['note'] ?></div>
-                                            </div>
+                                            <span style="cursor:pointer;text-decoration: underline;font-weight: bold"><?= $d['data'] ?><div class="tooltip"><span></span><?= $d['note'] ?></div></span> 
                                         <?php else: ?>
-                                            <div class="text" style="height:17px;text-align:center;width:100%"> <?= $d['data'] ?> </div>
-                                        <?php endif; ?>
-                                        <?php if ($is_admin): ?>
-                                            <div class="button edit" style="display:none"></div>
-                                            <input type="text" style="display:none" name="new_data" value="<?= is_numeric($d['data']) ? $d['data'] : NULL ?>" />
-                                            <input type="hidden" name="hidden_key" value="<?= $key?>" />
-                                            <input type="hidden" name="hidden_year" value="<?= $y?>" />
-                                            <input type="hidden" name="hidden_id_hs" value="<?= $id_hs?>" />
-                                            <input type="hidden" name="hidden_id_projekt" value="<?= $id_projekt?>" />
-                                      
+                                            <?= $d['data'] ?>
                                         <?php endif; ?>
                                     </td>
-
                                 <?php endforeach; ?>
                             </tr>
                         <?php endforeach; ?> 
-
                     </table>
-           
                 <?php else: ?>
                     <div class="tooltip" id="info">
                         <?php
@@ -182,21 +133,17 @@
                         if ($f > 0) :
                             ?>
                             Ihre Filtereinstellungen enthält <b><?= count($keys) ?></b> Zeitreihen. <br/> Bitte schränken Sie Ihre Auswahl weiter ein.
-    <?php else : ?>
+                        <?php else : ?>
                             Die Tabelle <b><?= $keymask->Name ?></b>  enthält <b><?= count($keys) ?></b> Zeitreihen. <br/>Bitte verwenden Sie die Filtermöglichkeit um die Anzahl der Zeitreihen zu beschränken. 
- <?php endif; ?>
+                        <?php endif; ?>
                     </div>
-<?php endif; ?>
+                <?php endif; ?>
             </div>
         </div>
-<?= Form::close() ?>
+        <?= Form::close() ?>
     </div>
 </div>
 <div class="dialog"></div>
-
 <script type="text/javascript">
-
-
     var closeText = "Schließen";
-
 </script>
