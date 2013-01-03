@@ -37,7 +37,7 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen We
 
                     Seit der Freischaltung verzeichnet histat eine jährlich wachsende Nutzung. Mit der Aufhebung der Registrierungspflicht zur Recherche im Jahre 2010 hat sich die Anzahl der Datenbankaufrufe innerhalb von zwei Jahren mehr als verdoppelt. Dieses Jahr werden wir über 3 000 registrierte Nutzerinnen und Nutzer verzeichnen.
                 </p>
-                <img src="http://histat.typodelta.de/histat_Statistik.png" width="600px">
+                <?= HTML::image('assets/img/pictures/histat_Statistik.png',array('width'=>'600px'))?>
 
 
             </div>
