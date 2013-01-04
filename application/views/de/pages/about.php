@@ -27,7 +27,7 @@ Die folgende Abbildung zeigt die Anzahl der Zeitreihen pro Studie (in logarithmi
 </p>
 <?= HTML::image('assets/img/pictures/Spannweiten.png',array('width'=>'600px'))?>
  <p class="normal">
-Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen Werte. Ab 1800 liegen für nahezu jedes Jahr mindestens tausend Werte vor, ab Mitte des 19. Jahrhunderts sind es schon über zehntausend, mit Gründung des Deutschen Reiches über zwanzigtausend. Den Höhepunkt bilden die Jahre um den Beginn des 20. Jahrhunderts: hier stehen für einige Jahre über sechzigtausend Werte bereit. Die beiden Weltkriege führen zu Einbrüchen. Insbesondere für die vierziger Jahre des zwanzigsten Jahrhunderts sinkt die Anzahl der verfügbaren Werte auf unter zweitausend. Für die Nachkriegszeit bis zur Gegenwart liegen zwischen zwanzig- und dreißigtausend Werte vor. Im Vergleich dazu nimmt sich die sogenannte vorstatistische Zeit bescheiden aus. Doch auch hier können wir seit dem 16. Jahrhundert überwiegend mehr als hundert Werte pro Jahr anbieten, seit Mitte des 17. Jahrhunderts zumindest für jedes zehnte Jahr weit über tausend.“
+Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünfeinhalb Millionen Werte. Ab 1800 liegen für nahezu jedes Jahr mindestens tausend Werte vor, ab Mitte des 19. Jahrhunderts sind es schon über zehntausend, mit Gründung des Deutschen Reiches über zwanzigtausend. Den Höhepunkt bilden die Jahre um den Beginn des 20. Jahrhunderts: hier stehen für einige Jahre über sechzigtausend Werte bereit. Die beiden Weltkriege führen zu Einbrüchen. Insbesondere für die vierziger Jahre des zwanzigsten Jahrhunderts sinkt die Anzahl der verfügbaren Werte auf unter zweitausend. Für die Nachkriegszeit bis zur Gegenwart liegen zwischen zwanzig- und dreißigtausend Werte vor. Im Vergleich dazu nimmt sich die sogenannte vorstatistische Zeit bescheiden aus. Doch auch hier können wir seit dem 16. Jahrhundert überwiegend mehr als hundert Werte pro Jahr anbieten, seit Mitte des 17. Jahrhunderts zumindest für jedes zehnte Jahr weit über tausend.“
 </p>
 <?= HTML::image('assets/img/pictures/Anzahlen.png',array('width'=>'600px'))?>
                 
@@ -35,7 +35,7 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünf Millionen We
                 <h3>Nutzungsstatistik</h3>
                 <p class="normal">
 
-                    Seit der Freischaltung verzeichnet histat eine jährlich wachsende Nutzung. Mit der Aufhebung der Registrierungspflicht zur Recherche im Jahre 2010 hat sich die Anzahl der Datenbankaufrufe innerhalb von zwei Jahren mehr als verdoppelt. Dieses Jahr werden wir über 3 000 registrierte Nutzerinnen und Nutzer verzeichnen.
+                    Seit der Freischaltung verzeichnet histat eine jährlich wachsende Nutzung. Mit der Aufhebung der Registrierungspflicht zur Recherche im Jahre 2010 hat sich die Anzahl der Datenbankaufrufe innerhalb von zwei Jahren mehr als verdoppelt. Dieses Jahr werden wir über 4 000 registrierte Nutzerinnen und Nutzer verzeichnen.
                 </p>
                 <?= HTML::image('assets/img/pictures/histat_Statistik.png',array('width'=>'600px'))?>
 
