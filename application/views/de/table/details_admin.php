@@ -33,12 +33,11 @@
 
 
         <div class="scrollX">
-            <table id="thead" <?= $is_admin ? 'class="admin"' : '' ?> >
+            <table id="thead" class="admin">
                 <?php $i = 0; ?>
 
                 <?php foreach ($details as $codeKurz => $detail) : ?>
                     <tr >
-
                         <td width="150">
                             <?php
                             $k = array_keys($detail);
@@ -57,7 +56,7 @@
                         <?php foreach ($detail as $key => $value) : ?>
                             <td  width="150" >
                                 <?php $str = mb_substr($detail[$key]->CodeBezeichnung, 0, 20); ?>
-                                <?= (strlen($str) >= 20 ? $str . '... <div class="tooltip"><span></span>' . $detail[$key]->CodeBezeichnung . '</div>' : $str) ?>
+                                <?= (strlen($str) >= 20 ? '<span style="cursor:pointer">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $detail[$key]->CodeBezeichnung . '</div></span>' : '<span class="text">' . $str . '</span>') ?>
                             </td>
                         <?php endforeach; ?>
                     </tr>
@@ -68,35 +67,31 @@
                             <td class="grey"  width="150">Tabelle</td>   
                             <?php foreach ($keys as $key): ?>
                                 <td class="grey"  width="150" style="text-align: center">
+                                
                                     <div class="button edit"></div>
                                     <?= Form::textarea('new_data', $tables[$key]) ?>
                                     <?= Form::hidden('hidden_key', $key) ?>
                                     <?= Form::hidden('hidden_type', 'table') ?>
                                     <?= Form::hidden('hidden_id_hs', $id_hs) ?>
                                     <?= Form::hidden('hidden_id_projekt', $id_projekt) ?>
-                                    <span class="text"><?= $tables[$key] ?></span></td>
+                                        <span class="text"><?= $tables[$key] ?></span>
+                                </td>
                             <?php endforeach; ?>
                         </tr>
                     <?php endif; ?>
                     <?php if (count(array_filter($sources)) > 0) : ?>
                         <tr>
-                            <td class="grey"  width="150"><div class="text" style="height:auto">Quellen</div></td>   
+                            <td class="grey"  width="150">Quellen</td>   
                             <?php foreach ($keys as $key): ?>
-
                                 <td class="grey"  width="150">
-                                    <?php if ($is_admin): ?>
-                                        <div class="button edit"></div>
-                                        <?= Form::textarea('new_data', $sources[$key]) ?>
-                                        <?= Form::hidden('hidden_key', $key) ?>
-                                        <?= Form::hidden('hidden_type', 'source') ?>
-                                        <?= Form::hidden('hidden_id_hs', $id_hs) ?>
-
-                                        <?= Form::hidden('hidden_id_projekt', $id_projekt) ?>
-                                    <?php endif; ?>
-
-                                    <?php $str = mb_substr($sources[$key], 0, 30); ?>
-                                    <?= (strlen($str) >= 30 ? '<div class="text" style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $sources[$key] . '</div></div>' : '<div class="text" style="width:100%">' . $str . '</div>') ?>
-
+                                    <div class="button edit"></div>
+                                    <?= Form::textarea('new_data', $sources[$key]) ?>
+                                    <?= Form::hidden('hidden_key', $key) ?>
+                                    <?= Form::hidden('hidden_type', 'source') ?>
+                                    <?= Form::hidden('hidden_id_hs', $id_hs) ?>
+                                    <?= Form::hidden('hidden_id_projekt', $id_projekt) ?>
+                                    <?php $str = mb_substr($sources[$key], 0, 20); ?>
+                                    <?= (strlen($str) >= 20 ? '<span class="text" style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $sources[$key] . '</div></span>' : '<span class="text" >' . $str . '</span>') ?>
                                 </td>
 
                             <?php endforeach; ?>
@@ -104,30 +99,25 @@
                     <?php endif; ?>
                     <?php if (count(array_filter($notes)) > 0) : ?>
                         <tr>
-                            <td class="grey" width="150"><div class="text" style="height:auto">Anmerkungen</div></td>   
+                            <td class="grey" width="150">Anmerkungen</td>   
                             <?php foreach ($keys as $key): ?>
 
                                 <td class="grey" width="150">
-                                    <?php if ($is_admin): ?>
-                                        <div class="button edit"></div>
-                                        <?= Form::textarea('new_data', $notes[$key]) ?>
-                                        <?= Form::hidden('hidden_key', $key) ?>
-                                        <?= Form::hidden('hidden_type', 'note') ?>
-                                        <?= Form::hidden('hidden_id_hs', $id_hs) ?>
-
-                                        <?= Form::hidden('hidden_id_projekt', $id_projekt) ?>
-                                    <?php endif; ?>
+                                    <div class="button edit"></div>
+                                    <?= Form::textarea('new_data', $notes[$key]) ?>
+                                    <?= Form::hidden('hidden_key', $key) ?>
+                                    <?= Form::hidden('hidden_type', 'note') ?>
+                                    <?= Form::hidden('hidden_id_hs', $id_hs) ?>
+                                    <?= Form::hidden('hidden_id_projekt', $id_projekt) ?>
                                     <?php $str = mb_substr($notes[$key], 0, 20); ?>
-                                    <?= (strlen($str) >= 20 ? '<span style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $notes[$key] . '</div></span>' : $str ) ?>
-
-
+                                    <?= (strlen($str) >= 20 ? '<span style="cursor:pointer;">' . $str . '... <div class="tooltip" style="width:400px"><span></span>' . $notes[$key] . '</div></span>' : '<span class="text">' . $str . '</span>' ) ?>
                                 </td>
 
                             <?php endforeach; ?>
                         </tr>
                     <?php endif; ?>
                     <tr>
-                        <td class="blue" width="150"><div class="text" style="height:auto">Grafik</div></td>
+                        <td class="blue" width="150">Grafik</td>
                         <?php foreach ($keys as $key): ?>
                             <td class="blue" width="150"><div class="text"  id="chart" style="height:24px;text-align:center;margin:auto;padding:0;"><?= Form::hidden('title', implode('<br/>', $titles[$key])) ?> <?= Form::hidden('chart', $id_hs . '/' . $key) ?><?= HTML::image($assets['img'] . 'layout/button-grafik.png') ?></div></td>
 
@@ -139,7 +129,7 @@
 
                 <?php if ($data): ?>
 
-                    <table id="tdata" <?= $is_admin ? 'class="admin"' : '' ?> >
+                    <table id="tdata" class="admin" >
                         <?php $i = 0; ?>
                         <?php foreach ($data as $y => $data): ?>
                             <tr id="<?= $y ?>">
@@ -148,20 +138,18 @@
                                     <?php $d = Arr::get($data, $key, array('data' => '&nbsp;', 'note' => NULL)); ?>
                                     <td  width="150">
                                         <?php if ($d['note']) : ?>
-                                            <div class="tooltip"><span></span><?= $d['note'] ?></div><span style="cursor:pointer;text-decoration: underline;font-weight: bold"><?= $d['data'] ?></span> 
+                                            <span style="cursor:pointer;text-decoration: underline;font-weight: bold"><?= $d['data'] ?><div class="tooltip"><span></span><?= $d['note'] ?></div></span> 
                                         <?php else: ?>
-                                            <?= $d['data'] ?>
+                                            <span class="text"><?= $d['data'] ?></span>
                                         <?php endif; ?>
-                                        <?php if (1 == 2): ?>
-                                            <div class="button edit" style="display:none"></div>
-                                            <input type="text" style="display:none" name="new_data" value="<?= is_numeric($d['data']) ? $d['data'] : NULL ?>" />
-                                            <input type="hidden" name="hidden_key" value="<?= $key ?>" />
-                                            <input type="hidden" name="hidden_year" value="<?= $y ?>" />
-                                            <input type="hidden" name="hidden_id_hs" value="<?= $id_hs ?>" />
-                                            <input type="hidden" name="hidden_id_projekt" value="<?= $id_projekt ?>" />
-                                        <?php endif; ?>
-                                    </td>
 
+                                        <div class="button edit"></div>
+                                        <input type="text" style="display:none" name="new_data" value="<?= is_numeric($d['data']) ? $d['data'] : NULL ?>" />
+                                        <input type="hidden" name="hidden_key" value="<?= $key ?>" />
+                                        <input type="hidden" name="hidden_year" value="<?= $y ?>" />
+                                        <input type="hidden" name="hidden_id_hs" value="<?= $id_hs ?>" />
+                                        <input type="hidden" name="hidden_id_projekt" value="<?= $id_projekt ?>" />
+                                    </td>
                                 <?php endforeach; ?>
                             </tr>
                         <?php endforeach; ?> 

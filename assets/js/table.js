@@ -128,21 +128,14 @@ scrollY.width(thead.width()+w);
       
     });
     
-    $('#tdata.admin.editable td').hover(function(){
-        if($(this).find('input[name="new_data"]').is(':hidden')){
-            $(this).find('.edit').show();
-        }
-        
-    },function(){
-        $(this).find('.edit').hide();
-    })
-    $('#tdata.admin.editable td .edit').live('click',function(){
+   
+    $('#tdata.admin td .edit').live('click',function(){
         var parent = $(this).parent('td');
         $(this).hide();
         parent.find('.text').hide();
         parent.find('input[name="new_data"]').show().focus();
     });
-    $('#tdata.admin.editable input[name="new_data"]').focusout(function(){
+    $('#tdata.admin input[name="new_data"]').focusout(function(){
         var t = $(this),year,id_hs,key,value,id_projekt;
         var parent = t.parent('td');
         key = parent.find('input[name="hidden_key"]').val();
@@ -182,21 +175,14 @@ scrollY.width(thead.width()+w);
         });
        
     })
-    $('#thead.admin.editable td.grey').hover(function(){
-        if($(this).find('textarea[name="new_data"]').is(':hidden')){
-            $(this).find('.edit').show();
-        }
-        
-    },function(){
-        $(this).find('.edit').hide();
-    })
-    $('#thead.admin.editable td.grey .edit').live('click',function(){
+ 
+    $('#thead.admin td.grey .edit').live('click',function(){
         var parent = $(this).parent('td');
         $(this).hide();
         parent.find('.text').hide();
         parent.find('textarea[name="new_data"]').show().focus();
     });
-    $('#thead.admin.editable textarea[name="new_data"]').focusout(function(){
+    $('#thead.admin textarea[name="new_data"]').focusout(function(){
        
         var t = $(this),type,id_hs,key,value,id_projekt;
         var parent = t.parent('td');

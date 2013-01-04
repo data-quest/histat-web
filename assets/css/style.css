@@ -1127,7 +1127,7 @@ table tr td.even {
 }
 
 #table_details div.details table{
-    border:1px solid #ffffff;
+    border:1px solid #999;
     padding:0px;
     margin:0px;
     width:auto;
@@ -1137,7 +1137,7 @@ table tr td.even {
 }
 
 #table_details div.details table td{
-    border:1px solid #ffffff;
+    border:1px solid #999;
     vertical-align: top;
     padding:5px;
     min-width: 150px;
@@ -1152,9 +1152,11 @@ table tr td.even {
 }
 #table_details div.details table td.blue{
     background: url("../img/layout/hg-tab.png") center center;
-    padding:0px;
+ color: #FFF;
+padding:0;
 
 }
+
 #tdata td{
     text-align: center;
 }
@@ -1188,13 +1190,11 @@ table tr td.even {
 #table_details div.details table#tdata  tr:hover td{
     background:#FE8F00;
 }
-#table_details #tdata input[name="new_data"],#table_details #thead textarea[name="new_data"]{
+.admin input[name="new_data"],.admin textarea[name="new_data"]{
 
     display:none;
 }
-#table_details #tdata,#table_details #tdata td{
-    position: relative;
-}
+
 
 #table_details #tdata .button{
     position: absolute;
@@ -1256,6 +1256,13 @@ table tr td.even {
     background: url(../img/layout/verlauf-orange_150x5.jpg) center center;
     width: 700px;
     line-height: 22px;
+}
+
+#table_details #tdata td:hover .button{
+    display: block;
+}
+#table_details #thead .grey:hover .button{
+    display:block;
 }
 /*Style table/details/id end*/
 /* Style cart*/
