@@ -142,6 +142,7 @@ scrollY.width(thead.width()+w);
         id_hs = parent.find('input[name="hidden_id_hs"]').val();
         year = parent.find('input[name="hidden_year"]').val();
         value = t.val();
+        parent.find('.edit').removeAttr('style');
         id_projekt = parent.find('input[name="hidden_id_projekt"]').val();
         $.ajax({
             url: base_url+'table/edit',
@@ -190,6 +191,7 @@ scrollY.width(thead.width()+w);
         id_hs = parent.find('input[name="hidden_id_hs"]').val();
         type = parent.find('input[name="hidden_type"]').val();
         value = t.val();
+         parent.find('.edit').removeAttr('style');
         id_projekt = parent.find('input[name="hidden_id_projekt"]').val();
         $.ajax({
             url: base_url+'table/edit_header',
