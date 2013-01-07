@@ -1,6 +1,10 @@
 <div id="table_details" >
 
+    <?php $data ? $download = 'download enabled' : $download = 'download disabled' ?>
+    <?php $id_hs = $keymask->ID_HS; ?>
+    <?php $id_projekt = $keymask->project->ID_Projekt; ?>
     <h1 class="left">Tabellenansicht der Studie</h1>
+
     <?php if (Session::instance()->get('search', false)) : ?>
         <span class="back right"><?= HTML::anchor('search/extended', __('Zurück zur Suche...')) ?></span>
 
@@ -8,15 +12,14 @@
     <div class="clear"></div>
     <?= $project ?>
 
-    <?php $data ? $download = 'download enabled' : $download = 'download disabled' ?>
-    <?php $id_hs = $keymask->ID_HS; ?>
-    <?php $id_projekt = $keymask->project->ID_Projekt; ?>
     <div class="tooltip loading">
         <?= HTML::image('assets/img/layout/loader.gif') ?> Wird geladen...
     </div>
     <div class="details" style="display:none">
 
-        <div class="name" id="tabelle"><div ><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
+        <div class="name" id="tabelle">    <div ><?= ($is_admin)? HTML::anchor('table/edit_details/'.$id_hs.'/'.$filter,__('Edit'),array('class'=>'edit_table')):''  ?>
+      
+        <?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
             <div class="download_icons">
                 <div class="<?= $download ?>"><?= __('Download') ?></div>
                 <div class="buttons" style="position: absolute" >

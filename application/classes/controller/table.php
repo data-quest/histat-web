@@ -60,10 +60,8 @@ class Controller_Table extends Controller_Data {
             throw new HTTP_Exception_404();
         $keymask = ORM::factory('keymask', $this->id_hs);
        $this->scripts[] = 'table.js';
- $view = View::factory(I18n::$lang . '/table/details');
-        if($this->user->has_roles(array('admin'))){
-             $view = View::factory(I18n::$lang . '/table/details_admin');
-        }
+        $view = View::factory(I18n::$lang . '/table/details');
+       
        
         $list = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
@@ -121,7 +119,70 @@ class Controller_Table extends Controller_Data {
         $view->project = $list->render();
         $this->content = $view->render();
     }
+    public function action_edit_details() {
+        if (!$this->id_hs && !$this->user->has_roles(array('admin')))
+            throw new HTTP_Exception_404();
+        $keymask = ORM::factory('keymask', $this->id_hs);
+       $this->scripts[] = 'table.js';
+ $view = View::factory(I18n::$lang . '/table/details_admin');
+   
+       
+        $list = View::factory(I18n::$lang . '/project/list');
+        //assign new projects to subview
+        $list->projects = $keymask->project;
+        $this->project = $keymask->project->Projektname;
+        //assign the referrer uri
+        $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
 
+        $post = $this->request->post('filter');
+
+        $this->set_filter($post);
+
+        $details = $keymask->getDetails($this->filter);
+        
+        $data = null;
+
+        if (!$post) {
+            $post = array();
+            $i = 0;
+            foreach (Arr::get($details, 'filters', array()) as $filters) {
+                foreach ($filters as $key => $filter) {
+                    $f = explode('_', $key);
+                    $code = $f[0];
+                    $pos = $f[1];
+                    $len = $f[2];
+                    if (substr($this->filter, $pos - 1, $len) === $code) {
+                        $post[$i] = $key;
+                    } else {
+                        $post[$i] = "all";
+                    }
+                }
+                $i++;
+            }
+        }
+        
+        if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
+            $data = $keymask->getData($this->filter);
+        }
+
+        
+        $view->details = $details['details'];
+        $view->keys = $details['keys'];
+        $view->data = $data;
+        $view->keymask = $keymask;
+
+        $view->tables = $details['tables'];
+        $view->titles = $details['titles'];
+        $view->filters = $details['filters'];
+        $view->sources = $details['sources'];
+        $view->notes = $details['notes'];
+        $view->filter = $this->filter;
+        $view->is_admin = $this->user->has_roles(array('admin'));
+        $view->post = $post;
+        $view->search = strstr($this->request->referrer(), 'search');
+        $view->project = $list->render();
+        $this->content = $view->render();
+    }
     public function action_download() {
 
         if (HTTP_Request::POST == $this->request->method()) {

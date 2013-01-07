@@ -129,6 +129,11 @@ Route::set('details', '(<lang>/)table/details/<id>/(<filter>)', array('lang' => 
         ->defaults(array(
             'controller' => 'table',
             'action' => 'details'));
+
+Route::set('edit_details', '(<lang>/)table/edit_details/<id>/(<filter>)', array('lang' => '(' . $langs . ')', 'id' => '.+', 'filter' => '.{32}'))
+        ->defaults(array(
+            'controller' => 'table',
+            'action' => 'edit_details'));
 /**
  * Route to track download 
  */

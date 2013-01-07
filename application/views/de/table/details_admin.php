@@ -14,7 +14,7 @@
         <?= HTML::image('assets/img/layout/loader.gif') ?> Wird geladen...
     </div>
     <div class="details" style="display:none">
-        <div class="name" id="tabelle"><div ><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
+        <div class="name" id="tabelle"><div ><?= ($is_admin)? HTML::anchor('table/details/'.$id_hs.'/'.$filter,__('Back'),array('class'=>'edit_table')):''  ?><?= $keymask->Name ?> (Gefundene Zeitreihen: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
             <div class="download_icons">
                 <div class="<?= $download ?>"><?= __('Download') ?></div>
                 <div class="buttons" style="position: absolute" >

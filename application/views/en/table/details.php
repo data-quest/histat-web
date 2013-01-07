@@ -16,7 +16,7 @@
     </div>
     <div class="details" style="display:none">
 
-        <div class="name" id="tabelle"><div ><?= $keymask->Name ?> (found timeseries: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
+        <div class="name" id="tabelle"><div ><?= ($is_admin)? HTML::anchor('table/edit_details/'.$id_hs.'/'.$filter,__('Edit'),array('class'=>'edit_table')):''  ?><?= $keymask->Name ?> (found timeseries: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
             <div class="download_icons">
                 <div class="<?= $download ?>"><?= __('Download') ?></div>
                 <div class="buttons" style="position: absolute" >

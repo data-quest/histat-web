@@ -1264,6 +1264,16 @@ padding:0;
 #table_details #thead .grey:hover .button{
     display:block;
 }
+#tabelle .edit_table{
+    display: inline-block;
+    height: 40px;
+    padding:0 10px;
+    background: #FF7E00;
+    text-decoration: none;
+    color:#FFF;
+    font-weight: bold;
+    margin:0 10px;
+}
 /*Style table/details/id end*/
 /* Style cart*/
 #cart{

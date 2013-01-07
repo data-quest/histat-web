@@ -55,5 +55,7 @@ return array(
     'E-Mail not found'=>'E-Mail Adresse wurde nicht gefunden',
     'Password could not be changed'=>'Passwort konnte nicht geändert werden',
     'New password was send to the E-Mail address' =>'Neues Passwort wurde an die E-Mail Adresse versendet',
-    'Your new password for histat.gesis.org' =>'Ihr neues Passwort bei histat.gesis.org'
+    'Your new password for histat.gesis.org' =>'Ihr neues Passwort bei histat.gesis.org',
+    'Edit'=>'Bearbeiten',
+    'Back'=>'Zurück'
 );
