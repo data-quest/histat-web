@@ -151,14 +151,15 @@ class Spreadsheet {
 
         $ext = $this->exts[$settings['format']];
         $mime = $this->mimes[$settings['format']];
+        ob_clean();
         ob_start();
         if ($settings['format'] == 'CSV') {
             $writer->setUseBOM(true);
         }
         $writer->save('php://output');
-
+        $body = ob_get_clean();
         $response = Request::current()->response();
-        $response->body(ob_get_clean())->send_file(TRUE, $settings['name'] . '.' . $ext);
+        $response->body($body)->send_file(TRUE, $settings['name'] . '.' . $ext, array('mime_type' => $mime));
     }
 
 }
