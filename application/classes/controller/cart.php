@@ -16,7 +16,9 @@ class Controller_Cart extends Controller_Table {
         $filters = array();
         $projects = array();
         $tables = array();
+     
         foreach ($this->user->cart_items->find_all() as $item) {
+            
             $keymask = $item->keymask;
             $projectID = $keymask->project->ID_Projekt;
             $bearbeitung = '';
@@ -94,7 +96,7 @@ class Controller_Cart extends Controller_Table {
         $filter_text = json_encode($this->request->post('filter_text'));
 
         $cart = $this->user->cart_items
-                ->where('ID_HS', '=', $this->id_hs)
+                ->where('keymask.ID_HS', '=', $this->id_hs)
                 ->where('filter', '=', $this->filter)
                 ->find_all();
 

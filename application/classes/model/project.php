@@ -146,7 +146,7 @@ class Model_Project extends ORM {
         $min = Arr::get($post, 'min', 1200);
         $max = Arr::get($post, 'max', date('Y',time()));
         $id = Arr::get($post, 'id', NULL);
-        $select = 'p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema,p.Datum_der_Bearbeitung,p.Projektautor,p.Publikationsjahr';
+        $select = DB::expr('p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema,p.Datum_der_Bearbeitung,p.Projektautor,p.Publikationsjahr');
         $result = array();
 
         
@@ -154,7 +154,7 @@ class Model_Project extends ORM {
         if ($title) {
 
             if ($id) {
-                $select = 'asx.ID_HS,asx.Schluessel,asx.hs_name,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem';
+                $select = DB::expr('asx.ID_HS,asx.Schluessel,asx.hs_name,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem');
             }
 
             //schluessel index match
@@ -267,7 +267,7 @@ class Model_Project extends ORM {
         }
         if ($description) {
             if ($id) {
-                $select = 'p.ID_Projekt,p.Projektname, p.Projektbeschreibung, p.Anmerkungsteil, p.Untergliederung,p.Veroeffentlichung,p.Quellen,CONCAT(Veroeffentlichung, \' GESIS Köln, Deutschland ZA\', CONCAT_WS(\' \', ZA_Studiennummer,\'Datenfile\',Bemerkungen)) as quote';
+                $select = DB::expr('p.ID_Projekt,p.Projektname, p.Projektbeschreibung, p.Anmerkungsteil, p.Untergliederung,p.Veroeffentlichung,p.Quellen,CONCAT(Veroeffentlichung, \' GESIS Köln, Deutschland ZA\', CONCAT_WS(\' \', ZA_Studiennummer,\'Datenfile\',Bemerkungen)) as quote');
             }
 
             $db = DB::select($select)
@@ -328,7 +328,7 @@ class Model_Project extends ORM {
         
         if ($source) {
             if ($id) {
-                $select = 'asx.ID_HS,asx.hs_name,asx.Schluessel,asx.count_data,Quelle';
+                $select = DB::expr('asx.ID_HS,asx.hs_name,asx.Schluessel,asx.count_data,Quelle');
             }
             $db = DB::select($select)
                     ->from(array('Aka_Projekte', 'p'))

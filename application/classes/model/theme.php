@@ -17,7 +17,7 @@
     );
     
     public function getThemes(){
-        return DB::select('Aka_Themen.*',array('COUNT(Aka_Projekte.ID_Projekt)','count'),array('SUM(Aka_Projekte.Anzahl_Zeitreihen)','summe'))
+        return DB::select('Aka_Themen.*',array(DB::expr('COUNT(Aka_Projekte.ID_Projekt)'),'count'),array(DB::expr('SUM(Aka_Projekte.Anzahl_Zeitreihen)'),'summe'))
                 ->from('Aka_Themen')
                 ->join('Aka_Projekte','LEFT')
                 ->on('Aka_Themen.ID_Thema','=','Aka_Projekte.ID_Thema')

@@ -17,7 +17,7 @@ class Model_Time extends ORM {
     );
 
     public function getTimes() {
-        return DB::select('Aka_Zeiten.*', array('COUNT(Aka_Projekte.ID_Projekt)', 'count'), array('SUM(Aka_Projekte.Anzahl_Zeitreihen)', 'summe'))
+        return DB::select('Aka_Zeiten.*', array(DB::expr('COUNT(Aka_Projekte.ID_Projekt)'), 'count'), array(DB::expr('SUM(Aka_Projekte.Anzahl_Zeitreihen)'), 'summe'))
                         ->from('Aka_Zeiten')
                         ->join('Aka_Projekte', 'LEFT')
                         ->on('Aka_Zeiten.ID_Zeit', '=', 'Aka_Projekte.ID_Zeit')

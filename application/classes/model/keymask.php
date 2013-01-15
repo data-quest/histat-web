@@ -51,7 +51,7 @@ class Model_Keymask extends ORM {
         return $result;
     }
   public function getKeys($filter) {
-        $result = DB::select(array("Schluessel", "`key`"), "Tabelle", "Quelle", "Anmerkung")->distinct(true)
+        $result = DB::select(array("Schluessel", "key"), "Tabelle", "Quelle", "Anmerkung")->distinct(true)
                 ->from("Lit_ZR")
                 ->where('ID_HS', '=', $this->ID_HS)
                 ->where("Schluessel", "LIKE", $filter);
