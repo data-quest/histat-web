@@ -15,6 +15,10 @@ class Model_Cart extends ORM {
         'chdate' => array(),
         'timelines' => array()
     );
+    protected $_load_with =array(
+        'user',
+        'keymask' 
+    );
     protected $_belongs_to = array(
         'user' => array('model' => 'user', 'foreign_key' => 'user_id', 'far_key' => 'id'),
         'keymask' => array('model' => 'keymask', 'foreign_key' => 'ID_HS', 'far_key' => 'ID_HS')
