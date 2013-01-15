@@ -11,43 +11,37 @@ class Controller_Cart extends Controller_Table {
 
     public function action_index() {
         $view = View::factory(I18n::$lang . '/cart/index');
-
+     
 
         $filters = array();
         $projects = array();
         $tables = array();
      
-        foreach ($this->user->cart_items->find_all() as $item) {
-            
-            $keymask = $item->keymask;
-            $projectID = $keymask->project->ID_Projekt;
+        foreach ($this->user->getCartItems() as $item) {   
+        
             $bearbeitung = '';
-            $datum = substr($keymask->project->Datum_der_Bearbeitung, -4);
+            $datum = substr($item->Datum_der_Bearbeitung, -4);
             if (!empty($datum)) {
                 $bearbeitung = '[' . $datum . ']';
             }
-
-            $projectName = __(':author, (:pub_year :edit_year) :project', array(':author' => $keymask->project->Projektautor,
-                ':pub_year' => $keymask->project->Publikationsjahr,
+            $projectName = __(':author, (:pub_year :edit_year) :project', array(':author' => $item->Projektautor,
+                ':pub_year' => $item->Publikationsjahr,
                 ':edit_year' => $bearbeitung,
-                ':project' => $keymask->project->Projektname
+                ':project' => $item->Projektname
                     ));
-
-
-            $tableID = $item->ID_HS;
-            $tableName = $keymask->Name;
-            $filter = $item->filter;
-            $filterText = json_decode($item->filter_text);
-            $filters[$projectID][$tableID][$filter] = array('text' => $filterText, 'timelines' => $item->timelines);
-            $projects[$projectID] = array('name' => $projectName,
-                'za' => $keymask->project->ZA_Studiennummer,
-                'theme' => $keymask->project->theme->Thema
+            $filters[$item->ID_Projekt][$item->ID_HS][$item->filter] = array('text' =>  json_decode($item->filter_text), 'timelines' => $item->timelines);
+            $projects[$item->ID_Projekt] = array('name' => $projectName,
+                'za' => $item->ZA_Studiennummer,
+                'theme' => $item->Thema
             );
 
-            $tables[$projectID][$tableID] = $tableName;
+            $tables[$item->ID_Projekt][$item->ID_HS] = $item->Name;
         }
+      
+ 
+     
         $view->message = $this->request->param('id', FALSE);
-        $view->projects = $projects;
+        $view->projects =$projects;
         $view->tables = $tables;
         $view->filters = $filters;
         $view->options = Kohana::$config->load('download')->get('options');

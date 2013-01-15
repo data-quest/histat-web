@@ -170,6 +170,55 @@ class Model_User extends Model_Auth_User {
             $login->create();
         }
     }
+    
+    public function getCartItems(){
+        /*
+         *     foreach ($this->user->cart_items->find_all() as $item) {
+            
+            $keymask = $item->keymask;
+               
+            $projectID = $keymask->project->ID_Projekt;
+       
+            $bearbeitung = '';
+            $datum = substr($keymask->project->Datum_der_Bearbeitung, -4);
+            if (!empty($datum)) {
+                $bearbeitung = '[' . $datum . ']';
+            }
+
+            $projectName = __(':author, (:pub_year :edit_year) :project', array(':author' => $keymask->project->Projektautor,
+                ':pub_year' => $keymask->project->Publikationsjahr,
+                ':edit_year' => $bearbeitung,
+                ':project' => $keymask->project->Projektname
+                    ));
+
+
+            $tableID = $item->ID_HS;
+            $tableName = $keymask->Name;
+            $filter = $item->filter;
+            $filterText = json_decode($item->filter_text);
+            $filters[$projectID][$tableID][$filter] = array('text' => $filterText, 'timelines' => $item->timelines);
+            $projects[$projectID] = array('name' => $projectName,
+                'za' => $keymask->project->ZA_Studiennummer,
+                'theme' => $keymask->project->theme->Thema
+            );
+
+            $tables[$projectID][$tableID] = $tableName;
+        }
+         */
+        $result = DB::select("ID_Projekt","ID_HS","sm.Name","Projektautor","Publikationsjahr","Datum_der_Bearbeitung","Projektname","filter_text","filter","timelines","ZA_Studiennummer","Thema")
+                ->distinct(TRUE)
+                ->from(array("warenkorb","w"))
+                ->join(array("Aka_Schluesselmaske","sm"),"LEFT")
+                ->using("ID_HS")
+                ->join(array("Aka_Projekte","p"),"LEFT")
+                ->using("ID_Projekt")
+                ->join(array("Aka_Themen","t"),"LEFT")
+                ->using("ID_Thema")
+                ->where("user_id","=",$this->id)
+             
+                ->order_by("w.chdate","DESC");
+        return $result->as_object()->execute();
+    }
 
 }
 
