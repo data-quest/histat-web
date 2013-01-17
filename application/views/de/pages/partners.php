@@ -1,3 +1,19 @@
+<h3>Was andere über histat sagen</h3>
+               <br>
+                &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br><br>
+                Prof. Dr. Martin Schulze Wessel<br>
+                Vorsitzender des Verbandes der Historiker und Historikerinnen Deutschlands<br><br><br>
+
+
+                &quot;Ein unverzichtbares Daten-Repositorium für die deutsche Wirtschafts- und Sozialgeschichte.&quot;<br><br>
+                Prof. Dr. Jörg Baten<br>
+                General Secretary der International Economic History Association <br><br><br>
+
+
+                &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
+                Dr. Oliver Volckart<br>
+                London School of Economics<br><br>
+            <br><br>
 <h3>Kooperationspartner</h3>
 <br/>
 <ul class="normal">
