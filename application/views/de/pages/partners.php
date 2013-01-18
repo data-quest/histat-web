@@ -1,9 +1,20 @@
+<h3>Was andere über histat sagen</h3>
+               <br>
+                &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br><br>
+                Prof. Dr. Martin Schulze Wessel<br>
+                Vorsitzender des Verbandes der Historiker und Historikerinnen Deutschlands<br><br><br>
+
+
+                &quot;Ein unverzichtbares Daten-Repositorium für die deutsche Wirtschafts- und Sozialgeschichte.&quot;<br><br>
+                Prof. Dr. Jörg Baten<br>
+                General Secretary der International Economic History Association <br><br><br>
+
+
+                &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
+                Dr. Oliver Volckart<br>
+                London School of Economics<br><br>
+            <br><br>
 <h3>Kooperationspartner</h3>
-<?= HTML::anchor("http://www.destatis.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
-<br/>
-<?= HTML::anchor("http://www.bpb.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-bpb.png", array("alt" => "BpB")), array(), "http") ?>
-<br/>
-<br/>
 <br/>
 <ul class="normal">
     <li>
