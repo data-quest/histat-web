@@ -6,6 +6,7 @@ function init_schluessel_detail($ID_HS)
     $s_code = $db->query("SELECT Aka_SchluesselCode.ID_CodeKuerz,Position,CodeBeschreibung,Zeichen 
             FROM Aka_SchluesselCode LEFT JOIN Aka_Codes USING(ID_CodeKuerz)
              WHERE ID_HS ='".$ID_HS."' ORDER BY Position")->fetchAll(PDO::FETCH_ASSOC);
+    $schluessel_detail = array();
     foreach ($s_code as $rs) {
         $code_inhalt = $db->query("SELECT CodeBezeichnung,Code FROM Aka_CodeInhalt WHERE ID_CodeKuerz='".$rs["ID_CodeKuerz"]."'")->fetchAll(PDO::FETCH_ASSOC);
         $tmp = array();
