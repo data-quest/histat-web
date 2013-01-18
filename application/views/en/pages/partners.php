@@ -1,3 +1,19 @@
+               <h3>What others say about histat</h3>
+               <br>
+                &quot;A really good and important project.&quot;<br><br>
+                Prof. Dr. Martin Schulze Wessel<br>
+                Chairman des Verbandes der Historiker und Historikerinnen Deutschlands<br><br><br>
+
+
+                &quot;An indispensable data-repository for German economic and social history.&quot;<br><br>
+                Prof. Dr. Jörg Baten<br>
+                General Secretary der International Economic History Association <br><br><br>
+
+
+                &quot;It is most certainly not possible to make it more comfortable.&quot;<br><br>
+                Dr. Oliver Volckart<br>
+                London School of Economics<br><br>
+            <br><br>
 <h3>Cooperating Partners</h3>
 <br/>
 <ul class="normal">

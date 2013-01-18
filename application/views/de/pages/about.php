@@ -49,23 +49,7 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünfeinhalb Milli
             </center>
             <h3>Vollständige Dokumentation als PDF (107 S.)</h3>
             <br><br>
-               <h2>Was andere über histat sagen</h2>
-               <h3>
-               <br>
-                &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br><br>
-                Prof. Dr. Martin Schulze Wessel<br>
-                Vorsitzender des Verbandes der Historiker und Historikerinnen Deutschlands<br><br><br>
-
-
-                &quot;Ein unverzichtbares Daten-Repositorium für die deutsche Wirtschafts- und Sozialgeschichte.&quot;<br><br>
-                Prof. Dr. Jörg Baten<br>
-                General Secretary der International Economic History Association <br><br><br>
-
-
-                &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
-                Dr. Oliver Volckart<br>
-                London School of Economics<br><br></h3>
-            <br><br>
+               
             <h3>Kontakt<br/>
                 <br/>
                 <br/>
