@@ -28,7 +28,7 @@ class Model_Keymask extends ORM {
                         ->join(array('Aka_CodeInhalt', 'ci'), 'LEFT')
                         ->on('ci.ID_CodeKuerz', '=', 'c.ID_CodeKuerz')
                         ->where("k.ID_HS", "=", $this->ID_HS)
-                        ->order_by('Position','DESC')->as_object()->execute();
+                        ->order_by('Position')->order_by('Code')->as_object()->execute();
         $result = array();
   
         $keys = $this->getKeys($filter);
