@@ -42,13 +42,14 @@
                             <?php
                             $k = array_keys($detail);
                             $beschreibung = $detail[$k[0]]->CodeBeschreibung;
-                            $selected = Arr::get($post, $i, "all");
+                            $selected = Arr::get($post, $i, "-1");
                             echo Form::hidden('filter_text[]', $beschreibung . ' : ' . Arr::get($filters[$codeKurz], $selected, __('All')));
                             echo Form::hidden('id', $id_hs);
                             echo Form::hidden('filter_string', $filter);
-                            $filters[$codeKurz]["all"] = $beschreibung . ' *';
+                            $filters[$codeKurz]["-1"] = $beschreibung . ' *';
 
-                            $filters_reversed = array_reverse(Arr::get($filters, $codeKurz));
+                               $filters_reversed = (Arr::get($filters, $codeKurz));
+                            ksort($filters_reversed);
                             ?>
                             <?= Form::select('filter[]', $filters_reversed, $selected, array('style' => 'width:150px')) ?>
                         </td>

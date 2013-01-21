@@ -34,7 +34,7 @@ class Controller_Table extends Controller_Data {
         if (count($filters) > 0) {
 
             foreach ($filters as $filter) {
-                if ($filter !== "all") {
+                if ($filter !== "-1") {
                     $filter = explode('_', $filter);
                     $code = $filter[0];
                     $pos = $filter[1];
@@ -88,7 +88,7 @@ class Controller_Table extends Controller_Data {
                     if (substr($this->filter, $pos - 1, $len) === $code) {
                         $post[$i] = $key;
                     } else {
-                        $post[$i] = "all";
+                        $post[$i] = "-1";
                     }
                 }
                 $i++;
@@ -104,7 +104,7 @@ class Controller_Table extends Controller_Data {
         $view->keys = $details['keys'];
         $view->data = $data;
         $view->keymask = $keymask;
-
+       
         $view->tables = $details['tables'];
         $view->titles = $details['titles'];
         $view->filters = $details['filters'];
