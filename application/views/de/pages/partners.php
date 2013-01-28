@@ -12,8 +12,11 @@
 
                 &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
                 Dr. Oliver Volckart<br>
-                London School of Economics<br><br>
-            <br><br>
+                London School of Economics<br><br><br>
+
+                &quot;Es ist großartig, dass GESIS diese Daten sammelt und Forschern zur Verfügung stellt.&quot;<br><br>
+                Robin Winkler<br>
+                DPhil candidate in Economic History, Oxford University<br><br><br>
 <h3>Kooperationspartner</h3>
 <br/>
 <ul class="normal">
