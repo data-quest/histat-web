@@ -12,7 +12,11 @@
 
                 &quot;It is most certainly not possible to make it more comfortable.&quot;<br><br>
                 Dr. Oliver Volckart<br>
-                London School of Economics<br><br>
+                London School of Economics<br><br><br>
+                
+                &quot;It's great that GESIS collects this data and provides it to researchers.&quot;<br><br>
+                Robin Winkler<br>
+                DPhil candidate in Economic History, Oxford University
             <br><br>
 <h3>Cooperating Partners</h3>
 <br/>
