@@ -24,7 +24,7 @@
                 &quot;Es ist großartig, dass GESIS diese Daten sammelt und Forschern zur Verfügung stellt.&quot;<br><br>
                 Robin Winkler<br>
                 DPhil candidate in Economic History, Oxford University<br><br><br>
-<h3>Kooperationspartner</h3>
+<h3>Weitere Kooperationspartner</h3>
 <br/>
 <ul class="normal">
     <li>
