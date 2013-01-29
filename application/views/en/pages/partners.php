@@ -1,4 +1,10 @@
-               <h3>What others say about histat</h3>
+<h3>In cooperation with</h3>
+
+<?= HTML::anchor("http://www.destatis.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
+<br/>
+<br/>
+
+<h3>What others say about histat</h3>
                <br>
                 &quot;A really good and important project.&quot;<br><br>
                 Prof. Dr. Martin Schulze Wessel<br>
@@ -18,7 +24,7 @@
                 Robin Winkler<br>
                 DPhil candidate in Economic History, Oxford University
             <br><br>
-<h3>Cooperating Partners</h3>
+<h3>Further cooperating Partners</h3>
 <br/>
 <ul class="normal">
     <li>
