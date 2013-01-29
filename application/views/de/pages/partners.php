@@ -1,3 +1,10 @@
+<h3>In Kooperation mit</h3>
+
+<?= HTML::anchor("http://www.destatis.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
+<br/>
+<br/>
+
+
 <h3>Was andere über histat sagen</h3>
                <br>
                 &quot;Ein wirklich gutes und wichtiges Vorhaben.&quot;<br><br>
