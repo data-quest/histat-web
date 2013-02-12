@@ -82,7 +82,7 @@ Kohana::init(array(
     'base_url' => '/histat/',
     'index_file' => FALSE, // SEO (avoid index.php/mycontroller/action)
     'profile' => (Kohana::$environment !== Kohana::PRODUCTION), //see how good you are
-    'caching' => (Kohana::$environment === Kohana::PRODUCTION),
+    'caching' => TRUE//(Kohana::$environment === Kohana::PRODUCTION),
 ));
 
 /**
@@ -165,6 +165,27 @@ Route::set('delete_cart', '(<lang>/)cart/delete/<id>/(<filter>)', array('lang' =
         ->defaults(array(
             'controller' => 'cart',
             'action' => 'delete'));
+
+// API Browser, if enabled
+if (Kohana::$config->load('userguide.api_browser') === TRUE)
+{
+	Route::set('docs/api', '(<lang>/)guide/api(/<class>)', array('class' => '[a-zA-Z0-9_]+'))
+		->defaults(array(
+			'controller' => 'userguide',
+			'action'     => 'api',
+			'class'      => NULL,
+		));
+}
+
+// User guide pages, in modules
+Route::set('docs/guide', '(<lang>/)guide(/<module>(/<page>))', array(
+		'page' => '.+',
+	))
+	->defaults(array(
+		'controller' => 'userguide',
+		'action'     => 'docs',
+		'module'     => '',
+	));
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
