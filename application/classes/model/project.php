@@ -48,7 +48,7 @@ class Model_Project extends ORM {
     public function new_projects() {
 
         return DB::select(
-                                 'Zeitraum', 'Anzahl_Zeitreihen', array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Anzahl_Zeitreihen','Thema','Datum_der_Bearbeitung','Publikationsjahr'
+                                'Zugangsklasse', 'Zeitraum', 'Anzahl_Zeitreihen', array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Anzahl_Zeitreihen','Thema','Datum_der_Bearbeitung','Publikationsjahr'
                         )
                         ->from('Aka_Projekte')
                  ->join('Aka_Themen', 'INNER')
@@ -71,7 +71,7 @@ class Model_Project extends ORM {
 
 
         $result = DB::select(
-                        'Zeitraum', 'Anzahl_Zeitreihen', array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Thema','Datum_der_Bearbeitung','Publikationsjahr'
+                        'Zugangsklasse',  'Zeitraum', 'Anzahl_Zeitreihen', array('ZA_Studiennummer', 'Studiennummer'), array('Projektname', 'Studientitel'), array('Projektautor', 'Autor'), 'ID_Projekt', 'Thema','Datum_der_Bearbeitung','Publikationsjahr'
                 )
                 ->from('Aka_Projekte')
                 ->join('user_downloads', 'INNER')
@@ -99,7 +99,7 @@ class Model_Project extends ORM {
 
     public function getAuthors() {
 
-        return DB::select('ID_Projekt', 'Projektautor')
+        return DB::select( 'Zugangsklasse', 'ID_Projekt', 'Projektautor')
                         ->from(array('Aka_Projekte', 'p'))
                         ->where('p.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
                         ->where('p.Projektautor', 'IS NOT', NULL)
@@ -117,7 +117,7 @@ class Model_Project extends ORM {
                 
     }
     public function getTimelines($id){
-             return DB::select(array(DB::expr('COUNT(lz.ID_HS)'),'timelines'))
+             return DB::select(array(DB::expr('COUNT(lz.ID_HS)'),'timelines', 'Zugangsklasse'))
                 ->from(array('Aka_Schluesselmaske','sm'))
                 ->join(array('Lit_ZR','lz'))
                 ->on('lz.ID_HS','=','sm.ID_HS')
@@ -146,7 +146,7 @@ class Model_Project extends ORM {
         $min = Arr::get($post, 'min', 1200);
         $max = Arr::get($post, 'max', date('Y',time()));
         $id = Arr::get($post, 'id', NULL);
-        $select = DB::expr('p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema,p.Datum_der_Bearbeitung,p.Projektautor,p.Publikationsjahr');
+        $select = DB::expr('Zugangsklasse,p.ID_Projekt,p.Projektname,p.ZA_Studiennummer,t.Thema,p.Datum_der_Bearbeitung,p.Projektautor,p.Publikationsjahr');
         $result = array();
 
         
@@ -154,7 +154,7 @@ class Model_Project extends ORM {
         if ($title) {
 
             if ($id) {
-                $select = DB::expr('asx.ID_HS,asx.Schluessel,asx.hs_name,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem');
+                $select = DB::expr('Zugangsklasse,asx.ID_HS,asx.Schluessel,asx.hs_name,asx.ID_Projekt,asx.count_data,asx.min_jahr_sem,asx.max_jahr_sem');
             }
 
             //schluessel index match
