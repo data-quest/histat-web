@@ -26,8 +26,7 @@ class Controller_Table extends Controller_Data {
         $this->id_hs = $this->request->param('id');
         $this->filter = $this->request->param('filter', $this->filter);
         $this->session->set('referrer', $this->request->uri());
-        if ($this->user->has_roles(array('guest')))
-            $this->request->redirect(I18n::$lang . '/auth/login');
+      
     }
 
     public function set_filter($filters) {
@@ -54,9 +53,16 @@ class Controller_Table extends Controller_Data {
     }
 
     public function action_details() {
+          
+          
         if (!$this->id_hs)
             throw new HTTP_Exception_404();
+        
         $keymask = ORM::factory('keymask', $this->id_hs);
+        
+        if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
+            $this->request->redirect(I18n::$lang . '/auth/login');
+        
         $this->scripts[] = 'table.js';
         $view = View::factory(I18n::$lang . '/table/details');
 
@@ -184,9 +190,11 @@ class Controller_Table extends Controller_Data {
     }
 
     public function action_download() {
-
+           $keymask = ORM::factory('keymask', $this->id_hs);
+            if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
+            $this->request->redirect(I18n::$lang . '/auth/login');
         if (HTTP_Request::POST == $this->request->method()) {
-            $keymask = ORM::factory('keymask', $this->id_hs);
+         
             $details = $keymask->getDetails($this->filter);
             $name = $keymask->project->Projektname;
             $type = $this->request->param('type');
@@ -260,7 +268,8 @@ class Controller_Table extends Controller_Data {
 
     public function action_xls() {
         $keymask = ORM::factory('keymask', $this->id_hs);
-
+           if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
+            $this->request->redirect(I18n::$lang . '/auth/login');
 
         $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
         $details = $keymask->getDetails($this->filter);
@@ -282,6 +291,8 @@ class Controller_Table extends Controller_Data {
 
     public function action_xlsx() {
         $keymask = ORM::factory('keymask', $this->id_hs);
+           if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
+            $this->request->redirect(I18n::$lang . '/auth/login');
         $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;
@@ -302,6 +313,8 @@ class Controller_Table extends Controller_Data {
 
     public function action_csv() {
         $keymask = ORM::factory('keymask', $this->id_hs);
+           if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
+            $this->request->redirect(I18n::$lang . '/auth/login');
         $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
         $details = $keymask->getDetails($this->filter);
         $details['data'] = null;

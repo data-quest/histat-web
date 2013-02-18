@@ -1063,6 +1063,9 @@ table tr td.even {
 }
 /*Style profile/edit_password end*/
 /*Style table/details/id*/
+#table_details.public{
+    background:#DDD8C1;
+}
 #table_details h1{
     padding: 1em;
 }

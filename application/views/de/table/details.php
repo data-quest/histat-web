@@ -1,8 +1,9 @@
-<div id="table_details" >
+
 
     <?php $data ? $download = 'download enabled' : $download = 'download disabled' ?>
     <?php $id_hs = $keymask->ID_HS; ?>
     <?php $id_projekt = $keymask->project->ID_Projekt; ?>
+<div id="table_details" <?= $keymask->project->Zugangsklasse == "-1"?'class="public"':"" ?> >
     <h1 class="left">Tabellenansicht der Studie</h1>
 
     <?php if (Session::instance()->get('search', false)) : ?>
@@ -27,7 +28,9 @@
                     <?php $data ? $id = array('class' => $class, 'id' => 'cart', 'onclick' => 'return false;') : $id = array('class' => $class, 'onclick' => 'return false;') ?>   <?= HTML::anchor($data ? 'download/xls/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.XLS', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/xlsx/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.XLSX', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/csv/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.CSV', array('class' => $class)) ?>
+                    <?php if($keymask->project->Zugangsklasse !== "-1"):?>
                     <?= HTML::anchor('table/details/' . $id_hs . '/' . $filter . '#tabelle', HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
+                    <?php endif;?>
                 </div> 
 
             </div>
