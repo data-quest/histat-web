@@ -60,7 +60,7 @@ class Model_Project extends ORM {
                         ->execute();
     }
     public function get_newest(){
-        return DB::select('chdate')
+        return DB::select( 'Zugangsklasse','chdate')
                 ->from('Aka_Projekte')
                 ->order_by('chdate', 'DESC')
                 ->limit(1)
@@ -89,7 +89,7 @@ class Model_Project extends ORM {
     }
 
     public function getUsedTables() {
-        return DB::select("lz.ID_HS")->distinct(true)
+        return DB::select( 'Zugangsklasse',"lz.ID_HS")->distinct(true)
                         ->from(array("Aka_Projekte", "p"))
                         ->join(array('Aka_Schluesselmaske', 'sm'), 'INNER')->on('p.ID_Projekt', '=', 'sm.ID_Projekt')
                         ->join(array('Lit_ZR', 'lz'), 'INNER')->on('sm.ID_HS', '=', 'lz.ID_HS')
