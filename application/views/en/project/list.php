@@ -2,7 +2,7 @@
     <?php if (!$projects->loaded()) : ?>
         <?php foreach ($projects->find_all() as $project): ?>
 
-            <tr >
+             <tr <?= $project->Zugangsklasse == "-1"?'class="public"':''?>>
                 <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>
                 <td class="even" width="13%"><?= $project->theme->Thema ?></td>
                 <?php 
@@ -26,7 +26,7 @@
 
         <?php endforeach ?>
     <?php else: ?>
-        <tr >
+          <tr <?= $projects->Zugangsklasse == "-1"?'class="public"':''?>>
             <td width="10%">ZA <?= $projects->ZA_Studiennummer ?></td>
             <td class="even" width="13%"><?= $projects->theme->Thema ?></td>
               <?php 

@@ -166,6 +166,13 @@ td.timelines:hover{
     cursor: pointer;
     background:url(../img/layout/button-table-details-left.png) no-repeat center right;  
 }
+tr.public td.timelines{
+  background:url(../img/layout/button-table-details-public-left.png) no-repeat center right;  
+}
+tr.public td.timelines:hover{
+     cursor: pointer;
+  background:url(../img/layout/button-table-details-public-right.png) no-repeat center right;  
+}
 td.details span a{
     display:block;
     margin: auto;
@@ -1064,7 +1071,7 @@ table tr td.even {
 /*Style profile/edit_password end*/
 /*Style table/details/id*/
 #table_details.public{
-    background:#DDD8C1;
+    
 }
 #table_details h1{
     padding: 1em;
