@@ -26,7 +26,7 @@
                 <div class="buttons" >
                     <?php $data ? $class = 'button' : $class = 'button disabled' ?>
                     <?php $data ? $id = array('class' => $class, 'id' => 'cart', 'onclick' => 'return false;') : $id = array('class' => $class, 'onclick' => 'return false;') ?>  
-                    <?php if($keymask->project->Zugangsklasse !== "-1" || $guest ):?>
+                    <?php if($keymask->project->Zugangsklasse !== "-1" || !$guest ):?>
                     <?= HTML::anchor('table/details/' . $id_hs . '/' . $filter . '#tabelle', HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
                     <?php endif;?>
                     <?= HTML::anchor($data ? 'download/xls/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.XLS', array('class' => $class)) ?>
