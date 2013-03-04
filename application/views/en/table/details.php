@@ -20,15 +20,16 @@
         <div class="name" id="tabelle"><div ><?= ($is_admin)? HTML::anchor('table/edit_details/'.$id_hs.'/'.$filter,__('Edit'),array('class'=>'edit_table')):''  ?><?= $keymask->Name ?> (found timeseries: <b><?= $data ? count($keys) : '<span style="color:#FE8F00">' . count($keys) . '</span>' ?></b>)</div> 
             <div class="download_icons">
                 <div class="<?= $download ?>"><?= __('Download') ?></div>
-                <div class="buttons" style="position: absolute" >
+                <div class="buttons" >
                     <?php $data ? $class = 'button' : $class = 'button disabled' ?>
                     <?php $data ? $id = array('class' => $class, 'id' => 'cart', 'onclick' => 'return false;') : $id = array('class' => $class, 'onclick' => 'return false;') ?>   <?= HTML::anchor($data ? 'download/xls/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.XLS', array('class' => $class)) ?>
+                         <?php if($keymask->project->Zugangsklasse !== "-1"):?>
+                    <?= HTML::anchor('table/details/' . $id_hs . '/' . $filter . '#tabelle', HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
+                    <?php endif;?>
                     <?= HTML::anchor($data ? 'download/xlsx/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.XLSX', array('class' => $class)) ?>
                     <?= HTML::anchor($data ? 'download/csv/' . $id_hs . '/' . $filter : 'table/details/' . $id_hs, '.CSV', array('class' => $class)) ?>
                     <?= HTML::anchor('table/details/' . $id_hs . '/' . $filter . '#tabelle', HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
-                    <?php if($keymask->project->Zugangsklasse !== "-1"):?>
-                    <?= HTML::anchor('table/details/' . $id_hs . '/' . $filter . '#tabelle', HTML::image('/assets/img/layout/icon-warenkorb.png'), $id) ?>
-                    <?php endif;?>
+               
                 </div> 
 
             </div>

@@ -1,4 +1,7 @@
-<div id="project_details" style="display:none" >
+<?php
+$public = $project->Zugangsklasse == "-1";
+?>
+<div id="project_details" style="display:none" <?= $public?'class="public"':''?>>
     <table border="0" cellpadding="0" cellspacing="0">
         <tr >
             <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>

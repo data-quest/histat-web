@@ -301,14 +301,21 @@ table tr td.even {
     background: #ffffff; 
     cursor: pointer;
 }
+.public .button{
+        background: url(../img/layout/hg-navi-orange-public.png) repeat-x left center;
+}
 .button{
-    text-decoration: none;
-    color:#ffffff;
-    padding:10px;
-    border:0px;
-    font-size: 1.1em;
+    border: 0 none;
+    color: #FFFFFF;
     cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 1.1em;
+    line-height: 34px;
+    margin-right: 5px;
     max-height: 35px;
+    padding: 3px 10px;
+    text-decoration: none;
     background: url(../img/layout/hg-navi-orange.jpg) repeat-x left center;
 }
 /*General Styles end*/
@@ -647,6 +654,7 @@ table tr td.even {
     padding: 2px;
 
 }
+
 #project_details .link a{
 
     color: #FFFFFF;
@@ -676,6 +684,15 @@ table tr td.even {
 }
 #project_details  .timelines.hide:hover{
          background:url(../img/layout/button-table-details-left.png) repeat-x center right;
+}
+#project_details.public .link{
+    background: url("../img/layout/details-public.png") repeat center center transparent;
+}
+#project_details.public  .timelines:hover{
+    background:url(../img/layout/button-table-details-public-right.png) repeat-x center right;
+}
+#project_details.public  .timelines{
+         background:url(../img/layout/button-table-details-public-left.png) repeat-x center right;
 }
 #project_details h1{
     padding: 10px; 
@@ -1089,9 +1106,9 @@ table tr td.even {
     padding:2em;
 }
 #table_details .name .buttons{
-    position: absolute;
-    width:400px;
-    margin-left:-200px;
+   float:right;
+    width:auto;
+   
     display: none;
 }
 
@@ -1115,6 +1132,10 @@ table tr td.even {
     font-weight: bold;
     cursor: pointer;
     background:#FF7E00;
+}
+#table_details.public .name .download{
+    background:#527F5F;
+   
 }
 #table_details .name .download.disabled{
     background:#BABEBF;
@@ -1286,8 +1307,8 @@ padding:0;
 }
 /*Style table/details/id end*/
 /* Style cart*/
-#cart{
-    padding:15px;
+#cart > img{
+    padding:10px 5px;
 }
 #cart .right{
     float:right;

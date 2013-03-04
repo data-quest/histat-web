@@ -20,6 +20,7 @@ class Controller_Admin extends Controller_Index {
     }
 
     public function action_users() {
+       
          $this->sub_navi->activate(__('Users'));
          $message = $this->request->param('id','');
         $view = View::factory(I18n::$lang.'/admin/user/index');
