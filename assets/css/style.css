@@ -1383,6 +1383,7 @@ padding:0;
     background: #000000;
     top:0px;
     left:0px;
+    z-index: 2;
 }
 #download .transparent{
     /* IE 8 */
