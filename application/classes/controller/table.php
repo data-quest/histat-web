@@ -71,6 +71,7 @@ class Controller_Table extends Controller_Data {
         //assign new projects to subview
         $list->projects = $keymask->project;
         $this->project = $keymask->project->Projektname;
+        
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
 
@@ -119,6 +120,7 @@ class Controller_Table extends Controller_Data {
         $view->filter = $this->filter;
         $view->is_admin = $this->user->has_roles(array('admin'));
         $view->post = $post;
+        $view->guest = $this->user->has_roles(array('guest'));
         $view->search = strstr($this->request->referrer(), 'search');
         $view->project = $list->render();
         $this->content = $view->render();
@@ -193,6 +195,7 @@ class Controller_Table extends Controller_Data {
            $keymask = ORM::factory('keymask', $this->id_hs);
             if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
             $this->request->redirect(I18n::$lang . '/auth/login');
+            
         if (HTTP_Request::POST == $this->request->method()) {
          
             $details = $keymask->getDetails($this->filter);
