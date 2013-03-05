@@ -15,8 +15,9 @@
                 Prof. Dr. Jörg Baten<br>
                 General Secretary der International Economic History Association <br><br><br>
 
-                &quot;Die Beratung durch das Team war mir eine große Hilfe. Es hätte sicherlich Wochen gedauert, all diese Informationen zu orten ... und wahrscheinlich hatte ich einen Großteil gar nicht erst gefunden.&quot;<br><br>
-                Dr. Michael Peters, MIT Department of Economics<br><br><br>
+                &quot;Die Beratung durch das Team war mir eine große Hilfe. Es hätte sicherlich Wochen gedauert, all diese Informationen zu orten ... und wahrscheinlich hätte ich einen Großteil gar nicht erst gefunden.&quot;<br><br>
+                Dr. Michael Peters<br> 
+                MIT Department of Economics<br><br><br>
                
                 &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
                 Dr. Oliver Volckart<br>
