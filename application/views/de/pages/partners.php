@@ -11,12 +11,13 @@
                 Prof. Dr. Martin Schulze Wessel<br>
                 Vorsitzender des Verbandes der Historiker und Historikerinnen Deutschlands<br><br><br>
 
-
                 &quot;Ein unverzichtbares Daten-Repositorium für die deutsche Wirtschafts- und Sozialgeschichte.&quot;<br><br>
                 Prof. Dr. Jörg Baten<br>
                 General Secretary der International Economic History Association <br><br><br>
 
-
+                &quot;Die Beratung durch das Team war mir eine große Hilfe. Es hätte sicherlich Wochen gedauert, all diese Informationen zu orten ... und wahrscheinlich hatte ich einen Großteil gar nicht erst gefunden.&qout;<br><br>
+                Dr. Michael Peters, MIT Department of Economics<br><br><br>
+               
                 &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
                 Dr. Oliver Volckart<br>
                 London School of Economics<br><br><br>
