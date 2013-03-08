@@ -54,7 +54,7 @@ class Model_Project extends ORM {
                  ->join('Aka_Themen', 'INNER')
                 ->using('ID_Thema')
                         ->where('ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
-                        ->order_by('Aka_Projekte.chdate', 'DESC')
+                        ->order_by('Aka_Projekte.ZA_Studiennummer', 'DESC')
                         ->limit('20')
                         ->as_object($this)
                         ->execute();
