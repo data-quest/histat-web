@@ -192,7 +192,7 @@ class Controller_Index extends Controller_Template {
             $this->template->times = number_format($times[0]->amount, 0, ',', '.');
             $this->template->values = number_format($values[0]->amount, 0, ',', '.');
             $date = time();
-            if(count($project)>0){ $date = $project[0]->chdate;}
+            if(count($project)>0){ $date = strtotime($project[0]->chdate);}
             $this->template->date = date("d.m.Y",$date);
             $this->template->user = $this->user;
             $this->template->pagename = urlencode($this->page_name());
