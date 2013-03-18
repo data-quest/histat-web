@@ -191,7 +191,9 @@ class Controller_Index extends Controller_Template {
             $this->template->xsrf = $this->xsrf;
             $this->template->times = number_format($times[0]->amount, 0, ',', '.');
             $this->template->values = number_format($values[0]->amount, 0, ',', '.');
-            $this->template->date = date("d.m.Y",strtotime($project[0]->chdate));
+            $date = time();
+            if($project){ $date = $project[0]->chdate;}
+            $this->template->date = date("d.m.Y",$date);
             $this->template->user = $this->user;
             $this->template->pagename = urlencode($this->page_name());
              $this->template->area = urlencode($this->area());
