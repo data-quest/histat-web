@@ -8,6 +8,7 @@ defined('SYSPATH') or die('No direct script access.');
 class Controller_Data extends Controller_Index {
 
     protected $dialog = "";
+    protected $isAdmin = false;
 
     public function before() {
         parent::before();
@@ -20,6 +21,9 @@ class Controller_Data extends Controller_Index {
         $this->sub_navi->add('data/names', __('Names'));
            $this->sub_navi->add('data/new', __('New'));
         $this->sub_navi->add('data/top', __('Top'));
+
+        $this->isAdmin = $this->user->has_roles(array("admin"));
+        
     }
     public function action_index() {
        $this->action_themes();
@@ -34,7 +38,7 @@ class Controller_Data extends Controller_Index {
         //Load view/<lang>/project/list.php prepare the subview
         $list = View::factory(I18n::$lang . '/project/new');
         //assign new projects to subview
-        $list->projects = $project->new_projects();
+        $list->projects = $project->new_projects($this->isAdmin);
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/data/index');
         //Assign list in view
@@ -56,7 +60,7 @@ class Controller_Data extends Controller_Index {
         //Load view/<lang>/project/list.php prepare the subview
         $list = View::factory(I18n::$lang . '/project/top');
         //assign new projects to subview
-        $list->projects = $project->top_projects();
+        $list->projects = $project->top_projects($this->isAdmin);
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/data/top');
         //Assign list in view
@@ -71,15 +75,17 @@ class Controller_Data extends Controller_Index {
 
     public function action_themes($id = NULL) {
         $this->sub_navi->activate(__('Themes'));
+        
         if (!$id)
             $id = $this->request->param('id');
 
         if (!$id) {
             $this->scripts[] = 'jquery.tagsphere.min.js';
+            //$this->scripts[] = 'jquery.awesomeCloud.min.js';
             $this->scripts[] = 'themes.js';
             $orm = ORM::factory('theme');
             $total = 0;
-            $themes_tmp = $orm->getThemes()->order_by('summe', 'DESC')->as_object()->execute();
+            $themes_tmp      = $orm->getThemes($this->isAdmin)->order_by('summe', 'DESC')->as_object()->execute();
             foreach ($themes_tmp as $theme) {
                 $total += $theme->summe;
             }
@@ -95,8 +101,9 @@ class Controller_Data extends Controller_Index {
         } else {
             $orm = ORM::factory('theme', $id);
             $view = View::factory(I18n::$lang . '/data/themes/overview');
-            $view->theme_list = $orm->getThemes()->as_object()->execute();
+            $theme_list = $orm->getThemes($this->isAdmin)->as_object()->execute();
 
+            $view->theme_list = $theme_list;
             //Load view/<lang>/project/list.php prepare the subview
             $list = View::factory(I18n::$lang . '/project/list');
             //assign new projects to subview
@@ -122,7 +129,7 @@ class Controller_Data extends Controller_Index {
             $this->scripts[] = 'themes.js';
             $orm = ORM::factory('time');
             $total = 0;
-            $times_tmp = $orm->getTimes()->order_by('summe', 'DESC')->as_object()->execute();
+            $times_tmp       = $orm->getTimes($this->isAdmin)->order_by('summe', 'DESC')->as_object()->execute();
             foreach ($times_tmp as $time) {
                 $total += $time->summe;
             }
@@ -138,7 +145,7 @@ class Controller_Data extends Controller_Index {
         } else {
             $orm = ORM::factory('time', $id);
             $view = View::factory(I18n::$lang . '/data/times/overview');
-            $view->time_list = $orm->getTimes()->as_object()->execute();
+            $view->time_list = $orm->getTimes($this->isAdmin)->as_object()->execute();
 
             //Load view/<lang>/project/list.php prepare the subview
             $list = View::factory(I18n::$lang . '/project/list');
@@ -164,7 +171,7 @@ class Controller_Data extends Controller_Index {
 
         $orm = ORM::factory('project');
         $view = View::factory(I18n::$lang . '/data/names/overview');
-        $authors = $orm->getAuthors();
+        $authors     = $orm->getAuthors($this->isAdmin);
         $author_list = array();
         $key_list = array();
         foreach ($authors as $author) {

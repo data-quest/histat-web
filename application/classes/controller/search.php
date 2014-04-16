@@ -14,7 +14,7 @@ class Controller_Search extends Controller_Data {
     public function before() {
         parent::before();
         $this->layout = View::factory(I18n::$lang . '/search/layout');
-        $orm = ORM::factory('theme');
+        $orm          = ORM::factory('theme')->where('ID_Thema', '<>', $this->config['test_import_id']);
 
         $themes = array(
             "-1" => __('All')
@@ -23,7 +23,15 @@ class Controller_Search extends Controller_Data {
             $themes[$theme->ID_Thema] = $theme->Thema;
         }
         $checked = "on";
-
+        $invalidIds = array(
+            Kohana::$config->load('config.example_theme_id'),
+            Kohana::$config->load('config.test_import_id')
+        );
+        foreach ($invalidIds as $id) {
+            if (isset($themes[$id])) {
+                unset($themes[$id]);
+            }
+        }
 
         if (HTTP_Request::POST == $this->request->method()) {
             $post = $this->request->post();

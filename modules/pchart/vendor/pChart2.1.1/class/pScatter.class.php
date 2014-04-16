@@ -511,6 +511,7 @@
          $SplineSettings["Forces"] = $Forces; 
          $this->pChartObject->drawSpline($WayPoints,$SplineSettings);
         }
+        var_dump($SplineSettings);
       }
     }
 

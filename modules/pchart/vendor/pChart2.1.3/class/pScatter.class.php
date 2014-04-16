@@ -527,7 +527,7 @@
           {
            $X = $Value; $Y = $PosArrayY[$Key];
            $Force = $this->pChartObject->getLength($LastX,$LastY,$X,$Y)/5;
-
+         
            if ( $X != VOID && $Y != VOID )
             {
              $RealValue = round($Data["Series"][$Series["X"]]["Data"][$Key],2)." / ".round($Data["Series"][$Series["Y"]]["Data"][$Key],2);
@@ -544,6 +544,7 @@
           }
          $SplineSettings["Forces"] = $Forces; 
          $this->pChartObject->drawSpline($WayPoints,$SplineSettings);
+        
         }
       }
     }

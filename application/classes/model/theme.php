@@ -16,14 +16,16 @@
         'projects' => array('model'=>'project','far_key'=>'ID_Thema','foreign_key'=>'ID_Thema')
     );
     
-    public function getThemes(){
-        return DB::select('Aka_Themen.*',array(DB::expr('COUNT(Aka_Projekte.ID_Projekt)'),'count'),array(DB::expr('SUM(Aka_Projekte.Anzahl_Zeitreihen)'),'summe'))
+    public function getThemes($isAdmin = false) {
+        $result = DB::select('Aka_Themen.*', array(DB::expr('COUNT(Aka_Projekte.ID_Projekt)'), 'count'), array(DB::expr('SUM(Aka_Projekte.Anzahl_Zeitreihen)'), 'summe'))
                 ->from('Aka_Themen')
                 ->join('Aka_Projekte','LEFT')
                 ->on('Aka_Themen.ID_Thema','=','Aka_Projekte.ID_Thema')
-                ->where('Aka_Projekte.ID_Projekt', 'IS NOT ', NULL)
-                ->where('Aka_Themen.ID_Thema', '!=', Kohana::$config->load('config.example_theme_id'))
-                ->group_by('Thema');        
+                ->where('Aka_Projekte.ID_Projekt', 'IS NOT ', NULL);
+        if (!$isAdmin) {
+            $result->where('Aka_Themen.ID_Thema', '!=', Kohana::$config->load('config.test_import_id'));
+        }
+        return $result->group_by('Thema');
     }
    
 }

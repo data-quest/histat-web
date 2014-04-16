@@ -1698,3 +1698,8 @@ padding:0;
     width: 200px;
     border: 1px solid #72777A;
 }
+#themes_cloud ul li{
+    float:left;
+    margin:15px;
+    height:50px;
+}
