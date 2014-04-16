@@ -4,8 +4,8 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Stats extends Controller_Admin {
 
-    private $result = '';
-    private $options = array(
+    private $result   = '';
+    private $options  = array(
         'Übersicht der registrierten Nutzer',
         'Übersicht der einzelnen Downloads (Datentabellen)',
         'Übersicht zur Anzahl der Downloads (Datentabellen) nach Studien',
@@ -16,8 +16,17 @@ class Controller_Stats extends Controller_Admin {
         'Liste der Studien',
         'Gesamtübersicht: Registrierungen, Anmeldungen und Downloads'
     );
-    private $name = '';
+    private $name     = '';
     private $download = false;
+    private $ids      = array();
+
+    public function before() {
+        $this->ids = array(
+            Kohana::$config->load('config.example_theme_id'),
+            Kohana::$config->load('config.test_import_id')
+        );
+        parent::before();
+    }
 
     public function action_index() {
         
@@ -26,17 +35,17 @@ class Controller_Stats extends Controller_Admin {
     public function action_display() {
         $this->sub_navi->activate(__('Stats'));
 
-        $view = View::factory(I18n::$lang . '/admin/stats/index');
+        $view          = View::factory(I18n::$lang . '/admin/stats/index');
         $view->options = $this->options;
-        $content = '';
+        $content       = '';
 
         if (HTTP_Request::POST == $this->request->method()) {
 
             $this->download = $this->request->post('download') != NULL;
 
-            $option = $this->request->post('option');
-            $from = strtotime($this->request->post('from'));
-            $to = strtotime($this->request->post('to'));
+            $option     = $this->request->post('option');
+            $from       = strtotime($this->request->post('from'));
+            $to         = strtotime($this->request->post('to'));
             $this->name = __($this->options[$option]);
             $this->{'option_' . $option}($from, $to);
         }
@@ -53,11 +62,11 @@ class Controller_Stats extends Controller_Admin {
 
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_0');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_0');
             $view->result = $users;
             $this->result = $view->render();
         } else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_0');
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_0');
             $view->result = $users;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
@@ -73,6 +82,7 @@ class Controller_Stats extends Controller_Admin {
                 ->join(array('users', 'c'), 'LEFT')
                 ->on('a.username', '=', 'c.username')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->where('b.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->order_by('a.mkdate')
                 ->as_object()
                 ->execute();
@@ -80,11 +90,11 @@ class Controller_Stats extends Controller_Admin {
 
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_1');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_1');
             $view->result = $result;
             $this->result = $view->render();
-        }else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_1');
+        } else {
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_1');
             $view->result = $result;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
@@ -99,6 +109,7 @@ class Controller_Stats extends Controller_Admin {
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
                 ->on('a.projekt_id', '=', 'b.ID_Projekt')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->where('b.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->group_by('za')
                 ->order_by('downloads', 'DESC')
                 ->as_object()
@@ -107,11 +118,11 @@ class Controller_Stats extends Controller_Admin {
 
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_2');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_2');
             $view->result = $result;
             $this->result = $view->render();
-        }else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_2');
+        } else {
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_2');
             $view->result = $result;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
@@ -128,6 +139,7 @@ class Controller_Stats extends Controller_Admin {
                 ->join(array('users', 'c'), 'LEFT')
                 ->on('a.username', '=', 'c.username')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->where('b.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->group_by('download_date', 'user_id', 'za')
                 ->order_by('a.mkdate')
                 ->as_object()
@@ -136,11 +148,11 @@ class Controller_Stats extends Controller_Admin {
 
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_3');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_3');
             $view->result = $result;
             $this->result = $view->render();
-        }else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_3');
+        } else {
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_3');
             $view->result = $result;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
@@ -154,6 +166,7 @@ class Controller_Stats extends Controller_Admin {
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
                 ->on('a.projekt_id', '=', 'b.ID_Projekt')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->where('b.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->group_by('intended_use')
                 ->order_by('downloads', 'DESC')
                 ->as_object()
@@ -162,11 +175,11 @@ class Controller_Stats extends Controller_Admin {
 
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_4');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_4');
             $view->result = $result;
             $this->result = $view->render();
-        }else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_4');
+        } else {
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_4');
             $view->result = $result;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
@@ -177,25 +190,26 @@ class Controller_Stats extends Controller_Admin {
         $result = DB::select(
                         array('b.Projektname', 'title'), array('b.ZA_Studiennummer', 'za')
                 )
-                ->from(array('Aka_Projekte','b')) 
+                ->from(array('Aka_Projekte', 'b'))
                 ->join(array('user_downloads', 'a'), 'LEFT')
                 ->on('a.projekt_id', '=', DB::expr('b.ID_Projekt AND a.mkdate BETWEEN :from AND :to', array(':from' => $from, ':to' => $to)))
                 ->where(DB::expr('1'), DB::expr(''), DB::expr(''))
                 ->where('b.ID_Thema', '<>', $this->config->get('example_theme_id'))
                 ->where('a.projekt_id', 'IS', DB::expr('NULL'))
+                ->where('b.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->group_by('b.ID_Projekt')
                 ->order_by('za')
                 ->as_object()
                 ->execute();
-        
+
 
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_5');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_5');
             $view->result = $result;
             $this->result = $view->render();
-        }else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_5');
+        } else {
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_5');
             $view->result = $result;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
@@ -212,6 +226,7 @@ class Controller_Stats extends Controller_Admin {
                 ->join(array('Aka_Themen', 'c'), 'LEFT')
                 ->on('b.ID_Thema', '=', 'c.ID_Thema')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->where('b.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->group_by('c.ID_Thema')
                 ->order_by('downloads', 'DESC')
                 ->as_object()
@@ -220,11 +235,11 @@ class Controller_Stats extends Controller_Admin {
 
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_6');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_6');
             $view->result = $result;
             $this->result = $view->render();
-        }else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_6');
+        } else {
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_6');
             $view->result = $result;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
@@ -236,17 +251,17 @@ class Controller_Stats extends Controller_Admin {
                         array('ZA_Studiennummer', 'za'), array('Projektname', 'title'), array('Projektautor', 'author')
                 )
                 ->from('Aka_Projekte')
-                ->where('ID_Thema', '<>', $this->config->get('example_theme_id'))
+                ->where('ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->order_by('ZA_Studiennummer', 'DESC')
                 ->as_object()
                 ->execute();
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_7');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_7');
             $view->result = $result;
             $this->result = $view->render();
-        }else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_7');
+        } else {
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_7');
             $view->result = $result;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
@@ -256,7 +271,7 @@ class Controller_Stats extends Controller_Admin {
 
 
         $quest_id = ORM::factory('role', array('name' => 'guest'))->users->find()->id;
-        $result = array();
+        $result   = array();
         $result[] = DB::select(array(DB::expr("COUNT(*)"), 'count'))
                 ->from('users')
                 ->where('mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
@@ -321,6 +336,7 @@ class Controller_Stats extends Controller_Admin {
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
                 ->on('a.projekt_id', '=', 'b.ID_Projekt')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->where('b.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->as_object()
                 ->execute();
         $result[] = DB::select(array(DB::expr("COUNT(DISTINCT IFNULL(b.ZA_Studiennummer,a.za_nummer),TO_DAYS(FROM_UNIXTIME(a.mkdate)))"), 'count'))
@@ -328,28 +344,28 @@ class Controller_Stats extends Controller_Admin {
                 ->join(array('Aka_Projekte', 'b'), 'LEFT')
                 ->on('a.projekt_id', '=', 'b.ID_Projekt')
                 ->where('a.mkdate', 'BETWEEN', DB::expr(':from AND :to', array(':from' => $from, ':to' => $to)))
+                ->where('b.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->as_object()
                 ->execute();
 
         if (!$this->download) {
-            $view = View::factory(I18n::$lang . '/admin/stats/option_8');
+            $view         = View::factory(I18n::$lang . '/admin/stats/option_8');
             $view->result = $result;
             $this->result = $view->render();
-        }else {
-            $view = View::factory(I18n::$lang . '/admin/stats/csv/option_8');
+        } else {
+            $view         = View::factory(I18n::$lang . '/admin/stats/csv/option_8');
             $view->result = $result;
             $this->response->body(utf8_decode($view->render()))->headers(array('Content-Type' => 'text/csv', 'charset' => 'ISO-8859-1'))->send_file(TRUE, $this->name . '.csv');
         }
     }
 
-   
     public function after() {
         $this->sub_navi->activate(__('Stats'));
         $this->scripts[] = 'stats.js';
-        $view = View::factory(I18n::$lang . '/admin/stats/index');
-        $view->options = $this->options;
-        $view->content = $this->result;
-        $this->content = $view->render();
+        $view            = View::factory(I18n::$lang . '/admin/stats/index');
+        $view->options   = $this->options;
+        $view->content   = $this->result;
+        $this->content   = $view->render();
         parent::after();
     }
 
