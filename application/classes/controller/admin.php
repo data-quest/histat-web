@@ -16,7 +16,7 @@ class Controller_Admin extends Controller_Index {
     }
 
     public function action_index() {
-      $this->action_users();
+      $this->action_stats();
     }
 
     public function action_users() {
