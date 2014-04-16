@@ -25,7 +25,7 @@
         if (!$isAdmin) {
             $result->where('Aka_Themen.ID_Thema', '!=', Kohana::$config->load('config.test_import_id'));
         }
-        return $result->group_by('Thema');
+        return $result->group_by('Thema')->order_by('Position', 'ASC')->order_by('Thema', 'ASC');
     }
    
 }
