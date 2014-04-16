@@ -56,7 +56,7 @@ class Model_Project extends ORM {
         if (!$isAdmin) {
             $result->where('ID_Thema', '!=', Kohana::$config->load('config.test_import_id'));
         }
-        return $result->order_by('Aka_Projekte.ZA_Studiennummer', 'DESC')
+        return $result->order_by('Aka_Projekte.chdate', 'DESC')
                         ->limit('20')
                         ->as_object($this)
                         ->execute();
