@@ -16,7 +16,7 @@ class Controller_Admin extends Controller_Index {
     }
 
     public function action_index() {
-      $this->action_stats();
+      $this->request->redirect(I18n::$lang . '/stats');
     }
 
     public function action_users() {
