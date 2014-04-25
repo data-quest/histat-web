@@ -8,25 +8,24 @@ defined('SYSPATH') or die('No direct script access.');
 class Controller_Table extends Controller_Data {
 
     protected $sub_navis = array();
-    protected $id_hs = null;
-    protected $filter = '________________________________';
+    protected $id_hs     = null;
+    protected $filter    = '________________________________';
 
     public function before() {
 
         parent::before();
         $this->sub_navis = array(
-            'index' => __('New'),
-            'top' => __('Top'),
-            'times' => __('Times'),
+            'index'  => __('New'),
+            'top'    => __('Top'),
+            'times'  => __('Times'),
             'themes' => __('Themes'),
-            'names' => __('Names')
+            'names'  => __('Names')
         );
-        $index = Arr::get($this->session->get('action'), 'name', 'index');
+        $index           = Arr::get($this->session->get('action'), 'name', 'index');
         $this->sub_navi->activate($this->sub_navis[$index]);
-        $this->id_hs = $this->request->param('id');
-        $this->filter = $this->request->param('filter', $this->filter);
+        $this->id_hs     = $this->request->param('id');
+        $this->filter    = $this->request->param('filter', $this->filter);
         $this->session->set('referrer', $this->request->uri());
-      
     }
 
     public function set_filter($filters) {
@@ -35,10 +34,10 @@ class Controller_Table extends Controller_Data {
             foreach ($filters as $filter) {
                 if ($filter !== "-1") {
                     $filter = explode('_', $filter);
-                    $code = $filter[0];
-                    $pos = $filter[1];
-                    $len = $filter[2];
-                    $c = 0;
+                    $code   = $filter[0];
+                    $pos    = $filter[1];
+                    $len    = $filter[2];
+                    $c      = 0;
                     for ($i = 0; $i < strlen($this->filter); $i++) {
                         if ($i == $pos - 1) {
                             for ($l = $i; $l < $pos + $len - 1; $l++) {
@@ -53,25 +52,23 @@ class Controller_Table extends Controller_Data {
     }
 
     public function action_details() {
-          
-          
-        if (!$this->id_hs)
-            throw new HTTP_Exception_404();
-        
+
+
+        if (!$this->id_hs) throw new HTTP_Exception_404();
+
         $keymask = ORM::factory('keymask', $this->id_hs);
-        
-        if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
-            $this->request->redirect(I18n::$lang . '/auth/login');
-        
+
+        if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1") $this->request->redirect(I18n::$lang . '/auth/login');
+
         $this->scripts[] = 'table.js';
-        $view = View::factory(I18n::$lang . '/table/details');
+        $view            = View::factory(I18n::$lang . '/table/details');
 
 
-        $list = View::factory(I18n::$lang . '/project/list');
+        $list           = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects = $keymask->project;
-        $this->project = $keymask->project->Projektname;
-        
+        $this->project  = $keymask->project->Projektname;
+
         //assign the referrer uri
         $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
 
@@ -85,13 +82,13 @@ class Controller_Table extends Controller_Data {
 
         if (!$post) {
             $post = array();
-            $i = 0;
+            $i    = 0;
             foreach (Arr::get($details, 'filters', array()) as $filters) {
                 foreach ($filters as $key => $filter) {
-                    $f = explode('_', $key);
+                    $f    = explode('_', $key);
                     $code = $f[0];
-                    $pos = $f[1];
-                    $len = $f[2];
+                    $pos  = $f[1];
+                    $len  = $f[2];
                     if (substr($this->filter, $pos - 1, $len) === $code) {
                         $post[$i] = $key;
                     } else {
@@ -108,38 +105,37 @@ class Controller_Table extends Controller_Data {
 
 
         $view->details = $details['details'];
-        $view->keys = $details['keys'];
-        $view->data = $data;
+        $view->keys    = $details['keys'];
+        $view->data    = $data;
         $view->keymask = $keymask;
-       
-        $view->tables = $details['tables'];
-        $view->titles = $details['titles'];
-        $view->filters = $details['filters'];
-        $view->sources = $details['sources'];
-        $view->notes = $details['notes'];
-        $view->filter = $this->filter;
+
+        $view->tables   = $details['tables'];
+        $view->titles   = $details['titles'];
+        $view->filters  = $details['filters'];
+        $view->sources  = $details['sources'];
+        $view->notes    = $details['notes'];
+        $view->filter   = $this->filter;
         $view->is_admin = $this->user->has_roles(array('admin'));
-        $view->post = $post;
-        $view->guest = $this->user->has_roles(array('guest'));
-        $view->search = strstr($this->request->referrer(), 'search');
-        $view->project = $list->render();
-        $this->content = $view->render();
+        $view->post     = $post;
+        $view->guest    = $this->user->has_roles(array('guest'));
+        $view->search   = strstr($this->request->referrer(), 'search');
+        $view->project  = $list->render();
+        $this->content  = $view->render();
     }
 
     public function action_edit_details() {
-        if (!$this->id_hs && !$this->user->has_roles(array('admin')))
-            throw new HTTP_Exception_404();
-        $keymask = ORM::factory('keymask', $this->id_hs);
+        if (!$this->id_hs && !$this->user->has_roles(array('admin'))) throw new HTTP_Exception_404();
+        $keymask         = ORM::factory('keymask', $this->id_hs);
         $this->scripts[] = 'table.js';
-        $view = View::factory(I18n::$lang . '/table/details_admin');
+        $view            = View::factory(I18n::$lang . '/table/details_admin');
 
 
-        $list = View::factory(I18n::$lang . '/project/list');
+        $list           = View::factory(I18n::$lang . '/project/list');
         //assign new projects to subview
         $list->projects = $keymask->project;
-        $this->project = $keymask->project->Projektname;
+        $this->project  = $keymask->project->Projektname;
         //assign the referrer uri
-        $list->uri = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
+        $list->uri      = URL::site(I18n::$lang . '/table/details/' . $this->id_hs);
 
         $post = $this->request->post('filter');
 
@@ -151,13 +147,13 @@ class Controller_Table extends Controller_Data {
 
         if (!$post) {
             $post = array();
-            $i = 0;
+            $i    = 0;
             foreach (Arr::get($details, 'filters', array()) as $filters) {
                 foreach ($filters as $key => $filter) {
-                    $f = explode('_', $key);
+                    $f    = explode('_', $key);
                     $code = $f[0];
-                    $pos = $f[1];
-                    $len = $f[2];
+                    $pos  = $f[1];
+                    $len  = $f[2];
                     if (substr($this->filter, $pos - 1, $len) === $code) {
                         $post[$i] = $key;
                     } else {
@@ -174,47 +170,45 @@ class Controller_Table extends Controller_Data {
 
 
         $view->details = $details['details'];
-        $view->keys = $details['keys'];
-        $view->data = $data;
+        $view->keys    = $details['keys'];
+        $view->data    = $data;
         $view->keymask = $keymask;
 
-        $view->tables = $details['tables'];
-        $view->titles = $details['titles'];
-        $view->filters = $details['filters'];
-        $view->sources = $details['sources'];
-        $view->notes = $details['notes'];
-        $view->filter = $this->filter;
+        $view->tables   = $details['tables'];
+        $view->titles   = $details['titles'];
+        $view->filters  = $details['filters'];
+        $view->sources  = $details['sources'];
+        $view->notes    = $details['notes'];
+        $view->filter   = $this->filter;
         $view->is_admin = $this->user->has_roles(array('admin'));
-        $view->post = $post;
-        $view->search = strstr($this->request->referrer(), 'search');
-        $view->project = $list->render();
-        $this->content = $view->render();
+        $view->post     = $post;
+        $view->search   = strstr($this->request->referrer(), 'search');
+        $view->project  = $list->render();
+        $this->content  = $view->render();
     }
 
     public function action_download() {
-           $keymask = ORM::factory('keymask', $this->id_hs);
-            if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
-            $this->request->redirect(I18n::$lang . '/auth/login');
-            
+        $keymask = ORM::factory('keymask', $this->id_hs);
+        if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1") $this->request->redirect(I18n::$lang . '/auth/login');
+
         if (HTTP_Request::POST == $this->request->method()) {
-         
+
             $details = $keymask->getDetails($this->filter);
-            $name = $keymask->project->Projektname;
-            $type = $this->request->param('type');
-            $uses = $this->request->post('uses');
-            if ($uses == '-1')
-                $uses = $this->request->post('custom');
+            $name    = $keymask->project->Projektname;
+            $type    = $this->request->param('type');
+            $uses    = $this->request->post('uses');
+            if ($uses == '-1') $uses    = $this->request->post('custom');
 
 
-            $download = ORM::factory('download');
-            $download->username = $this->user->username;
-            $download->projekt_id = $keymask->project->ID_Projekt;
-            $download->anzahl = count($details['keys']);
-            $download->type = $type;
+            $download               = ORM::factory('download');
+            $download->username     = $this->user->username;
+            $download->projekt_id   = $keymask->project->ID_Projekt;
+            $download->anzahl       = count($details['keys']);
+            $download->type         = $type;
             $download->intended_use = $uses;
-            $download->za_nummer = $keymask->project->ZA_Studiennummer;
-            $download->name = $name;
-            $download->mkdate = time();
+            $download->za_nummer    = $keymask->project->ZA_Studiennummer;
+            $download->name         = $name;
+            $download->mkdate       = time();
             $download->create();
             if (Kohana::$environment === Kohana::PRODUCTION) {
                 $url = 'http://www.gesis.org/histat/' . I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter;
@@ -264,50 +258,79 @@ class Controller_Table extends Controller_Data {
                 "\x9E" => '&#382;',
                 "\x9F" => '&#376;');
             return str_replace(array_values($windows1252), array_keys($windows1252), utf8_decode(mb_encode_numericentity($string, array(0x100, 0xffff, 0, 0xffff), 'UTF-8')
-                            )
+                    )
             );
         }
     }
 
     public function action_xls() {
         $keymask = ORM::factory('keymask', $this->id_hs);
-           if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
-            $this->request->redirect(I18n::$lang . '/auth/login');
+        if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1") $this->request->redirect(I18n::$lang . '/auth/login');
 
-        $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
-        $details = $keymask->getDetails($this->filter);
+        $table_name      = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
+        $details         = $keymask->getDetails($this->filter);
         $details['data'] = null;
-        $grid = array();
+        $project         = $keymask->project;
+        $grid            = array();
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $details['data'] = $keymask->getData($this->filter);
         }
+        $bearbeitung = '';
+        $datum       = substr($project->Datum_der_Bearbeitung, -4);
+        if (!empty($datum)) {
+            $bearbeitung = '[' . $datum . ']';
+        }
+        $quote = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutschland ZA:za Datenfile :file', array(':author'    => $project->Projektautor,
+            ':pub_year'  => $project->Publikationsjahr,
+            ':edit_year' => $bearbeitung,
+            ':project'   => $project->Projektname,
+            ':za'        => $project->ZA_Studiennummer,
+            ':file'      => $project->Bemerkungen));
         if ($details['data']) {
 
-            $grid = $this->create_grid($details);
+            $grid    = $this->create_grid($details);
             $grid[1] = array($table_name);
-            $ws = new Spreadsheet();
+            $grid[2] = array('Datengeber/Autor(en)', $project->Projektautor);
+            $grid[3] = array('Studientitel', $project->Projektname);
+            $grid[4] = array('Zitierpflichtige Publikation:', $quote);
+            $ws      = new Spreadsheet();
             $ws->set_active_sheet(0);
             $ws->set_data($grid);
+
             $ws->send(array('name' => ($table_name), 'format' => 'Excel5'));
         }
     }
 
     public function action_xlsx() {
-        $keymask = ORM::factory('keymask', $this->id_hs);
-           if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
-            $this->request->redirect(I18n::$lang . '/auth/login');
-        $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
-        $details = $keymask->getDetails($this->filter);
+        $keymask         = ORM::factory('keymask', $this->id_hs);
+        if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1") $this->request->redirect(I18n::$lang . '/auth/login');
+        $table_name      = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
+        $details         = $keymask->getDetails($this->filter);
         $details['data'] = null;
-        $grid = array();
+        $grid            = array();
+        $project         = $keymask->project;
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $details['data'] = $keymask->getData($this->filter);
         }
+        $bearbeitung = '';
+        $datum       = substr($project->Datum_der_Bearbeitung, -4);
+        if (!empty($datum)) {
+            $bearbeitung = '[' . $datum . ']';
+        }
+        $quote = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutschland ZA:za Datenfile :file', array(':author'    => $project->Projektautor,
+            ':pub_year'  => $project->Publikationsjahr,
+            ':edit_year' => $bearbeitung,
+            ':project'   => $project->Projektname,
+            ':za'        => $project->ZA_Studiennummer,
+            ':file'      => $project->Bemerkungen));
         if ($details['data']) {
 
-            $grid = $this->create_grid($details);
+            $grid    = $this->create_grid($details);
             $grid[1] = array($table_name);
-            $ws = new Spreadsheet();
+            $grid[2] = array('Datengeber/Autor(en)', $project->Projektautor);
+            $grid[3] = array('Studientitel', $project->Projektname);
+            $grid[4] = array('Zitierpflichtige Publikation:', $quote);
+            $ws      = new Spreadsheet();
             $ws->set_active_sheet(0);
             $ws->set_data($grid);
             $ws->send(array('name' => ($table_name), 'format' => 'Excel2007'));
@@ -315,21 +338,35 @@ class Controller_Table extends Controller_Data {
     }
 
     public function action_csv() {
-        $keymask = ORM::factory('keymask', $this->id_hs);
-           if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1")
-            $this->request->redirect(I18n::$lang . '/auth/login');
-        $table_name = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
-        $details = $keymask->getDetails($this->filter);
+        $keymask         = ORM::factory('keymask', $this->id_hs);
+        if ($this->user->has_roles(array('guest')) && $keymask->project->Zugangsklasse !== "-1") $this->request->redirect(I18n::$lang . '/auth/login');
+        $table_name      = substr(str_replace(array('"', ':', ' ', '/', '\\', '.', ','), '_', $keymask->Name), 0, 100);
+        $details         = $keymask->getDetails($this->filter);
         $details['data'] = null;
-        $grid = array();
+        $grid            = array();
+        $project         = $keymask->project;
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $details['data'] = $keymask->getData($this->filter);
         }
+        $bearbeitung = '';
+        $datum       = substr($project->Datum_der_Bearbeitung, -4);
+        if (!empty($datum)) {
+            $bearbeitung = '[' . $datum . ']';
+        }
+        $quote = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutschland ZA:za Datenfile :file', array(':author'    => $project->Projektautor,
+            ':pub_year'  => $project->Publikationsjahr,
+            ':edit_year' => $bearbeitung,
+            ':project'   => $project->Projektname,
+            ':za'        => $project->ZA_Studiennummer,
+            ':file'      => $project->Bemerkungen));
         if ($details['data']) {
 
-            $grid = $this->create_grid($details);
+            $grid    = $this->create_grid($details);
             $grid[1] = array($table_name);
-            $ws = new Spreadsheet();
+            $grid[2] = array('Datengeber/Autor(en)', $project->Projektautor);
+            $grid[3] = array('Studientitel', $project->Projektname);
+            $grid[4] = array('Zitierpflichtige Publikation:', $quote);
+            $ws      = new Spreadsheet();
             $ws->set_active_sheet(0);
 
             $ws->set_data($grid);
@@ -338,17 +375,18 @@ class Controller_Table extends Controller_Data {
     }
 
     protected function create_grid($details) {
-        $grid = array();
-        $i = 2;
+        $grid    = array();
+        $i       = 5;
         $headers = Arr::get($details, 'details', array());
-        $tables = Arr::get($details, 'tables', array());
+        $tables  = Arr::get($details, 'tables', array());
         $sources = Arr::get($details, 'sources', array());
-        $data = Arr::get($details, 'data', array());
-        $keys = Arr::get($details, 'keys', array());
-        $notes = Arr::get($details, 'notes', array());
+        $data    = Arr::get($details, 'data', array());
+        $keys    = Arr::get($details, 'keys', array());
+        $notes   = Arr::get($details, 'notes', array());
+
         foreach ($headers as $header) {
-            $row = array();
-            $key = array_keys($header);
+            $row   = array();
+            $key   = array_keys($header);
             $row[] = $header[$key[0]]->CodeBeschreibung;
             foreach ($keys as $k) {
                 $row[] = $header[$k]->CodeBezeichnung;
@@ -357,7 +395,7 @@ class Controller_Table extends Controller_Data {
             $i++;
         }
         if (count(array_filter($tables)) > 0) {
-            $row = array();
+            $row   = array();
             $row[] = 'Tabelle';
             foreach ($keys as $k) {
                 $row[] = str_replace(array("\r\n", "\n", "\r"), ' ', $tables[$k]);
@@ -366,7 +404,7 @@ class Controller_Table extends Controller_Data {
             $i++;
         }
         if (count(array_filter($sources)) > 0) {
-            $row = array();
+            $row   = array();
             $row[] = 'Quellen';
             foreach ($keys as $k) {
                 $row[] = str_replace(array("\r\n", "\n", "\r"), ' ', $sources[$k]);
@@ -375,7 +413,7 @@ class Controller_Table extends Controller_Data {
             $i++;
         }
         if (count(array_filter($notes)) > 0) {
-            $row = array();
+            $row   = array();
             $row[] = 'Anmerkungen';
             foreach ($keys as $k) {
                 $row[] = str_replace(array("\r\n", "\n", "\r"), ' ', $notes[$k]);
@@ -384,7 +422,7 @@ class Controller_Table extends Controller_Data {
             $i++;
         }
         foreach ($data as $y => $d) {
-            $row = array();
+            $row   = array();
             $row[] = $y;
 
             foreach ($keys as $k) {
@@ -404,12 +442,12 @@ class Controller_Table extends Controller_Data {
     public function action_edit() {
         $this->auto_render = false;
         if ($this->session->get('xsrf') == $this->request->post('xsfr') && $this->user->has_roles(array('admin'))) {
-            $value = NULL;
-            $result = false;
-            $id_hs = $this->request->post('id_hs');
-            $key = $this->request->post('key');
-            $year = $this->request->post('year');
-            $value = $this->request->post('value');
+            $value      = NULL;
+            $result     = false;
+            $id_hs      = $this->request->post('id_hs');
+            $key        = $this->request->post('key');
+            $year       = $this->request->post('year');
+            $value      = $this->request->post('value');
             $id_projekt = $this->request->post('id_projekt');
 
             $select = DB::select('Data')
@@ -424,46 +462,44 @@ class Controller_Table extends Controller_Data {
                     ->where('Jahr_Sem', '=', $year);
 
 
-            if ($db->execute())
-                $result = true;
+            if ($db->execute()) $result = true;
 
             if ($value) {
                 $result = false;
-                $db = DB::insert('Daten__Aka', array('Data', 'ID_HS', 'Schluessel', 'Jahr_Sem'))
+                $db     = DB::insert('Daten__Aka', array('Data', 'ID_HS', 'Schluessel', 'Jahr_Sem'))
                         ->values(array($value, $id_hs, $key, $year));
-                if ($db->execute())
-                    $result = true;
+                if ($db->execute()) $result = true;
             }
 
             if ($result) {
 
-                $logs = ORM::factory('tablelog');
+                $logs             = ORM::factory('tablelog');
                 $logs->ID_Projekt = $id_projekt;
-                $logs->ID_HS = $id_hs;
+                $logs->ID_HS      = $id_hs;
                 $logs->Schluessel = $key;
-                $logs->Jahr_Sem = $year;
-                $logs->username = $this->user->username;
-                $logs->old_value = Arr::get($select[0], 'Data');
-                $logs->new_value = $value;
+                $logs->Jahr_Sem   = $year;
+                $logs->username   = $this->user->username;
+                $logs->old_value  = Arr::get($select[0], 'Data');
+                $logs->new_value  = $value;
 
                 $logs->save();
-                $keymask = ORM::factory('keymask', $id_hs);
-                $details = $keymask->getDetails($key);
+                $keymask     = ORM::factory('keymask', $id_hs);
+                $details     = $keymask->getDetails($key);
                 $filter_text = implode(',', Arr::get($details['titles'], $key, array()));
 
 
-                $view = View::factory('de/mails/datachange');
+                $view              = View::factory('de/mails/datachange');
                 $view->projectname = $keymask->project->Projektname;
-                $view->tablename = $keymask->Name;
-                $view->filter = $filter_text;
-                $view->year = $year;
-                $view->old_value = Arr::get($select[0], 'Data', 'leer');
-                $view->new_value = $value == NULL ? 'leer' : $value;
-                $view->username = $this->user->surname . ' ' . $this->user->name;
-                $view->chdate = date('Y-m-d H:i:s');
-                $view->id_hs = $id_hs;
-                $view->filter_key = $key;
-                $to = $this->config->get('log_to');
+                $view->tablename   = $keymask->Name;
+                $view->filter      = $filter_text;
+                $view->year        = $year;
+                $view->old_value   = Arr::get($select[0], 'Data', 'leer');
+                $view->new_value   = $value == NULL ? 'leer' : $value;
+                $view->username    = $this->user->surname . ' ' . $this->user->name;
+                $view->chdate      = date('Y-m-d H:i:s');
+                $view->id_hs       = $id_hs;
+                $view->filter_key  = $key;
+                $to                = $this->config->get('log_to');
 
                 $email = Email::factory(__('Änderungen an Daten'))
                         ->to($to)
@@ -480,17 +516,17 @@ class Controller_Table extends Controller_Data {
     public function action_edit_header() {
         $this->auto_render = false;
         if ($this->session->get('xsrf') == $this->request->post('xsfr') && $this->user->has_roles(array('admin'))) {
-            $value = NULL;
-            $result = false;
-            $id_hs = $this->request->post('id_hs');
-            $key = $this->request->post('key');
-            $type = $this->request->post('type');
-            $value = $this->request->post('value');
+            $value      = NULL;
+            $result     = false;
+            $id_hs      = $this->request->post('id_hs');
+            $key        = $this->request->post('key');
+            $type       = $this->request->post('type');
+            $value      = $this->request->post('value');
             $id_projekt = $this->request->post('id_projekt');
-            $types = array(
+            $types      = array(
                 'source' => 'Quelle',
-                'note' => 'Anmerkung',
-                'table' => 'Tabelle'
+                'note'   => 'Anmerkung',
+                'table'  => 'Tabelle'
             );
 
 
@@ -499,43 +535,43 @@ class Controller_Table extends Controller_Data {
                                 ->from('Lit_ZR')
                                 ->where('ID_HS', '=', $id_hs)
                                 ->where('Schluessel', '=', $key)->execute();
-                $db = DB::update('Lit_ZR')->set(array($types[$type] => $value))
+                $db     = DB::update('Lit_ZR')->set(array($types[$type] => $value))
                         ->where('ID_HS', '=', $id_hs)
                         ->where('Schluessel', '=', $key);
                 if ($db->execute()) {
 
 
-                    $logs = ORM::factory('tableheadlog');
+                    $logs             = ORM::factory('tableheadlog');
                     $logs->ID_Projekt = $id_projekt;
-                    $logs->ID_HS = $id_hs;
+                    $logs->ID_HS      = $id_hs;
                     $logs->Schluessel = $key;
-                    $logs->head = $types[$type];
-                    $logs->username = $this->user->username;
-                    $logs->old_value = Arr::get($select[0], $types[$type]);
-                    $logs->new_value = $value;
+                    $logs->head       = $types[$type];
+                    $logs->username   = $this->user->username;
+                    $logs->old_value  = Arr::get($select[0], $types[$type]);
+                    $logs->new_value  = $value;
 
                     $logs->save();
 
 
-                    $keymask = ORM::factory('keymask', $id_hs);
-                    $details = $keymask->getDetails($key);
+                    $keymask     = ORM::factory('keymask', $id_hs);
+                    $details     = $keymask->getDetails($key);
                     $filter_text = implode(',', Arr::get($details['titles'], $key, array()));
 
 
-                    $view = View::factory('de/mails/dataheadchange');
+                    $view              = View::factory('de/mails/dataheadchange');
                     $view->projectname = $keymask->project->Projektname;
-                    $view->tablename = $keymask->Name;
-                    $view->filter = $filter_text;
-                    $view->head = $types[$type];
-                    $view->old_value = Arr::get($select[0], $types[$type], 'leer');
-                    $view->new_value = $value == NULL ? 'leer' : $value;
-                    $view->username = $this->user->surname . ' ' . $this->user->name;
-                    $view->chdate = date('Y-m-d H:i:s');
-                    $view->id_hs = $id_hs;
-                    $view->filter_key = $key;
-                    $to = $this->config->get('log_to');
+                    $view->tablename   = $keymask->Name;
+                    $view->filter      = $filter_text;
+                    $view->head        = $types[$type];
+                    $view->old_value   = Arr::get($select[0], $types[$type], 'leer');
+                    $view->new_value   = $value == NULL ? 'leer' : $value;
+                    $view->username    = $this->user->surname . ' ' . $this->user->name;
+                    $view->chdate      = date('Y-m-d H:i:s');
+                    $view->id_hs       = $id_hs;
+                    $view->filter_key  = $key;
+                    $to                = $this->config->get('log_to');
 
-                    $email = Email::factory(__('Änderungen an Kopfbereich der Tabelle'))
+                    $email  = Email::factory(__('Änderungen an Kopfbereich der Tabelle'))
                             ->to($to)
                             ->from($this->config->get('from'))
                             ->message($view->render(), 'text/html')
