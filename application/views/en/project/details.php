@@ -39,7 +39,7 @@ $quote       = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutsch
 
 
     <a href="#" style="visbility:hidden"></a>
-    <h1>Bibiographische Angaben</h1>
+    <h1>Bibliographische Angaben</h1>
 
     <div class="content">
         <div class="right"></div>
@@ -59,10 +59,12 @@ $quote       = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutsch
     <?php $description = nl2br($project->Projektbeschreibung); ?>
     <?php $len         = strlen($description); ?>
     <?php if ($len > 0) : ?>
-        <h4>Studienbeschreibung </h4>
+
         <div class="content">
             <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $description ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>">
+                <b>Studienbeschreibung: </b><br/>
+                <?= $description ?></div>
             <div class="clear"></div>
         </div>
     <?php endif; ?>
@@ -72,10 +74,12 @@ $quote       = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutsch
 
     <?php $len = strlen($fundort); ?>
     <?php if ($len > 0) : ?>
-        <h4>Untersuchungsgebiet</h4>
+
         <div class="content">
             <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $fundort ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>">
+                <b>Untersuchungsgebiet:</b><br/>
+                <?= $fundort ?></div>
             <div class="clear"></div>
         </div>
     <?php endif; ?>
@@ -83,68 +87,58 @@ $quote       = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutsch
     <?php $quellenverzeichnis = nl2br($project->Fundort) ?>
     <?php $len                = strlen($quellenverzeichnis); ?>
     <?php if ($len > 0) : ?>
-        <h4>Quellentypen</h4>
+
         <div class="content">
             <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $quellenverzeichnis ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>">
+                <b>Quellentypen:</b>
+                <br/><?= $quellenverzeichnis ?></div>
             <div class="clear"></div>
         </div>
     <?php endif; ?>
     <?php $sources = nl2br($project->Quellen) ?>
     <?php $len     = strlen($sources); ?>
     <?php if ($len > 0) : ?>
-        <h4>Verwendete Quellen (ausführliches Verzeichnis)</h4>
+
         <div class="content">
             <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $sources ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>">
+                <b>Verwendete Quellen (ausführliches Verzeichnis):</b><br/>
+                <?= $sources ?></div>
             <div class="clear"></div>
         </div>
     <?php endif; ?>
     <?php $notes = nl2br($project->Anmerkungsteil); ?>
     <?php $len   = strlen($notes); ?>
     <?php if ($len > 0) : ?>
-        <h4>Anmerkungen</h4>
+
         <div class="content">
             <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
-            <div class="normal left <?= $len > 300 ? 'short' : '' ?>"><?= $notes ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>">
+                <b>Anmerkungen:</b><br/>
+                <?= $notes ?></div>
             <div class="clear"></div>
         </div>
     <?php endif; ?>
     <h1>Bearbeitungshinweise</h1>
-    <h4>Datum der Archivierung</h4>
+
     <div class="content">
         <div class="right"></div>
-        <div class="normal left"><?= $project->Datum_der_Archivierung ?></div>
+        <div class="normal left">
+            <b>Datum der Archivierung:</b> <?= $project->Datum_der_Archivierung ?><br/>
+            <b>Jahr der Online-Publikation:</b> <?= $project->Publikationsjahr ?><br/>
+            <b>Bearbeiter in GESIS:</b> <?= $project->Bearbeiter_im_ZA ?><br/>
+            <b>Version:</b ><?= $project->Bemerkungen ?><br/>
+            <b>Zugangsklasse:</b> <?= $project->Zugangsklasse ?><br/>
+        </div>
         <div class="clear"></div>
     </div>
-    <h4>Jahr der Online-Publikation</h4>
-    <div class="content">
-        <div class="right"></div>
-        <div class="normal left"><?= $project->Publikationsjahr ?></div>
-        <div class="clear"></div>
-    </div>
-    <h4>Bearbeiter in GESIS</h4>
-    <div class="content">
-        <div class="right"></div>
-        <div class="normal left"><?= $project->Bearbeiter_im_ZA ?></div>
-        <div class="clear"></div>
-    </div>
-    <h4>Version</h4>
-    <div class="content">
-        <div class="right"></div>
-        <div class="normal left"><?= $project->Bemerkungen ?></div>
-        <div class="clear"></div>
-    </div>
-    <h4>Zugangsklasse</h4>
-    <div class="content">
-        <div class="right"></div>
-        <div class="normal left"><?= $project->Zugangsklasse ?></div>
-        <div class="clear"></div>
-    </div>
+
+
     <h1>Materialien zur Studie</h1>
 
 
-    <h4>Download:</h4>
+
     <div class="content">
         <?php
         $text = HTML::image('assets/img/layout/download.png', array('class' => 'pdficon')) . __('DDI-XML');
