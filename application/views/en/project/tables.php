@@ -62,26 +62,39 @@ $public = $project->Zugangsklasse == "-1";
         <div class="pages">
 
 
-            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page - 1), __('previous'), array('class' => 'prev')) ?>
+            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page - 1), "zurück", array('class' => 'prev')) ?>
 
             <div class="list">
-                <?php for ($i = 0; $i < $countTables; $i++): ?>
+                <?php
+                $start = max(0, $page - 7);
+                $end   = min($countTables, $page + 7);
+                if ($page > $countTables - 7) {
+                    $start-= $page + 7 - $countTables;
+                }
+                if ($page < 7) {
+                    $end += 7 - $page;
+                }
+                ?>
+                <div style="width:<?= 15 * 50 ?>px">
                     <?php
-                    $attr = array('style' => 'left:' . ($i * 50) . 'px');
-                    if ($page == $i + 1) {
-                        $attr['class'] = 'current';
-                    }
-                    ?>
-                    <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($i + 1), ($i + 1), $attr) ?>
-                <?php endfor; ?>
+                    for ($i = $start; $i < $end; $i++):
+                        ?>
+                        <?php
+                        $attr = array();
+                        if ($page == $i + 1) {
+                            $attr['class'] = 'current';
+                        }
+                        ?>
+                        <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($i + 1), ($i + 1), $attr) ?>
+                    <?php endfor; ?>
+                </div>
             </div>
-            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page + 1), __('next'), array('class' => 'next')) ?>
+            <?= HTML::anchor('project/tables/' . $project->ID_Projekt . '/' . ($page + 1), "vor", array('class' => 'next')) ?>
 
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
     <?php endif; ?>
-
 
 </div>
 <script type="text/javascript">

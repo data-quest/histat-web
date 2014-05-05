@@ -779,9 +779,10 @@ table tr td.even {
     text-align: center;
     border-left:1px solid #aaaaaa;
 }
-#project_details .pages a{
-    position: absolute;
+#project_details .list a{
+    float:left;
 }
+
 #project_details .pages div.list{
     position: absolute;
     width:693px;
