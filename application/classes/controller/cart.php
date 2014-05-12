@@ -174,10 +174,10 @@ class Controller_Cart extends Controller_Table {
 
 
         $command = sprintf("cd /tmp/histat/ ;zip -r download_%d.zip  download_%d/", $this->user->id, $this->user->id);
-
-        exec($command);
-
-        $this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
+        $output  = array();
+         exec($command, $output);
+     
+        //$this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
 
 
         $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', sprintf("histat.gesis.org_Warenkorb_%s.zip", date("m-d-y-h-i", time())), array('delete' => TRUE));
