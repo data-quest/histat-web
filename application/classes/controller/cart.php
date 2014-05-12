@@ -180,7 +180,7 @@ class Controller_Cart extends Controller_Table {
         //$this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
 
 
-        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', sprintf("histat.gesis.org_Warenkorb_%s.zip", date("m-d-y-h-i", time())), array('delete' => TRUE));
+        $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', sprintf("histat.gesis.org_Warenkorb_%s.zip", date("m-d-y-h-i", time())), array('delete' => false));
     }
 
     private function rrmdir($dir) {
