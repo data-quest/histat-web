@@ -114,10 +114,12 @@ class Controller_Cart extends Controller_Table {
         if (HTTP_Request::POST != $this->request->method() || $this->request->post('selected') == NULL) {
             $this->request->redirect(I18n::$lang . '/cart/index');
         }
+       
         $cart = ORM::factory('cart')
                 ->where('user_id', '=', $this->user->id)
-                ->where(DB::expr('CONCAT_WS("/",ID_HS,filter)'), 'IN', DB::expr("('" . implode("','", $this->request->post('selected')) . "')"))
+                ->where(DB::expr('CONCAT_WS("/",keymask.ID_HS,filter)'), 'IN', DB::expr("('" . implode("','", $this->request->post('selected')) . "')"))
                 ->find_all();
+       
         $formats = array(
             'xsl' => 'Excel5',
             'xslx' => 'Excel2007',
@@ -135,8 +137,7 @@ class Controller_Cart extends Controller_Table {
 
 
 
-
-
+       
         foreach ($cart as $nr => $item) {
 
             $keymask = ORM::factory('keymask', $item->ID_HS);
