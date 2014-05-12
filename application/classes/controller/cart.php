@@ -125,7 +125,7 @@ class Controller_Cart extends Controller_Table {
             'xslx' => 'Excel2007',
             'csv'  => 'CSV'
         );
-        $path    = realpath(__DIR__ . '/../../../../');
+        $path    = realpath(dirname(__FILE__) . '/../../../../');
         //$path    = '/tmp/histat';
 
         if (!is_dir($path)) {
