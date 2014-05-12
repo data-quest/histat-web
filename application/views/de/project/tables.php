@@ -71,8 +71,16 @@ $public   = $project->Zugangsklasse == "-1";
                     if ($page > $countTables - 7) {
                         $start-= $page + 7 - $countTables;
                     }
+
                     if ($page < 7) {
                         $end += 7 - $page;
+                    }
+                    if ($start < 1) {
+                        $start = 0;
+                    }
+                  
+    if ($end > $countTables) {
+        $end = $countTables;
                     }
                     ?>
                     <div style="width:<?= 15 * 50 ?>px">
