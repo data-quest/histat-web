@@ -129,7 +129,7 @@ class Controller_Cart extends Controller_Table {
             mkdir('/tmp/histat/', 0777, true);
         }
         if (!is_dir('/tmp/histat/download_' . $this->user->id)) {
-            mkdir('/tmp/histat/download_' . $this->user->id);
+            mkdir('/tmp/histat/download_' . $this->user->id, 0777, true);
         }
         $uses = $this->request->post('uses');
         if ($uses == '-1')
@@ -177,7 +177,7 @@ class Controller_Cart extends Controller_Table {
 
         exec($command);
 
-       // $this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
+        $this->rrmdir('/tmp/histat/download_' . $this->user->id . '/');
 
 
         $this->response->send_file('/tmp/histat/download_' . $this->user->id . '.zip', sprintf("histat.gesis.org_Warenkorb_%s.zip", date("m-d-y-h-i", time())), array('delete' => TRUE));
