@@ -126,6 +126,7 @@ class Controller_Cart extends Controller_Table {
             'csv'  => 'CSV'
         );
         $path    = realpath(dirname(__FILE__) . '/../../../../');
+        var_dump($path);
         //$path    = '/tmp/histat';
 
         if (!is_dir($path)) {
