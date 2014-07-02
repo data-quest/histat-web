@@ -60,9 +60,9 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünfeinhalb Milli
 
                 <br/>
                 <br/>
-                Dr. Thomas Rahlf<br/>
+                Prof. Dr. Rainer Metz<br/>
               
-                0221 – 47694 478<br/>
+                0221 – 47694 479<br/>
                 <br/>
 
                 Gabriele Franzmann, M.A.<br/>
@@ -84,7 +84,7 @@ Insgesamt umfassen alle in histat enthaltenen Zeitreihen rund fünfeinhalb Milli
         <div class="clear"></div>
     </div>
     <!--div id="gotop" ><a href="#top" alt="nach oben">nach oben</a></div-->
-    <img width="955px" src="http://histat.typodelta.de/dhs-team.jpg">
+    <!--<img width="955px" src="http://histat.typodelta.de/dhs-team.jpg">-->
     <div class="clear"></div>
 
 </div>

@@ -51,9 +51,9 @@ Since the offer of the online-database histat via the GESIS-Web a yearly growing
 
                 <br/>
                 <br/>
-                Dr. Thomas Rahlf<br/>
-              
-                +49 221 – 47694 478<br/>
+                Prof. Dr. Rainer Metz<br/>
+
+                0221 – 47694 479<br/>
                 <br/>
 
                 Gabriele Franzmann, M.A.<br/>
@@ -75,7 +75,7 @@ Since the offer of the online-database histat via the GESIS-Web a yearly growing
         <div class="clear"></div>
     </div>
     <!--div id="gotop" ><a href="#top" alt="nach oben">nach oben</a></div-->
-    <img width="955px" src="http://histat.typodelta.de/dhs-team.jpg">
+    <!--<img width="955px" src="http://histat.typodelta.de/dhs-team.jpg">-->
     <div class="clear"></div>
 
 </div>
