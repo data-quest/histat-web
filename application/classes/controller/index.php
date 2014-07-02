@@ -119,7 +119,7 @@ class Controller_Index extends Controller_Template {
         $this->main_navi->add('index', __('Home'));
         $this->main_navi->add('data', __('Data'));
         $this->main_navi->add('pages/about', __('About'));
-        $this->main_navi->add('pages/galery', __('Galery'));
+        //$this->main_navi->add('pages/galery', __('Galery'));
   
         
         //If user is not loged in
