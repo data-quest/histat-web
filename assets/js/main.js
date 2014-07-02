@@ -195,4 +195,9 @@ $(function(){
         $(this).fadeOut('slow');
     });
      $('#admin_users').parents('#layout').width("98%");
+    $('#authors div.keys li a').bind('click', function(){
+        var letter = this.href.substr(-1);
+        $('#' + letter).parent('div').css('font-weight', 'bold');
+        return true;
+    });
 });
