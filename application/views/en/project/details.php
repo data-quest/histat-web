@@ -5,19 +5,9 @@ $public      = $project->Zugangsklasse == "-1";
 <?php $fundort     = nl2br($project->Untersuchungsgebiet); ?>
 <?php $publication = nl2br($project->Veroeffentlichung); ?>
 <?php
-$bearbeitung = '';
-$datum       = substr($project->Datum_der_Bearbeitung, -4);
-if (!empty($datum)) {
-    $bearbeitung = '[' . $datum . ']';
-}
-?>
-<?php
-$quote       = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutschland ZA:za Datenfile :file', array(':author'    => $project->Projektautor,
-    ':pub_year'  => $project->Publikationsjahr,
-    ':edit_year' => $bearbeitung,
-    ':project'   => $project->Projektname,
-    ':za'        => $project->ZA_Studiennummer,
-    ':file'      => $project->Bemerkungen));
+$quote = nl2br(__(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln. histat.\nStudiennummer :za\nDatenfile :file", array(':publication'    => $project->Veroeffentlichung,
+                                                                                                                              ':za'        => $project->ZA_Studiennummer,
+                                                                                                                              ':file'      => $project->Bemerkungen)));
 ?>
 <div id="project_details" style="display:none" <?= $public ? 'class="public"' : '' ?>>
     <table border="0" cellpadding="0" cellspacing="0">

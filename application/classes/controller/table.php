@@ -275,17 +275,11 @@ class Controller_Table extends Controller_Data {
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $details['data'] = $keymask->getData($this->filter);
         }
-        $bearbeitung = '';
-        $datum       = substr($project->Datum_der_Bearbeitung, -4);
-        if (!empty($datum)) {
-            $bearbeitung = '[' . $datum . ']';
-        }
-        $quote = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutschland ZA:za Datenfile :file', array(':author'    => $project->Projektautor,
-            ':pub_year'  => $project->Publikationsjahr,
-            ':edit_year' => $bearbeitung,
-            ':project'   => $project->Projektname,
-            ':za'        => $project->ZA_Studiennummer,
-            ':file'      => $project->Bemerkungen));
+
+        $quote = __(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln. histat.\nStudiennummer :za\nDatenfile :file", array(':publication'    => $project->Veroeffentlichung,
+                                                                                                                                      ':za'        => $project->ZA_Studiennummer,
+                                                                                                                                      ':file'      => $project->Bemerkungen));
+
         if ($details['data']) {
 
             $grid    = $this->create_grid($details);
@@ -312,17 +306,9 @@ class Controller_Table extends Controller_Data {
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $details['data'] = $keymask->getData($this->filter);
         }
-        $bearbeitung = '';
-        $datum       = substr($project->Datum_der_Bearbeitung, -4);
-        if (!empty($datum)) {
-            $bearbeitung = '[' . $datum . ']';
-        }
-        $quote = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutschland ZA:za Datenfile :file', array(':author'    => $project->Projektautor,
-            ':pub_year'  => $project->Publikationsjahr,
-            ':edit_year' => $bearbeitung,
-            ':project'   => $project->Projektname,
-            ':za'        => $project->ZA_Studiennummer,
-            ':file'      => $project->Bemerkungen));
+        $quote = __(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln. histat.\nStudiennummer :za\nDatenfile :file", array(':publication'    => $project->Veroeffentlichung,
+                                                                                                                                      ':za'        => $project->ZA_Studiennummer,
+                                                                                                                                      ':file'      => $project->Bemerkungen));
         if ($details['data']) {
 
             $grid    = $this->create_grid($details);
@@ -348,17 +334,9 @@ class Controller_Table extends Controller_Data {
         if (count(Arr::get($details, 'keys', array())) <= $this->config->get('max_timelines')) {
             $details['data'] = $keymask->getData($this->filter);
         }
-        $bearbeitung = '';
-        $datum       = substr($project->Datum_der_Bearbeitung, -4);
-        if (!empty($datum)) {
-            $bearbeitung = '[' . $datum . ']';
-        }
-        $quote = __(':author, (:pub_year :edit_year) :project GESIS Köln, Deutschland ZA:za Datenfile :file', array(':author'    => $project->Projektautor,
-            ':pub_year'  => $project->Publikationsjahr,
-            ':edit_year' => $bearbeitung,
-            ':project'   => $project->Projektname,
-            ':za'        => $project->ZA_Studiennummer,
-            ':file'      => $project->Bemerkungen));
+        $quote = __(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln. histat.\nStudiennummer :za\nDatenfile :file", array(':publication'    => $project->Veroeffentlichung,
+                                                                                                                                      ':za'        => $project->ZA_Studiennummer,
+                                                                                                                                      ':file'      => $project->Bemerkungen));
         if ($details['data']) {
 
             $grid    = $this->create_grid($details);

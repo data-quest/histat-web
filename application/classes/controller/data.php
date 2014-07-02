@@ -3,7 +3,7 @@
 defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Controller <b>Data</b> 
+ * Controller <b>Data</b>
  */
 class Controller_Data extends Controller_Index {
 
@@ -17,13 +17,13 @@ class Controller_Data extends Controller_Index {
         //Add sub navigation items
       $this->sub_navi->add('data/themes', __('Themes'));
         $this->sub_navi->add('data/times', __('Times'));
-       
+
         $this->sub_navi->add('data/names', __('Names'));
            $this->sub_navi->add('data/new', __('New'));
         $this->sub_navi->add('data/top', __('Top'));
 
         $this->isAdmin = $this->user->has_roles(array("admin"));
-        
+
     }
     public function action_index() {
        $this->action_themes();
@@ -75,7 +75,7 @@ class Controller_Data extends Controller_Index {
 
     public function action_themes($id = NULL) {
         $this->sub_navi->activate(__('Themes'));
-        
+
         if (!$id)
             $id = $this->request->param('id');
 
@@ -89,6 +89,7 @@ class Controller_Data extends Controller_Index {
             foreach ($themes_tmp as $theme) {
                 $total += $theme->summe;
             }
+            if (!$total) $total = 1;
             $themes = array();
             $i = 0;
             foreach ($themes_tmp as $theme) {
@@ -176,7 +177,7 @@ class Controller_Data extends Controller_Index {
         $key_list = array();
         foreach ($authors as $author) {
             $names = explode(';', $author->Projektautor);
-           
+
             if (count($names) > 0) {
                 foreach ($names as $name) {
                     $name = trim(str_replace(array('(', ')'), array(''), $name));
@@ -201,7 +202,7 @@ class Controller_Data extends Controller_Index {
             $sorted[$key] =$author;
         }
        ksort($sorted);
-      
+
         ksort($key_list);
         $view->author_list = $sorted;
         $view->key_list = $key_list;
