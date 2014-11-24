@@ -75,7 +75,7 @@ $quote = nl2br(__(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln.
         </div>
     <?php endif; ?>
 
-    <?php $quellenverzeichnis = nl2br($project->Fundort) ?>
+    <?php $quellenverzeichnis = nl2br($project->Quellen) ?>
     <?php $len                = strlen($quellenverzeichnis); ?>
     <?php if ($len > 0) : ?>
 
@@ -87,7 +87,7 @@ $quote = nl2br(__(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln.
             <div class="clear"></div>
         </div>
     <?php endif; ?>
-    <?php $sources = nl2br($project->Quellen) ?>
+    <?php $sources = nl2br($project->Fundort) ?>
     <?php $len     = strlen($sources); ?>
     <?php if ($len > 0) : ?>
 
@@ -99,6 +99,7 @@ $quote = nl2br(__(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln.
             <div class="clear"></div>
         </div>
     <?php endif; ?>
+
     <?php $notes = nl2br($project->Anmerkungsteil); ?>
     <?php $len   = strlen($notes); ?>
     <?php if ($len > 0) : ?>
@@ -111,6 +112,20 @@ $quote = nl2br(__(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln.
             <div class="clear"></div>
         </div>
     <?php endif; ?>
+
+    <?php $subdivision = nl2br($project->Untergliederung); ?>
+    <?php $len   = strlen($subdivision); ?>
+    <?php if ($len > 0) : ?>
+
+    <div class="content">
+            <div class="right"><?= $len > 300 ? '<span class="more">Mehr</span>' : '' ?></div>
+            <div class="normal left <?= $len > 300 ? 'short' : '' ?>">
+                <b>Sachliche Untergliederung der Datentabellen:</b><br/>
+                <?= $subdivision ?></div>
+            <div class="clear"></div>
+        </div>
+    <?php endif; ?>
+
     <h1>Bearbeitungshinweise</h1>
 
     <div class="content">
