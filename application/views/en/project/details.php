@@ -37,7 +37,7 @@ $quote = nl2br(__(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln.
             <b>Studiennummer:</b> ZA <?= $project->ZA_Studiennummer ?><br/>
             <b>Studientitel:</b> <?= $project->Projektname ?><br/>
             <b>Erhebungs- bzw. Untersuchungszeitraum:</b> <?= $project->Zeitraum ?><br/>
-            <b>Pirmärforscher:</b> <?= $project->Projektautor ?><br/>
+            <b>Primärforscher:</b> <?= $project->Projektautor ?><br/>
             <b>Veröffentlichung (gedruckte Veröffentlichung):</b> <?= $publication ?><br/>
             <b>Empfohlene Zitation (Datensatz):</b> <?= $quote ?><br/>
         </div>
