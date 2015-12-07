@@ -6,9 +6,19 @@ $public      = $project->Zugangsklasse == "-1";
 <?php $publication = nl2br($project->Veroeffentlichung); ?>
 
 <?php
-$quote = nl2br(__(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln. histat.\nStudiennummer :za\nDatenfile :file", array(':publication'    => $project->Veroeffentlichung,
-                                                                                                                              ':za'        => $project->ZA_Studiennummer,
-                                                                                                                              ':file'      => $project->Bemerkungen)));
+$bearbeitung = '';
+$datum       = substr($project->Datum_der_Bearbeitung, -4);
+if (!empty($datum)) {
+    $bearbeitung = '[' . $datum . ']';
+}
+
+$quote = nl2br(__("\n:author, (:pub_year :edit_year) :project\nDaten entnommen aus:\nGESIS Datenarchiv, Köln. histat.\nStudiennummer :za\nDatenfile :file", array(':author'    => $project->Projektautor,
+            ':pub_year'  => $project->Publikationsjahr,
+            ':edit_year' => $bearbeitung,
+            ':project'   => $project->Projektname,
+            ':za'        => $project->ZA_Studiennummer,
+            ':file'      => $project->Bemerkungen)));
+
 ?>
 <div id="project_details" style="display:none" <?= $public ? 'class="public"' : '' ?>>
     <table border="0" cellpadding="0" cellspacing="0">
@@ -38,7 +48,7 @@ $quote = nl2br(__(":publication\nDaten entnommen aus:\nGESIS Datenarchiv, Köln.
             <b>Studiennummer:</b> ZA <?= $project->ZA_Studiennummer ?><br/>
             <b>Studientitel:</b> <?= $project->Projektname ?><br/>
             <b>Erhebungs- bzw. Untersuchungszeitraum:</b> <?= $project->Zeitraum ?><br/>
-            <b>Pirmärforscher:</b> <?= $project->Projektautor ?><br/>
+            <b>Primärforscher:</b> <?= $project->Projektautor ?><br/>
             <b>Veröffentlichung (gedruckte Veröffentlichung):</b> <?= $publication ?><br/>
             <b>Empfohlene Zitation (Datensatz):</b> <?= $quote ?><br/>
         </div>

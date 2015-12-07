@@ -52,7 +52,7 @@ class Controller_Cart extends Controller_Table {
 
         $cart = ORM::factory('cart')
                 ->where('user_id', '=', $this->user->id)
-                ->where('ID_HS', '=', $this->id_hs)
+                ->where('cart.ID_HS', '=', $this->id_hs)
                 ->where('filter', '=', $this->filter)
                 ->find();
         if ($cart->loaded()) {
