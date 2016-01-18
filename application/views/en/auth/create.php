@@ -1,7 +1,7 @@
 <h1>Registration</h1>
 <p>
 <h3>Information on Registration</h3>
-Before getting access to the database, the registration via the registration form is required. After submitting the completed form you get your password via e-mail for the histat-database login. Please note that you have to accept the <?= HTML::anchor('http://www.gesis.org/en/services/data-analysis/data-historical-studies/db-historical-statistics/','histat-database’s conditions of use',array('target'=>'blank'))?> as well as the <?= HTML::anchor('http://www.gesis.org/en/services/data-analysis/data-archive-service/usage-regulations/','GESIS Data Archive\'s',array('target'=>'blank')) ?> regulations of use.
+Before getting access to the database, the registration via the registration form is required. After submitting the completed form you get your password via e-mail for the histat-database login. Please note that you have to accept the <?= HTML::anchor('http://www.gesis.org/en/services/data-analysis/daten-historischer-studien/histat/','histat-database’s conditions of use',array('target'=>'blank'))?> as well as the <?= HTML::anchor('http://www.gesis.org/en/services/data-analysis/data-archive-service/usage-regulations/','GESIS Data Archive\'s',array('target'=>'blank')) ?> regulations of use.
 </p>
 <div id="create">
     <?php foreach ($errors as $key => $error): ?>
