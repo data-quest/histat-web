@@ -1,6 +1,6 @@
 <h3>In Kooperation mit</h3>
 
-<?= HTML::anchor("http://www.destatis.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
+<?= HTML::anchor("http://www.destatis.de/", HTML::image("https://histat.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
 <br/>
 <br/>
 
@@ -16,9 +16,9 @@
                 General Secretary der International Economic History Association <br><br><br>
 
                 &quot;Die Beratung durch das Team war mir eine große Hilfe. Es hätte sicherlich Wochen gedauert, all diese Informationen zu orten ... und wahrscheinlich hätte ich einen Großteil gar nicht erst gefunden.&quot;<br><br>
-                Dr. Michael Peters<br> 
+                Dr. Michael Peters<br>
                 MIT Department of Economics<br><br><br>
-               
+
                 &quot;Bequemer geht es nun wirklich nicht.&quot;<br><br>
                 Dr. Oliver Volckart<br>
                 London School of Economics<br><br><br>
@@ -48,8 +48,8 @@
 </ul>
 <br/>
 <h3>Layout:</h3>
-<?= HTML::anchor("http://metavor.de/", HTML::image("http://metavor.de/images/logo-trans.png", array("alt" => "http://metavor.de/")), array(), "http") ?>
+<?= HTML::anchor("http://metavor.de/", HTML::image("https://metavor.de/images/logo-trans.png", array("alt" => "http://metavor.de/")), array(), "http") ?>
 
 <br/>
 <h3>Technische Realisation:</h3>
-<?= HTML::anchor("http://data-quest.de/", HTML::image("http://www.data-quest.de/fileadmin/dq_homepage/assets/bilder/logo.png", array("alt" => "http://data-quest.de")), array(), "http") ?>
+<?= HTML::anchor("http://data-quest.de/", HTML::image("https://www.data-quest.de/fileadmin/dq_homepage/assets/bilder/logo.png", array("alt" => "http://data-quest.de")), array(), "http") ?>

@@ -3,7 +3,7 @@
 defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Controller <b>Table</b> 
+ * Controller <b>Table</b>
  */
 class Controller_Download extends Controller_Table {
     private $type;
@@ -28,7 +28,7 @@ class Controller_Download extends Controller_Table {
         {
             if (Kohana::$environment === Kohana::PRODUCTION)
             {
-                $url = 'http://www.gesis.org/histat/' . I18n::$lang . '/table/' . $this->type . '/' . $this->id_hs . '/' . $this->filter;
+                $url = 'https://histat.gesis.org/histat/' . I18n::$lang . '/table/' . $this->type . '/' . $this->id_hs . '/' . $this->filter;
             }
             else
             {

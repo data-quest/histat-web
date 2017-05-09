@@ -31,7 +31,7 @@
                 </dc2:title>
             </dce:DCElements>
         </r:Citation>
-        <s:Abstract id="ZA<?= $project->ZA_Studiennummer ?>_A"> 
+        <s:Abstract id="ZA<?= $project->ZA_Studiennummer ?>_A">
             <r:Content>
                 <?= (HTML::chars($project->Projektbeschreibung)) ?>
             </r:Content>
@@ -51,7 +51,7 @@
             <r:IdentifyingAgency>de.gesis</r:IdentifyingAgency>
             <r:Version>1.0.0</r:Version>
         </r:UniverseReference>
-        <s:Purpose id="ZA<?= $project->ZA_Studiennummer ?>_P"> 
+        <s:Purpose id="ZA<?= $project->ZA_Studiennummer ?>_P">
             <r:Content></r:Content>
         </s:Purpose>
         <r:Coverage>
@@ -86,7 +86,7 @@
             <r:Citation>
                 <r:Title>Online-Datenbank HISTAT</r:Title>
             </r:Citation>
-            <r:ExternalURLReference>http://www.histat.gesis.org</r:ExternalURLReference>
+            <r:ExternalURLReference>https://www.histat.gesis.org</r:ExternalURLReference>
         </r:OtherMaterial>
         <r:Note type="Addendum" id="ZA<?= $project->ZA_Studiennummer ?>_Not">
             <r:Relationship>
@@ -101,9 +101,9 @@
         </r:Note>
         <c:ConceptualComponent id="ZA<?= $project->ZA_Studiennummer ?>_ConCom"  isMaintainable="true" agency="de.gesis" version="1.0.0">
             <c:UniverseScheme id="ZA<?= $project->ZA_Studiennummer ?>_UniSch"  isMaintainable="true" agency="de.gesis" version="1.0.0">
-                <c:Universe id="ZA<?= $project->ZA_Studiennummer ?>_Uni"  isVersionable="true" version="1.0.0"> 
+                <c:Universe id="ZA<?= $project->ZA_Studiennummer ?>_Uni"  isVersionable="true" version="1.0.0">
                     <c:HumanReadable></c:HumanReadable>
-                </c:Universe> 
+                </c:Universe>
             </c:UniverseScheme>
         </c:ConceptualComponent>
         <dc:DataCollection id="ZA<?= $project->ZA_Studiennummer ?>_DatCol"  isMaintainable="true" agency="de.gesis" version="1.0.0">
@@ -340,7 +340,7 @@
                 <a:Organization id="ZA<?= $project->ZA_Studiennummer ?>_Org_AR"  isVersionable="true" version="1.0.0">
                     <a:OrganizationName>GESIS - Leibniz Institut für Sozialwissenschaften</a:OrganizationName>
                     <a:Nickname>GESIS</a:Nickname>
-                    <a:URL>http://www.gesis.org/</a:URL>
+                    <a:URL>https://www.gesis.org/</a:URL>
                 </a:Organization>
                 <a:Organization id="ZA<?= $project->ZA_Studiennummer ?>_Org_DC"  isVersionable="true" version="1.0.0">
                     <a:OrganizationName><?=  HTML::chars($project->Projektautor) ?>

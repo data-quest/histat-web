@@ -1,6 +1,6 @@
 <h3>In cooperation with</h3>
 
-<?= HTML::anchor("http://www.destatis.de/", HTML::image("http://www.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
+<?= HTML::anchor("http://www.destatis.de/", HTML::image("https://histat.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
 <br/>
 <br/>
 
@@ -19,7 +19,7 @@
                 &quot;It is most certainly not possible to make it more comfortable.&quot;<br><br>
                 Dr. Oliver Volckart<br>
                 London School of Economics<br><br><br>
-                
+
                 &quot;It's great that GESIS collects this data and provides it to researchers.&quot;<br><br>
                 Robin Winkler<br>
                 DPhil candidate in Economic History, Oxford University
@@ -46,8 +46,8 @@
 </ul>
 <br/>
 <h3>Layout:</h3>
-<?= HTML::anchor("http://metavor.de/", HTML::image("http://metavor.de/images/logo-trans.png", array("alt" => "http://metavor.de/")), array(), "http") ?>
+<?= HTML::anchor("http://metavor.de/", HTML::image("https://metavor.de/images/logo-trans.png", array("alt" => "http://metavor.de/")), array(), "http") ?>
 
 <br/>
 <h3>Technical Realization:</h3>
-<?= HTML::anchor("http://data-quest.de/", HTML::image("http://www.data-quest.de/fileadmin/dq_homepage/assets/bilder/logo.png", array("alt" => "http://data-quest.de")), array(), "http") ?>
+<?= HTML::anchor("http://data-quest.de/", HTML::image("https://www.data-quest.de/fileadmin/dq_homepage/assets/bilder/logo.png", array("alt" => "http://data-quest.de")), array(), "http") ?>

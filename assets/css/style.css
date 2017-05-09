@@ -33,7 +33,7 @@ body {
 	*/
 	/* new css */
 	background-color: #72777A;
-    background-image: url("http://www.gesis.org/fileadmin/img/content/gs_fond.png");
+    background-image: url("https://www.gesis.org/fileadmin/img/content/gs_fond.png");
     background-repeat: repeat-x;
 }
 img{
@@ -336,7 +336,7 @@ table tr td.even {
 	/* new css */
 	/* external link! */
 	background-color: #58748F;
-	background-image: url(http://www.gesis.org/fileadmin/img/header/gs_dachbalken.jpg);
+	background-image: url(https://www.gesis.org/fileadmin/img/header/gs_dachbalken.jpg);
 	background-position: left top;
 	background-repeat: repeat-y;
 	color: #000000;

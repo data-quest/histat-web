@@ -9,7 +9,7 @@
             echo HTML::script($assets['js'] . $file) . "\n";
         ?>
           <script language="JavaScript1.3">et_js=1.3</script><script language="JavaScript1.9">et_pd_v=1.9;</script><script language="JavaScript1.8">et_pd_v=1.8;</script><script language="JavaScript1.7">et_pd_v=1.7;</script><script language="JavaScript1.6">et_pd_v=1.6;</script><script language="JavaScript1.5">et_pd_v=1.5;</script><script language="JavaScript1.4">et_pd_v=1.4;</script><script language="JavaScript1.3">et_pd_v=1.3;</script><script language="JavaScript1.2">et_pd_v=1.2;</script><script language="JavaScript1.1">et_pd_v=1.1;</script><script language="JavaScript1">et_pd_v=1;</script>
-  
+
         <!-- Copyright (c) 2000-2009 etracker GmbH. All rights reserved. -->
         <!-- This material may not be reproduced, displayed, modified or distributed -->
         <!-- without the express prior written permission of the copyright holder. -->
@@ -20,7 +20,7 @@
 /* HR@GESIS zusätzlich zu styles.css hinzufügen */
 #microsite {
 	background-color: #EEE9D2;
-	background-image: url("http://www.gesis.org/fileadmin/img/header/microsite/gs_ms_neutral_header.png");
+	background-image: url("https://www.gesis.org/fileadmin/img/header/microsite/gs_ms_neutral_header.png");
 	background-repeat: no-repeat;
 	border-bottom: 1px solid #FFFFFF;
 	height: 50px;
@@ -87,12 +87,12 @@
         <title><?= $title ?></title>
     </head>
     <body>
-        <noscript><p><a href="http://www.etracker.com"><img class="trackimage" style="border:0px;" alt="" src="http://www.etracker.com/nscnt.php?et=qPKGYV" /></a></p></noscript>
+        <noscript><p><a href="https://www.etracker.com"><img class="trackimage" style="border:0px;" alt="" src="https://www.etracker.com/nscnt.php?et=qPKGYV" /></a></p></noscript>
         <div id="top"></div>
         <div id="layout">
             <div id="header">
-                <a href="http://www.gesis.org"><?= HTML::image($assets['img'] . '/layout/gs_logo_microsite.jpg', array('class' => 'logo')) ?></a>
-            
+                <a href="https://www.gesis.org"><?= HTML::image($assets['img'] . '/layout/gs_logo_microsite.jpg', array('class' => 'logo')) ?></a>
+
             </div>
             <div id="microsite">
                     <div class="infos">
@@ -115,18 +115,18 @@
                 <?php
                   $lang_img = I18n::$lang === 'de'?'en':'de';
                   $url = Request::current()->uri();
-                  
+
                   if($url === '/'){
                       $url = I18n::$lang.'/index';
                   }
-                  
+
                 ?>
                 <a href="<?= str_replace('/'.I18n::$lang.'/', '/'.$lang_img.'/',URL::site($url));?>"><?= HTML::image('assets/img/layout/lang_'.$lang_img.'.gif') ?></a>
-             
+
                 <?= $searchbar ?>
                  <div class="clear"></div>
             </div>
-           
+
             <div id="sub_navi">
                 <?php if (count($sub_navi) > 0): ?>
                     <ul>
@@ -141,7 +141,7 @@
                         <?= HTML::anchor('profile', __('Logged in: :name :surname', array(':name' => $user->name, ':surname' => $user->surname))) ?>
                         <ul>
                             <li><?= HTML::anchor('auth/logout', __('Logout')) ?></li>
-                           
+
 
                             <li><?= HTML::anchor('cart', __('Cart [:value]', array(':value' => '<span id="cart_items">' . $user->cart_items->find_all()->count() . '</span>'))) ?></li>
 
@@ -157,8 +157,8 @@
                 <div class="clear"></div>
             </div>
             <div id="footer">
-           
-                © GESIS <?= HTML::anchor('http://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last update at :date', array(':date' => $date)) ?>
+
+                © GESIS <?= HTML::anchor('https://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last update at :date', array(':date' => $date)) ?>
             </div>
             <!-- etracker PARAMETER 3.0 -->
             <script type="text/javascript">

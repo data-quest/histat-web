@@ -3,7 +3,7 @@
 defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Controller <b>Table</b> 
+ * Controller <b>Table</b>
  */
 class Controller_Table extends Controller_Data {
 
@@ -211,12 +211,12 @@ class Controller_Table extends Controller_Data {
             $download->mkdate       = time();
             $download->create();
             if (Kohana::$environment === Kohana::PRODUCTION) {
-                $url = 'http://www.gesis.org/histat/' . I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter;
+                $url = 'https://www.gesis.org/histat/' . I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter;
             } else {
                 $url = URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
             }
 
-            $this->request->redirect('http://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
+            $this->request->redirect('https://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
         }
     }
 
