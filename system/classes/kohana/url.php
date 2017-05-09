@@ -46,7 +46,11 @@ class Kohana_URL {
 		{
 			// Use the current protocol
 			list($protocol) = explode('/', strtolower($protocol->protocol()));
+				if ($protocol == 'http' && Request::$initial->secure())                         {
+				    $protocol = 'https';
+		        }
 		}
+
 
 		if ( ! $protocol)
 		{
