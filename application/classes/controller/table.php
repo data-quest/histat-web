@@ -211,7 +211,7 @@ class Controller_Table extends Controller_Data {
             $download->mkdate       = time();
             $download->create();
             if (Kohana::$environment === Kohana::PRODUCTION) {
-                $url = 'https://www.gesis.org/histat/' . I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter;
+                $url = 'https://histat.gesis.org/histat/' . I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter;
             } else {
                 $url = URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
             }
