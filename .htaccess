@@ -4,7 +4,7 @@ Options All -Indexes -Multiviews
 RewriteEngine On
 
 # Installation directory
-RewriteBase /histat/
+RewriteBase /histat_neu/
 
 # Protect hidden files from being viewed
 <Files .*>
@@ -24,13 +24,15 @@ RewriteRule .* index.php?/$0 [PT]
 </IfModule>
 FileETag MTime Size
 <IfModule mod_expires.c>
-ExpiresActive On
-ExpiresByType text/css "access plus 1 week"
-ExpiresByType application/javascript "access plus 1 month"
-ExpiresByType application/x-javascript "access plus 1 month"
-ExpiresByType image/gif "access plus 1 month"
-ExpiresByType image/jpeg "access plus 1 month"
-ExpiresByType image/png "access plus 1 month"
-ExpiresByType image/x-icon "access plus 1 year"
-ExpiresByType image/icon "access plus 1 year"
+#ExpiresActive On
+#ExpiresByType text/css "access plus 1 week"
+#ExpiresByType application/javascript "access plus 1 month"
+#ExpiresByType application/x-javascript "access plus 1 month"
+#ExpiresByType image/gif "access plus 1 month"
+#ExpiresByType image/jpeg "access plus 1 month"
+#ExpiresByType image/png "access plus 1 month"
+#ExpiresByType image/x-icon "access plus 1 year"
+#ExpiresByType image/icon "access plus 1 year"
 </IfModule>
+php_value error_reporting 22519
+

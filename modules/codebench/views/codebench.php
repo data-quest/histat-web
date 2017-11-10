@@ -1,11 +1,11 @@
-<?php defined('SYSPATH') or die('No direct access allowed.');
+<?php
 /**
  * Codebench — A benchmarking module.
  *
  * @package    Kohana/Codebench
  * @author     Kohana Team
- * @copyright  (c) 2009 Kohana Team
- * @license    http://kohanaphp.com/license.html
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 ?>
 <!DOCTYPE html>
@@ -245,7 +245,7 @@
 			<?php echo Text::auto_p(Text::auto_link($codebench['description']), FALSE) ?>
 		<?php } ?>
 
-		<?php // echo '<h2>Raw output:</h2>', Kohana::debug($codebench) ?>
+		<?php // echo '<h2>Raw output:</h2>', Debug::vars($codebench) ?>
 
 	<?php } ?>
 

@@ -2,11 +2,13 @@
 include_once(Kohana::find_file('tests/cache', 'CacheBasicMethodsTest'));
 
 /**
-*  @package    Kohana/Cache/Memcache
+ * @package    Kohana/Cache
+ * @group      kohana
+ * @group      kohana.cache
  * @category   Test
  * @author     Kohana Team
- * @copyright  (c) 2009-2010 Kohana Team
- * @license    http://kohanaphp.com/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 class Kohana_SqliteTest extends Kohana_CacheBasicMethodsTest {
 
@@ -29,6 +31,20 @@ class Kohana_SqliteTest extends Kohana_CacheBasicMethodsTest {
 		if ( ! extension_loaded('pdo_sqlite'))
 		{
 			$this->markTestSkipped('SQLite PDO PHP Extension is not available');
+		}
+
+		if ( ! Kohana::$config->load('cache.sqlite'))
+		{
+			Kohana::$config->load('cache')
+				->set(
+					'sqlite',
+					array(
+						'driver'             => 'sqlite',
+						'default_expire'     => 3600,
+						'database'           => 'memory',
+						'schema'             => 'CREATE TABLE caches(id VARCHAR(127) PRIMARY KEY, tags VARCHAR(255), expiration INTEGER, cache TEXT)',
+					)
+				);
 		}
 
 		$this->cache(Cache::instance('sqlite'));

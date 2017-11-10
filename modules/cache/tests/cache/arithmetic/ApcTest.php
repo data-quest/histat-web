@@ -2,11 +2,13 @@
 include_once(Kohana::find_file('tests/cache/arithmetic', 'CacheArithmeticMethods'));
 
 /**
-*  @package    Kohana/Cache/Memcache
+ * @package    Kohana/Cache
+ * @group      kohana
+ * @group      kohana.cache
  * @category   Test
  * @author     Kohana Team
- * @copyright  (c) 2009-2010 Kohana Team
- * @license    http://kohanaphp.com/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 class Kohana_ApcTest extends Kohana_CacheArithmeticMethodsTest {
 
@@ -37,6 +39,18 @@ class Kohana_ApcTest extends Kohana_CacheArithmeticMethodsTest {
 				'place "apc.enable_cli=1" in your php.ini file');
 		}
 
+		if ( ! Kohana::$config->load('cache.apc'))
+		{
+			Kohana::$config->load('cache')
+				->set(
+					'apc',
+					array(
+						'driver'             => 'apc',
+						'default_expire'     => 3600,
+					)
+				);
+		}
+
 		$this->cache(Cache::instance('apc'));
 	}
 
@@ -55,7 +69,7 @@ class Kohana_ApcTest extends Kohana_CacheArithmeticMethodsTest {
 	 * 
 	 * @dataProvider provider_set_get
 	 *
-	 * @param   array    data 
+	 * @param   array    data
 	 * @param   mixed    expected 
 	 * @return  void
 	 */

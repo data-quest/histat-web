@@ -1,20 +1,33 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
+<?php
 
 /**
  * Test for feed helper
  *
  * @group kohana
- * @group kohana.feed
+ * @group kohana.core
+ * @group kohana.core.feed
  *
  * @package    Kohana
  * @category   Tests
  * @author     Kohana Team
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
- * @copyright  (c) 2008-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 class Kohana_FeedTest extends Unittest_TestCase
 {
+
+	/**
+	 * Sets up the environment
+	 */
+	// @codingStandardsIgnoreStart
+	public function setUp()
+	// @codingStandardsIgnoreEnd
+	{
+		parent::setUp();
+		Kohana::$config->load('url')->set('trusted_hosts', array('localhost'));
+	}
+
 	/**
 	 * Provides test data for test_parse()
 	 *
@@ -24,7 +37,8 @@ class Kohana_FeedTest extends Unittest_TestCase
 	{
 		return array(
 			// $source, $expected
-			array('http://dev.kohanaframework.org/projects/kohana3/activity.atom', 15),
+			array(realpath(__DIR__.'/../test_data/feeds/activity.atom'), array('Proposals (Political/Workflow) #4839 (New)', 'Proposals (Political/Workflow) #4782')),
+			array(realpath(__DIR__.'/../test_data/feeds/example.rss20'), array('Example entry')),
 		);
 	}
 
@@ -37,14 +51,15 @@ class Kohana_FeedTest extends Unittest_TestCase
 	 * @param string  $source   URL to test
 	 * @param integer $expected Count of items
 	 */
-	public function test_parse($source, $expected)
+	public function test_parse($source, $expected_titles)
 	{
-		if ( ! $this->hasInternet())
+		$titles = array();
+		foreach (Feed::parse($source) as $item)
 		{
-			$this->markTestSkipped('An internet connection is required for this test');
+			$titles[] = $item['title'];
 		}
 
-		$this->assertEquals($expected, count(feed::parse($source)));
+		$this->assertSame($expected_titles, $titles);
 	}
 
 	/**
@@ -115,11 +130,11 @@ class Kohana_FeedTest extends Unittest_TestCase
 	{
 		$this->setEnvironment($enviroment);
 
-		$this->assertTag($matcher_item, feed::create($info, $items), '', FALSE);
+		$this->assertTag($matcher_item, Feed::create($info, $items), '', FALSE);
 
 		foreach ($matchers_image as $matcher_image)
 		{
-			$this->assertTag($matcher_image, feed::create($info, $items), '', FALSE);
+			$this->assertTag($matcher_image, Feed::create($info, $items), '', FALSE);
 		}
 	}
 }

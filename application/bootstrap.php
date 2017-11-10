@@ -1,17 +1,20 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
 
 // -- Environment setup --------------------------------------------------------
+
 // Load the core Kohana class
-require SYSPATH . 'classes/kohana/core' . EXT;
+require SYSPATH.'classes/Kohana/Core'.EXT;
 
-if (is_file(APPPATH . 'classes/kohana' . EXT)) {
-    // Application extends the core
-    require APPPATH . 'classes/kohana' . EXT;
-} else {
-    // Load empty core extension
-    require SYSPATH . 'classes/kohana' . EXT;
+if (is_file(APPPATH.'classes/Kohana'.EXT))
+{
+	// Application extends the core
+	require APPPATH.'classes/Kohana'.EXT;
 }
-
+else
+{
+	// Load empty core extension
+	require SYSPATH.'classes/Kohana'.EXT;
+}
 /**
  * Set the default time zone.
  *
@@ -52,6 +55,40 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 I18n::lang('de');
 
 /**
+ * Set the mb_substitute_character to "none"
+ *
+ * @link http://www.php.net/manual/function.mb-substitute-character.php
+ */
+mb_substitute_character('none');
+
+if (isset($_SERVER['SERVER_PROTOCOL']))
+{
+	// Replace the default protocol.
+	HTTP::$protocol = $_SERVER['SERVER_PROTOCOL'];
+}
+
+/**
+ * Cookie Salt
+ * @see  http://kohanaframework.org/3.3/guide/kohana/cookies
+ * 
+ * If you have not defined a cookie salt in your Cookie class then
+ * uncomment the line below and define a preferrably long salt.
+ */
+Cookie::$salt = 'ßa84v9vzr9a23v9r9c7rz92z923c7ß7c7923cz923';
+/**
+ * Cookie HttpOnly directive
+ * If set to true, disallows cookies to be accessed from JavaScript
+ * @see https://en.wikipedia.org/wiki/Session_hijacking
+ */
+Cookie::$httponly = TRUE;
+/**
+ * If website runs on secure protocol HTTPS, allows cookies only to be transmitted
+ * via HTTPS.
+ * Warning: HSTS must also be enabled in .htaccess, otherwise first request
+ * to http://www.example.com will still reveal this cookie
+ */
+Cookie::$secure = isset($_SERVER['HTTPS']) AND $_SERVER['HTTPS'] == 'on' ? TRUE : FALSE;
+/**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
  *
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
@@ -77,10 +114,10 @@ if (isset($_SERVER['KOHANA_ENV'])) {
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-    'base_url' => '/histat/',
-    'index_file' => FALSE, // SEO (avoid index.php/mycontroller/action)
+    'base_url' => '/histat_neu/',
+    'index_file' => 'index.php', // SEO (avoid index.php/mycontroller/action)
     'profile' => (Kohana::$environment !== Kohana::PRODUCTION), //see how good you are
-    'caching' => TRUE//(Kohana::$environment === Kohana::PRODUCTION),
+    'caching' => FALSE//(Kohana::$environment === Kohana::PRODUCTION),
 ));
 
 /**

@@ -1,17 +1,18 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
+<?php
 
 /**
  * Tests the session class
  *
  * @group kohana
- * @group kohana.session
+ * @group kohana.core
+ * @group kohana.core.session
  *
  * @package    Kohana
  * @category   Tests
  * @author     Kohana Team
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
- * @copyright  (c) 2008-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 class Kohana_SessionTest extends Unittest_TestCase
 {
@@ -21,7 +22,9 @@ class Kohana_SessionTest extends Unittest_TestCase
 	 *
 	 * @return Session
 	 */
+	// @codingStandardsIgnoreStart
 	public function getMockSession(array $config = array())
+	// @codingStandardsIgnoreEnd
 	{
 		return $this->getMockForAbstractClass('Session', array($config));
 	}
@@ -92,20 +95,14 @@ class Kohana_SessionTest extends Unittest_TestCase
 	 */
 	public function test_constructor_loads_session_with_session_id()
 	{
-		$this->markTestIncomplete(
-			'Need to work out why constructor is not being called'
-		);
-
 		$config = array();
 		$session_id = 'lolums';
 
 		// Don't auto-call constructor, we need to setup the mock first
-		$session = $this->getMockForAbstractClass(
-			'Session',
-			array(),
-			'',
-			FALSE
-		);
+		$session = $this->getMockBuilder('Session')
+			->disableOriginalConstructor()
+			->setMethods(array('read'))
+			->getMockForAbstractClass();
 
 		$session
 			->expects($this->once())

@@ -2,8 +2,8 @@
 
 return array(
 
-	'driver'       => 'orm',
-	'hash_method'  => 'sha256',
+	'driver'       => 'ORM',
+	'hash_method'  => 'md5',
 	'hash_key'     => 'key',
 	'lifetime'     => 1209600,
 	'session_type' => Session::$default,

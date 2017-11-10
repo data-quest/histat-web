@@ -5,7 +5,7 @@ defined('SYSPATH') or die('No direct access allowed.');
 return array
     (
     'default' => array(
-        'type' => 'pdo',
+        'type' => 'PDO',
         'connection' => array(
             /**
              * The following options are available for PDO:
@@ -15,9 +15,9 @@ return array
              * string   password    database password
              * boolean  persistent  use persistent connections?
              */
-            'dsn' => 'mysql:host=localhost;dbname=mydb',
-            'username' => 'user',
-            'password' => 'password',
+            'dsn' => 'mysql:host=127.0.0.1;dbname=histat_1',
+            'username' => '',
+            'password' => '',
             'persistent' => FALSE,
         ),
         /**
@@ -26,10 +26,10 @@ return array
          * string   identifier  set the escaping identifier
          */
         'table_prefix' => '',
-       // 'identifier' => '`',
+        'identifier' => '`',
         'charset' => 'utf8',
         'caching' => FALSE,
         'profiling' => (Kohana::$environment !== Kohana::PRODUCTION),
     ),
-  
+
 );

@@ -3,11 +3,11 @@
 # Markdown Extra  -  A text-to-HTML conversion tool for web writers
 #
 # PHP Markdown & Extra
-# Copyright (c) 2004-2008 Michel Fortin  
+# Copyright (c) 2004-2017 Michel Fortin  
 # <http://www.michelf.com/projects/php-markdown/>
 #
 # Original Markdown
-# Copyright (c) 2004-2006 John Gruber  
+# Copyright (c) 2004-2017 John Gruber  
 # <http://daringfireball.net/projects/markdown/>
 #
 
@@ -239,7 +239,7 @@ class Markdown_Parser {
 	var $predef_titles = array();
 
 
-	function Markdown_Parser() {
+	function __construct() {
 	#
 	# Constructor function. Initialize appropriate member variables.
 	#
@@ -1669,7 +1669,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 	var $predef_abbr = array();
 
 
-	function MarkdownExtra_Parser() {
+	function __construct() {
 	#
 	# Constructor function. Initialize the parser object.
 	#
@@ -1695,7 +1695,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 			"doAbbreviations"    => 70,
 			);
 		
-		parent::Markdown_Parser();
+		parent::__construct();
 	}
 	
 	
@@ -2869,12 +2869,12 @@ Copyright and License
 ---------------------
 
 PHP Markdown & Extra
-Copyright (c) 2004-2008 Michel Fortin  
+Copyright (c) 2004-2017 Michel Fortin  
 <http://www.michelf.com/>  
 All rights reserved.
 
 Based on Markdown  
-Copyright (c) 2003-2006 John Gruber   
+Copyright (c) 2003-2017 John Gruber   
 <http://daringfireball.net/>   
 All rights reserved.
 

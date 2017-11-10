@@ -1,18 +1,19 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
+<?php
 
 /**
  * Tests the Config lib that's shipped with kohana
  *
  * @group kohana
- * @group kohana.config
+ * @group kohana.core
+ * @group kohana.core.config
  *
  * @package    Kohana
  * @category   Tests
  * @author     Kohana Team
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
  * @author     Matt Button <matthew@sigswitch.com>
- * @copyright  (c) 2008-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 class Kohana_ConfigTest extends Unittest_TestCase
 {
@@ -41,7 +42,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	public function test_attach_adds_reader_and_returns_this()
 	{
 		$config = new Config;
-		$reader = $this->getMock('Kohana_Config_Reader');
+		$reader = $this->createMock('Kohana_Config_Reader');
 
 		$this->assertSame($config, $config->attach($reader));
 
@@ -59,8 +60,8 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config  = new Config;
 
-		$reader1 = $this->getMock('Kohana_Config_Reader');
-		$reader2 = $this->getMock('Kohana_Config_Reader');
+		$reader1 = $this->createMock('Kohana_Config_Reader');
+		$reader2 = $this->createMock('Kohana_Config_Reader');
 
 		$config->attach($reader1);
 		$config->attach($reader2);
@@ -88,8 +89,8 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	public function test_attach_can_add_reader_to_end_of_queue()
 	{
 		$config  = new Config;
-		$reader1 = $this->getMock('Kohana_Config_Reader');
-		$reader2 = $this->getMock('Kohana_Config_Reader');
+		$reader1 = $this->createMock('Kohana_Config_Reader');
+		$reader2 = $this->createMock('Kohana_Config_Reader');
 
 		$config->attach($reader1);
 		$config->attach($reader2, FALSE);
@@ -111,20 +112,22 @@ class Kohana_ConfigTest extends Unittest_TestCase
 		// that has already been used then it just re-uses the first's name
 
 		// To get around this we have to specify a totally random name for the second mock object
-		$reader1 = $this->getMock('Kohana_Config_Reader');
-		$reader2 = $this->getMock('Kohana_Config_Reader', array(), array(), 'MY_AWESOME_READER');
+		$reader1 = $this->createMock('Kohana_Config_Reader');
+		$reader2 = $this->createMock('Kohana_Config_Reader', array(), array(), 'MY_AWESOME_READER');
 
 		$config->attach($reader1);
 		$config->attach($reader2);
 
-		$this->assertSame($config, $config->detach($reader1));
-
-		$this->assertAttributeNotContains($reader1, '_sources', $config);
+        $this->assertAttributeContains($reader1, '_sources', $config);
 		$this->assertAttributeContains($reader2, '_sources', $config);
 
-		$this->assertSame($config, $config->detach($reader2));
+        $this->assertSame($config, $config->detach($reader2));
+        
+        $this->assertAttributeNotContains($reader2, '_sources', $config);
+        
+        $this->assertSame($config, $config->detach($reader1));
 
-		$this->assertAttributeNotContains($reader2, '_sources', $config);
+		$this->assertAttributeNotContains($reader1, '_sources', $config);
 	}
 
 	/**
@@ -136,7 +139,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	public function test_detach_returns_this_even_when_reader_dnx()
 	{
 		$config = new Config;
-		$reader = $this->getMock('Kohana_Config_Reader');
+		$reader = $this->createMock('Kohana_Config_Reader');
 
 		$this->assertSame($config, $config->detach($reader));
 	}
@@ -152,7 +155,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config = new Config;
 
-		$reader = $this->getMock('Kohana_Config_Reader', array('load'));
+		$reader = $this->createMock('Kohana_Config_Reader', array('load'));
 
 		$reader
 			->expects($this->once())
@@ -177,7 +180,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config = new Config;
 
-		$reader = $this->getMock('Kohana_Config_Reader', array('load'));
+		$reader = $this->createMock('Kohana_Config_Reader', array('load'));
 
 		$reader
 			->expects($this->once())
@@ -239,7 +242,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config = new Kohana_Config;
 
-		$reader = $this->getMock('Kohana_Config_Reader');
+		$reader = $this->createMock('Kohana_Config_Reader');
 
 		$config->attach($reader);
 
@@ -257,9 +260,9 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config = new Kohana_Config;
 
-		$reader1 = $this->getMock('Kohana_Config_Reader');
-		$writer1 = $this->getMock('Kohana_Config_Writer', array('write'));
-		$writer2 = $this->getMock('Kohana_Config_Writer', array('write'));
+		$reader1 = $this->createMock('Kohana_Config_Reader');
+		$writer1 = $this->createMock('Kohana_Config_Writer', array('write'));
+		$writer2 = $this->createMock('Kohana_Config_Writer', array('write'));
 
 		$writer1
 			->expects($this->once())
@@ -287,8 +290,8 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$group_name =  'lolumns';
 
-		$reader1 = $this->getMock('Kohana_Config_Reader', array('load'), array(), 'Unittest_Config_Reader_1');
-		$reader2 = $this->getMock('Kohana_Config_Reader', array('load'), array(), 'Unittest_Config_Reader_2');
+		$reader1 = $this->createMock('Kohana_Config_Reader', array('load'), array(), 'Unittest_Config_Reader_1');
+		$reader2 = $this->createMock('Kohana_Config_Reader', array('load'), array(), 'Unittest_Config_Reader_2');
 
 		$reader1
 			->expects($this->once())
@@ -332,7 +335,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	 */
 	public function test_load_reuses_config_groups()
 	{
-		$reader = $this->getMock('Kohana_Config_Reader', array('load'));
+		$reader = $this->createMock('Kohana_Config_Reader', array('load'));
 		$reader
 			->expects($this->once())
 			->method('load')
@@ -359,8 +362,8 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config = new Kohana_Config;
 
-		$reader1 = $this->getMock('Kohana_Config_Reader', array('load'));
-		$reader2 = $this->getMock('Kohana_Config_Reader', array('load'));
+		$reader1 = $this->createMock('Kohana_Config_Reader', array('load'));
+		$reader2 = $this->createMock('Kohana_Config_Reader', array('load'));
 
 		$reader1
 			->expects($this->once())
@@ -374,13 +377,13 @@ class Kohana_ConfigTest extends Unittest_TestCase
 			->with('something')
 			->will($this->returnValue(array('kohana' => 'good')));
 
-		$writer1 = $this->getMock('Kohana_Config_Writer', array('write'));
-		$writer2 = $this->getMock('Kohana_Config_Writer', array('write'));
+		$writer1 = $this->createMock('Kohana_Config_Writer', array('write'));
+		$writer2 = $this->createMock('Kohana_Config_Writer', array('write'));
 
 		// Due to crazy limitations in phpunit's mocking engine we have to be fairly
 		// liberal here as to what order we receive the config items
 		// Good news is that order shouldn't matter *yay*
-		//
+		// 
 		// Now save your eyes and skip the next... 13 lines!
 		$key = $this->logicalOr('pie', 'kohana');
 		$val = $this->logicalOr('good', 'awesome');

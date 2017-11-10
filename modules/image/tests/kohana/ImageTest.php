@@ -1,14 +1,24 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
+<?php
 
 /**
-*  @package    Kohana/Image
+ * @package    Kohana/Image
+ * @group      kohana
+ * @group      kohana.image
  * @category   Test
  * @author     Kohana Team
- * @copyright  (c) 2009-2011 Kohana Team
- * @license    http://http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 
 class Kohana_ImageTest extends PHPUnit_Framework_TestCase {
+
+	protected function setUp()
+	{
+		if ( ! extension_loaded('gd'))
+		{
+			$this->markTestSkipped('The GD extension is not available.');
+		}
+	}
 
 	/**
 	 * Tests the Image::save() method for files that don't have extensions

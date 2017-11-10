@@ -1,16 +1,17 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
+<?php
 
 /**
  * Tests Num
  *
- * @group      kohana
- * @group      kohana.num
+ * @group kohana
+ * @group kohana.core
+ * @group kohana.core.num
  * @package    Kohana
  * @category   Tests
  * @author     Kohana Team
  * @author     BRMatt <matthew@sigswitch.com>
- * @copyright  (c) 2008-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 class Kohana_NumTest extends Unittest_TestCase
 {
@@ -19,17 +20,22 @@ class Kohana_NumTest extends Unittest_TestCase
 	/**
 	 * SetUp test enviroment
 	 */
+	// @codingStandardsIgnoreStart
 	public function setUp()
+	// @codingStandardsIgnoreEnd
 	{
 		parent::setUp();
 
-		setlocale(LC_ALL, 'English');
+		$this->default_locale = setlocale(LC_ALL, 0);
+		setlocale(LC_ALL, 'en_US.utf8');
 	}
 
 	/**
 	 * Tear down environment
 	 */
+	// @codingStandardsIgnoreStart
 	public function tearDown()
+	// @codingStandardsIgnoreEnd
 	{
 		parent::tearDown();
 
@@ -194,7 +200,7 @@ class Kohana_NumTest extends Unittest_TestCase
 	{
 		foreach (array(Num::ROUND_HALF_UP, Num::ROUND_HALF_DOWN, Num::ROUND_HALF_EVEN, Num::ROUND_HALF_ODD) as $i => $mode)
 		{
-			$this->assertSame($expected[$i], Num::round($input, $precision, $mode, false));
+			$this->assertSame($expected[$i], Num::round($input, $precision, $mode, FALSE));
 		}
 	}
 }

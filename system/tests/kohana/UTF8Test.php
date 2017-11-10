@@ -1,15 +1,16 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
+<?php
 /**
  * Tests Kohana_UTF8 class
  *
  * @group kohana
- * @group kohana.utf8
+ * @group kohana.core
+ * @group kohana.core.utf8
  *
  * @package    Kohana
  * @category   Tests
  * @author     Kohana Team
- * @copyright  (c) 2008-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 class Kohana_UTF8Test extends Unittest_TestCase
 {

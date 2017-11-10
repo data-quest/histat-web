@@ -1,15 +1,15 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
+<?php
 
 /**
  * Tests Kohana_Security
  *
  * @group kohana
- * @group kohana.security
+ * @group kohana.core
+ * @group kohana.core.security
  *
  * @package    Kohana
  * @category   Tests
  */
-
 class Kohana_SecurityTest extends Unittest_TestCase
 {
 	/**
@@ -85,6 +85,7 @@ class Kohana_SecurityTest extends Unittest_TestCase
 	 */
 	public function test_csrf_token($expected, $input, $iteration)
 	{
+		//@todo: the Security::token tests need to be reviewed to check how much of the logic they're actually covering
 		Security::$token_name = 'token_'.$iteration;
 		$this->assertSame(TRUE, $input);
 		$this->assertSame($expected, Security::token(FALSE));

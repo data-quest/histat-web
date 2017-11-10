@@ -1,17 +1,18 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
+<?php
 
 /**
  * Tests Kohana File helper
  *
  * @group kohana
- * @group kohana.url
+ * @group kohana.core
+ * @group kohana.core.file
  *
  * @package    Kohana
  * @category   Tests
  * @author     Kohana Team
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
- * @copyright  (c) 2008-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
 class Kohana_FileTest extends Unittest_TestCase
 {
@@ -24,8 +25,7 @@ class Kohana_FileTest extends Unittest_TestCase
 	{
 		return array(
 			// $value, $result
-			array(Kohana::find_file('classes', 'file')),
-			array(Kohana::find_file('tests', 'test_data/github', 'png')),
+			array(Kohana::find_file('tests', 'test_data/github', 'png'), 'image/png'),
 		);
 	}
 
@@ -37,9 +37,10 @@ class Kohana_FileTest extends Unittest_TestCase
 	 * @param boolean $input  Input for File::mime
 	 * @param boolean $expected Output for File::mime
 	 */
-	public function test_mime($input)
+	public function test_mime($input, $expected)
 	{
-		$this->assertSame(1, preg_match('/^(?:application|audio|image|message|multipart|text|video)\/[a-z.+0-9-]+$/i', File::mime($input)));
+		//@todo: File::mime coverage needs significant improvement or to be dropped for a composer package - it's a "horribly unreliable" method with very little testing
+		$this->assertSame($expected, File::mime($input));
 	}
 
 	/**

@@ -17,7 +17,7 @@
             <tr>
                 <td><?= $log->project->Projektname ?></td>
                 <td class="even"><?= $log->username?></td>
-                <td><?php $keymask = ORM::factory('keymask', $log->ID_HS);
+                <td><?php $keymask = ORM::factory('Keymask', $log->ID_HS);
                  $details = $keymask->getDetails($log->Schluessel);
                 $filter_text = implode(',',Arr::get($details['titles'],$log->Schluessel,array())); 
                 echo $filter_text;

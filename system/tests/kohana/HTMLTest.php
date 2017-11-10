@@ -1,25 +1,43 @@
-<?php defined('SYSPATH') OR die('Kohana bootstrap needs to be included before tests run');
-
+<?php
 /**
  * Tests HTML
  *
  * @group kohana
- * @group kohana.html
+ * @group kohana.core
+ * @group kohana.core.html
  *
  * @package    Kohana
  * @category   Tests
  * @author     Kohana Team
  * @author     BRMatt <matthew@sigswitch.com>
- * @copyright  (c) 2008-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
-class Kohana_HTMLTest extends Unittest_TestCase
-{
+class Kohana_HTMLTest extends Unittest_TestCase {
+
+	/**
+	 * Sets up the environment
+	 */
+	// @codingStandardsIgnoreStart
+	public function setUp()
+	// @codingStandardsIgnoreEnd
+	{
+		parent::setUp();
+		Kohana::$config->load('url')->set('trusted_hosts', array('www\.kohanaframework\.org'));
+	}
+
+	/**
+	 * Defaults for this test
+	 * @var array
+	 */
+	// @codingStandardsIgnoreStart
 	protected $environmentDefault = array(
 		'Kohana::$base_url'    => '/kohana/',
 		'Kohana::$index_file'  => 'index.php',
+		'HTML::$strict' => TRUE,
 		'HTTP_HOST'	=> 'www.kohanaframework.org',
 	);
+	// @codingStandardsIgnoreStart
 
 	/**
 	 * Provides test data for test_attributes()
@@ -31,19 +49,28 @@ class Kohana_HTMLTest extends Unittest_TestCase
 		return array(
 			array(
 				array('name' => 'field', 'random' => 'not_quite', 'id' => 'unique_field'),
+				array(),
 				' id="unique_field" name="field" random="not_quite"'
 			),
 			array(
 				array('invalid' => NULL),
+				array(),
 				''
 			),
 			array(
+				array(),
 				array(),
 				''
 			),
 			array(
 				array('name' => 'field', 'checked'),
+				array(),
 				' name="field" checked="checked"',
+			),
+			array(
+				array('id' => 'disabled_field', 'disabled'),
+				array('HTML::$strict' => FALSE),
+				' id="disabled_field" disabled',
 			),
 		);
 	}
@@ -54,10 +81,13 @@ class Kohana_HTMLTest extends Unittest_TestCase
 	 * @test
 	 * @dataProvider provider_attributes
 	 * @param array  $attributes  Attributes to use
+	 * @param array  $options     Environment options to use
 	 * @param string $expected    Expected output
 	 */
-	public function test_attributes($attributes, $expected)
+	public function test_attributes(array $attributes, array $options, $expected)
 	{
+		$this->setEnvironment($options);
+
 		$this->assertSame(
 			$expected,
 			HTML::attributes($attributes)
@@ -89,6 +119,17 @@ class Kohana_HTMLTest extends Unittest_TestCase
 				NULL,
 				'https',
 				FALSE
+			),
+			array(
+				'<script type="text/javascript" src="https://www.kohanaframework.org/kohana/my/script.js"></script>',
+				'/my/script.js', // Test absolute paths
+				NULL,
+				'https',
+				FALSE
+			),
+			array(
+				'<script type="text/javascript" src="//google.com/script.js"></script>',
+				'//google.com/script.js',
 			),
 
 		);
@@ -149,6 +190,30 @@ class Kohana_HTMLTest extends Unittest_TestCase
 				'https',
 				TRUE
 			),
+			array(
+				'<link type="text/css" href="https://www.kohanaframework.org/kohana/index.php/my/style.css" rel="stylesheet" />',
+				'/my/style.css',
+				array(),
+				'https',
+				TRUE
+			),
+			array(
+				// #4283: http://dev.kohanaframework.org/issues/4283
+				'<link type="text/css" href="https://www.kohanaframework.org/kohana/index.php/my/style.css" rel="stylesheet/less" />',
+				'my/style.css',
+				array(
+					'rel' => 'stylesheet/less'
+				),
+				'https',
+				TRUE
+			),
+			array(
+				'<link type="text/css" href="//google.com/style.css" rel="stylesheet" />',
+				'//google.com/style.css',
+				array(),
+				NULL,
+				FALSE
+			),
 		);
 	}
 
@@ -179,6 +244,20 @@ class Kohana_HTMLTest extends Unittest_TestCase
 	public function provider_anchor()
 	{
 		return array(
+			// a fragment-only anchor
+			array(
+				'<a href="#go-to-section-kohana">Kohana</a>',
+				array(),
+				'#go-to-section-kohana',
+				'Kohana',
+			),
+			// a query-only anchor
+			array(
+				'<a href="?cat=a">Category A</a>',
+				array(),
+				'?cat=a',
+				'Category A',
+			),
 			array(
 				'<a href="http://kohanaframework.org">Kohana</a>',
 				array(),
@@ -193,6 +272,12 @@ class Kohana_HTMLTest extends Unittest_TestCase
 				array('target' => '_blank'),
 				'http',
 			),
+			[
+				'<a href="//google.com/">GOOGLE</a>',
+				[],
+				'//google.com/',
+				'GOOGLE',
+			],
 			array(
 				'<a href="https://www.kohanaframework.org/kohana/users/example">Kohana</a>',
 				array(),
@@ -232,6 +317,15 @@ class Kohana_HTMLTest extends Unittest_TestCase
 				'<a href="https://www.kohanaframework.org/kohana/users/example">Kohana</a>',
 				array(),
 				'users/example',
+				'Kohana',
+				NULL,
+				'https',
+				FALSE,
+			),
+			array(
+				'<a href="https://www.kohanaframework.org/kohana/users/example">Kohana</a>',
+				array(),
+				'/users/example',
 				'Kohana',
 				NULL,
 				'https',
@@ -285,7 +379,15 @@ class Kohana_HTMLTest extends Unittest_TestCase
 				'My picture file',
 				'ftp',
 				FALSE
-			)
+			),
+			array(
+				'<a href="ftp://www.kohanaframework.org/kohana/mypic.png">My picture file</a>',
+				array(),
+				'/mypic.png',
+				'My picture file',
+				'ftp',
+				FALSE
+			),
 		);
 	}
 
@@ -303,4 +405,55 @@ class Kohana_HTMLTest extends Unittest_TestCase
 			HTML::file_anchor($file, $title, $attributes, $protocol, $index)
 		);
 	}
+
+
+	/**
+	 * Provides test data for test_image
+	 *
+	 * @return array Array of test data
+	 */
+	public function provider_image()
+	{
+		return [
+			[
+				'<img src="http://google.com/image.png" />',
+				'http://google.com/image.png',
+			],
+			[
+				'<img src="//google.com/image.png" />',
+				'//google.com/image.png',
+			],
+			[
+				'<img src="/kohana/img/image.png" />',
+				'img/image.png',
+			],
+			[
+				'<img src="https://www.kohanaframework.org/kohana/index.php/img/image.png" alt="..." />',
+				'img/image.png',
+				['alt' => '...',],
+				'https',
+				TRUE
+			],
+		];
+	}
+
+	/**
+	 * Tests HTML::image()
+	 *
+	 * @test
+	 * @dataProvider  provider_image
+	 * @param string  $expected       Expected output
+	 * @param string  $file           file name
+	 * @param array   $attributes     HTML attributes for the image
+	 * @param string  $protocol       Protocol to use
+	 * @param bool    $index          Should the index file be included in url?
+	 */
+	public function test_image($expected, $file, array $attributes = NULL, $protocol = NULL, $index = FALSE)
+	{
+		$this->assertSame(
+			$expected,
+			HTML::image($file, $attributes, $protocol, $index)
+		);
+	}
+
 }

@@ -1,13 +1,15 @@
 <?php
+use PHPUnit\Framework\TestCase;
 /**
-*  @package    Kohana/Cache
+ * @package    Kohana/Cache
+ * @group      kohana
+ * @group      kohana.cache
  * @category   Test
  * @author     Kohana Team
- * @copyright  (c) 2009-2010 Kohana Team
- * @license    http://kohanaphp.com/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE.md
  */
-
-class Kohana_CacheTest extends PHPUnit_Framework_TestCase {
+class Kohana_CacheTest extends TestCase {
 
 	const BAD_GROUP_DEFINITION  = 1010;
 	const EXPECT_SELF           = 1001;
@@ -21,19 +23,28 @@ class Kohana_CacheTest extends PHPUnit_Framework_TestCase {
 	{
 		$tmp = realpath(sys_get_temp_dir());
 
+		$base = array();
+
+		if (Kohana::$config->load('cache.file'))
+		{
+			$base = array(
+				// Test default group
+				array(
+					NULL,
+					Cache::instance('file')
+				),
+				// Test defined group
+				array(
+					'file',
+					Cache::instance('file')
+				),
+			);
+		}
+
+
 		return array(
-			// Test default group
-			array(
-				NULL,
-				Cache::instance('file')
-			),
-			// Test defined group
-			array(
-				'file',
-				Cache::instance('file')
-			),
 			// Test bad group definition
-			array(
+			$base+array(
 				Kohana_CacheTest::BAD_GROUP_DEFINITION,
 				'Failed to load Kohana Cache group: 1010'
 			),
@@ -79,9 +90,13 @@ class Kohana_CacheTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_cloning_fails()
 	{
+		$cache = $this->getMockBuilder('Cache')
+			->disableOriginalConstructor()
+			->getMockForAbstractClass();
+
 		try
 		{
-			$cache_clone = clone(Cache::instance('file'));
+			clone($cache);
 		}
 		catch (Cache_Exception $e)
 		{
@@ -149,7 +164,7 @@ class Kohana_CacheTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_config($key, $value, $expected_result, array $expected_config)
 	{
-		$cache = $this->getMock('Cache_File', NULL, array(), '', FALSE);
+		$cache = $this->createMock('Cache_File', NULL, array(), '', FALSE);
 
 		if ($expected_result === Kohana_CacheTest::EXPECT_SELF)
 		{

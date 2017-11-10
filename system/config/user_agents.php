@@ -1,8 +1,11 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
 
 return array(
 
 	'platform' => array(
+		'windows nt 10.0'=> 'Windows 10',
+		'windows nt 6.3' => 'Windows 8.1',
+		'windows nt 6.2' => 'Windows 8',
 		'windows nt 6.1' => 'Windows 7',
 		'windows nt 6.0' => 'Windows Vista',
 		'windows nt 5.2' => 'Windows 2003',
@@ -46,6 +49,7 @@ return array(
 
 	'browser' => array(
 		'Opera'             => 'Opera',
+		'Edge'              => 'Edge',
 		'MSIE'              => 'Internet Explorer',
 		'Internet Explorer' => 'Internet Explorer',
 		'Shiira'            => 'Shiira',
@@ -94,13 +98,15 @@ return array(
 	),
 
 	'robot' => array(
-		'googlebot'   => 'Googlebot',
-		'msnbot'      => 'MSNBot',
-		'slurp'       => 'Inktomi Slurp',
-		'yahoo'       => 'Yahoo',
-		'askjeeves'   => 'AskJeeves',
-		'fastcrawler' => 'FastCrawler',
-		'infoseek'    => 'InfoSeek Robot 1.0',
-		'lycos'       => 'Lycos',
+		'googlebot'           => 'Googlebot',
+		'msnbot'              => 'MSNBot',
+		'facebookexternalhit' => 'Facebook',
+		'slurp'               => 'Inktomi Slurp',
+		'yahoo'               => 'Yahoo',
+		'askjeeves'           => 'AskJeeves',
+		'fastcrawler'         => 'FastCrawler',
+		'infoseek'            => 'InfoSeek Robot 1.0',
+		'lycos'               => 'Lycos',
 	),
+
 );

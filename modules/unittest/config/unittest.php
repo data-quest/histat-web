@@ -1,10 +1,9 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
 
 return array(
 
 	// If you don't use a whitelist then only files included during the request will be counted
 	// If you do, then only whitelisted items will be counted
-	// By default this is FALSE so that a phpunit.xml file can set the whitelist
 	'use_whitelist' => TRUE,
 
 	// Items to whitelist, only used in cli

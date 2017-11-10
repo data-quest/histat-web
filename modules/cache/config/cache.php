@@ -1,12 +1,20 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
 return array
 (
-	'memcache' => array(
+/*	
+    'default' => 'file',                            // allows to specify default cache directl from config file
+    'prefix'  => 'cache1_',                          //used to avoid duplicates when using _sanitize_id
+    'apcu'   => array(
+        'driver'             => 'apcu',
+        'default_expire'     => 3600,
+        'prefix'             => 'cache_apcu_',       // if set uses this prefix instead of global 'prefix'
+    ),
+    'memcache' => array(
 		'driver'             => 'memcache',
 		'default_expire'     => 3600,
 		'compression'        => FALSE,              // Use Zlib compression (can cause issues with integers)
 		'servers'            => array(
-			array(
+			'local' => array(
 				'host'             => 'localhost',  // Memcache Server
 				'port'             => 11211,        // Memcache port number
 				'persistent'       => FALSE,        // Persistent connection
@@ -23,7 +31,7 @@ return array
 		'default_expire'     => 3600,
 		'compression'        => FALSE,              // Use Zlib compression (can cause issues with integers)
 		'servers'            => array(
-			array(
+			'local' => array(
 				'host'             => 'localhost',  // Memcache Server
 				'port'             => 11211,        // Memcache port number
 				'persistent'       => FALSE,        // Persistent connection
@@ -34,10 +42,6 @@ return array
 			),
 		),
 		'instant_death'      => TRUE,
-	),
-	'apc'      => array(
-		'driver'             => 'apc',
-		'default_expire'     => 3600,
 	),
 	'wincache' => array(
 		'driver'             => 'wincache',
@@ -66,4 +70,5 @@ return array
 			'.svn'
 		)
 	)
+*/
 );
