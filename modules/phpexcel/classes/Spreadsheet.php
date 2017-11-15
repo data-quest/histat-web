@@ -158,7 +158,7 @@ class Spreadsheet {
         }
         $writer->save('php://output');
         $body = ob_get_clean();
-        $response = Request::current()->response();
+        $response = Response::factory();//Request::current()->response();
         $response->body($body)->send_file(TRUE, $settings['name'] . '.' . $ext, array('mime_type' => $mime));
     }
 
