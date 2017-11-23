@@ -3,7 +3,7 @@
 defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Controller <b>Table</b> 
+ * Controller <b>Table</b>
  */
 class Controller_Chart extends Controller_Data {
 
@@ -28,14 +28,13 @@ class Controller_Chart extends Controller_Data {
         $pData = new pData();
 
         $points = array();
-     
+
         foreach ($data as $y => $d) {
             $points[$y] = 0;
             foreach ($d as $value) {
                 $points[$y] = (int) $value['data'];
             }
         }
-           var_dump($points);
         $pData->addPoints(array_keys($points), "y");
         $pData->addPoints($points, "v");
         $pData->setSerieOnAxis("v", 0);
@@ -72,17 +71,17 @@ class Controller_Chart extends Controller_Data {
         $pScatter = new pScatter($pImage, $pData);
 
         $pScatter->drawScatterScale(array("GridR" => 180, "GridG" => 180, "GridB" => 180, "GridTicks" => 5));
-        
-        
+
+
         $pScatter->drawScatterLineChart();
 
-        
+
           $headers = array(
           'content-type'        => 'image/png',
           'Content-Disposition' => 'inline; filename="grafik.png"'
           );
           ob_end_clean();
-          $this->response->headers($headers)->body($pImage->autoOutput()); 
+          $this->response->headers($headers)->body($pImage->autoOutput());
     }
 
 }
