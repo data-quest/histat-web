@@ -11,7 +11,7 @@ class Controller_Auth extends Controller_Index {
         $this->main_navi->activate(__('Login'));
         $this->sub_navi->add('auth/login', __('Login'));
         $this->sub_navi->add('auth/create', __('Create'));
-  
+
         $this->layout = View::factory('auth/layout');
         $this->layout->content = '';
     }
@@ -52,7 +52,7 @@ class Controller_Auth extends Controller_Index {
                     Auth::instance()->force_login('guest');
                 }
 
-              
+
             } else {
                 $view->incorrect = TRUE;
                 Auth::instance()->force_login('guest');
@@ -66,8 +66,8 @@ class Controller_Auth extends Controller_Index {
         if ($this->user->has_roles(array('guest'))) {
             throw new HTTP_Exception_404();
         }
-        Auth::instance()->logout(TRUE);
-        Auth::instance()->force_login('guest');
+        @Auth::instance()->logout(TRUE);
+        @Auth::instance()->force_login('guest');
         $this->redirect(I18n::$lang . '/index');
     }
 
@@ -128,7 +128,7 @@ class Controller_Auth extends Controller_Index {
                 $mailBody->password = $password;
                 $mailBody->name = $post['name'];
                 $mailBody->surname = $post['surname'];
-                
+
                 $textBody = View::factory(I18n::$lang . '/mails/text_registration');
                 $textBody->username = $post['username'];
                 $textBody->password = $password;
@@ -160,9 +160,9 @@ class Controller_Auth extends Controller_Index {
 
         if (HTTP_Request::POST == $this->request->method()) {
            $email = $this->request->post('email');
-       
+
             $user = ORM::factory('User', array('email'=>$email));
-           
+
             if($user->loaded()){
 
             try {
@@ -186,8 +186,8 @@ class Controller_Auth extends Controller_Index {
                 $mailBody->password = $password;
                 $mailBody->name = $user->name;
                 $mailBody->surname = $user->surname;
-                
-                
+
+
                   $textBody = View::factory(I18n::$lang . '/mails/text_passwordchangedcustom');
                 $textBody->username = $user->username;
                 $textBody->password = $password;
@@ -201,7 +201,7 @@ class Controller_Auth extends Controller_Index {
                         ->send();
                $view->message = __('New password was send to the E-Mail address');
             } catch (ORM_Validation_Exception $e) {
-               
+
                $view->message = __('Password could not be changed');
             }
             }else{
