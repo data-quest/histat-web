@@ -506,7 +506,7 @@ class Kohana_Response implements HTTP_Response {
 		while (ob_get_level())
 		{
 			// Flush all output buffers
-			ob_end_flush();
+			ob_end_clean();
 		}
 
 		// Manually stop execution
