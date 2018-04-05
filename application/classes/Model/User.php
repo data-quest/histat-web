@@ -66,15 +66,12 @@ class Model_User extends Model_Auth_User {
             ),
             'zip' => array(
                 array('not_empty'),
-                array('numeric')
             ),
             'location' => array(
                 array('not_empty'),
-                array('alpha', array(':value', TRUE))
             ),
             'country' => array(
                 array('not_empty'),
-                array('alpha', array(':value', TRUE))
             ),
             'locked'=>array(
                 array('range',array(':value',0,1))
