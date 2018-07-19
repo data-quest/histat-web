@@ -29,7 +29,7 @@ class Controller_Stats extends Controller_Admin {
     }
 
     public function action_index() {
-        
+
     }
 
     public function action_display() {
@@ -248,10 +248,12 @@ class Controller_Stats extends Controller_Admin {
     private function option_7($from, $to) {
 
         $result = DB::select(
-                        array('ZA_Studiennummer', 'za'), array('Projektname', 'title'), array('Projektautor', 'author')
+                        array('Thema', 'thema'), array('ZA_Studiennummer', 'za'), array('Projektname', 'title'), array('Projektautor', 'author')
                 )
                 ->from('Aka_Projekte')
-                ->where('ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
+                ->join('Aka_Themen', 'LEFT')
+                ->on('Aka_Themen.ID_Thema', '=', 'Aka_Projekte.ID_Thema')
+                ->where('Aka_Projekte.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $this->ids) . "')"))
                 ->order_by('ZA_Studiennummer', 'DESC')
                 ->as_object()
                 ->execute();

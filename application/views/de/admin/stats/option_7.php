@@ -3,6 +3,7 @@
     <table>
         <thead>
             <tr>
+                <th>Thema</th>
                 <th>ZA-Nr.</th>
                 <th>Studientitel</th>
                 <th>Autor</th>
@@ -14,7 +15,7 @@
         <tbody>
             <?php foreach ($result as $res): ?>
                 <tr>
-
+                    <td><?=$res->thema?></td>
                     <td>ZA <?= $res->za ?></td>
                     <td class="even"> <?= $res->title ?></td>
 

@@ -109,6 +109,7 @@ class Controller_Data extends Controller_Index {
             $list = View::factory(I18n::$lang . '/project/list');
             //assign new projects to subview
             $list->projects = $orm->projects;
+
             //assign the referrer uri
             $list->uri = URL::site(I18n::$lang . '/data/themes/' . $id);
             //Assign list in view

@@ -1,6 +1,6 @@
 <h3>In cooperation with</h3>
 
-<?= HTML::anchor("http://www.destatis.de/", HTML::image("https://histat.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
+<?= HTML::anchor("https://www.destatis.de/", HTML::image("https://histat.gesis.org/histat/assets/img/layout/logo-destatis.png", array("alt" => "destatis")), array(), "http") ?>
 <br/>
 <br/>
 
@@ -46,8 +46,8 @@
 </ul>
 <br/>
 <h3>Layout:</h3>
-<?= HTML::anchor("http://metavor.de/", HTML::image("https://metavor.de/images/logo-trans.png", array("alt" => "http://metavor.de/")), array(), "http") ?>
-
+<?= HTML::anchor("http://metavor.de/", 'http://metavor.de/', array(), "http") ?>
+<br>
 <br/>
 <h3>Technical Realization:</h3>
 <?= HTML::anchor("http://data-quest.de/", HTML::image("https://www.data-quest.de/fileadmin/dq_homepage/assets/bilder/logo.png", array("alt" => "http://data-quest.de")), array(), "http") ?>

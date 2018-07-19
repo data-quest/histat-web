@@ -19,13 +19,13 @@ class Controller_Index extends Controller_Template {
 
     /**
      * Instance of Auth Class
-     * @var Object $user 
+     * @var Object $user
      */
     protected $user = NULL;
 
     /**
      * Object of Config class, use method <b>get</b> to get Values from config/config.php
-     * @var Object $config 
+     * @var Object $config
      * @example
      * $this->config->get('foo'); //get foo from config/config.php
      * @link http://kohanaframework.org/3.2/guide/kohana/config
@@ -34,26 +34,26 @@ class Controller_Index extends Controller_Template {
 
     /**
      * Instance of Session object
-     * @var Object $session 
+     * @var Object $session
      * @link http://kohanaframework.org/3.2/guide/kohana/sessions
      */
     protected $session;
 
     /**
      * Page Title
-     * @var string $title 
+     * @var string $title
      */
     protected $title = '';
 
     /**
      * Page Content , accepts HTML and View
-     * @var string $content 
+     * @var string $content
      */
     protected $content = '';
 
     /**
      * css Styles
-     * @var array $styles 
+     * @var array $styles
      * @example
      * $this->styles[] = 'myfile.css'; //Add new CSS style
      */
@@ -61,7 +61,7 @@ class Controller_Index extends Controller_Template {
 
     /**
      * js Scripts
-     * @var array $scripts 
+     * @var array $scripts
      * @example
      * $this->scripts[]='myscript.js'; //Add new JS Script
      */
@@ -69,13 +69,13 @@ class Controller_Index extends Controller_Template {
 
     /**
      * Navigation object of main Navigation (see classes/navigation.php)
-     * @var Navigation $main_navi 
+     * @var Navigation $main_navi
      */
     protected $main_navi;
 
     /**
      * Navigation object of main Navigation (see classes/navigation.php)
-     * @var Navigation $sub_navi 
+     * @var Navigation $sub_navi
      */
     protected $sub_navi;
     protected $xsrf;
@@ -114,14 +114,14 @@ class Controller_Index extends Controller_Template {
         //Get user Instance
         $this->user = Auth::instance()->get_user();
 
-      
+
         //Add main Navigation Items
         $this->main_navi->add('index', __('Home'));
         $this->main_navi->add('data', __('Data'));
-        $this->main_navi->add('pages/about', __('About'));
+        //$this->main_navi->add('pages/about', __('About'));
         //$this->main_navi->add('pages/galery', __('Galery'));
-  
-        
+
+
         //If user is not loged in
         if (!$this->user) {
             Auth::instance()->force_login('guest');
@@ -142,8 +142,8 @@ class Controller_Index extends Controller_Template {
         $this->xsrf = $this->session->get('xsrf', md5(Text::random('alnum')));
         //Save xsrf Token
         $this->session->set('xsrf', $this->xsrf);
-      
-      
+
+
     }
 
     public function action_index() {
@@ -152,6 +152,7 @@ class Controller_Index extends Controller_Template {
         //Get the view home.php
         $view = View::factory('home');
         //Assign Vars to home.php
+        $view->base_url = Kohana::$base_url;
         $view->welcome = View::factory(I18n::$lang . '/pages/welcome')->render(); //render view/<lang>/welcome.php
         $view->stats = View::factory(I18n::$lang . '/pages/stats')->render(); //render view/<lang>/stats.php
         $view->priorities = View::factory(I18n::$lang . '/pages/priorities')->render(); //render view/<lang>/priorities.php
@@ -161,7 +162,7 @@ class Controller_Index extends Controller_Template {
     }
 
     private function page_name() {
-        
+
         $c = $this->request->controller();
         $a = $this->request->action();
         return ('HISTAT/' . urlencode(I18n::$lang.Kohana::$config->load('etracker')->get($c . '/' . $a)) . ':' . $c . '/' . $a . ($this->project ? '/' . $this->project : ''));
@@ -170,15 +171,15 @@ class Controller_Index extends Controller_Template {
              $c = $this->request->controller();
         $a = $this->request->action();
         return ('HISTAT/' . urlencode(I18n::$lang.'/'.$c . '/' . $a));
-   
+
     }
 
     public function after() {
 
         //Disable assign vars if template is not a view(ajax Request)
         if ($this->template instanceof View) {
-            $values = DB::select(array(DB::expr('COUNT(Data)'), 'amount'))->from('Daten__Aka')->as_object()->execute();
             $times = DB::select(array(DB::expr('COUNT(ID_HS)'), 'amount'))->from('Lit_ZR')->as_object()->execute();
+            $studies = DB::select(array(DB::expr('COUNT(*)'), 'amount'))->from('Aka_Projekte')->as_object()->execute();
              $project = ORM::factory('Project')->get_newest();
             //Assign vars to layout
             $this->template->searchbar = View::factory(I18n::$lang . '/search/bar')->render(); //render view/<lang>/searchbar.php
@@ -190,7 +191,7 @@ class Controller_Index extends Controller_Template {
             $this->template->scripts = $this->scripts;
             $this->template->xsrf = $this->xsrf;
             $this->template->times = number_format($times[0]->amount, 0, ',', '.');
-            $this->template->values = number_format($values[0]->amount, 0, ',', '.');
+            $this->template->studies = number_format($studies[0]->amount, 0, ',', '.');
             $date = time();
             if(count($project)>0){ $date = strtotime($project[0]->chdate);}
             $this->template->date = date("d.m.Y",$date);

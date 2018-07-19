@@ -57,5 +57,6 @@ return array(
     'New password was send to the E-Mail address' =>'Neues Passwort wurde an die E-Mail Adresse versendet',
     'Your new password for histat.gesis.org' =>'Ihr neues Passwort bei histat.gesis.org',
     'Edit'=>'Bearbeiten',
-    'Back'=>'Zurück'
+    'Back'=>'Zurück',
+    'Studies' => 'Studien'
 );

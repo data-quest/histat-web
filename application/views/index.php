@@ -100,7 +100,7 @@
                         <span class="orange">histat:</span> <br/> <span class="description"><?= __('Historical statistics')?></span>
                     </div>
                     <div class="values">
-                        <span class="orange"><?= $values ?></span> <?= __('Values'); ?>
+                        <span class="orange"><?= $studies ?></span> <?= __('Studies'); ?>
                     </div>
                     <div class="timelines">
                         <span class="orange"><?= $times ?></span> <?= __('Time series');?>
