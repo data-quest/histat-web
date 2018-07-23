@@ -1,9 +1,9 @@
 <table border="0" cellpadding="0" cellspacing="0">
     <?php if (!$projects->loaded()) : ?>
-        <? ob_start(); ?>
+        <?php ob_start(); ?>
         <?php foreach ($projects->find_all() as $project): ?>
-            <?$times += $project->Anzahl_Zeitreihen; ?>
-            <?$studies++;?>
+            <?php $times += $project->Anzahl_Zeitreihen; ?>
+            <?php $studies++;?>
             <tr <?= $project->Zugangsklasse == "-1"?'class="public"':''?>>
                 <td width="10%">ZA <?= $project->ZA_Studiennummer ?></td>
                 <td class="even" width="13%"><?= $project->theme->Thema ?></td>
@@ -26,7 +26,7 @@
 
             </tr>
         <?php endforeach ?>
-        <? $out = ob_get_clean()?>
+        <?php $out = ob_get_clean()?>
 
         <tr>
         <td colspan="5" style="text-align: right;">
