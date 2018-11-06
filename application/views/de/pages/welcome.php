@@ -28,14 +28,17 @@ Willkommen bei der Online-Datenbank <span class="orange">histat</span>.
     <br>
     0221 – 47694 476
 </p>
-<p class="normal">
-    Dokumente zu histat für den Download
+<h3>Dokumente zu histat für den Download</h3>
+<br>
 <ul class="list">
     <li>
         <a title="Th. Rahlf et al.: histat – Zeitreihen zur historischen Statistik von Deutschland online." target="_blank" href="https://www.ssoar.info/ssoar/handle/document/32599">Th. Rahlf et al.: histat – Zeitreihen zur historischen Statistik von Deutschland online</a>
     </li>
     <li>
-        <a title="Kurzbeschreibung histat" href="<?=Kohana::$base_url?>assets/Online-DB_histat_Anmeldung-u-Nutzung.pdf">Kurzbeschreibung histat</a>
+    <a title="Franzmann, G.: The Online‐Database histat as an Example for Research‐Promoting Infrastructures for Studies in Quantitative Historical Research" target="_blank" href="<?=Kohana::$base_url?>assets/Online-DB-histat_Economies-et-Societes_6-2015.pdf">Franzmann, G.: The Online‐Database histat as an Example for Research‐Promoting Infrastructures for Studies in Quantitative Historical Research</a>
+    </li>
+    <li>
+        <a title="Kurzbeschreibung histat" target="_blank" href="<?=Kohana::$base_url?>assets/Online-DB_histat_Anmeldung-u-Nutzung.pdf">Kurzbeschreibung histat</a>
     </li>
 </ul>
 </p>
