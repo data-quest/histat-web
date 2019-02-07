@@ -117,7 +117,7 @@ Kohana::init(array(
     'base_url' => '/histat_neu/',
     'index_file' => 'index.php', // SEO (avoid index.php/mycontroller/action)
     'profile' => (Kohana::$environment !== Kohana::PRODUCTION), //see how good you are
-    'errors' => (Kohana::$environment === Kohana::PRODUCTION),
+    'errors' => (Kohana::$environment !== Kohana::PRODUCTION),
     'caching' => FALSE//(Kohana::$environment === Kohana::PRODUCTION),
 ));
 
