@@ -36,7 +36,7 @@ class Model_User extends Model_Auth_User {
     );
 
     public function rules() {
-        
+
         return array(
             'username' => array(
                 array('not_empty'),
@@ -62,13 +62,13 @@ class Model_User extends Model_Auth_User {
                 array('name', array(':value', TRUE))
             ),
             'street' => array(
-                array('not_empty')
+                //array('not_empty')
             ),
             'zip' => array(
-                array('not_empty'),
+                //array('not_empty'),
             ),
             'location' => array(
-                array('not_empty'),
+                //array('not_empty'),
             ),
             'country' => array(
                 array('not_empty'),
@@ -88,7 +88,7 @@ class Model_User extends Model_Auth_User {
             'department' => array(
               //  array('alpha', array(':value', TRUE))
                 ));
-       
+
     }
 
     public function extra_rules() {
@@ -167,15 +167,15 @@ class Model_User extends Model_Auth_User {
             $login->create();
         }
     }
-    
+
     public function getCartItems(){
         /*
          *     foreach ($this->user->cart_items->find_all() as $item) {
-            
+
             $keymask = $item->keymask;
-               
+
             $projectID = $keymask->project->ID_Projekt;
-       
+
             $bearbeitung = '';
             $datum = substr($keymask->project->Datum_der_Bearbeitung, -4);
             if (!empty($datum)) {
@@ -212,7 +212,7 @@ class Model_User extends Model_Auth_User {
                 ->join(array("Aka_Themen","t"),"LEFT")
                 ->using("ID_Thema")
                 ->where("user_id","=",$this->id)
-             
+
                 ->order_by("w.chdate","DESC");
         return $result->as_object()->execute();
     }

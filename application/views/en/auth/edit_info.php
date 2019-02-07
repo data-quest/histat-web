@@ -14,6 +14,7 @@
     <?= Form::input('name', HTML::chars(Arr::get($_POST, 'name', $user->name))) ?><br/>
     <span class="star">*</span><?= Form::label('surname', 'Nachname:') ?>
     <?= Form::input('surname', HTML::chars(Arr::get($_POST, 'surname', $user->surname))) ?><br/>
+    <!--
     <?= Form::label('institution', 'Institution:') ?>
     <?= Form::input('institution', HTML::chars(Arr::get($_POST, 'institution', $user->institution))) ?><br/>
     <?= Form::label('department', 'Abteilung:') ?>
@@ -24,6 +25,7 @@
     <?= Form::input('zip', HTML::chars(Arr::get($_POST, 'zip', $user->zip))) ?><br/>
     <span class="star">*</span><?= Form::label('location', 'Ort:') ?>
     <?= Form::input('location', HTML::chars(Arr::get($_POST, 'location', $user->location))) ?><br/>
+    -->
     <span class="star">*</span><?= Form::label('country', 'Land:') ?>
     <?= Form::input('country', HTML::chars(Arr::get($_POST, 'country', $user->country))) ?><br/>
     <span class="star">*</span><?= Form::label('email', 'E-mail:') ?>

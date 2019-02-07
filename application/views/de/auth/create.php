@@ -4,7 +4,7 @@
 Um Zugang zur Datenbank zu erhalten, müssen Sie sich als Nutzer unter Verwendung des Anmeldeformulars registrieren. Nach abschicken des Anmeldeformulars erhalten Sie per E-mail Ihr Passwort. Mit Hilfe dieses Passworts können Sie die Datenbank HISTAT öffnen.
 
 Bitte nehmen Sie zur Kenntnis, dass Sie als Nutzer die <?= HTML::anchor('http://www.gesis.org/unser-angebot/daten-analysieren/daten-historischer-studien/histat//','Nutzungsbedingungen der Datenbank',array('target'=>'blank'))?> sowie die <?= HTML::anchor('http://www.gesis.org/unser-angebot/daten-analysieren/datenservice/benutzungsordnung/
-','GESIS-DAS Nutzungsordnung',array('target'=>'blank'))?> akzeptieren. 
+','GESIS-DAS Nutzungsordnung',array('target'=>'blank'))?> akzeptieren.
 
 
 </p>
@@ -23,6 +23,7 @@ Bitte nehmen Sie zur Kenntnis, dass Sie als Nutzer die <?= HTML::anchor('http://
     <?= Form::input('name', HTML::chars(Arr::get($_POST, 'name'))) ?><br/>
     <span class="star">*</span><?= Form::label('surname', 'Nachname:') ?>
     <?= Form::input('surname', HTML::chars(Arr::get($_POST, 'surname'))) ?><br/>
+    <!--
     <?= Form::label('institution', 'Institution:') ?>
     <?= Form::input('institution', HTML::chars(Arr::get($_POST, 'institution'))) ?><br/>
     <?= Form::label('department', 'Abteilung:') ?>
@@ -33,6 +34,7 @@ Bitte nehmen Sie zur Kenntnis, dass Sie als Nutzer die <?= HTML::anchor('http://
     <?= Form::input('zip', HTML::chars(Arr::get($_POST, 'zip'))) ?><br/>
     <span class="star">*</span><?= Form::label('location', 'Ort:') ?>
     <?= Form::input('location', HTML::chars(Arr::get($_POST, 'location'))) ?><br/>
+     -->
     <span class="star">*</span><?= Form::label('country', 'Land:') ?>
     <?= Form::input('country', HTML::chars(Arr::get($_POST, 'country'))) ?><br/>
     <span class="star">*</span><?= Form::label('email', 'E-Mail:') ?>

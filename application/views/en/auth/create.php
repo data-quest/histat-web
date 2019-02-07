@@ -18,6 +18,7 @@ Before getting access to the database, the registration via the registration for
     <?= Form::input('name', HTML::chars(Arr::get($_POST, 'name'))) ?><br/>
     <span class="star">*</span><?= Form::label('surname', 'Second name:') ?>
     <?= Form::input('surname', HTML::chars(Arr::get($_POST, 'surname'))) ?><br/>
+    <!--
     <?= Form::label('institution', 'Institution:') ?>
     <?= Form::input('institution', HTML::chars(Arr::get($_POST, 'institution'))) ?><br/>
     <?= Form::label('department', 'Department:') ?>
@@ -28,6 +29,7 @@ Before getting access to the database, the registration via the registration for
     <?= Form::input('zip', HTML::chars(Arr::get($_POST, 'zip'))) ?><br/>
     <span class="star">*</span><?= Form::label('location', 'City:') ?>
     <?= Form::input('location', HTML::chars(Arr::get($_POST, 'location'))) ?><br/>
+    -->
     <span class="star">*</span><?= Form::label('country', 'Country:') ?>
     <?= Form::input('country', HTML::chars(Arr::get($_POST, 'country'))) ?><br/>
     <span class="star">*</span><?= Form::label('email', 'E-Mail adress:') ?>
@@ -36,7 +38,7 @@ Before getting access to the database, the registration via the registration for
     <?= Form::input('phone', HTML::chars(Arr::get($_POST, 'phone'))) ?><br/>
     <?= Form::submit('register', 'Create new account') ?>
     <?= Form::close() ?>
- 
+
     <div class="clear"></div>
 </div>
 <span class="star">*</span> required fields
