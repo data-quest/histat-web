@@ -159,7 +159,7 @@ $quote = nl2br(__("\n:author, (:pub_year :edit_year) :project\nDaten entnommen a
         <?php
         $text = HTML::image('assets/img/layout/download.png', array('class' => 'pdficon')) . __('DDI-XML');
         ?>
-        <div class="right"> <?= HTML::anchor('project/export/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
+        <div class="right"> <?= HTML::anchor('project/export/' . $project->ID_Projekt, $text, array('class' => 'button', 'onmousedown' => "_etracker.sendEvent('".urlencode($project->ZA_Studiennummer.':'.$project->Projektname) ."','Studienbeschreibung DDI-XML')")) ?></div>
 
         <div class="normal left">Diese Studienbeschreibung als DDI-XML.</div>
         <div class="clear"></div>
@@ -173,7 +173,7 @@ $quote = nl2br(__("\n:author, (:pub_year :edit_year) :project\nDaten entnommen a
             if ($kb > 1024) $text = round($mb, 2) . ' MB';
             $text = HTML::image('assets/img/layout/pdficon_small.png', array('class' => 'pdficon')) . $text;
             ?>
-                    <div class="right"> <?= HTML::anchor('project/download/' . $project->ID_Projekt, $text, array('class' => 'button')) ?></div>
+                    <div class="right"> <?= HTML::anchor('project/download/' . $project->ID_Projekt, $text, array('class' => 'button', 'onmousedown' => "_etracker.sendEvent('".urlencode($project->ZA_Studiennummer.':'.$project->Projektname) ."','Studienbeschreibung PDF')")) ?></div>
                 <div class="normal left short">Download weiterer Texte zu dieser Studie im PDF Format (Forschungsberichte, Publikationen, Materialien zur Studie) </div>
                 <div class="clear"></div>
             </div>

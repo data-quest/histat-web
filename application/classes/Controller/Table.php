@@ -216,7 +216,7 @@ class Controller_Table extends Controller_Data {
                 $url = URL::site(I18n::$lang . '/table/' . $type . '/' . $this->id_hs . '/' . $this->filter, 'http');
             }
 
-            $this->redirect('https://www.etracker.de/lnkcnt.php?et=qPKGYV&url=' . urlencode($url) . '&lnkname=' . urlencode('HISTAT/download/' . $name));
+            $this->redirect($url);
         }
     }
 

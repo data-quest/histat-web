@@ -101,6 +101,7 @@ class Controller_Data extends Controller_Index {
             $view->themes = $themes;//$this->shuffle_assoc($themes);
         } else {
             $orm = ORM::factory('Theme', $id);
+            $this->theme_name = $orm->Thema;
             $view = View::factory(I18n::$lang . '/data/themes/overview');
             $theme_list = $orm->getThemes($this->isAdmin)->as_object()->execute();
 

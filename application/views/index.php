@@ -8,13 +8,21 @@
         foreach ($scripts as $file)
             echo HTML::script($assets['js'] . $file) . "\n";
         ?>
-          <script language="JavaScript1.3">et_js=1.3</script><script language="JavaScript1.9">et_pd_v=1.9;</script><script language="JavaScript1.8">et_pd_v=1.8;</script><script language="JavaScript1.7">et_pd_v=1.7;</script><script language="JavaScript1.6">et_pd_v=1.6;</script><script language="JavaScript1.5">et_pd_v=1.5;</script><script language="JavaScript1.4">et_pd_v=1.4;</script><script language="JavaScript1.3">et_pd_v=1.3;</script><script language="JavaScript1.2">et_pd_v=1.2;</script><script language="JavaScript1.1">et_pd_v=1.1;</script><script language="JavaScript1">et_pd_v=1;</script>
-
-        <!-- Copyright (c) 2000-2009 etracker GmbH. All rights reserved. -->
+        <!-- Copyright (c) 2000-2016 etracker GmbH. All rights reserved. -->
         <!-- This material may not be reproduced, displayed, modified or distributed -->
         <!-- without the express prior written permission of the copyright holder. -->
-        <!-- BEGIN etracker code ETRC 3.0 -->
-       <!-- <script type="text/javascript" >document.write(String.fromCharCode(60)+"script type=\"text/javascript\" src=\"http"+("https:"==document.location.protocol?"s":"")+"://web.gesis.org/t.js?et=qPKGYV\">"+String.fromCharCode(60)+"/script>");</script> -->
+        <!-- etracker tracklet 4.0 -->
+        <script type="text/javascript">
+
+            var et_pagename = "<?= $pagename ?>";
+            var et_areas = "<?= $area ?>";
+
+        </script>
+
+        <script id="_etLoader" type="text/javascript" charset="UTF-8" data-secure-code="qPKGYV" src="//static.etracker.com/code/e.js"></script>
+
+        <noscript><link rel="stylesheet" media="all" href="//www.etracker.de/cnt_css.php?et=qPKGYV&amp;v=4.0&amp;java=n&amp;et_easy=0&amp;et_pagename=<?= $pagename ?>&amp;et_areas=<?= $area ?>&amp;et_ilevel=0&amp;et_target=,0,0,0&amp;et_lpage=0&amp;et_trig=0&amp;et_se=0&amp;et_cust=0&amp;et_basket=&amp;et_url=&amp;et_tag=&amp;et_sub=&amp;et_organisation=&amp;et_demographic=" /></noscript>
+
              <!-- HR@GESIS Microsite styles -->
     <style type="text/css">
 /* HR@GESIS zusätzlich zu styles.css hinzufügen */
@@ -87,7 +95,7 @@
         <title><?= $title ?></title>
     </head>
     <body>
-        <noscript><p><a href="https://www.etracker.com"><img class="trackimage" style="border:0px;" alt="" src="https://www.etracker.com/nscnt.php?et=qPKGYV" /></a></p></noscript>
+
         <div id="top"></div>
         <div id="layout">
             <div id="header">
@@ -160,16 +168,10 @@
 
                 © GESIS <?= HTML::anchor('https://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last update at :date', array(':date' => $date)) ?>
             </div>
-            <!-- etracker PARAMETER 3.0 -->
             <script type="text/javascript">
                 var xsrf = "<?= $xsrf ?>";
                 var base_url = "<?= URL::base()?>";
-                var et_pagename     = "<?= $pagename ?>";
-                var et_areas = "<?= $area ?>";
             </script>
-            <!-- etracker PARAMETER END -->
-            <script type="text/javascript">_etc();</script>
-            <!-- etracker CODE END -->
         </div>
 
     </body>

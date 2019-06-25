@@ -97,7 +97,6 @@ class Controller_Index extends Controller_Template {
         $this->scripts [] = 'jquery-ui.min.js';
         $this->scripts [] = 'search.js';
         $this->scripts [] = 'main.js';
-        $this->scripts [] = 't.js?et=qPKGYV';
           I18n::lang($this->request->param('lang','de'));
         //Setup Cookie
         Cookie::$salt = $this->config->get('cookie_salt');
@@ -165,13 +164,24 @@ class Controller_Index extends Controller_Template {
 
         $c = $this->request->controller();
         $a = $this->request->action();
-        return ('HISTAT/' . urlencode(I18n::$lang.Kohana::$config->load('etracker')->get($c . '/' . $a)) . ':' . $c . '/' . $a . ($this->project ? '/' . $this->project : ''));
+        $etracker_config = Kohana::$config->load('etracker');
+        $pagename = $etracker_config->get(strtolower($c . '/' . $a));
+        if ($pagename) {
+            return 'HISTAT/' . urlencode(I18n::$lang . $pagename . ':' . join('/', array_filter([$this->theme_name, $this->project])));
+        } else {
+            return '';
+        }
     }
     private function area(){
-             $c = $this->request->controller();
+        $c = $this->request->controller();
         $a = $this->request->action();
-        return ('HISTAT/' . urlencode(I18n::$lang.'/'.$c . '/' . $a));
-
+        $etracker_config = Kohana::$config->load('etracker');
+        $pagename = $etracker_config->get(strtolower($c . '/' . $a));
+        if ($pagename) {
+            return 'HISTAT/' . urlencode(I18n::$lang.'/'.$c . '/' . $a);
+        } else {
+            return '';
+        }
     }
 
     public function after() {
