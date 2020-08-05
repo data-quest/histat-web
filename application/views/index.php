@@ -166,7 +166,7 @@
             </div>
             <div id="footer">
 
-                © GESIS <?= HTML::anchor('https://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last update at :date', array(':date' => $date)) ?>
+                © GESIS <?= HTML::anchor('https://www.gesis.org/das-institut/impressum/', __('Impressum')) ?> | <?= HTML::anchor('https://www.gesis.org/institut/datenschutz', __('Data protection')) ?> | <?= HTML::anchor('pages/sitemap', __('Sitemap')) ?> | <?= __('Last update at :date', array(':date' => $date)) ?>
             </div>
             <script type="text/javascript">
                 var xsrf = "<?= $xsrf ?>";

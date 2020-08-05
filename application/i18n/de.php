@@ -58,5 +58,6 @@ return array(
     'Your new password for histat.gesis.org' =>'Ihr neues Passwort bei histat.gesis.org',
     'Edit'=>'Bearbeiten',
     'Back'=>'Zurück',
-    'Studies' => 'Studien'
+    'Studies' => 'Studien',
+    'Data protection' => 'Datenschutz'
 );
