@@ -19,9 +19,8 @@
 
         </script>
 
-        <script id="_etLoader" type="text/javascript" charset="UTF-8" data-secure-code="qPKGYV" src="//static.etracker.com/code/e.js"></script>
+        <script id="_etLoader" type="text/javascript" charset="UTF-8" data-block-cookies="true" data-respect-dnt="true" data-secure-code="qPKGYV" src="//static.etracker.com/code/e.js"></script>
 
-        <noscript><link rel="stylesheet" media="all" href="//www.etracker.de/cnt_css.php?et=qPKGYV&amp;v=4.0&amp;java=n&amp;et_easy=0&amp;et_pagename=<?= $pagename ?>&amp;et_areas=<?= $area ?>&amp;et_ilevel=0&amp;et_target=,0,0,0&amp;et_lpage=0&amp;et_trig=0&amp;et_se=0&amp;et_cust=0&amp;et_basket=&amp;et_url=&amp;et_tag=&amp;et_sub=&amp;et_organisation=&amp;et_demographic=" /></noscript>
 
              <!-- HR@GESIS Microsite styles -->
     <style type="text/css">
