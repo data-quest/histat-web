@@ -184,7 +184,7 @@ class Model_Project extends ORM {
             $db->where('p.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $ids) . "')"));
             if ($text) $db->where(DB::expr("MATCH(schluessel_index)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
 
-            if (!$id) $db->group_by('asx.ID_Projekt');;
+            /*if (!$id)*/ $db->group_by('asx.ID_Projekt');;
 
             foreach ($db->as_object()->execute() as $value) {
                 if ($id) {
@@ -245,7 +245,8 @@ class Model_Project extends ORM {
             $db->where('p.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $ids) . "')"));
             if ($text) $db->where(DB::expr("MATCH(hs_name)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
 
-            if (!$id) $db->group_by('asx.ID_Projekt');;
+            /*if (!$id)*/ $db->group_by('asx.ID_Projekt');;
+
 
             foreach ($db->as_object()->execute() as $value) {
                 if ($id) {
@@ -302,7 +303,7 @@ class Model_Project extends ORM {
             $db->where('p.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $ids) . "')"));
             if ($text) $db->where(DB::expr("MATCH(Projektname, Projektbeschreibung, Untergliederung,Veroeffentlichung,Quellen)"), ' ', DB::expr('AGAINST(:text IN BOOLEAN MODE)', array(':text' => $text)));
 
-            if (!$id) $db->group_by('asx.ID_Projekt');
+            /*if (!$id)*/ $db->group_by('asx.ID_Projekt');
 
 
             foreach ($db->as_object()->execute() as $value) {
@@ -367,7 +368,7 @@ class Model_Project extends ORM {
             $db->where('p.ID_Thema', 'NOT IN', DB::expr("('" . implode("','", $ids) . "')"));
             if ($text) $db->where(DB::expr("MATCH(Quelle)"), ' ', DB::expr("AGAINST(:text IN BOOLEAN MODE)", array(':text' => $text)));
 
-            if (!$id) $db->group_by('asx.ID_Projekt');
+            /*if (!$id)*/ $db->group_by('asx.ID_Projekt');
 
             foreach ($db->as_object()->execute() as $value) {
 
